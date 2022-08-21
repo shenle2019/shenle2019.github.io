@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python面试题整理-V1 day5 简述Python的引用计数机制。  12345678910111213141516171819202122232425262728293031323334353637383940414243Python的垃圾回收机制Python采用的是引用计数机制为主，标记-清除和分代收集两种机制为辅的策略。引用计数(reference counting)Python语言默">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python interview 5">
+<meta property="og:url" content="https://shenle2019.github.io/2022/08/22/python-interview-5/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="Python面试题整理-V1 day5 简述Python的引用计数机制。  12345678910111213141516171819202122232425262728293031323334353637383940414243Python的垃圾回收机制Python采用的是引用计数机制为主，标记-清除和分代收集两种机制为辅的策略。引用计数(reference counting)Python语言默">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-08-21T19:08:03.000Z">
+<meta property="article:modified_time" content="2022-08-21T12:05:13.881Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2022/08/22/python-interview-5/"/>
+
+
+
+
+
+  <title>python interview 5 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2022/08/22/python-interview-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python interview 5</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-21T19:08:03Z">
+                2022-08-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-08-21T12:05:13Z">
+                2022-08-21
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2022/08/22/python-interview-5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2022/08/22/python-interview-5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Python面试题整理-V1-day5"><a href="#Python面试题整理-V1-day5" class="headerlink" title="Python面试题整理-V1 day5"></a>Python面试题整理-V1 day5</h2><ul>
+<li>简述Python的引用计数机制。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Python的垃圾回收机制</span><br><span class="line">Python采用的是引用计数机制为主，标记-清除和分代收集两种机制为辅的策略。</span><br><span class="line"></span><br><span class="line">引用计数(reference counting)</span><br><span class="line">Python语言默认采用的垃圾收集机制是“引用计数法 Reference Counting”，该算法最早George E. Collins在<span class="number">1960</span>的时候首次提出，<span class="number">50</span>年后的今天，该算法依然被很多编程语言使用。</span><br><span class="line">引用计数法的原理是：每个对象维护一个ob_ref字段，用来记录该对象当前被引用的次数，每当新的引用指向该对象时，它的引用计数ob_ref加<span class="number">1</span>，每当该对象的引用失效时计数ob_ref减<span class="number">1</span>，一旦对象的引用计数为<span class="number">0</span>，该对象立即被回收，对象占用的内存空间将被释放。</span><br><span class="line">它的缺点是需要额外的空间维护引用计数，这个问题是其次的，不过最主要的问题是它不能解决对象的“循环引用”，因此，也有很多语言比如Java并没有采用该算法做来垃圾的收集机制。</span><br><span class="line">Python中一切皆对象，也就是说，在Python中你用到的一切变量，本质上都是类对象。实际上每一个对象的核心就是一个结构体PyObject，它的内部有一个引用计数器ob_refcnt，程序在运行的过程中会实时的更新ob_refcnt的值，来反映引用当前对象的名称数量。当某对象的引用计数值为<span class="number">0</span>,说明这个对象变成了垃圾，那么它会被回收掉，它所用的内存也会被立即释放掉。</span><br><span class="line"></span><br><span class="line">循环引用</span><br><span class="line">引用计数的另一个现象就是循环引用，相当于有两个对象a和b，其中a引用了b，b引用了a，这样a和b的引用计数都为<span class="number">1</span>，并且永远都不会为<span class="number">0</span>，这就意味着这两个对象永远都不会被回收了，这就是循环引用 , a与b形成了一个引用循环</span><br><span class="line"></span><br><span class="line">标记清除(Mark <span class="keyword">and</span> Sweep)</span><br><span class="line">Python采用了“标记-清除”(Mark <span class="keyword">and</span> Sweep)算法，解决容器对象可能产生的循环引用问题。(注意，只有容器对象才会产生循环引用的情况，比如列表、字典、用户自定义类的对象、元组等。而像数字，字符串这类简单类型不会出现循环引用。作为一种优化策略，对于只包含简单类型的元组也不在标记清除算法的考虑之列)</span><br><span class="line"></span><br><span class="line">跟其名称一样，该算法在进行垃圾回收时分成了两步，分别是：</span><br><span class="line"></span><br><span class="line">标记阶段，遍历所有的对象，如果是可达的（reachable），也就是还有对象引用它，那么就标记该对象为可达；</span><br><span class="line">清除阶段，再次遍历对象，如果发现某个对象没有标记为可达，则就将其回收。</span><br><span class="line"></span><br><span class="line">分代回收(Generational garbage collector)</span><br><span class="line">分代回收技术是上个世纪<span class="number">80</span>年代初发展起来的一种垃圾回收机制，也是Java 垃圾回收的核心算法。分代回收是基于这样的一个统计事实，对于程序，存在一定比例的内存块的生存周期比较短；而剩下的内存块，生存周期会比较长，甚至会从程序开始一直持续到程序结束。</span><br><span class="line"></span><br><span class="line">生存期较短对象的比例通常在 <span class="number">80</span>%～<span class="number">90</span>% 之间。因此，简单地认为：对象存在时间越长，越可能不是垃圾，应该越少去收集。这样在执行标记-清除算法时可以有效减小遍历的对象数，从而提高垃圾回收的速度，是一种以空间换时间的方法策略。</span><br><span class="line"></span><br><span class="line">Python 将所有的对象分为 <span class="number">0</span>，<span class="number">1</span>，<span class="number">2</span> 三代；</span><br><span class="line">所有的新建对象都是 <span class="number">0</span> 代对象；</span><br><span class="line">当某一代对象经历过垃圾回收，依然存活，就被归入下一代对象。</span><br><span class="line"></span><br><span class="line">Python 中的 gc 模块</span><br><span class="line">gc 模块是我们在Python中进行内存管理的接口，一般情况Python程序员都不用关心自己程序的内存管理问题，但是有的时候，比如发现自己程序存在内存泄露，就可能需要用到gc模块的接口来排查问题。</span><br><span class="line"></span><br><span class="line">有的 Python 系统会关闭自动垃圾回收，程序自己判断回收的时机，据说 instagram 的系统就是这样做的，整体运行效率提高了<span class="number">10</span>%。</span><br><span class="line"></span><br><span class="line">常用函数：</span><br><span class="line">set_debug(flags) ：设置gc的debug日志，一般设置为gc.DEBUG_LEAK可以看到内存泄漏的对象。</span><br><span class="line">collect([generation]) ：执行垃圾回收。会将那些有循环引用的对象给回收了。这个函数可以传递参数，<span class="number">0</span>代表只回收第<span class="number">0</span>代的的垃圾对象、<span class="number">1</span>代表回收第<span class="number">0</span>代和第<span class="number">1</span>代的对象，<span class="number">2</span>代表回收第<span class="number">0</span>、<span class="number">1</span>、<span class="number">2</span>代的对象。如果不传参数，那么会使用<span class="number">2</span>作为默认参数。</span><br><span class="line">get_threshold() ：获取gc模块执行垃圾回收的阈值。返回的是个元组，第<span class="number">0</span>个是零代的阈值，第<span class="number">1</span>个是<span class="number">1</span>代的阈值，第<span class="number">2</span>个是<span class="number">2</span>代的阈值。</span><br><span class="line">set_threshold(threshold0[, threshold1[, threshold2]) ：设置执行垃圾回收的阈值。</span><br><span class="line">get_count() ：获取当前自动执行垃圾回收的计数器。返回一个元组。第<span class="number">0</span>个是零代的垃圾对象的数量，第<span class="number">1</span>个是零代链表遍历的次数，第<span class="number">2</span>个是<span class="number">1</span>代链表遍历的次数。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>print(int(“1.4”)) 与 print(int(1.4))</li>
+</ul>
+<h3 id="print-int-“1-4”-有报错"><a href="#print-int-“1-4”-有报错" class="headerlink" title="print(int(“1.4”)),有报错"></a>print(int(“1.4”)),有报错</h3><p>print(int(1.4))  输出1</p>
+<ul>
+<li>列举3条以上PEP8的编码规范。</li>
+</ul>
+<p>1.顶级定义之间空两行，比如函数或者类定义。<br>2.方法定义、类定义与第一个方法之间，均空一行。<br>3.三引号进行注释。<br>4.使用Pycharm、Eclipse一般使用4个空格进行缩进代码。</p>
+<ul>
+<li>正则表达式匹配第一个URL</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Find</span>(<span class="params">string</span>):</span></span><br><span class="line">    <span class="comment"># findall() 查找匹配正则表达式的字符串</span></span><br><span class="line">    url = re.findall(<span class="string">&#x27;https?://(?:[-\w.]|(?:%[\da-fA-F]&#123;2&#125;))+&#x27;</span>, string)</span><br><span class="line">    <span class="keyword">return</span> url</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">string = <span class="string">&#x27;Runoob 的网页地址为：https://www.runoob.com，Google 的网页地址为：https://www.google.com&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Urls: &quot;</span>, Find(string))</span><br><span class="line"><span class="comment">### 匹配第一个url</span></span><br><span class="line"><span class="built_in">print</span>(Find(string)[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Search</span>(<span class="params">string</span>):</span></span><br><span class="line">    <span class="comment">### search需要加group by来提取</span></span><br><span class="line">    url = re.search(<span class="string">&#x27;https?://(?:[-\w.]|(?:%[\da-fA-F]&#123;2&#125;))+&#x27;</span>, string)</span><br><span class="line">    <span class="keyword">return</span> url.group()</span><br><span class="line"></span><br><span class="line"><span class="comment">### 匹配第一个url</span></span><br><span class="line"><span class="built_in">print</span>(Search(string))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>正则匹配中文</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 正则匹配中文</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">title = <span class="string">&#x27;你好， hello ，世界&#x27;</span></span><br><span class="line">pattern = re.<span class="built_in">compile</span>(<span class="string">r&#x27;[\u4e00-\u9fff]+&#x27;</span>)</span><br><span class="line">result = pattern.findall(title)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩展知识：</span></span><br><span class="line"><span class="comment"># 几个主要非英文语系字符范围</span></span><br><span class="line"><span class="comment"># 2E80～33FFh：中日韩符号区。收容康熙字典部首、中日韩辅助部首、注音符号、日本假名、韩文音符，中日韩的符号、标点、带圈或带括符文数字、月份，以及日本的假名组合、单位、年号、月份、日期、时间等。</span></span><br><span class="line"><span class="comment"># 3400～4DFFh：中日韩认同表意文字扩充A区，总计收容6,582个中日韩汉字。</span></span><br><span class="line"><span class="comment"># 4E00～9FFFh：中日韩认同表意文字区，总计收容20,902个中日韩汉字。</span></span><br><span class="line"><span class="comment"># A000～A4FFh：彝族文字区，收容中国南方彝族文字和字根。</span></span><br><span class="line"><span class="comment"># AC00～D7FFh：韩文拼音组合字区，收容以韩文音符拼成的文字。</span></span><br><span class="line"><span class="comment"># F900～FAFFh：中日韩兼容表意文字区，总计收容302个中日韩汉字。</span></span><br><span class="line"><span class="comment"># FB00～FFFDh：文字表现形式区，收容组合拉丁文字、希伯来文、阿拉伯文、中日韩直式标点、小符号、半角符号、全角</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>简述Python乐观锁和悲观锁。</li>
+</ul>
+<p>悲观锁：不相信其他人不会修改，传统的关系型数据库里边就用到了很多这种锁机制，如mysql, 每次查询、修改数据操作之前就会上锁，整个数据处理过程中，将数据处于锁定状态，自己更新数据后再释放锁，可以有效防止库存冲突问题<br>乐观锁：相信其他人不会修改，所以查询、修改数据库时不会上锁，所以再数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了，则返回错误的信息，让用户决定如何 去做</p>
+<ul>
+<li>r/r+/rb/rb+ 等文件打开模式的区别。</li>
+</ul>
+<p>‘r’：只读。该文件必须已存在。<br>‘r+’：可读可写。该文件必须已存在，写为追加在文件内容末尾。<br>‘rb’：表示以二进制方式读取文件。该文件必须已存在。<br>‘w’：只写。打开即默认创建一个新文件，如果文件已存在，则覆盖写(即文件内原始数据会被新写入的数据清空覆盖)。<br>‘w+’：写读。打开创建新文件并写入数据，如果文件已存在，则覆盖写。<br>‘wb’：表示以二进制写方式打开，只能写文件， 如果文件不存在，创建该文件；如果文件已存在，则覆盖写。<br>‘a’：追加写。若打开的是已有文件则直接对已有文件操作，若打开文件不存在则创建新文件，只能执行写(追加在后面)，不能读。<br>‘a+’：追加读写。打开文件方式与写入方式和’a’一样，但是可以读。需注意的是你若刚用‘a+’打开一个文件，一般不能直接读取，<br>因为此时光标已经是文件末尾，除非你把光标移动到初始位置或任意非末尾的位置。</p>
+<p>看似那么多模式，无非是三大类：读r(read)，写w(write)，追加a(append)。</p>
+<ul>
+<li>linux中的&gt;,&gt;&gt;</li>
+</ul>
+<p>重定向，&gt;表示输出，&gt;&gt;表示追加。</p>
+<ul>
+<li>正则表达式匹配出<html><h1><a target="_blank" rel="noopener" href="http://www.itcast.cn/">www.itcast.cn</a></h1></html></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">labels = [<span class="string">&quot;&lt;html&gt;&lt;h1&gt;www.itcast.cn&lt;/h1&gt;&lt;/html&gt;&quot;</span>,<span class="string">&quot;&lt;html&gt;&lt;h1&gt;www.baidu.com&lt;/h1&gt;&lt;/html&gt;&quot;</span>,<span class="string">&quot;&lt;html&gt;&lt;h1&gt;www.itcast.cn&lt;/h1&gt;&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> lab <span class="keyword">in</span> labels:</span><br><span class="line">    ret = re.match(<span class="string">r&quot;&lt;(\w*)&gt;&lt;(\w*)&gt;.*?&lt;/\2&gt;&lt;/\1&gt;&quot;</span>,lab)</span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;&#123;&#125; 符合要求&quot;</span>.<span class="built_in">format</span>(ret.group()))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;&#123;&#125; 不符合要求&quot;</span>.<span class="built_in">format</span>(lab))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>输出结果:</p>
+<p>/Users/shenle/PycharmProjects/pythontest100/venv/bin/python /Users/shenle/PycharmProjects/pythontest100/test001.py</p>
+<html><h1>www.itcast.cn</h1></html> 符合要求
+<html><h1>www.baidu.com</h1></html> 符合要求
+<html><h1>www.itcast.cn</h1> 不符合要求
+
+<p>Process finished with exit code 0</p>
+<ul>
+<li>python 传参数是传值还是传地址？</li>
+</ul>
+<p>python中函数参数是引用传递，而不是值传递。</p>
+<p>不管什么类型的参数，在 Python 函数中对参数直接使用“=”符号赋值是没用的，直接使用“=”符号赋值并不能改变参数。<br>如果需要让函数修改某些数据，则可以通过把这些数据包装成列表、字典等可变对象，然后把列表、字典等可变对象作为参数传入函数，在函数中通过列表、字典的方法修改它们，这样才能改变这些数据。</p>
+<p>对于不可变类型，如数字、字符、元组等，因变量不可修改，所以运算不会修改自身。<br>但是对于可变类型，如列表、字典等，因变量可以修改，所以函数体运算可能会修改传入的参数变量。</p>
+<ul>
+<li>求两个列表的交集、差集和并集。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">b = [<span class="number">4</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line"></span><br><span class="line">jj1 = [i <span class="keyword">for</span> i <span class="keyword">in</span> a <span class="keyword">if</span> i <span class="keyword">in</span> b]</span><br><span class="line">jj2 = <span class="built_in">list</span>(<span class="built_in">set</span>(a).intersection(<span class="built_in">set</span>(b)))</span><br><span class="line"></span><br><span class="line">cj1 = <span class="built_in">list</span>(<span class="built_in">set</span>(a).difference(<span class="built_in">set</span>(b)))  <span class="comment">###在a不在b</span></span><br><span class="line">cj2 = <span class="built_in">list</span>(<span class="built_in">set</span>(b).difference(<span class="built_in">set</span>(a)))  <span class="comment">###在b不在a</span></span><br><span class="line"></span><br><span class="line">bj1 = <span class="built_in">list</span>(<span class="built_in">set</span>(b).union(<span class="built_in">set</span>(a)))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(jj1)</span><br><span class="line"><span class="built_in">print</span>(jj2)</span><br><span class="line"><span class="built_in">print</span>(cj1)</span><br><span class="line"><span class="built_in">print</span>(cj2)</span><br><span class="line"><span class="built_in">print</span>(bj1)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>生成0到100之间的随机数。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment">### 生成随机整数。</span></span><br><span class="line">result1 = random.randint(<span class="number">0</span>,<span class="number">100</span>)</span><br><span class="line"><span class="built_in">print</span>(result1)</span><br><span class="line"></span><br><span class="line"><span class="comment">### 生成随机整数</span></span><br><span class="line">result2 = random.choice(<span class="built_in">range</span>(<span class="number">0</span>,<span class="number">101</span>))</span><br><span class="line"><span class="built_in">print</span>(result2)</span><br><span class="line"></span><br><span class="line"><span class="comment">### 生成随机小数</span></span><br><span class="line">result3 = <span class="number">100</span>*random.random()</span><br><span class="line"><span class="built_in">print</span>(result3)</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>lambda匿名函数的好处</li>
+</ul>
+<p>精简代码，省去了定义函数、map省去了for循环操作。</p>
+<ul>
+<li>常见网络传输协议</li>
+</ul>
+<p>UDP/TCP/FTP/HTTP/SMTP等等。</p>
+<ul>
+<li>单引号、双引号、三引号的用法。</li>
+</ul>
+<p>单引号和双引号是等效的，如果要换行，那么需要使用符号“\”；<br>三引号则可以直接换行，并且可以包含注释。<br>单引号里不能加单引号，但可加“\”或者是双引号进行转义输出。<br>双引号里面不能再加双引号，但是可以加“\”或者是单引号进行转义输出。</p>
+<ul>
+<li>HTTP请求中的get和post的区别。</li>
+</ul>
+<p>一、最普遍的答案</p>
+<p>我们在Google或百度上搜索这个问题时，得到最多的答案就是如下三点，而这似乎也成为了“标准答案”，其实这个答案有待商榷。</p>
+<ol>
+<li><p>GET使用URL或Cookie传参，而POST将数据放在BODY中。</p>
+</li>
+<li><p>GET方式提交的数据有长度限制，则POST的数据则可以非常大。</p>
+</li>
+<li><p>POST比GET安全，因为数据在地址栏上不可见。</p>
+</li>
+</ol>
+<p>二、“标准答案”其实是错的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> GET使用URL或Cookie传参，而POST将数据放在BODY中</span><br><span class="line">GET和POST是由HTTP协议定义的。在HTTP协议中，Method和Data（URL， Body， Header）是正交的两个概念，也就是说，使用哪个Method与应用层的数据如何传输是没有相互关系的。</span><br><span class="line">HTTP没有要求，如果Method是POST数据就要放在BODY中。也没有要求，如果Method是GET，数据（参数）就一定要放在URL中而不能放在BODY中。</span><br><span class="line">那么，网上流传甚广的这个说法是从何而来的呢？我在HTML标准中，找到了相似的描述。这和网上流传的说法一致。但是这只是HTML标准对HTTP协议的用法的约定。怎么能当成GET和POST的区别呢？</span><br><span class="line">而且，现代的Web Server都是支持GET中包含BODY这样的请求。虽然这种请求不可能从浏览器发出，但是现在的Web Server又不是只给浏览器用，已经完全地超出了HTML服务器的范畴了。</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> GET方式提交的数据有长度限制，则POST的数据则可以非常大</span><br><span class="line">先说结论：HTTP协议对GET和POST都没有对长度的限制。HTTP协议明确地指出了，HTTP头和Body都没有长度的要求。</span><br><span class="line">首先是<span class="string">&quot;GET方式提交的数据有长度限制&quot;</span>，如果我们使用GET通过URL提交数据，那么GET可提交的数据量就跟URL的长度有直接关系了。而实际上，URL不存在参数上限的问题，HTTP协议规范没有对URL长度进行限制。这个限制是特定的浏览器及服务器对它的限制。IE对URL长度的限制是<span class="number">2083</span>字节(2K+<span class="number">35</span>)。对于其他浏览器，如Netscape、FireFox等，理论上没有长度限制，其限制取决于操作系统的支持。</span><br><span class="line">注意这个限制是整个URL长度，而不仅仅是你的参数值数据长度。</span><br><span class="line">POST也是一样，POST是没有大小限制的，HTTP协议规范也没有对POST数据进行大小限制，起限制作用的是服务器的处理程序的处理能力。</span><br><span class="line">当然，我们常说GET的URL会有长度上的限制这个说法是怎么回事呢？虽然这个不是GET和POST的本质区别，但是我们也可以说说导致URL长度限制的两方面的原因：</span><br><span class="line"><span class="number">1.</span> 浏览器。早期的浏览器会对URL长度做限制。而现在的具体限制是怎么样的，我自己没有亲测过，就不复制网上的说法啦。</span><br><span class="line"><span class="number">2.</span> 服务器。URL长了，对服务器处理也是一种负担。原本一个会话就没有多少数据，现在如果有人恶意地构造几个M大小的URL，并不停地访问你的服务器。服务器的最大并发数显然会下降。另一种攻击方式是，告诉服务器Content-Length是一个很大的数，然后只给服务器发一点儿数据，服务器你就傻等着去吧。哪怕你有超时设置，这种故意的次次访问超时也能让服务器吃不了兜着走。有鉴于此，多数服务器出于安全啦、稳定啦方面的考虑，会给URL长度加限制。但是这个限制是针对所有HTTP请求的，与GET、POST没有关系。</span><br><span class="line"><span class="number">3.</span> POST比GET安全，因为数据在地址栏上不可见</span><br><span class="line">这个说法其实也是基于上面的<span class="number">1</span>，<span class="number">2</span>两点的基础上来说的，我觉得没什么问题，但是需要明白为什么使用GET在地址栏上就不安全了，以及还有没有其他原因说明“POST比GET安全”。</span><br><span class="line">通过GET提交数据，用户名和密码将明文出现在URL上，因为登录页面有可能被浏览器缓存，其他人查看浏览器的历史纪录，那么别人就可以拿到你的账号和密码了，</span><br><span class="line">除此之外，使用GET提交数据还可能会造成Cross-site request forgery攻击。</span><br><span class="line"></span><br><span class="line">三、我的理解</span><br><span class="line"></span><br><span class="line">“<span class="number">1.</span> GET使用URL或Cookie传参，而POST将数据放在BODY中”，这个是因为HTTP协议用法的约定。并非它们的本身区别。</span><br><span class="line">“<span class="number">2.</span> GET方式提交的数据有长度限制，则POST的数据则可以非常大”，这个是因为它们使用的操作系统和浏览器设置的不同引起的区别。也不是GET和POST本身的区别。</span><br><span class="line">“<span class="number">3.</span> POST比GET安全，因为数据在地址栏上不可见”，这个说法没毛病，但依然不是GET和POST本身的区别。</span><br><span class="line">虽然这三点不是它们的本身区别，但至少是它们在使用上的区别，所以我在面试这个问题时，如果面试者能够回答上面三点我基本会给个及格分。那么你想不想要更高的分数？</span><br><span class="line"></span><br><span class="line">四、终极区别</span><br><span class="line">GET和POST最大的区别主要是GET请求是幂等性的，POST请求不是。这个是它们本质区别，上面的只是在使用上的区别。</span><br><span class="line">什么是幂等性？幂等性是指一次和多次请求某一个资源应该具有同样的副作用。</span><br><span class="line">简单来说意味着对同一URL的多个请求应该返回同样的结果。</span><br><span class="line">正因为它们有这样的区别，所以不应该且不能用get请求做数据的增删改这些有副作用的操作。</span><br><span class="line">因为get请求是幂等的，在网络不好的隧道中会尝试重试。如果用get请求增数据，</span><br><span class="line">会有重复操作的风险，而这种重复操作可能会导致副作用（浏览器和操作系统并不知道你会用get请求去做增操作）。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>python中读取excel的方法。</li>
+</ul>
+<p>应用数据分析库，pandas</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df = pd.read_excel(<span class="string">&quot;333.xlsx&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(df)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>简述多线程、多进程。</li>
+</ul>
+<p>多任务：<br>计算机的核心是CPU，承担了所有的计算任务。一个CPU在一个时间切片里只能运行一个程序。<br>多任务的目的：提升程序的执行效率，更充分利用cpu的资源</p>
+<p>并行：当任务数小于或者等于cpu核数时，每一个任务都有对应的cpu来处理执行，即任务真的是一起执行的<br>并发：当任务数多于cpu核数，通过操作系统的各种任务调度算法，实现用多个任务串行执行（实际上总有一些任务不在执行，因为切换任务的速度相当快，看上去像一起执行而已）<br>运行的程序即进程,进程包含线程(&gt;=1),线程包含协程(&gt;=1)</p>
+<p>切换开销:进程&gt;线程&gt;协程(并发量更高)</p>
+<p>区别：<br>进程：多进程利用多核CPU完成任务,是操作系统资源分配的最小单位，进程拥有自己独立的内存空间，所以进程间数据不共享，进程之间的通信由操作系统传递，导致通讯效率低，切换开销大,创建或销毁进程时系统开销大<br>线程：是CPU调度的最小单位，所有线程共享进程的内存空间，通讯效率高，切换开销小，但共享意味着竞争=&gt;GIL(CPython全局解释器锁,同时只能运行一个线程,无法利用多核 CPU),在I/O阻塞的时候，解释器会释放GIL<br>协程：一个可以挂起的函数，协程的调度完全由用户控制，用函数切换，开销极小。genvent，monkey.patchall自动捕捉耗时点</p>
+<p>场景：<br>线程，协程：IO密集（网络IO、磁盘IO、数据库IO）大量时间花在数据传输<br>进程：连续密集的计算（C10K）大量时间花在计算<br>一般开发中：多进程(cpu的核数)+多协程<br>业余时间用过多线程写爬虫，提升效率=》获取所有url,并发爬取<br>在多个用户同时发起对同一个商品的下单请求时，会出现资源竞争问题，导致库存的最终结果出现异常=》乐观锁</p>
+<ul>
+<li>python正则中的search与match</li>
+</ul>
+<p>Python3 正则表达式<br>正则表达式是一个特殊的字符序列，它能帮助你方便的检查一个字符串是否与某种模式匹配。<br>Python 自1.5版本起增加了re 模块，它提供 Perl 风格的正则表达式模式。<br>re 模块使 Python 语言拥有全部的正则表达式功能。<br>compile 函数根据一个模式字符串和可选的标志参数生成一个正则表达式对象。该对象拥有一系列方法用于正则表达式匹配和替换。<br>re 模块也提供了与这些方法功能完全一致的函数，这些函数使用一个模式字符串做为它们的第一个参数。</p>
+<p>re.match 尝试从字符串的起始位置匹配一个模式，如果不是起始位置匹配成功的话，match()就返回none。<br>re.match(pattern, string, flags=0)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="built_in">print</span>(re.match(<span class="string">&#x27;www&#x27;</span>, <span class="string">&#x27;www.runoob.com&#x27;</span>).span())  <span class="comment"># 在起始位置匹配</span></span><br><span class="line"><span class="built_in">print</span>(re.match(<span class="string">&#x27;com&#x27;</span>, <span class="string">&#x27;www.runoob.com&#x27;</span>))         <span class="comment"># 不在起始位置匹配</span></span><br></pre></td></tr></table></figure>
+
+<p>输出：<br>(0, 3)<br>None</p>
+<p>re.search 扫描整个字符串并返回第一个成功的匹配。</p>
+<p>函数语法：</p>
+<p>re.search(pattern, string, flags=0)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span>(re.search(<span class="string">&#x27;www&#x27;</span>, <span class="string">&#x27;www.runoob.com&#x27;</span>).span())  <span class="comment"># 在起始位置匹配</span></span><br><span class="line"><span class="built_in">print</span>(re.search(<span class="string">&#x27;com&#x27;</span>, <span class="string">&#x27;www.runoob.com&#x27;</span>).span())         <span class="comment"># 不在起始位置匹配</span></span><br></pre></td></tr></table></figure>
+
+<p>输出：<br>(0, 3)<br>(11, 14)</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2022/08/22/python-interview-5/" title="python interview 5">https://shenle2019.github.io/2022/08/22/python-interview-5/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/08/22/python-interview-4/" rel="next" title="python interview 4">
+                <i class="fa fa-chevron-left"></i> python interview 4
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/08/22/Automatic-test-framework/" rel="prev" title="Automatic test framework">
+                Automatic test framework <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86-V1-day5"><span class="nav-number">1.</span> <span class="nav-text">Python面试题整理-V1 day5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#print-int-%E2%80%9C1-4%E2%80%9D-%E6%9C%89%E6%8A%A5%E9%94%99"><span class="nav-number">1.1.</span> <span class="nav-text">print(int(“1.4”)),有报错</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text">www.itcast.cn</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text">www.itcast.cn</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text">www.baidu.com</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text">www.itcast.cn</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'VLcgBQixkeBQUATGzDVaqcpk-gzGzoHsz',
+        appKey: 'hdVMQzxTmu7ohwxMg6TvuY9W',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
