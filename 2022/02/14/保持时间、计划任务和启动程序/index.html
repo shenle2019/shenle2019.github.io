@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="保持时间、、计划任务和启动程序time 模块 time.time()函数 Unix 纪元是编程中经常参考的时间：1970 年 1 月 1 日 0 点，即协调世界时（UTC）。time.time()函数返回自那一刻以来的秒数，是一个浮点值（回想一下，浮点值只是一个带小数点的数）。这个数字称为 UNIX 纪元时间戳。例如，在交互式环境中输入以下代码 &gt;&gt;&gt; import time &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="保持时间、计划任务和启动程序">
+<meta property="og:url" content="https://shenle2019.github.io/2022/02/14/%E4%BF%9D%E6%8C%81%E6%97%B6%E9%97%B4%E3%80%81%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="保持时间、、计划任务和启动程序time 模块 time.time()函数 Unix 纪元是编程中经常参考的时间：1970 年 1 月 1 日 0 点，即协调世界时（UTC）。time.time()函数返回自那一刻以来的秒数，是一个浮点值（回想一下，浮点值只是一个带小数点的数）。这个数字称为 UNIX 纪元时间戳。例如，在交互式环境中输入以下代码 &gt;&gt;&gt; import time &amp;">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-02-14T08:51:26.000Z">
+<meta property="article:modified_time" content="2022-02-14T00:52:24.000Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2022/02/14/保持时间、计划任务和启动程序/"/>
+
+
+
+
+
+  <title>保持时间、计划任务和启动程序 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2022/02/14/%E4%BF%9D%E6%8C%81%E6%97%B6%E9%97%B4%E3%80%81%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">保持时间、计划任务和启动程序</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-14T16:51:26+08:00">
+                2022-02-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-02-14T08:52:24+08:00">
+                2022-02-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2022/02/14/%E4%BF%9D%E6%8C%81%E6%97%B6%E9%97%B4%E3%80%81%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2022/02/14/%E4%BF%9D%E6%8C%81%E6%97%B6%E9%97%B4%E3%80%81%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="保持时间、、计划任务和启动程序"><a href="#保持时间、、计划任务和启动程序" class="headerlink" title="保持时间、、计划任务和启动程序"></a>保持时间、、计划任务和启动程序</h3><h4 id="time-模块"><a href="#time-模块" class="headerlink" title="time 模块"></a>time 模块</h4><ul>
+<li><p>time.time()函数</p>
+<p>Unix 纪元是编程中经常参考的时间：1970 年 1 月 1 日 0 点，即协调世界时（UTC）。time.time()函数返回自那一刻以来的秒数，是一个浮点值（回想一下，浮点值只是一个带小数点的数）。这个数字称为 UNIX 纪元时间戳。例如，在交互式环境中输入以下代码</p>
+<p>&gt;&gt;&gt; <strong>import time</strong></p>
+<p>&gt;&gt;&gt; <strong>time.time()</strong></p>
+<p>1425063955.068649</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcProd</span>():</span></span><br><span class="line">	<span class="comment"># Calculate the product of the first 100,000 numbers.</span></span><br><span class="line">	product = <span class="number">1</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">100000</span>):</span><br><span class="line">	product = product * i</span><br><span class="line">	<span class="keyword">return</span> product</span><br><span class="line">startTime = time.time()</span><br><span class="line">prod = calcProd()</span><br><span class="line">endTime = time.time()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;The result is %s digits long.&#x27;</span> % (<span class="built_in">len</span>(<span class="built_in">str</span>(prod))))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Took %s seconds to calculate.&#x27;</span> % (endTime - startTime))</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<p>D:\pythontest\autowork\venv\Scripts\python.exe D:/pythontest/autowork/venv/timetest.py<br>The result is 456569 digits long.<br>Took 2.9553983211517334 seconds to calculate.</p>
+</li>
+<li><p>time.sleep()函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">\&gt;&gt;&gt; **<span class="keyword">import</span> time**</span><br><span class="line"></span><br><span class="line">\&gt;&gt;&gt; **<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):**</span><br><span class="line"></span><br><span class="line"> **<span class="built_in">print</span>(<span class="string">&#x27;Tick&#x27;</span>)**</span><br><span class="line"></span><br><span class="line"> **time.sleep(<span class="number">1</span>)**</span><br><span class="line"></span><br><span class="line"> **<span class="built_in">print</span>(<span class="string">&#x27;Tock&#x27;</span>)**</span><br><span class="line"></span><br><span class="line"> **time.sleep(<span class="number">1</span>)**</span><br><span class="line"></span><br><span class="line">Tick</span><br><span class="line"></span><br><span class="line">Tock</span><br><span class="line"></span><br><span class="line">Tick</span><br><span class="line"></span><br><span class="line">Tock</span><br><span class="line"></span><br><span class="line">Tick</span><br><span class="line"></span><br><span class="line">Tock</span><br><span class="line"></span><br><span class="line"> &gt;&gt;&gt; **time.sleep(<span class="number">5</span>)**</span><br></pre></td></tr></table></figure></li>
+<li><p>数字四舍五入</p>
+<p>在处理时间时，你会经常遇到小数点后有许多数字的浮点值。为了让这些值更易于处理，可以用 Python 内置的 round()函数将它们缩短，该函数按照指定的精度四舍五入到一个浮点数。只要传入要舍入的数字，再加上可选的第二个参数，指明需要传入到小数点后多少位。如果省略第二个参数，round()将数字四舍五入到最接近的整数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">\&gt;&gt;&gt; **<span class="keyword">import</span> time**</span><br><span class="line"></span><br><span class="line">\&gt;&gt;&gt; **now = time.time()**</span><br><span class="line"></span><br><span class="line">\&gt;&gt;&gt; **now**</span><br><span class="line"></span><br><span class="line"><span class="number">1425064108.017826</span></span><br><span class="line"></span><br><span class="line">\&gt;&gt;&gt; **<span class="built_in">round</span>(now, <span class="number">2</span>)**</span><br><span class="line"></span><br><span class="line"><span class="number">1425064108.02</span></span><br><span class="line"></span><br><span class="line">\&gt;&gt;&gt; **<span class="built_in">round</span>(now, <span class="number">4</span>)**</span><br><span class="line"></span><br><span class="line"><span class="number">1425064108.0178</span></span><br><span class="line"></span><br><span class="line">\&gt;&gt;&gt; **<span class="built_in">round</span>(now)**</span><br><span class="line"></span><br><span class="line"><span class="number">1425064108</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="项目：超级秒表"><a href="#项目：超级秒表" class="headerlink" title="项目：超级秒表"></a>项目：超级秒表</h4><p>假设要记录在没有自动化的枯燥任务上花了多少时间。你没有物理秒表，要为笔记本或智能手机找到一个免费的秒表应用，没有广告，且不会将你的浏览历史发送给市场营销人员，又出乎意料地困难（在你同意的许可协议中，它说它可以这样做。你确实阅读了许可协议，不是吗？）。你可以自己用 Python 写一个简单的秒表程序。总的来说，你的程序需要完成：</p>
+<p> 记录从按下回车键开始，每次按键的时间，每次按键都是一个新的“单圈”。</p>
+<p> 打印圈数、总时间和单圈时间。</p>
+<p>这意味着代码将需要完成以下任务：</p>
+<p> 在程序开始时，通过调用 time.time()得到当前时间，将它保存为一个时间戳。</p>
+<p>在每个单圈开始时也一样。</p>
+<p> 记录圈数，每次用户按下回车键时加 1。 </p>
+<p> 用时间戳相减，得到计算流逝的时间。</p>
+<p> 处理 KeyboardInterrupt 异常，这样用户可以按 Ctrl-C 退出。</p>
+<p>打开一个新的文件编辑器窗口，并保存为 stopwatch.py。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! python3</span></span><br><span class="line"><span class="comment"># stopwatch.py - A simple stopwatch program.</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> signal</span><br><span class="line"><span class="comment"># Display the program&#x27;s instructions.</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Press ENTER to begin. Afterwards, press ENTER to &quot;click&quot; the stopwatch.Press Ctrl-C to quit.&#x27;</span>)</span><br><span class="line"><span class="built_in">input</span>() <span class="comment"># press Enter to begin</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Started.&#x27;</span>)</span><br><span class="line">startTime = time.time() <span class="comment"># get the first lap&#x27;s start time</span></span><br><span class="line">lastTime = startTime</span><br><span class="line">lapNum = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Start tracking the lap times.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="built_in">input</span>()</span><br><span class="line"></span><br><span class="line">        lapTime = <span class="built_in">round</span>(time.time() - lastTime, <span class="number">2</span>)</span><br><span class="line">        totalTime = <span class="built_in">round</span>(time.time() - startTime, <span class="number">2</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Lap #%s: %s (%s)&#x27;</span> % (lapNum, totalTime, lapTime), end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        lapNum += <span class="number">1</span></span><br><span class="line">        lastTime = time.time() <span class="comment"># reset the last lap time</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">except</span> BaseException <span class="keyword">as</span> e:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(e, KeyboardInterrupt):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\nDone.&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">###这里注意，如果直接抛错KeyboardInterrupt，则有其他异常，用基类异常包一下比较好。</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="datetime-模块"><a href="#datetime-模块" class="headerlink" title="datetime 模块"></a>datetime 模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> datetime</span><br><span class="line"> &gt;&gt;&gt; datetime.datetime.now()</span><br><span class="line"> datetime.datetime(<span class="number">2015</span>, <span class="number">2</span>, <span class="number">27</span>, <span class="number">11</span>, <span class="number">10</span>, <span class="number">49</span>, <span class="number">55</span>, <span class="number">53</span>)</span><br><span class="line"> &gt;&gt;&gt; dt = datetime.datetime(<span class="number">2015</span>, <span class="number">10</span>, <span class="number">21</span>, <span class="number">16</span>, <span class="number">29</span>, <span class="number">0</span>)</span><br><span class="line"> &gt;&gt;&gt; dt.year, dt.month, dt.day</span><br><span class="line">(<span class="number">2015</span>, <span class="number">10</span>, <span class="number">21</span>)</span><br><span class="line"> &gt;&gt;&gt; dt.hour, dt.minute, dt.second</span><br><span class="line">(<span class="number">16</span>, <span class="number">29</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>datetime.datetime.fromtimestamp(<span class="number">1000000</span>)</span><br><span class="line">datetime.datetime(<span class="number">1970</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="number">5</span>, <span class="number">46</span>, <span class="number">40</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>datetime.datetime.fromtimestamp(time.time())</span><br><span class="line">datetime.datetime(<span class="number">2015</span>, <span class="number">2</span>, <span class="number">27</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">0</span>, <span class="number">604980</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>halloween2015 = datetime.datetime(<span class="number">2015</span>, <span class="number">10</span>, <span class="number">31</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"> &gt;&gt;&gt; newyears2016 = datetime.datetime(<span class="number">2016</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>oct31_2015 = datetime.datetime(<span class="number">2015</span>, <span class="number">10</span>, <span class="number">31</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"> &gt;&gt;&gt; halloween2015 == oct31_2015</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"> &gt;&gt;&gt; halloween2015 &gt; newyears2016</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"> &gt;&gt;&gt; newyears2016 &gt; halloween2015</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>newyears2016 != oct31_2015</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">###datetime 模块还提供了 timedelta 数据类型，它表示一段时间，而不是一个时刻</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>delta = datetime.timedelta(days=<span class="number">11</span>, hours=<span class="number">10</span>, minutes=<span class="number">9</span>, seconds=<span class="number">8</span>)</span><br><span class="line"> &gt;&gt;&gt; delta.days, delta.seconds, delta.microseconds</span><br><span class="line">(<span class="number">11</span>, <span class="number">36548</span>, <span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>delta.total_seconds()</span><br><span class="line"><span class="number">986948.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">str</span>(delta)</span><br><span class="line"><span class="string">&#x27;11 days, 10:09:08&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dt = datetime.datetime.now()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dt</span><br><span class="line">datetime.datetime(<span class="number">2015</span>, <span class="number">2</span>, <span class="number">27</span>, <span class="number">18</span>, <span class="number">38</span>, <span class="number">50</span>, <span class="number">636181</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>thousandDays = datetime.timedelta(days=<span class="number">1000</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dt + thousandDays</span><br><span class="line">datetime.datetime(<span class="number">2017</span>, <span class="number">11</span>, <span class="number">23</span>, <span class="number">18</span>, <span class="number">38</span>, <span class="number">50</span>, <span class="number">636181</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>oct21st = datetime.datetime(<span class="number">2015</span>, <span class="number">10</span>, <span class="number">21</span>, <span class="number">16</span>, <span class="number">29</span>, <span class="number">0</span>)</span><br><span class="line"> &gt;&gt;&gt; aboutThirtyYears = datetime.timedelta(days=<span class="number">365</span> * <span class="number">30</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>oct21st</span><br><span class="line">datetime.datetime(<span class="number">2015</span>, <span class="number">10</span>, <span class="number">21</span>, <span class="number">16</span>, <span class="number">29</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>oct21st - aboutThirtyYears</span><br><span class="line">datetime.datetime(<span class="number">1985</span>, <span class="number">10</span>, <span class="number">28</span>, <span class="number">16</span>, <span class="number">29</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>oct21st - (<span class="number">2</span> * aboutThirtyYears)</span><br><span class="line">datetime.datetime(<span class="number">1955</span>, <span class="number">11</span>, <span class="number">5</span>, <span class="number">16</span>, <span class="number">29</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">###暂停直至特定日期</span></span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">halloween2016 = datetime.datetime(<span class="number">2016</span>, <span class="number">10</span>, <span class="number">31</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">while</span> datetime.datetime.now() &lt; halloween2016:</span><br><span class="line">time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### strftime()方法将 datetime 对象转换为字符串</span></span><br><span class="line"></span><br><span class="line">strftime 指令 含义</span><br><span class="line">%Y 带世纪的年份，例如<span class="string">&#x27;2014&#x27;</span></span><br><span class="line">%y 不带世纪的年份，<span class="string">&#x27;00&#x27;</span>至<span class="string">&#x27;99&#x27;</span>（<span class="number">1970</span> 至 <span class="number">2069</span>）</span><br><span class="line">%m 数字表示的月份, <span class="string">&#x27;01&#x27;</span>至<span class="string">&#x27;12&#x27;</span></span><br><span class="line">%B 完整的月份，例如<span class="string">&#x27;November&#x27;</span></span><br><span class="line">%b 简写的月份，例如<span class="string">&#x27;Nov&#x27;</span></span><br><span class="line">%d 一月中的第几天，<span class="string">&#x27;01&#x27;</span>至<span class="string">&#x27;31&#x27;</span></span><br><span class="line">%j 一年中的第几天，<span class="string">&#x27;001&#x27;</span>至<span class="string">&#x27;366&#x27;</span></span><br><span class="line">%w 一周中的第几天，<span class="string">&#x27;0&#x27;</span>（周日）至<span class="string">&#x27;6&#x27;</span>（周六）</span><br><span class="line">%A 完整的周几，例如<span class="string">&#x27;Monday&#x27;</span></span><br><span class="line">%a 简写的周几，例如<span class="string">&#x27;Mon&#x27;</span></span><br><span class="line">%H 小时（<span class="number">24</span> 小时时钟），<span class="string">&#x27;00&#x27;</span>至<span class="string">&#x27;23&#x27;</span></span><br><span class="line">%I 小时（<span class="number">12</span> 小时时钟），<span class="string">&#x27;01&#x27;</span>至<span class="string">&#x27;12&#x27;</span></span><br><span class="line">%M 分，<span class="string">&#x27;00&#x27;</span>至<span class="string">&#x27;59&#x27;</span></span><br><span class="line">%S 秒，<span class="string">&#x27;00&#x27;</span>至<span class="string">&#x27;59&#x27;</span></span><br><span class="line">%p <span class="string">&#x27;AM&#x27;</span>或<span class="string">&#x27;PM&#x27;</span></span><br><span class="line">%% 就是<span class="string">&#x27;%&#x27;</span>字符</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>oct21st = datetime.datetime(<span class="number">2015</span>, <span class="number">10</span>, <span class="number">21</span>, <span class="number">16</span>, <span class="number">29</span>, <span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>oct21st.strftime(<span class="string">&#x27;%Y/%m/%d %H:%M:%S&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;2015/10/21 16:29:00&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>oct21st.strftime(<span class="string">&#x27;%I:%M %p&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;04:29 PM&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>oct21st.strftime(<span class="string">&quot;%B of &#x27;%y&quot;</span>)</span><br><span class="line"><span class="string">&quot;October of &#x27;15&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>datetime.datetime.strptime(<span class="string">&#x27;October 21, 2015&#x27;</span>, <span class="string">&#x27;%B %d, %Y&#x27;</span>)</span><br><span class="line">datetime.datetime(<span class="number">2015</span>, <span class="number">10</span>, <span class="number">21</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>datetime.datetime.strptime(<span class="string">&#x27;2015/10/21 16:29:00&#x27;</span>, <span class="string">&#x27;%Y/%m/%d %H:%M:%S&#x27;</span>)</span><br><span class="line">datetime.datetime(<span class="number">2015</span>, <span class="number">10</span>, <span class="number">21</span>, <span class="number">16</span>, <span class="number">29</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>datetime.datetime.strptime(<span class="string">&quot;October of &#x27;15&quot;</span>, <span class="string">&quot;%B of &#x27;%y&quot;</span>)</span><br><span class="line">datetime.datetime(<span class="number">2015</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>datetime.datetime.strptime(<span class="string">&quot;November of &#x27;63&quot;</span>, <span class="string">&quot;%B of &#x27;%y&quot;</span>)</span><br><span class="line">datetime.datetime(<span class="number">2063</span>, <span class="number">11</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>​    在 Python 中，日期和时间可能涉及好几种不同的数据类型和函数。下面回顾了</p>
+<p>表示时间的 3 种不同类型的值：</p>
+<p> Unix 纪元时间戳（time 模块中使用）是一个浮点值或整型值，表示自 1970 年 1 月 1 日午夜 0 点（UTC）以来的秒数。</p>
+<p> datetime 对象（属于 datetime 模块）包含一些整型值，保存在 year、month、day、hour、minute 和 second 等属性中。</p>
+<p> timedelta 对象（属于 datetime 模块）表示的一段时间，而不是一个特定的时刻。</p>
+<p>下面回顾了时间函数及其参数和返回值：</p>
+<p> time.time()函数返回一个浮点值，表示当前时刻的 Unix 纪元时间戳。</p>
+<p> time.sleep(seconds)函数让程序暂停 seconds 参数指定的秒数。</p>
+<p> datetime.datetime(year, month, day, hour, minute, second)函数返回参数指定的时刻的 datetime 对象。如果没有提供 hour、minute 或 second 参数，它们默认为 0。 </p>
+<p> datetime.datetime.now()函数返回当前时刻的 datetime 对象。</p>
+<p> datetime.datetime.fromtimestamp(epoch)函数返回 epoch 时间戳参数表示的时刻的 datetime 对象。</p>
+<p> datetime.timedelta(weeks, days, hours, minutes, seconds, milliseconds, microseconds)函数返回一个表示一段时间的 timedelta 对象。该函数的关键字参数都是可选的，不包括 month 或 year。 </p>
+<p> total_seconds()方法用于 timedelta 对象，返回 timedelta 对象表示的秒数。</p>
+<p> strftime(format)方法返回一个字符串，用 format 字符串中的定制格式来表示datetime 对象表示的时间。详细格式参见表 15-1。 </p>
+<p> datetime.datetime.strptime(time_string, format)函数返回一个 datetime 对象，它的时刻由 time_string 指定，利用 format 字符串参数来解析。</p>
+<h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time, datetime</span><br><span class="line">startTime = datetime.datetime(<span class="number">2029</span>, <span class="number">10</span>, <span class="number">31</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">while</span> datetime.datetime.now() &lt; startTime:</span><br><span class="line">time.sleep(<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Program now starting on Halloween 2029&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> threading, time</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Start of program.&#x27;</span>)</span><br><span class="line"> <span class="function"><span class="keyword">def</span> <span class="title">takeANap</span>():</span></span><br><span class="line">time.sleep(<span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Wake up!&#x27;</span>)</span><br><span class="line"> threadObj = threading.Thread(target=takeANap)</span><br><span class="line"> threadObj.start()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;End of program.&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">###向线程的目标函数传递参数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">&#x27;Cats&#x27;</span>, <span class="string">&#x27;Dogs&#x27;</span>, <span class="string">&#x27;Frogs&#x27;</span>, sep=<span class="string">&#x27; &amp; &#x27;</span>)</span><br><span class="line">Cats &amp; Dogs &amp; Frogs</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> threading</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>threadObj = threading.Thread(target=<span class="built_in">print</span>, args=[<span class="string">&#x27;Cats&#x27;</span>, <span class="string">&#x27;Dogs&#x27;</span>, <span class="string">&#x27;Frogs&#x27;</span>],</span><br><span class="line">kwargs=&#123;<span class="string">&#x27;sep&#x27;</span>: <span class="string">&#x27; &amp; &#x27;</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>threadObj.start()</span><br><span class="line">Cats &amp; Dogs &amp; Frogs</span><br><span class="line"></span><br><span class="line">threadObj = threading.Thread(target=<span class="built_in">print</span>(<span class="string">&#x27;Cats&#x27;</span>, <span class="string">&#x27;Dogs&#x27;</span>, <span class="string">&#x27;Frogs&#x27;</span>, sep=<span class="string">&#x27; &amp; &#x27;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>项目：多线程 XKCD 下载程序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! python3</span></span><br><span class="line"><span class="comment"># multidownloadXkcd.py - Downloads XKCD comics using multiple threads.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests, os, bs4, threading</span><br><span class="line">os.makedirs(<span class="string">&#x27;xkcd&#x27;</span>, exist_ok=<span class="literal">True</span>) <span class="comment"># store comics in ./xkcd</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">downloadXkcd</span>(<span class="params">startComic, endComic</span>):</span></span><br><span class="line">    <span class="keyword">for</span> urlNumber <span class="keyword">in</span> <span class="built_in">range</span>(startComic, endComic):</span><br><span class="line">        <span class="comment"># Download the page.</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Downloading page http://xkcd.com/%s...&#x27;</span> % (urlNumber))</span><br><span class="line">        res = requests.get(<span class="string">&#x27;http://xkcd.com/%s&#x27;</span> % (urlNumber))</span><br><span class="line">        res.raise_for_status()</span><br><span class="line"></span><br><span class="line">        soup = bs4.BeautifulSoup(res.text)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Find the URL of the comic image.</span></span><br><span class="line">        comicElem = soup.select(<span class="string">&#x27;#comic img&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> comicElem == []:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;Could not find comic image.&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            comicUrl = comicElem[<span class="number">0</span>].get(<span class="string">&#x27;src&#x27;</span>)</span><br><span class="line">            <span class="comment"># Download the image.</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;Downloading image %s...&#x27;</span> % (comicUrl))</span><br><span class="line">            res = requests.get(comicUrl)</span><br><span class="line">            res.raise_for_status()</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Save the image to ./xkcd</span></span><br><span class="line">            imageFile = <span class="built_in">open</span>(os.path.join(<span class="string">&#x27;xkcd&#x27;</span>, os.path.basename(comicUrl)), <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">            <span class="keyword">for</span> chunk <span class="keyword">in</span> res.iter_content(<span class="number">100000</span>):</span><br><span class="line">                imageFile.write(chunk)</span><br><span class="line">            imageFile.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create and start the Thread objects.</span></span><br><span class="line">downloadThreads = [] <span class="comment"># a list of all the Thread objects</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">1400</span>, <span class="number">100</span>): <span class="comment"># loops 14 times, creates 14 threads</span></span><br><span class="line">    downloadThread = threading.Thread(target=downloadXkcd, args=(i, i + <span class="number">99</span>))</span><br><span class="line">    downloadThreads.append(downloadThread)</span><br><span class="line">    downloadThread.start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Wait for all threads to end.</span></span><br><span class="line"><span class="keyword">for</span> downloadThread <span class="keyword">in</span> downloadThreads:</span><br><span class="line">    downloadThread.join()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Done.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="从-Python-启动其他程序"><a href="#从-Python-启动其他程序" class="headerlink" title="从 Python 启动其他程序"></a>从 Python 启动其他程序</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>subprocess.Popen(<span class="string">&#x27;C:\\Windows\\System32\\calc.exe&#x27;</span>)</span><br><span class="line">&lt;subprocess.Popen <span class="built_in">object</span> at <span class="number">0x0000000003055A58</span>&gt;&gt;&gt;&gt; <span class="keyword">import</span> subprocess</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>subprocess.Popen(<span class="string">&#x27;C:\\Windows\\System32\\calc.exe&#x27;</span>)</span><br><span class="line">&lt;subprocess.Popen <span class="built_in">object</span> at <span class="number">0x0000000003055A58</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>subprocess.Popen(<span class="string">&#x27;/usr/bin/gnome-calculator&#x27;</span>)</span><br><span class="line">&lt;subprocess.Popen <span class="built_in">object</span> at <span class="number">0x7f2bcf93b20</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>calcProc = subprocess.Popen(<span class="string">&#x27;c:\\Windows\\System32\\calc.exe&#x27;</span>)</span><br><span class="line"> &gt;&gt;&gt; calcProc.poll() == <span class="literal">None</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"> &gt;&gt;&gt; calcProc.wait()</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>calcProc.poll()</span><br><span class="line"><span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>subprocess.Popen([<span class="string">&#x27;C:\\Windows\\notepad.exe&#x27;</span>, <span class="string">&#x27;C:\\hello.txt&#x27;</span>])</span><br><span class="line">&lt;subprocess.Popen <span class="built_in">object</span> at <span class="number">0x00000000032DCEB8</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">###运行其他 Python 脚本</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>subprocess.Popen([<span class="string">&#x27;C:\\python34\\python.exe&#x27;</span>, <span class="string">&#x27;hello.py&#x27;</span>])</span><br><span class="line">&lt;subprocess.Popen <span class="built_in">object</span> at <span class="number">0x000000000331CF28</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">###用默认的应用程序打开文件用默认的应用程序打开文件</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fileObj = <span class="built_in">open</span>(<span class="string">&#x27;hello.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fileObj.write(<span class="string">&#x27;Hello world!&#x27;</span>)</span><br><span class="line"><span class="number">12</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fileObj.close()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>subprocess.Popen([<span class="string">&#x27;start&#x27;</span>, <span class="string">&#x27;hello.txt&#x27;</span>], shell=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果你精通计算机，可能知道 Windows 上的 Task Scheduler，OS X 上的launchd，或 Linux 上的 cron 调度程序。这些工具文档齐全，而且可靠，它们都允许</p>
+<p>你安排应用程序在特定的时间启动。如果想更多地了解它们，可以在 <a target="_blank" rel="noopener" href="http://nostarch.com/automatestuff/%E6%89%BE%E5%88%B0%E6%95%99%E7%A8%8B%E7%9A%84%E9%93%BE%E6%8E%A5%E3%80%82">http://nostarch.com/automatestuff/找到教程的链接。</a></p>
+<h4 id="项目：简单的倒计时程序"><a href="#项目：简单的倒计时程序" class="headerlink" title="项目：简单的倒计时程序"></a>项目：简单的倒计时程序</h4><p>就像很难找到一个简单的秒表应用程序一样，也很难找到一个简单的倒计时程</p>
+<p>序。让我们来写一个倒计时程序，在倒计时结束时报警。</p>
+<p>总的来说，程序要做到：</p>
+<p> 从 60 倒数。</p>
+<p> 倒数至 0 时播放声音文件（alarm.wav）。</p>
+<p>这意味着代码将需要做到以下几点：</p>
+<p> 在显示倒计时的每个数字之间，调用 time.sleep()暂停一秒。</p>
+<p> 调用 subprocess.Popen()，用默认的应用程序播放声音文件。</p>
+<p>打开一个新的文件编辑器窗口，并保存为 countdown.py。就像很难找到一个简单的秒表应用程序一样，也很难找到一个简单的倒计时程</p>
+<p>序。让我们来写一个倒计时程序，在倒计时结束时报警。</p>
+<p>总的来说，程序要做到：</p>
+<p> 从 60 倒数。</p>
+<p> 倒数至 0 时播放声音文件（alarm.wav）。</p>
+<p>这意味着代码将需要做到以下几点：</p>
+<p> 在显示倒计时的每个数字之间，调用 time.sleep()暂停一秒。</p>
+<p> 调用 subprocess.Popen()，用默认的应用程序播放声音文件。</p>
+<p>打开一个新的文件编辑器窗口，并保存为 countdown.py。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! python3</span></span><br><span class="line"><span class="comment"># countdown.py - A simple countdown script.</span></span><br><span class="line"><span class="keyword">import</span> time, subprocess</span><br><span class="line">timeLeft = <span class="number">5</span></span><br><span class="line"><span class="keyword">while</span> timeLeft &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(timeLeft, end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    timeLeft = timeLeft - <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># At the end of the countdown, play a sound file.</span></span><br><span class="line">subprocess.Popen([<span class="string">&#x27;start&#x27;</span>, <span class="string">&#x27;alarm.wav&#x27;</span>], shell=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2022/02/14/%E4%BF%9D%E6%8C%81%E6%97%B6%E9%97%B4%E3%80%81%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F/" title="保持时间、计划任务和启动程序">https://shenle2019.github.io/2022/02/14/%E4%BF%9D%E6%8C%81%E6%97%B6%E9%97%B4%E3%80%81%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/01/18/%E5%A4%84%E7%90%86PDF%E5%92%8CWord%E6%96%87%E6%A1%A3/" rel="next" title="处理PDF和Word文档">
+                <i class="fa fa-chevron-left"></i> 处理PDF和Word文档
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/02/21/%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E6%94%B6%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6/" rel="prev" title="发送和接收电子邮件">
+                发送和接收电子邮件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E6%8C%81%E6%97%B6%E9%97%B4%E3%80%81%E3%80%81%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">保持时间、、计划任务和启动程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#time-%E6%A8%A1%E5%9D%97"><span class="nav-number">1.1.</span> <span class="nav-text">time 模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%EF%BC%9A%E8%B6%85%E7%BA%A7%E7%A7%92%E8%A1%A8"><span class="nav-number">1.2.</span> <span class="nav-text">项目：超级秒表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#datetime-%E6%A8%A1%E5%9D%97"><span class="nav-number">1.3.</span> <span class="nav-text">datetime 模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E-Python-%E5%90%AF%E5%8A%A8%E5%85%B6%E4%BB%96%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.5.</span> <span class="nav-text">从 Python 启动其他程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%EF%BC%9A%E7%AE%80%E5%8D%95%E7%9A%84%E5%80%92%E8%AE%A1%E6%97%B6%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.6.</span> <span class="nav-text">项目：简单的倒计时程序</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'VLcgBQixkeBQUATGzDVaqcpk-gzGzoHsz',
+        appKey: 'hdVMQzxTmu7ohwxMg6TvuY9W',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script></body>
+</html>

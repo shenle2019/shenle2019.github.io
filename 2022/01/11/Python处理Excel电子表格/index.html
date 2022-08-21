@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python处理Excel电子表格Excel文档的几个概念 一个Excel电子表格文档，一般称为一个工作簿 工作簿中可以包含多个sheet页，为工作表 工作表中列从A开始，行从1开始，行和列相交的部分，为单元格。 单元格中存储的内容，为value值。  1．导入 openpyxl 模块。 2．调用 openpyxl.load_workbook()函数。 3．取得 Workbook 对象。 4．调用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python处理Excel电子表格">
+<meta property="og:url" content="https://shenle2019.github.io/2022/01/11/Python%E5%A4%84%E7%90%86Excel%E7%94%B5%E5%AD%90%E8%A1%A8%E6%A0%BC/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="Python处理Excel电子表格Excel文档的几个概念 一个Excel电子表格文档，一般称为一个工作簿 工作簿中可以包含多个sheet页，为工作表 工作表中列从A开始，行从1开始，行和列相交的部分，为单元格。 单元格中存储的内容，为value值。  1．导入 openpyxl 模块。 2．调用 openpyxl.load_workbook()函数。 3．取得 Workbook 对象。 4．调用">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-01-10T21:06:32.000Z">
+<meta property="article:modified_time" content="2022-01-10T13:07:30.000Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2022/01/11/Python处理Excel电子表格/"/>
+
+
+
+
+
+  <title>Python处理Excel电子表格 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2022/01/11/Python%E5%A4%84%E7%90%86Excel%E7%94%B5%E5%AD%90%E8%A1%A8%E6%A0%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python处理Excel电子表格</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-11T05:06:32+08:00">
+                2022-01-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-01-10T21:07:30+08:00">
+                2022-01-10
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2022/01/11/Python%E5%A4%84%E7%90%86Excel%E7%94%B5%E5%AD%90%E8%A1%A8%E6%A0%BC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2022/01/11/Python%E5%A4%84%E7%90%86Excel%E7%94%B5%E5%AD%90%E8%A1%A8%E6%A0%BC/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Python处理Excel电子表格"><a href="#Python处理Excel电子表格" class="headerlink" title="Python处理Excel电子表格"></a>Python处理Excel电子表格</h3><h4 id="Excel文档的几个概念"><a href="#Excel文档的几个概念" class="headerlink" title="Excel文档的几个概念"></a>Excel文档的几个概念</h4><ul>
+<li>一个Excel电子表格文档，一般称为一个工作簿</li>
+<li>工作簿中可以包含多个sheet页，为工作表</li>
+<li>工作表中列从A开始，行从1开始，行和列相交的部分，为单元格。</li>
+<li>单元格中存储的内容，为value值。</li>
+</ul>
+<p>1．导入 openpyxl 模块。</p>
+<p>2．调用 openpyxl.load_workbook()函数。</p>
+<p>3．取得 Workbook 对象。</p>
+<p>4．调用 get_active_sheet()或 get_sheet_by_name()工作簿方法。</p>
+<p>5．取得 Worksheet 对象。</p>
+<p>6．使用索引或工作表的 cell()方法，带上 row 和 column 关键字参数。</p>
+<p>7．取得 Cell 对象。</p>
+<p>8．读取 Cell 对象的 value 属性。</p>
+<h4 id="安装openpyxl模块"><a href="#安装openpyxl模块" class="headerlink" title="安装openpyxl模块"></a>安装openpyxl模块</h4><p>import openpyxl</p>
+<p>如果有报错，没有对应模块，则使用命令导入<strong>pip install openpyxl</strong></p>
+<h4 id="读取Excel文档"><a href="#读取Excel文档" class="headerlink" title="读取Excel文档"></a>读取Excel文档</h4><p>从<a target="_blank" rel="noopener" href="http://nostarch.com/automatestuff/%E4%B8%8B%E8%BD%BD%E4%B9%A6%E4%B8%AD%E6%89%80%E6%9C%89%E4%BE%8B%E5%AD%90%E6%96%87%E6%A1%A3%EF%BC%8C%E5%9C%A8Automate_the_Boring_Stuff_2e_onlinematerials.zip%E6%96%87%E6%A1%A3%E4%B8%AD">http://nostarch.com/automatestuff/下载书中所有例子文档，在Automate_the_Boring_Stuff_2e_onlinematerials.zip文档中</a></p>
+<p>获取example.xlsx文件。</p>
+<ul>
+<li><p>用openpyxl模块打开Excel文档</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl</span><br><span class="line"></span><br><span class="line">wb = openpyxl.load_workbook(<span class="string">&#x27;example.xlsx&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(wb))</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<p>&lt;class ‘openpyxl.workbook.workbook.Workbook’&gt;</p>
+</li>
+<li><p>从工作簿中取得工作表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl</span><br><span class="line"></span><br><span class="line">wb = openpyxl.load_workbook(<span class="string">&#x27;example.xlsx&#x27;</span>)</span><br><span class="line"><span class="comment"># print(type(wb))</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1.&#x27;</span> + <span class="built_in">str</span>(wb.get_sheet_names()))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;2.&#x27;</span> + <span class="built_in">str</span>(wb.sheetnames))</span><br><span class="line"><span class="comment">#print(&#x27;x.&#x27; + str())</span></span><br><span class="line">sheet = wb.get_sheet_by_name(<span class="string">&#x27;Sheet3&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;3.&#x27;</span> + <span class="built_in">str</span>(sheet))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;4.&#x27;</span> + <span class="built_in">str</span>(<span class="built_in">type</span>(sheet)))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;5.&#x27;</span> + <span class="built_in">str</span>(sheet.title))</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x27;Workbook&#x27; object has no attribute &#x27;get_active_sheet&#x27;,有报错，无此属性</span></span><br><span class="line"><span class="comment"># anotherSheet = wb.get_active_sheet()</span></span><br><span class="line"><span class="comment"># print(&#x27;6.&#x27; + str(anotherSheet))</span></span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<p>1.[‘Sheet1’, ‘Sheet2’, ‘Sheet3’]<br>2.[‘Sheet1’, ‘Sheet2’, ‘Sheet3’]<br>3.&lt;Worksheet “Sheet3”&gt;<br>4.&lt;class ‘openpyxl.worksheet.worksheet.Worksheet’&gt;<br>5.Sheet3</p>
+</li>
+<li><p>从表中取得单元格</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl</span><br><span class="line">wb = openpyxl.load_workbook(<span class="string">&#x27;example.xlsx&#x27;</span>)</span><br><span class="line">sheet = wb.get_sheet_by_name(<span class="string">&#x27;Sheet1&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1.&#x27;</span> + <span class="built_in">str</span>(sheet[<span class="string">&#x27;A1&#x27;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;2.&#x27;</span> + <span class="built_in">str</span>(sheet[<span class="string">&#x27;A1&#x27;</span>].value))</span><br><span class="line">c = sheet[<span class="string">&#x27;B1&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;3.&#x27;</span> + <span class="built_in">str</span>(c.value))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;4.&#x27;</span> + <span class="string">&#x27;Row &#x27;</span> + <span class="built_in">str</span>(c.row) + <span class="string">&#x27;, Column &#x27;</span> + <span class="built_in">str</span>(c.column) + <span class="string">&#x27; is &#x27;</span> + <span class="built_in">str</span>(c.value))</span><br><span class="line"><span class="comment">###B1是单元格，coordinate属性提供位置信息</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;5.&#x27;</span> + <span class="string">&#x27;Cell &#x27;</span> + c.coordinate + <span class="string">&#x27; is &#x27;</span> + c.value)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;6.&#x27;</span> + <span class="built_in">str</span>(sheet[<span class="string">&#x27;C1&#x27;</span>].value))</span><br><span class="line"></span><br><span class="line"><span class="comment">###另一种实现方法，直接通过给ceil传递行和列的值</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;7.&#x27;</span> + <span class="built_in">str</span>(sheet.cell(row=<span class="number">1</span>, column=<span class="number">2</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;8.&#x27;</span> + <span class="built_in">str</span>(sheet.cell(row=<span class="number">1</span>, column=<span class="number">2</span>).value))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">8</span>, <span class="number">2</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;9.&#x27;</span>,i, sheet.cell(row=i, column=<span class="number">2</span>).value)</span><br><span class="line"></span><br><span class="line"><span class="comment">##无此属性&#x27;Worksheet&#x27; object has no attribute &#x27;get_highest_column&#x27;</span></span><br><span class="line"><span class="comment"># print(&#x27;10.&#x27; + str(sheet.get_highest_row()))</span></span><br><span class="line"><span class="comment"># print(&#x27;11.&#x27; + str(sheet.get_highest_column()))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">###输出：</span></span><br><span class="line"><span class="number">1.</span>&lt;Cell <span class="string">&#x27;Sheet1&#x27;</span>.A1&gt;</span><br><span class="line"><span class="number">2.2015</span>-04-05 <span class="number">13</span>:<span class="number">34</span>:02</span><br><span class="line"><span class="number">3.</span>Apples</span><br><span class="line"><span class="number">4.</span>Row <span class="number">1</span>, Column <span class="number">2</span> <span class="keyword">is</span> Apples</span><br><span class="line"><span class="number">5.</span>Cell B1 <span class="keyword">is</span> Apples</span><br><span class="line"><span class="number">6.73</span></span><br><span class="line"><span class="number">7.</span>&lt;Cell <span class="string">&#x27;Sheet1&#x27;</span>.B1&gt;</span><br><span class="line"><span class="number">8.</span>Apples</span><br><span class="line"><span class="number">9.</span> <span class="number">1</span> Apples</span><br><span class="line"><span class="number">10.</span> <span class="number">3</span> Pears</span><br><span class="line"><span class="number">11.</span> <span class="number">5</span> Apples</span><br><span class="line"><span class="number">12.</span> <span class="number">7</span> Strawberries</span><br></pre></td></tr></table></figure></li>
+<li><p>从表中获取行和列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl</span><br><span class="line">wb = openpyxl.load_workbook(<span class="string">&#x27;example.xlsx&#x27;</span>)</span><br><span class="line">sheet = wb.get_sheet_by_name(<span class="string">&#x27;Sheet1&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1.&#x27;</span> + <span class="built_in">str</span>(<span class="built_in">tuple</span>(sheet[<span class="string">&#x27;A1&#x27;</span>:<span class="string">&#x27;C3&#x27;</span>])))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> rowOfCellObjects <span class="keyword">in</span> sheet[<span class="string">&#x27;A1&#x27;</span>:<span class="string">&#x27;C3&#x27;</span>]:</span><br><span class="line">    <span class="keyword">for</span> cellObj <span class="keyword">in</span> rowOfCellObjects:</span><br><span class="line">	    <span class="built_in">print</span>(cellObj.coordinate, cellObj.value)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;--- END OF ROW ---&#x27;</span>)</span><br><span class="line">        </span><br><span class="line"><span class="comment">###输出：</span></span><br><span class="line"><span class="number">1.</span>((&lt;Cell <span class="string">&#x27;Sheet1&#x27;</span>.A1&gt;, &lt;Cell <span class="string">&#x27;Sheet1&#x27;</span>.B1&gt;, &lt;Cell <span class="string">&#x27;Sheet1&#x27;</span>.C1&gt;), (&lt;Cell <span class="string">&#x27;Sheet1&#x27;</span>.A2&gt;, &lt;Cell <span class="string">&#x27;Sheet1&#x27;</span>.B2&gt;, &lt;Cell <span class="string">&#x27;Sheet1&#x27;</span>.C2&gt;), (&lt;Cell <span class="string">&#x27;Sheet1&#x27;</span>.A3&gt;, &lt;Cell <span class="string">&#x27;Sheet1&#x27;</span>.B3&gt;, &lt;Cell <span class="string">&#x27;Sheet1&#x27;</span>.C3&gt;))</span><br><span class="line">A1 <span class="number">2015</span>-04-05 <span class="number">13</span>:<span class="number">34</span>:02</span><br><span class="line">B1 Apples</span><br><span class="line">C1 <span class="number">73</span></span><br><span class="line">--- END OF ROW ---</span><br><span class="line">A2 <span class="number">2015</span>-04-05 03:<span class="number">41</span>:<span class="number">23</span></span><br><span class="line">B2 Cherries</span><br><span class="line">C2 <span class="number">85</span></span><br><span class="line">--- END OF ROW ---</span><br><span class="line">A3 <span class="number">2015</span>-04-06 <span class="number">12</span>:<span class="number">46</span>:<span class="number">51</span></span><br><span class="line">B3 Pears</span><br><span class="line">C3 <span class="number">14</span></span><br><span class="line">--- END OF ROW ---</span><br></pre></td></tr></table></figure></li>
+<li><p>项目实战：从电子表格中读取数据</p>
+<p>假定你有一张电子表格的数据，来自于 2010 年美国人口普查。你有一个无聊的任</p>
+<p>务，要遍历表中的几千行，计算总的人口，以及每个县的普查区的数目（普查区就是一</p>
+<p>个地理区域，是为人口普查而定义的）。每行表示一个人口普查区。我们将这个电子表格</p>
+<p>文件命名为 censuspopdata.xlsx，可以从 <a target="_blank" rel="noopener" href="http://nostarch.com/automatestuff/%E4%B8%8B%E8%BD%BD%E5%AE%83%E3%80%82">http://nostarch.com/automatestuff/下载它。</a></p>
+<p>尽管 Excel 是要能够计算多个选中单元格的和，你仍然需要选中 3000 个以上县</p>
+<p>的单元格。即使手工计算一个县的人口只需要几秒钟，整张电子表格也需要几个小</p>
+<p>时时间。</p>
+<p>在这个项目中，你要编写一个脚本，从人口普查电子表格文件中读取数据，并</p>
+<p>在几秒钟内计算出每个县的统计值。</p>
+<p>下面是程序要做的事：</p>
+<p>• 从 Excel 电子表格中读取数据。</p>
+<p>• 计算每个县中普查区的数目。</p>
+<p>• 计算每个县的总人口。</p>
+<p>• 打印结果。</p>
+<p>这意味着代码需要完成下列任务：</p>
+<p>• 用 openpyxl 模块打开 Excel 文档并读取单元格。</p>
+<p>• 计算所有普查区和人口数据，将它保存到一个数据结构中。</p>
+<p>• 利用 pprint 模块，将该数据结构写入一个扩展名为.py 的文本文件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! python3</span></span><br><span class="line"><span class="comment"># readCensusExcel.py - Tabulates population and number of census tracts for</span></span><br><span class="line"><span class="comment"># each county.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> openpyxl, pprint</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Opening workbook...&#x27;</span>)</span><br><span class="line">wb = openpyxl.load_workbook(<span class="string">&#x27;censuspopdata.xlsx&#x27;</span>)</span><br><span class="line">sheet = wb.get_sheet_by_name(<span class="string">&#x27;Population by Census Tract&#x27;</span>)</span><br><span class="line">countyData = &#123;&#125;</span><br><span class="line"><span class="comment"># Fill in countyData with each county&#x27;s population and tracts.</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Reading rows...&#x27;</span>)</span><br><span class="line">rownummax = sheet.max_row + <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(rownummax)</span><br><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,rownummax):</span><br><span class="line">    <span class="comment"># Each row in the spreadsheet has data for one census tract.</span></span><br><span class="line">    state  = sheet[<span class="string">&#x27;B&#x27;</span> + <span class="built_in">str</span>(row)].value</span><br><span class="line">    county = sheet[<span class="string">&#x27;C&#x27;</span> + <span class="built_in">str</span>(row)].value</span><br><span class="line">    pop    = sheet[<span class="string">&#x27;D&#x27;</span> + <span class="built_in">str</span>(row)].value</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Make sure the key for this state exists.</span></span><br><span class="line">    countyData.setdefault(state, &#123;&#125;)</span><br><span class="line">    <span class="comment"># Make sure the key for this county in this state exists.</span></span><br><span class="line">    countyData[state].setdefault(county, &#123;<span class="string">&#x27;tracts&#x27;</span>: <span class="number">0</span>, <span class="string">&#x27;pop&#x27;</span>: <span class="number">0</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Each row represents one census tract, so increment by one.</span></span><br><span class="line">    countyData[state][county][<span class="string">&#x27;tracts&#x27;</span>] += <span class="number">1</span></span><br><span class="line">    <span class="comment"># Increase the county pop by the pop in this census tract.</span></span><br><span class="line">    countyData[state][county][<span class="string">&#x27;pop&#x27;</span>] += <span class="built_in">int</span>(pop)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Open a new text file and write the contents of countyData to it.</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Writing results...&#x27;</span>)</span><br><span class="line">resultFile = <span class="built_in">open</span>(<span class="string">&#x27;census2020.py&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">resultFile.write(<span class="string">&#x27;allData = &#x27;</span> + pprint.pformat(countyData))</span><br><span class="line">resultFile.close()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Done.&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">###使用方法：</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> os</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.chdir(<span class="string">&#x27;C:\\Python34&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> census2020</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>census2020.allData[<span class="string">&#x27;AK&#x27;</span>][<span class="string">&#x27;Anchorage&#x27;</span>]</span><br><span class="line">&#123;<span class="string">&#x27;pop&#x27;</span>: <span class="number">291826</span>, <span class="string">&#x27;tracts&#x27;</span>: <span class="number">55</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>anchoragePop = census2020.allData[<span class="string">&#x27;AK&#x27;</span>][<span class="string">&#x27;Anchorage&#x27;</span>][<span class="string">&#x27;pop&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">&#x27;The 2010 population of Anchorage was &#x27;</span> + <span class="built_in">str</span>(anchoragePop))</span><br><span class="line">The <span class="number">2010</span> population of Anchorage was <span class="number">291826</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="写入Excel文档"><a href="#写入Excel文档" class="headerlink" title="写入Excel文档"></a>写入Excel文档</h4><ul>
+<li><p>创建并保存Excel对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl</span><br><span class="line">wb = openpyxl.Workbook()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1.&#x27;</span> + <span class="built_in">str</span>(wb.sheetnames))</span><br><span class="line">sheet = wb.active</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;2.&#x27;</span> + <span class="built_in">str</span>(sheet.title))</span><br><span class="line">sheet.title = <span class="string">&#x27;Spam Bacon Eggs Sheet&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;3.&#x27;</span> + <span class="built_in">str</span>(wb.sheetnames))</span><br></pre></td></tr></table></figure></li>
+<li><p>创建和删除工作表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl</span><br><span class="line">wb = openpyxl.Workbook()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1.&#x27;</span> + <span class="built_in">str</span>(wb.sheetnames))</span><br><span class="line"></span><br><span class="line">wb.create_sheet()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;2.&#x27;</span> + <span class="built_in">str</span>(wb.sheetnames))</span><br><span class="line"></span><br><span class="line">wb.create_sheet(index=<span class="number">0</span>, title=<span class="string">&#x27;First Sheet&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;3.&#x27;</span> + <span class="built_in">str</span>(wb.sheetnames))</span><br><span class="line"></span><br><span class="line">wb.create_sheet(index=<span class="number">2</span>, title=<span class="string">&#x27;Middle Sheet&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;4.&#x27;</span> + <span class="built_in">str</span>(wb.sheetnames))</span><br><span class="line"></span><br><span class="line"><span class="comment"># wb.remove_sheet(wb.get_sheet_by_name(&#x27;Middle Sheet&#x27;))</span></span><br><span class="line"><span class="comment"># wb.remove_sheet(wb.get_sheet_by_name(&#x27;Sheet1&#x27;))</span></span><br><span class="line"><span class="keyword">del</span> wb[<span class="string">&#x27;Middle Sheet&#x27;</span>]</span><br><span class="line"><span class="keyword">del</span> wb[<span class="string">&#x27;Sheet1&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;5.&#x27;</span> + <span class="built_in">str</span>(wb.sheetnames))</span><br><span class="line"></span><br><span class="line"><span class="comment">####结果：</span></span><br><span class="line"><span class="number">1.</span>[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line"><span class="number">2.</span>[<span class="string">&#x27;Sheet&#x27;</span>, <span class="string">&#x27;Sheet1&#x27;</span>]</span><br><span class="line"><span class="number">3.</span>[<span class="string">&#x27;First Sheet&#x27;</span>, <span class="string">&#x27;Sheet&#x27;</span>, <span class="string">&#x27;Sheet1&#x27;</span>]</span><br><span class="line"><span class="number">4.</span>[<span class="string">&#x27;First Sheet&#x27;</span>, <span class="string">&#x27;Sheet&#x27;</span>, <span class="string">&#x27;Middle Sheet&#x27;</span>, <span class="string">&#x27;Sheet1&#x27;</span>]</span><br><span class="line"><span class="number">5.</span>[<span class="string">&#x27;First Sheet&#x27;</span>, <span class="string">&#x27;Sheet&#x27;</span>]</span><br></pre></td></tr></table></figure></li>
+<li><p>将值写入单元格</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> openpyxl</span><br><span class="line">wb = openpyxl.Workbook()</span><br><span class="line">sheet = wb[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line">sheet[<span class="string">&#x27;A1&#x27;</span>] = <span class="string">&#x27;Hello world!&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1.&#x27;</span> + <span class="built_in">str</span>(sheet[<span class="string">&#x27;A1&#x27;</span>].value))</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>项目实战</p>
+</li>
+</ul>
+<p>这个项目需要编写一个程序，更新产品销售电子表格中的单元格。程序将遍历这个电子表格，找到特定类型的产品，并更新它们的价格。每一行代表一次单独的销售。列分别是销售产品的类型（A）、产品每磅的价格（B）、销售的磅数（C），以及这次销售的总收入。TOTAL 列设置为 Excel 公式，将每磅的成本乘以销售的磅数，并将结果取整到分。有了这个公式，如果列 B 或 C 发 生变化，TOTAL 列中的单元格将自动更新。</p>
+<p>现在假设 Garlic、Celery 和 Lemons 的价格输入的不正确。这让你面对一项无聊的任务：遍历这个电子表格中的几千行，更新所有 garlic、celery 和 lemon 行中每磅的价格。你不能简单地对价格查找替换，因为可能有其他的产品价格一样，你不希望错误地“更正”。对于几千行数据，手工操作可能要几小时。但你可以编写程序，几秒钟内完成这个任务。</p>
+<p>你的程序做下面的事情：</p>
+<p>• 循环遍历所有行。</p>
+<p>• 如果该行是 Garlic、Celery 或 Lemons，更新价格。</p>
+<p>这意味着代码需要做下面的事情：</p>
+<p>• 打开电子表格文件。</p>
+<p>• 针对每一行，检查列 A 的值是不是 Celery、Garlic 或 Lemon。 </p>
+<p>• 如果是，更新列 B 中的价格。</p>
+<p>• 将该电子表格保存为一个新文件（这样就不会丢失原来的电子表格，以防万一）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! python3</span></span><br><span class="line"><span class="comment"># updateProduce.py - Corrects costs in produce sales spreadsheet.</span></span><br><span class="line"><span class="keyword">import</span> openpyxl</span><br><span class="line">wb = openpyxl.load_workbook(<span class="string">&#x27;produceSales.xlsx&#x27;</span>)</span><br><span class="line">sheet = wb[<span class="string">&#x27;Sheet&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># The produce types and their updated prices</span></span><br><span class="line"><span class="comment">###注意，这里用字典比用if else判断比较好，因为后续只需要修改字典值即可，不用修改代码，解耦合</span></span><br><span class="line">PRICE_UPDATES = &#123;<span class="string">&#x27;Garlic&#x27;</span>: <span class="number">3.08</span>,</span><br><span class="line"><span class="string">&#x27;Celery&#x27;</span>: <span class="number">1.29</span>,</span><br><span class="line"><span class="string">&#x27;Lemon&#x27;</span>: <span class="number">1.37</span>&#125;</span><br><span class="line"><span class="comment"># Loop through the rows and update the prices.</span></span><br><span class="line"><span class="keyword">for</span> rowNum <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, sheet.max_row + <span class="number">1</span>): <span class="comment"># skip the first row</span></span><br><span class="line">    produceName = sheet.cell(row=rowNum, column=<span class="number">1</span>).value</span><br><span class="line">    <span class="keyword">if</span> produceName <span class="keyword">in</span> PRICE_UPDATES:</span><br><span class="line">        sheet.cell(row=rowNum, column=<span class="number">2</span>).value = PRICE_UPDATES[produceName]</span><br><span class="line">wb.save(<span class="string">&#x27;updatedProduceSales.xlsx&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="设置单元格的字体风格"><a href="#设置单元格的字体风格" class="headerlink" title="设置单元格的字体风格"></a>设置单元格的字体风格</h4><p>from openpyxl.styles import Font, Style</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> openpyxl</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> openpyxl.styles <span class="keyword">import</span> Font, Style</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb = openpyxl.Workbook()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet = wb.get_sheet_by_name(<span class="string">&#x27;Sheet&#x27;</span>)</span><br><span class="line"> &gt;&gt;&gt; italic24Font = Font(size=<span class="number">24</span>, italic=<span class="literal">True</span>)</span><br><span class="line"> &gt;&gt;&gt; styleObj = Style(font=italic24Font)</span><br><span class="line"> &gt;&gt;&gt; sheet[<span class="string">&#x27;A&#x27;</span>].style/styleObj</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;A1&#x27;</span>] = <span class="string">&#x27;Hello world!&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb.save(<span class="string">&#x27;styled.xlsx&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Font对象"><a href="#Font对象" class="headerlink" title="Font对象"></a>Font对象</h4><p>Font style 属性的关键字参数</p>
+<p>关键字参数 </p>
+<p>数据类型 </p>
+<p>描述</p>
+<p>name </p>
+<p>字符串 </p>
+<p>字体名称，诸如’Calibri’</p>
+<p>或’Times New Roman’</p>
+<p>size </p>
+<p>整型 </p>
+<p>大小点数</p>
+<p>bold </p>
+<p>布尔型 </p>
+<p>True 表示粗体</p>
+<p>italic </p>
+<p>布尔型 </p>
+<p>True 表示斜体</p>
+<p>可以调用 Font()来创建一个 Font 对象，并将这个 Font 对象保存在一个变量中。</p>
+<p>然后将它传递给 Style()，得到 的 Style 对象保存在一个变量中，并将该变量赋给 Cell</p>
+<p>对象的 style 属性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> openpyxl</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> openpyxl.styles <span class="keyword">import</span> Font, Style</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb = openpyxl.Workbook()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet = wb.get_sheet_by_name(<span class="string">&#x27;Sheet&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fontObj1 = Font(name=<span class="string">&#x27;Times New Roman&#x27;</span>, bold=<span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>styleObj1 = Style(font=fontObj1)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;A1&#x27;</span>].style/styleObj</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;A1&#x27;</span>] = <span class="string">&#x27;Bold Times New Roman&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fontObj2 = Font(size=<span class="number">24</span>, italic=<span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>styleObj2 = Style(font=fontObj2)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;B3&#x27;</span>].style/styleObj</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;B3&#x27;</span>] = <span class="string">&#x27;24 pt Italic&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb.save(<span class="string">&#x27;styles.xlsx&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> openpyxl</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb = openpyxl.Workbook()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet = wb.get_active_sheet()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;A1&#x27;</span>] = <span class="number">200</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;A2&#x27;</span>] = <span class="number">300</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;A3&#x27;</span>] = <span class="string">&#x27;=SUM(A1:A2)&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb.save(<span class="string">&#x27;writeFormula.xlsx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> openpyxl</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wbFormulas = openpyxl.load_workbook(<span class="string">&#x27;writeFormula.xlsx&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet = wbFormulas.get_active_sheet()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;A3&#x27;</span>].value</span><br><span class="line"><span class="string">&#x27;=SUM(A1:A2)&#x27;</span></span><br><span class="line"><span class="comment">###如果你希望看到该公式的计算结果，而不是原来的公式，就必须将 load_workbook()的 data_only 关键字参数设置为 True。</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wbDataOnly = openpyxl.load_workbook(<span class="string">&#x27;writeFormula.xlsx&#x27;</span>, data_only=<span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet = wbDataOnly.get_active_sheet()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;A3&#x27;</span>].value</span><br><span class="line"><span class="number">500</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="调整行与列"><a href="#调整行与列" class="headerlink" title="调整行与列"></a>调整行与列</h4><ul>
+<li><p>设置行高与列宽</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> openpyxl</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb = openpyxl.Workbook()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet = wb.get_active_sheet()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;A1&#x27;</span>] = <span class="string">&#x27;Tall row&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;B2&#x27;</span>] = <span class="string">&#x27;Wide column&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet.row_dimensions[<span class="number">1</span>].height = <span class="number">70</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet.column_dimensions[<span class="string">&#x27;B&#x27;</span>].width = <span class="number">20</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb.save(<span class="string">&#x27;dimensions.xlsx&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>合并和拆分单元格</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> openpyxl</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb = openpyxl.Workbook()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet = wb.get_active_sheet()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet.merge_cells(<span class="string">&#x27;A1:D3&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;A1&#x27;</span>] = <span class="string">&#x27;Twelve cells merged together.&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet.merge_cells(<span class="string">&#x27;C5:D5&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet[<span class="string">&#x27;C5&#x27;</span>] = <span class="string">&#x27;Two merged cells.&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb.save(<span class="string">&#x27;merged.xlsx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> openpyxl</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb = openpyxl.load_workbook(<span class="string">&#x27;merged.xlsx&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet = wb.get_active_sheet()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet.unmerge_cells(<span class="string">&#x27;A1:D3&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet.unmerge_cells(<span class="string">&#x27;C5:D5&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb.save(<span class="string">&#x27;merged.xlsx&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>冻结窗口</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">freeze_panes 的设置 冻结的行和列</span><br><span class="line">sheet.freeze_panes = <span class="string">&#x27;A2&#x27;</span> 行 <span class="number">1</span></span><br><span class="line">sheet.freeze_panes = <span class="string">&#x27;B1&#x27;</span> 列 A</span><br><span class="line">sheet.freeze_panes = <span class="string">&#x27;C1&#x27;</span> 列 A 和列 B</span><br><span class="line">sheet.freeze_panes = <span class="string">&#x27;C2&#x27;</span> 行 <span class="number">1</span> 和列 A 和列 B</span><br><span class="line">sheet.freeze_panes = <span class="string">&#x27;A1&#x27;</span>或</span><br><span class="line">sheet.freeze_panes = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> openpyxl</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb = openpyxl.load_workbook(<span class="string">&#x27;produceSales.xlsx&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet = wb.get_active_sheet()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet.freeze_panes = <span class="string">&#x27;A2&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb.save(<span class="string">&#x27;freezeExample.xlsx&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>图标</p>
+<p>openpyxl 支持利用工作表中单元格的数据，创建条形图、折线图、散点图和饼</p>
+<p>图。要创建图表，需要做下列事情：</p>
+<p>1．从一个矩形区域选择的单元格，创建一个 Reference 对象。</p>
+<p>2．通过传入 Reference 对象，创建一个 Series 对象。</p>
+<p>3．创建一个 Chart 对象。</p>
+<p>4．将 Series 对象添加到 Chart 对象。</p>
+<p>5．可选地设置Chart 对象的drawing.top、drawing.left、drawing.width 和drawing.height</p>
+<p>变量。</p>
+<p>6．将 Chart 对象添加到 Worksheet 对象。</p>
+<p>Reference 对象需要一些解释。Reference 对象是通过调用 openpyxl.charts. Reference()</p>
+<p>函数并传入 3 个参数创建的：</p>
+<p>1．包含图表数据的 Worksheet 对象。</p>
+<p>2．两个整数的元组，代表矩形选择区域的左上角单元格，该区域包含图表数</p>
+<p>据：元组中第一个整数是行，第二个整数是列。请注意第一行是 1，不是 0。 </p>
+<p>3．两个整数的元组，代表矩形选择区域的右下角单元格，该区域包含图表数</p>
+<p>据：元组中第一个整数是行，第二个整数是列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> openpyxl</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb = openpyxl.Workbook()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet = wb.get_active_sheet()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">11</span>): <span class="comment"># create some data in column A</span></span><br><span class="line">sheet[<span class="string">&#x27;A&#x27;</span> + <span class="built_in">str</span>(i)] = i</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>refObj = openpyxl.charts.Reference(sheet, (<span class="number">1</span>, <span class="number">1</span>), (<span class="number">10</span>, <span class="number">1</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>seriesObj = openpyxl.charts.Series(refObj, title=<span class="string">&#x27;First series&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>chartObj = openpyxl.charts.BarChart()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>chartObj.append(seriesObj)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>chartObj.drawing.top = <span class="number">50</span> <span class="comment"># set the position</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>chartObj.drawing.left = <span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>chartObj.drawing.width = <span class="number">300</span> <span class="comment"># set the size</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>chartObj.drawing.height = <span class="number">200</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sheet.add_chart(chartObj)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wb.save(<span class="string">&#x27;sampleChart.xlsx&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2022/01/11/Python%E5%A4%84%E7%90%86Excel%E7%94%B5%E5%AD%90%E8%A1%A8%E6%A0%BC/" title="Python处理Excel电子表格">https://shenle2019.github.io/2022/01/11/Python%E5%A4%84%E7%90%86Excel%E7%94%B5%E5%AD%90%E8%A1%A8%E6%A0%BC/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/01/09/%E5%A4%8D%E7%9B%98-Python%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E8%AF%95%E5%8D%B7%E5%92%8C%E7%AD%94%E6%A1%88/" rel="next" title="复盘 - Python自动生成试卷和答案">
+                <i class="fa fa-chevron-left"></i> 复盘 - Python自动生成试卷和答案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/01/18/%E5%A4%84%E7%90%86PDF%E5%92%8CWord%E6%96%87%E6%A1%A3/" rel="prev" title="处理PDF和Word文档">
+                处理PDF和Word文档 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python%E5%A4%84%E7%90%86Excel%E7%94%B5%E5%AD%90%E8%A1%A8%E6%A0%BC"><span class="nav-number">1.</span> <span class="nav-text">Python处理Excel电子表格</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Excel%E6%96%87%E6%A1%A3%E7%9A%84%E5%87%A0%E4%B8%AA%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">Excel文档的几个概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85openpyxl%E6%A8%A1%E5%9D%97"><span class="nav-number">1.2.</span> <span class="nav-text">安装openpyxl模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96Excel%E6%96%87%E6%A1%A3"><span class="nav-number">1.3.</span> <span class="nav-text">读取Excel文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%99%E5%85%A5Excel%E6%96%87%E6%A1%A3"><span class="nav-number">1.4.</span> <span class="nav-text">写入Excel文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%8D%95%E5%85%83%E6%A0%BC%E7%9A%84%E5%AD%97%E4%BD%93%E9%A3%8E%E6%A0%BC"><span class="nav-number">1.5.</span> <span class="nav-text">设置单元格的字体风格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Font%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.6.</span> <span class="nav-text">Font对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F"><span class="nav-number">1.7.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E8%A1%8C%E4%B8%8E%E5%88%97"><span class="nav-number">1.8.</span> <span class="nav-text">调整行与列</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'VLcgBQixkeBQUATGzDVaqcpk-gzGzoHsz',
+        appKey: 'hdVMQzxTmu7ohwxMg6TvuY9W',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script></body>
+</html>

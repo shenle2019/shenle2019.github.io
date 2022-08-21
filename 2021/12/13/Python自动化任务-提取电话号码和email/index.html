@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="说明本文为《Python编程快速上手-让繁琐工作自动化》的学习笔记。 主要熟悉一下python基础和正则表达式，使用正则表达式从剪贴板来提取电话号码和email。 Python编程基础记几个经常要用到的内容：  hello world 1234567891011# this program says hello and asks for your nameprint(&amp;#x27;Hello Wor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python自动化任务-提取电话号码和email">
+<meta property="og:url" content="https://shenle2019.github.io/2021/12/13/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%BB%E5%8A%A1-%E6%8F%90%E5%8F%96%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E5%92%8Cemail/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="说明本文为《Python编程快速上手-让繁琐工作自动化》的学习笔记。 主要熟悉一下python基础和正则表达式，使用正则表达式从剪贴板来提取电话号码和email。 Python编程基础记几个经常要用到的内容：  hello world 1234567891011# this program says hello and asks for your nameprint(&amp;#x27;Hello Wor">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-12-12T22:09:06.000Z">
+<meta property="article:modified_time" content="2021-12-12T14:10:46.000Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2021/12/13/Python自动化任务-提取电话号码和email/"/>
+
+
+
+
+
+  <title>Python自动化任务-提取电话号码和email | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2021/12/13/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%BB%E5%8A%A1-%E6%8F%90%E5%8F%96%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E5%92%8Cemail/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python自动化任务-提取电话号码和email</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-13T06:09:06+08:00">
+                2021-12-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-12-12T22:10:46+08:00">
+                2021-12-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/12/13/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%BB%E5%8A%A1-%E6%8F%90%E5%8F%96%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E5%92%8Cemail/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/12/13/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%BB%E5%8A%A1-%E6%8F%90%E5%8F%96%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E5%92%8Cemail/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>本文为《Python编程快速上手-让繁琐工作自动化》的学习笔记。</p>
+<p>主要熟悉一下python基础和正则表达式，使用正则表达式从剪贴板来提取电话号码和email。</p>
+<h3 id="Python编程基础"><a href="#Python编程基础" class="headerlink" title="Python编程基础"></a>Python编程基础</h3><p>记几个经常要用到的内容：</p>
+<ul>
+<li><p>hello world</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># this program says hello and asks for your name</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Hello World!&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;What is your name?&#x27;</span>) <span class="comment">#ask for your name</span></span><br><span class="line">myName = <span class="built_in">input</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;it is goood to meet you&#x27;</span> + myName)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;the length of your name is:&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(myName))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;What is your age?&#x27;</span>) <span class="comment">#ask for your age</span></span><br><span class="line">myAge = <span class="built_in">input</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;you will be &#x27;</span> + <span class="built_in">str</span>(<span class="built_in">int</span>(myAge) + <span class="number">1</span>) + <span class="string">&#x27; in a year.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>input()函数在等待用户在键盘上输入一些文本，并按下回车键。</p>
+</li>
+<li><p>range()</p>
+<p>range(101)是从0到100；</p>
+<p>range(12,16)是从12到15；</p>
+<p>range(0,10,2)是0,2,4,6,8；</p>
+</li>
+<li><p>常用导入模块</p>
+<p>import random, sys, os, math;</p>
+<p>也可以用from random import *;</p>
+</li>
+<li><p>可使用sys.exit()提前结束程序</p>
+</li>
+<li><p>global语句</p>
+<p>如果需要在一个函数内修改全局变量，则使用global语句；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">spam</span>():</span></span><br><span class="line">    <span class="keyword">global</span> eggs</span><br><span class="line">    eggs = <span class="string">&#x27;spam&#x27;</span></span><br><span class="line"></span><br><span class="line">eggs = <span class="string">&#x27;global&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(eggs)</span><br><span class="line">spam()</span><br><span class="line"><span class="built_in">print</span>(eggs)</span><br></pre></td></tr></table></figure></li>
+<li><p>异常处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">spam</span>(<span class="params">divideBy</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">42</span> / divideBy</span><br><span class="line">    <span class="keyword">except</span> ZeroDivisionError:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Error:Invalid argument.&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(spam(<span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(spam(<span class="number">12</span>))</span><br><span class="line"><span class="built_in">print</span>(spam(<span class="number">0</span>))</span><br><span class="line"><span class="built_in">print</span>(spam(<span class="number">1</span>))</span><br></pre></td></tr></table></figure></li>
+<li><p>写一个猜数字的小游戏</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">actrual_num = random.randint(<span class="number">1</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;the number is between 1 and 20&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># guess 6 times</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">7</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;now you can guess the number from 1 - 20:&#x27;</span>)</span><br><span class="line">    guess_num = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">    <span class="keyword">if</span> guess_num &gt; actrual_num:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;your guess num is greater than actural num&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span> guess_num &lt; actrual_num:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;your guess num is lesser than actural num&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> guess_num == actrual_num:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;congratulations!you are right,you guessed in &#x27;</span> + <span class="built_in">str</span>(i) + <span class="string">&#x27; times!&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;you are wrong,actural num is %&#x27;</span>,actrual_num)</span><br></pre></td></tr></table></figure></li>
+<li><p>列表使用小技巧</p>
+<p>循环列表：for i in range(len(列表名))：</p>
+<p>列表赋值：变量1，变量2，变量3 = 列表名。这里注意列表的长度与变量个数一致。</p>
+<p>index()方法返回下标。append、insert方法增加值，remove方法删除值。sort方法排序。</p>
+<p>字符串和元组同列表类似，区别在于前两者不可变。</p>
+<p>list和tuple方法可以让元组和列表互相转换。</p>
+</li>
+<li><p>python赋值、浅拷贝、深拷贝</p>
+<ul>
+<li><p><strong>直接赋值：</strong>其实就是对象的引用（别名）。</p>
+</li>
+<li><p><strong>浅拷贝(copy)：</strong>拷贝父对象，不会拷贝对象的内部的子对象。</p>
+</li>
+<li><p><strong>深拷贝(deepcopy)：</strong> copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>]]  <span class="comment"># 原始对象</span></span><br><span class="line"></span><br><span class="line">b = a  <span class="comment"># 赋值，传对象的引用</span></span><br><span class="line">c = copy.copy(a)  <span class="comment"># 对象拷贝，浅拷贝</span></span><br><span class="line">d = copy.deepcopy(a)  <span class="comment"># 对象拷贝，深拷贝</span></span><br><span class="line"></span><br><span class="line">a.append(<span class="number">5</span>)  <span class="comment"># 修改对象a</span></span><br><span class="line">a[<span class="number">4</span>].append(<span class="string">&#x27;c&#x27;</span>)  <span class="comment"># 修改对象a中的[&#x27;a&#x27;, &#x27;b&#x27;]数组对象</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;a = &#x27;</span>, a)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;b = &#x27;</span>, b)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;c = &#x27;</span>, c)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;d = &#x27;</span>, d)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出结果为：</span></span><br><span class="line"><span class="comment"># (&#x27;a = &#x27;, [1, 2, 3, 4, [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;], 5])</span></span><br><span class="line"><span class="comment"># (&#x27;b = &#x27;, [1, 2, 3, 4, [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;], 5])</span></span><br><span class="line"><span class="comment"># (&#x27;c = &#x27;, [1, 2, 3, 4, [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]])</span></span><br><span class="line"><span class="comment"># (&#x27;d = &#x27;, [1, 2, 3, 4, [&#x27;a&#x27;, &#x27;b&#x27;]])</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>字典的方法</p>
+<p>keys(),values(),items();</p>
+<p>get(字典键值，默认值)；获取到则成功，获取失败给默认值，不会报错。</p>
+<p>setdefault();如果没有默认值，则设置默认值；如果已经有值，则不会赋默认值。</p>
+<p>字典中值也可以是字典。</p>
+</li>
+<li><p>字符串</p>
+<p>一般字符串前加r来保证其成为原始字符串。</p>
+<p>‘’’ ‘’’多行字符串</p>
+<p>“”‘’</p>
+<p>中间是多行注释</p>
+<p>“””</p>
+<p>常用方法：</p>
+<p>isX：比如islower(),isupper(),isalpha(),isalnum(),isdecimal(),isspace(),istitle()等返回布尔值。</p>
+<p>startswith、endswith也都是返回布尔值。</p>
+<p>‘,’.join(要处理的内容),如连接列表中的内容为字符串，</p>
+<p>要处理的内容.split(‘\n’)，与上面相反，分割字符串为列表；</p>
+<p>用rjust，ljust，center等方法来对齐文本；</p>
+<p>用strip，rstrip，lstrip等方法来删除空白字符；</p>
+<p>用pyperclip模块拷贝粘贴字符串：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyperclip</span><br><span class="line">pyperclip.copy(<span class="string">&#x27;hello world&#x27;</span>)</span><br><span class="line">pyperclip.paste()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="模式匹配与正则表达式"><a href="#模式匹配与正则表达式" class="headerlink" title="模式匹配与正则表达式"></a>模式匹配与正则表达式</h3><ul>
+<li><p>用正则表达式匹配的一般步骤</p>
+<ul>
+<li><p>用import re导入正则表达式模块</p>
+</li>
+<li><p>用re.compile()函数创建一个Regex对象（记得使用原始字符串）</p>
+</li>
+<li><p>向Regex对象的search()方法传入想查找的字符串。它返回一个Match对象。</p>
+</li>
+<li><p>调用Match对象的group方法，返回实际匹配文本的字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">phoneNumRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;\d\d\d-\d\d\d-\d\d\d\d&#x27;</span>)</span><br><span class="line">mo = phoneNumRegex.search(<span class="string">&#x27;My number is 415-555-4242.&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Phone number found: &#x27;</span> + mo.group())</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>用正则表达式匹配更多模式</p>
+<ul>
+<li>利用括号分组</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">phoneNumRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;(\d\d\d)-(\d\d\d-\d\d\d\d)&#x27;</span>)</span><br><span class="line">mo = phoneNumRegex.search(<span class="string">&#x27;My number is 415-555-4242.&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Phone number found: &#x27;</span> + mo.group())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;mo.group(1): &#x27;</span> + mo.group(<span class="number">1</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;mo.group(2): &#x27;</span> + mo.group(<span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;mo.group(0): &#x27;</span> + mo.group(<span class="number">0</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;mo.group(): &#x27;</span> + mo.group())</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>用管道符|匹配多个分组</li>
+<li>用问号？实现可选匹配</li>
+<li>用星号*匹配零次或多次</li>
+<li>用加号匹配一次或多次</li>
+<li>用花括号匹配特定次数</li>
+<li>re.compile(r’(ha){3,5}’)贪心算法，匹配5次;re.compile(r’(ha){3,5}?’)非贪心匹配，匹配3次。</li>
+<li>findall()方法，返回全部匹配对象。因为search只返回一次。</li>
+<li>字符分类，常用\d数字\D非数字\w单词\W非单词\s空白\S非空白；</li>
+<li>可自定义字符分类[aeiouAEIOU]等，取非则前面加上[尖括号aeiouAEIOU]，这里markdown语法有其他含义，就不写出来了^.；</li>
+<li>^匹配开始，$匹配结尾。</li>
+<li>通配字符.</li>
+<li>.*匹配所有字符</li>
+<li>newlineRegex = re.compile(‘.*’, re.DOTALL)使用 re.DOTALL作为第二个参数，让点匹配所有字符，包括换行符。</li>
+<li> re.compile传入第二个参数re.IGNORECASE或者re.I来忽略大小写；</li>
+<li>sub方法替换字符串；</li>
+<li>管理复杂的正则表达式： re.compile传入第二个参数re.VERBOSE();</li>
+<li>组合使用可以用|串联起来，re.IGNORECASE()|re.DOTALL()|re.VERBOSE()；</li>
+</ul>
+</li>
+</ul>
+<h3 id="项目实战：电话号码和email提取程序"><a href="#项目实战：电话号码和email提取程序" class="headerlink" title="项目实战：电话号码和email提取程序"></a>项目实战：电话号码和email提取程序</h3><ul>
+<li><p>需要完成的任务：</p>
+<ul>
+<li><p>从剪贴板获取文本</p>
+</li>
+<li><p>找到文本中的所有电话和email</p>
+</li>
+<li><p>将他们粘贴到剪贴板</p>
+</li>
+</ul>
+</li>
+<li><p>代码需要做的事情：</p>
+<ul>
+<li>使用pyperclip模块复制和粘贴字符串</li>
+<li>使用两个正则表达式，一个匹配电话号码，一个匹配email</li>
+<li>将两个正则表达式找到所有匹配，而不是第一次匹配</li>
+<li>将匹配的字符串整理好格式，放在一个字符串中，用于粘贴</li>
+<li>如果没有找到匹配项，给出错误提示。</li>
+</ul>
+</li>
+<li><p>分步步骤：</p>
+<ol>
+<li>为电话号码创建一个正则表达式</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!python3</span></span><br><span class="line"><span class="comment">#phoneAndEmail.py - Finds phone numbers and email addresses on the clipboard</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pyperclip, re</span><br><span class="line"></span><br><span class="line">phoneRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;&#x27;&#x27;(</span></span><br><span class="line"><span class="string">    (\d&#123;3&#125;|\(\d&#123;3&#125;\))?  # area code</span></span><br><span class="line"><span class="string">    (\s|-|\.)?           # separator</span></span><br><span class="line"><span class="string">    (\d&#123;3&#125;)             # first 3 digits</span></span><br><span class="line"><span class="string">    (\s|-|\.)            # separator</span></span><br><span class="line"><span class="string">    (\d&#123;4&#125;)             # last 4 digits</span></span><br><span class="line"><span class="string">    (\s*(ext|x|ext.)\s*(\d&#123;2,5&#125;))? # extension</span></span><br><span class="line"><span class="string">    )&#x27;&#x27;&#x27;</span>, re.VERBOSE)</span><br><span class="line"></span><br><span class="line"><span class="comment">### <span class="doctag">TODO:</span> Create email regex</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### TODO：Find matches in cliboard text</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### <span class="doctag">TODO:</span> Copy results to the clipboard</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>为email地址创建一个正则表达式</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### Create email regex</span></span><br><span class="line">emailRegex = re.<span class="built_in">compile</span>(<span class="string">r&#x27;&#x27;&#x27;(</span></span><br><span class="line"><span class="string">    [a-zA-Z0-9._%+-]+       #username</span></span><br><span class="line"><span class="string">    @                       #@ symbol</span></span><br><span class="line"><span class="string">    [a-zA-Z0-9.-]+          #domain name    </span></span><br><span class="line"><span class="string">    (\.[a-zA-Z]&#123;2,4&#125;)                      #dot-something</span></span><br><span class="line"><span class="string">    )&#x27;&#x27;&#x27;</span>, re.VERBOSE)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在剪贴板文本中找到所有匹配</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### Find matches in cliboard text</span></span><br><span class="line">text = <span class="built_in">str</span>(pyperclip.paste())</span><br><span class="line">matches = []</span><br><span class="line"><span class="keyword">for</span> groups <span class="keyword">in</span> phoneRegex.findall(text):</span><br><span class="line">    pythonNum = <span class="string">&#x27;-&#x27;</span>.join([groups[<span class="number">1</span>],groups[<span class="number">3</span>],groups[<span class="number">5</span>]])</span><br><span class="line">    <span class="keyword">if</span> groups[<span class="number">8</span>] != <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">        pythonNum += <span class="string">&#x27; x&#x27;</span> + groups[<span class="number">8</span>]</span><br><span class="line">    matches.append(pythonNum)</span><br><span class="line"><span class="keyword">for</span> groups <span class="keyword">in</span> emailRegex.findall(text):</span><br><span class="line">    matches.append(groups[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>所有匹配连成一个字符串，复制到粘贴板上。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### Copy results to the clipboard</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(matches) &gt; <span class="number">0</span>:</span><br><span class="line">    pyperclip.copy(<span class="string">&#x27;\n&#x27;</span>.join(matches))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;copied to the clipboard: &#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>.join(matches))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;No phone numbers or email found.&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>完整程序及运行结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#!python3</span><br><span class="line">#phoneAndEmail.py - Finds phone numbers and email addresses on the clipboard</span><br><span class="line"></span><br><span class="line">import pyperclip, re</span><br><span class="line"></span><br><span class="line">phoneRegex = re.compile(r&#x27;&#x27;&#x27;(</span><br><span class="line">    (\d&#123;3&#125;|\(\d&#123;3&#125;\))?  # area code</span><br><span class="line">    (\s|-\.)?           # separator</span><br><span class="line">    (\d&#123;3&#125;)             # first 3 digits</span><br><span class="line">    (\s|-\.)            # separator</span><br><span class="line">    (\d&#123;4&#125;)             # last 4 digits</span><br><span class="line">    (\s*(ext|x|ext.)\s*(\d&#123;2,5&#125;))? # extension</span><br><span class="line">    )&#x27;&#x27;&#x27;, re.VERBOSE)</span><br><span class="line"></span><br><span class="line">### Create email regex</span><br><span class="line">emailRegex = re.compile(r&#x27;&#x27;&#x27;(</span><br><span class="line">    [a-zA-Z0-9._%+-]+       #username</span><br><span class="line">    @                       #@ symbol</span><br><span class="line">    [a-zA-Z0-9.-]+          #domain name    </span><br><span class="line">    (\.[a-zA-Z]&#123;2,4&#125;)                      #dot-something</span><br><span class="line">    )&#x27;&#x27;&#x27;, re.VERBOSE)</span><br><span class="line"></span><br><span class="line">### Find matches in cliboard text</span><br><span class="line">text = str(pyperclip.paste())</span><br><span class="line">matches = []</span><br><span class="line">for groups in phoneRegex.findall(text):</span><br><span class="line">    pythonNum = &#x27;-&#x27;.join([groups[1],groups[3],groups[5]])</span><br><span class="line">    if groups[8] != &#x27;&#x27;:</span><br><span class="line">        pythonNum += &#x27; x&#x27; + groups[8]</span><br><span class="line">    matches.append(pythonNum)</span><br><span class="line">for groups in emailRegex.findall(text):</span><br><span class="line">    matches.append(groups[0])</span><br><span class="line"></span><br><span class="line">### Copy results to the clipboard</span><br><span class="line">if len(matches) &gt; 0:</span><br><span class="line">    pyperclip.copy(&#x27;\n&#x27;.join(matches))</span><br><span class="line">    print(&#x27;copied to the clipboard: &#x27;)</span><br><span class="line">    print(&#x27;\n&#x27;.join(matches))</span><br><span class="line">else:</span><br><span class="line">    print(&#x27;No phone numbers or email found.&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>复制内容：</p>
+<blockquote>
+<p>Contact Us</p>
+<p>No Starch Press, Inc.<br>245 8th Street<br>San Francisco, CA 94103 USA<br>Phone: 800.420.7240 or +1 415.863.9900 (9 a.m. to 5 p.m., M-F, PST)<br>Fax: +1 415.863.9950</p>
+<p>Reach Us by Email</p>
+<ul>
+<li>General inquiries: <a href="mailto:info@nostarch.com">info@nostarch.com</a></li>
+<li>Media requests: <a href="mailto:media@nostarch.com">media@nostarch.com</a></li>
+<li>Academic requests: <a href="mailto:academic@nostarch.com">academic@nostarch.com</a> (<a target="_blank" rel="noopener" href="https://nostarch.com/academic.htm">Further information</a>)</li>
+<li>Conference and Events: <a href="mailto:conferences@nostarch.com">conferences@nostarch.com</a></li>
+<li>Help with your order: <a href="mailto:info@nostarch.com">info@nostarch.com</a></li>
+</ul>
+<p>Reach Us on Social Media<br><a target="_blank" rel="noopener" href="https://twitter.com/nostarch/">Twitter</a><br><a target="_blank" rel="noopener" href="https://www.facebook.com/NoStarchPress">Facebook</a><br><a target="_blank" rel="noopener" href="https://www.instagram.com/nostarchpress/">Instagram</a><br><a target="_blank" rel="noopener" href="https://www.linkedin.com/company/no-starch-press/">Linkedin</a><br><a target="_blank" rel="noopener" href="https://in.pinterest.com/nostarchpress">Pinterest</a></p>
+</blockquote>
+<p>CTRL+ A 全选上面内容，然后CTRL+C放到剪贴板，运行程序，结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">D:\pythontest\autowork\venv\Scripts\python.exe D:/pythontest/autowork/venv/phoneAndEmail.py</span><br><span class="line">copied to the clipboard: </span><br><span class="line"><span class="number">800</span>-<span class="number">420</span>-<span class="number">7240</span></span><br><span class="line"><span class="number">415</span>-<span class="number">863</span>-<span class="number">9900</span></span><br><span class="line"><span class="number">415</span>-<span class="number">863</span>-<span class="number">9950</span></span><br><span class="line">info@nostarch.com</span><br><span class="line">media@nostarch.com</span><br><span class="line">academic@nostarch.com</span><br><span class="line">conferences@nostarch.com</span><br><span class="line">info@nostarch.com</span><br><span class="line"></span><br><span class="line">Process finished <span class="keyword">with</span> exit code <span class="number">0</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<p>​    </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2021/12/13/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%BB%E5%8A%A1-%E6%8F%90%E5%8F%96%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E5%92%8Cemail/" title="Python自动化任务-提取电话号码和email">https://shenle2019.github.io/2021/12/13/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%BB%E5%8A%A1-%E6%8F%90%E5%8F%96%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E5%92%8Cemail/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/12/06/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6-UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/" rel="next" title="软件测试进阶-UI自动化测试框架">
+                <i class="fa fa-chevron-left"></i> 软件测试进阶-UI自动化测试框架
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/12/18/%E3%80%8A%E8%AE%A4%E7%9F%A5%E8%A7%89%E9%86%92%E3%80%8B%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97-%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86/" rel="prev" title="《认知觉醒》读书心得+笔记整理">
+                《认知觉醒》读书心得+笔记整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">Python编程基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E4%B8%8E%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">模式匹配与正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%EF%BC%9A%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E5%92%8Cemail%E6%8F%90%E5%8F%96%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">项目实战：电话号码和email提取程序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'VLcgBQixkeBQUATGzDVaqcpk-gzGzoHsz',
+        appKey: 'hdVMQzxTmu7ohwxMg6TvuY9W',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script></body>
+</html>

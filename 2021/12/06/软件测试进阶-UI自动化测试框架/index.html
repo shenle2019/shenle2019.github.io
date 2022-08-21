@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="UI自动化测试框架," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python+selenium实现自动化测试框架 基于虫师《Selenium2自动化测试实战-基于Python语言》的学习笔记  自动化测试基础部分 分层的自动化测试，从底往上一般分为：  Unit（数据处理层），一般用白盒单元测试，CodeReview  Service（业务逻辑层），一般用模块接口测试或者Web接口测试  UI（UI界面层），一般用UI自动化测试或者JS自动化测试   什么样的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件测试进阶-UI自动化测试框架">
+<meta property="og:url" content="https://shenle2019.github.io/2021/12/06/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6-UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="Python+selenium实现自动化测试框架 基于虫师《Selenium2自动化测试实战-基于Python语言》的学习笔记  自动化测试基础部分 分层的自动化测试，从底往上一般分为：  Unit（数据处理层），一般用白盒单元测试，CodeReview  Service（业务逻辑层），一般用模块接口测试或者Web接口测试  UI（UI界面层），一般用UI自动化测试或者JS自动化测试   什么样的">
+<meta property="og:locale">
+<meta property="og:image" content="https://shenle2019.github.io/2021/12/06/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6-UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6-UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/mztestpro.png">
+<meta property="article:published_time" content="2021-12-05T22:22:21.000Z">
+<meta property="article:modified_time" content="2021-12-05T14:44:28.000Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="UI自动化测试框架">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shenle2019.github.io/2021/12/06/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6-UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6-UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/mztestpro.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2021/12/06/软件测试进阶-UI自动化测试框架/"/>
+
+
+
+
+
+  <title>软件测试进阶-UI自动化测试框架 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2021/12/06/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6-UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">软件测试进阶-UI自动化测试框架</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-06T06:22:21+08:00">
+                2021-12-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-12-05T22:44:28+08:00">
+                2021-12-05
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">软件测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/12/06/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6-UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/12/06/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6-UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Python-selenium实现自动化测试框架"><a href="#Python-selenium实现自动化测试框架" class="headerlink" title="Python+selenium实现自动化测试框架"></a>Python+selenium实现自动化测试框架</h3><ul>
+<li><p>基于虫师《Selenium2自动化测试实战-基于Python语言》的学习笔记</p>
+</li>
+<li><p>自动化测试基础部分</p>
+<p><strong>分层的自动化测试，从底往上一般分为</strong>：</p>
+<ol>
+<li><p>Unit（数据处理层），一般用白盒单元测试，CodeReview</p>
+</li>
+<li><p>Service（业务逻辑层），一般用模块接口测试或者Web接口测试</p>
+</li>
+<li><p>UI（UI界面层），一般用UI自动化测试或者JS自动化测试</p>
+</li>
+</ol>
+<p><strong>什么样的项目适合自动化测试</strong>：</p>
+<ol>
+<li><p>软件需求变动不频繁</p>
+</li>
+<li><p>项目周期较长</p>
+</li>
+<li><p>自动化测试脚本可以重复使用</p>
+</li>
+</ol>
+</li>
+<li><p>其他基础</p>
+<ol>
+<li>Selenium工具</li>
+<li>前端三件套，html+css+Js</li>
+<li>Chrome浏览器的话，会用F12，定位元素，查看xpath之类</li>
+<li>Python基础+selenium包下载安装+Pycharm使用等</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><p>WebDriver API</p>
+<ol>
+<li><p>从定位元素开始，八大定位元素。</p>
+<p>随便百度参考一个<a target="_blank" rel="noopener" href="https://www.cnblogs.com/renshengruxi/p/12511654.html">selenium八大元素定位方法 </a></p>
+<p>常用的就是id，name，css，xpath等定位方法。</p>
+</li>
+<li><p>其他操作，如控制浏览器大小，后退、前进、刷新页面、</p>
+<p>元素操作，清除文本，按键输入，单击元素；接口操作表单提交；</p>
+<p>鼠标事件：右击、悬停、双击、拖放等；</p>
+<p><strong>常用验证信息：title，URL，和text；</strong></p>
+<p>设置元素等待，显示等待，隐式等待（较为简单）。sleep 休眠；</p>
+<p>定位一组元素，element改为elements；</p>
+<p>多表单切换；多窗口切换；</p>
+<p>警告框处理、上传下载文件；</p>
+<p>操作cookies；调用JS，处理HTML5视频播放、窗口截图、关闭窗口、验证码处理等；</p>
+</li>
+</ol>
+</li>
+<li><p>常用自动化测试框架模型</p>
+<ol>
+<li>线性测试</li>
+<li>模块化驱动测试</li>
+<li>数据驱动测试（常用读取文件txt、csv、xml等）</li>
+<li>关键字驱动测试</li>
+</ol>
+</li>
+<li><p>Selenium IDE，可结合浏览器提供脚本录制、回放以及编辑等功能。</p>
+</li>
+<li><p>unittest单元测试框架</p>
+<ol>
+<li><p>提供用例组织和执行</p>
+<p>setup（） + 用例 +teardown（）</p>
+</li>
+<li><p>提供丰富的比较方法</p>
+</li>
+<li><p>提供丰富的日志</p>
+</li>
+</ol>
+</li>
+<li><p>unittest中的几个概念理解</p>
+<ol>
+<li><p>test case 测试用例</p>
+</li>
+<li><p>test suite 多个用例的集合，可以组装test case，比如用addTest加载用例到testsuite中</p>
+</li>
+<li><p>test runner提供run（）方法来执行test case，test suite</p>
+</li>
+<li><p>test fixture对测试用例环境的搭建setup（）和销毁teardown（）</p>
+</li>
+<li><p>TestLoader类加载测试用例，可不需创建实例，因unittest提供了可以共享的defaultTestLoader类，</p>
+<p>可以用其子类和方法来创建实例。常用discover方法。</p>
+<p>discover(start_dir, pattern=’test*.py’, top_level_dir=None)</p>
+<p>runner.run(discover)</p>
+</li>
+</ol>
+</li>
+<li><p><strong>断言方法</strong></p>
+<p>断言,自动判断测试用例的测试结果是否成功：assert()<br>是预期结果和实际结果的比较，是继承了testcase的方法</p>
+<p>方法    检查<br>assertEqual(a, b）    a == b<br>assertNotEqual(a, b）    a != b<br>assertTrue(x）    bool(x）is True<br>assertFalse(x）    bool(x）is False<br>assertIs(a, b）    a is b<br>assertIsNot(a, b）    a is not b<br>assertIsNone(x）    x is None<br>assertIsNotNone(x）    x is not None<br>assertIn(a, b）    a in b<br>assertNotIn(a, b）    a not in b<br>assertIsInstance(a, b）    isinstance(a, b）<br>assertNotIsInstance(a, b）    not isinstance(a, b）</p>
+</li>
+<li><p>HTMLTestRunner模块，生成HTML测试报告</p>
+</li>
+<li><p>Page Object设计模式</p>
+<ol>
+<li>po模型设计思想</li>
+</ol>
+<hr>
+<p>　　Page Object 模式主要是将每个页面设计为一个class，其中包含页面中的需要测试的元素（按钮，输入框，标题等），这样在Selenium测试页面中可以通过调取页面类来获取页面元素，这样避免当页面元素id或者位置变化后，需要改测试代码。当元素ID变化时，只需要改测试页面Class中的页面属性即可。将页面定位与和业务分开，分离测试对象（元素对象）和测试脚本（用例脚本），提高可维护性。</p>
+<p>　　Page Object模式是一种自动化测试设计模式，将页面定位和业务操作分开，分离测试对象（元素对象）和测试脚本（用例脚本），提高用例的可维护性。</p>
+<pre><code>unittest是一种单元测试框架，用于设计各式各样的测试用例，可调用PageObject设计的页面类（对象），设计出更加可维护的用例。它提供用例组织与执行，提供丰富的比较（断言）方法，提供丰富的日志，统一适用于web自动化用例的开发与执行。
+</code></pre>
+<p>　　UI自动化最核心的问题定位是，跟业务层解耦出来，单独处理定位的问题，然后在实现业务层。所使用到的方法是对一个UI页面做测试我们抽取为三层，举例为BasePage+LoginPage+Unittest。 　</p>
+<p>　　后续示例中，PO模型的基本思路：login_page(查找页面元素类) —&gt;login_handle(操作层，将查找到的元素位置上传递数据) —&gt; login_business(业务层：调用操作层，根据操作层的传递的结果进行判断场景，如邮箱错误场景等) —&gt; first_case(封装调用业务层，进行测试用例的场景组装)</p>
+<ol start="2">
+<li>po模型之如何设计操作层</li>
+</ol>
+<hr>
+<p>查找页面元素类：把定位页面元素的方法都封装在相应的一个相应页面中，此页面的元素定位方式都可以在这个文件中找到</p>
+<p>操作层：编写注册过程中需要的方法，比如输入用户名、密码等页面操作,工具类-保存页面操作的所有方法。</p>
+<p>业务层：把操作层组装起来</p>
+<p>查找页面元素类：loginPage.py</p>
+<p>操作层：loginrHandle.py</p>
+<p>业务层：loginbusiness.py</p>
+<p>下面以126邮箱web登录页面为例展示编写PO模型</p>
+<ol start="3">
+<li>定位页面元素类</li>
+</ol>
+<hr>
+<p> 示例代码：loginPage.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line"><span class="comment">#定位页面元素</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginPage</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.driver = webdriver.Chrome()</span><br><span class="line">        self.driver.get(<span class="string">&#x27;https://www.126.com/&#x27;</span>)</span><br><span class="line">        self.driver.maximize_window()</span><br><span class="line">        self.driver.implicitly_wait(<span class="number">20</span>)</span><br><span class="line">        <span class="comment"># 切换到表单中</span></span><br><span class="line">        self.driver.switch_to.frame(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#定位邮箱输入框</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_email_element</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.driver.find_element_by_css_selector(<span class="string">&#x27;input[name=&quot;email&quot;]&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#定位密码输入框</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_password_element</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.driver.find_element_by_css_selector(<span class="string">&#x27;input[name=&quot;password&quot;]&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#定义 登录 按钮</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_loginbutton_element</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.driver.find_element_by_id(<span class="string">&#x27;dologin&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>操作层</li>
+</ol>
+<hr>
+<p> 示例代码：loginrHandle.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#操作层</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">loginHandle</span>(<span class="params">LoginPage</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        LoginPage.__init__(self)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#输入邮箱</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">send_user_email</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.get_email_element().send_keys(<span class="string">&#x27;Augus&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#输入密码</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">send_user_password</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.get_password_element().send_keys(<span class="string">&quot;1234&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#点击登录按钮</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">click_loginbutton</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.get_loginbutton_element().click()</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>业务层</li>
+</ol>
+<hr>
+<p>示例代码：loginbusiness.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#业务层</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginBusiness</span>(<span class="params">loginHandle</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        loginHandle.__init__(self)</span><br><span class="line">    <span class="comment">#登录功能</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login_case</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.send_user_email()</span><br><span class="line">        self.send_user_password()</span><br><span class="line">        self.click_loginbutton()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    l = LoginBusiness()</span><br><span class="line">    l.login_case()</span><br></pre></td></tr></table></figure></li>
+<li><p>BBS项目实战：</p>
+<p>目录</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6-UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/mztestpro.png" alt="mztestpro"></p>
+</li>
+</ul>
+<p>关键脚本:</p>
+<ol>
+<li><p>编写公共模块,driver.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"><span class="comment"># from selenium.webdriver import Remote</span></span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support.ui <span class="keyword">import</span> WebDriverWait</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动浏览器</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">browser</span>():</span></span><br><span class="line">    option = webdriver.ChromeOptions()  <span class="comment"># 加载浏览器配置</span></span><br><span class="line">    option.add_argument(<span class="string">&#x27;disable-infobars&#x27;</span>)  <span class="comment"># 浏览器不显示受自动测试软件控制</span></span><br><span class="line">    option.add_argument(<span class="string">&#x27;-kiosk&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    driver = webdriver.Chrome(chrome_options=option)</span><br><span class="line">    <span class="comment"># host = &quot;127.0.0.1:4444&quot;</span></span><br><span class="line">    <span class="comment"># dc = &#123;&#x27;browserName&#x27;:&#x27;chrome&#x27;&#125;</span></span><br><span class="line">    <span class="comment"># driver = Remote(command_executor =&#x27;http://&#x27; + host + &#x27;/wd/hub&#x27; ,desired_capabilities=dc)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 本地启动一个主hub和一个node节点（主机端口4444，node节点5555）的方法,本机ip172.16.10.66</span></span><br><span class="line">    <span class="comment"># java -jar selenium-server-standalone-2.48.2.jar -role hub</span></span><br><span class="line">    <span class="comment"># java -jar selenium-server-standalone-2.48.2.jar -role node port 5555</span></span><br><span class="line">    <span class="comment"># 启动一个远程node ，如172.16.10.34:6666</span></span><br><span class="line">    <span class="comment"># java -jar selenium-server-standalone-2.48.2.jar -role node port 6666 -hub http://172.16.10.66:4444/grid/register</span></span><br><span class="line">    <span class="keyword">return</span> driver</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(__file__)</span><br><span class="line">    dr = browser()</span><br><span class="line">    dr.get(<span class="string">&quot;http://www.baidu.com&quot;</span>)</span><br><span class="line">    dr.quit()</span><br></pre></td></tr></table></figure></li>
+<li><p>自定义测试框架myunit.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> .driver <span class="keyword">import</span> browser</span><br><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTest</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">self</span>):</span></span><br><span class="line">		self.driver = browser()</span><br><span class="line">		self.driver.implicitly_wait(<span class="number">30</span>)</span><br><span class="line">		self.driver.maximize_window()</span><br><span class="line">		</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">tearDown</span>(<span class="params">self</span>):</span></span><br><span class="line">		self.driver.quit()</span><br></pre></td></tr></table></figure></li>
+<li><p>定义截图功能funtion.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment">#截屏</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_img</span>(<span class="params">driver,file_name</span>):</span></span><br><span class="line">	base_dir = os.path.dirname(os.path.dirname(__file__))</span><br><span class="line">	<span class="comment">#base_dir = str(base_dir)</span></span><br><span class="line">	base_dir = base_dir.replace(<span class="string">&quot;\\&quot;</span>,<span class="string">&quot;/&quot;</span>)</span><br><span class="line">	base_dir = base_dir.split(<span class="string">&#x27;/test_case&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">	file_path = base_dir + <span class="string">&quot;/report/image/&quot;</span> + file_name</span><br><span class="line">	driver.get_screenshot_as_file(file_path)</span><br><span class="line">	</span><br><span class="line"><span class="comment"># #获取最新的测试报告，用于发送测试报告邮件</span></span><br><span class="line"><span class="comment"># def new_report(file_path):</span></span><br><span class="line"><span class="comment"># 	files = os.listdir(file_path)</span></span><br><span class="line"><span class="comment"># 	f_times = []</span></span><br><span class="line"><span class="comment"># 	for f in files:</span></span><br><span class="line"><span class="comment"># 		if os.path.splitext(file_path + f)[1] == &#x27;.html&#x27;:</span></span><br><span class="line"><span class="comment"># 			f_time = os.path.getmtime(file_path + f)</span></span><br><span class="line"><span class="comment"># 			f_times.append((f_time, f))</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 	return sorted(f_times)[-1][1]</span></span><br><span class="line"></span><br><span class="line">	</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">	sys.path.append(<span class="string">&quot;D:\pythontest\mztestpro\mztestpro-master\bbs\test_case\models&quot;</span>)</span><br><span class="line">	<span class="built_in">print</span>(sys.path)</span><br><span class="line">	<span class="keyword">import</span> driver</span><br><span class="line">	driver = driver.browser()</span><br><span class="line">	driver.get(<span class="string">&quot;http://www.baidu.com&quot;</span>)</span><br><span class="line">	insert_img(driver,<span class="string">&quot;baidu.png&quot;</span>)</span><br><span class="line">	driver.quit()</span><br></pre></td></tr></table></figure></li>
+<li><p>编写pageObject，page基础类base.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Page</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    基础页面，供所有的页面对象继承</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="comment"># bbs_url = &quot;http://10.200.12.8:8099&quot;</span></span><br><span class="line">    <span class="comment"># bbs_url = &quot;https://bbs.meizu.cn&quot;</span></span><br><span class="line">    bbs_url = <span class="string">&quot;http://www.broadview.com.cn/&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, selenium_driver, base_url=bbs_url, parent=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.base_url = base_url</span><br><span class="line">        self.driver = selenium_driver</span><br><span class="line">        self.timeout = <span class="number">30</span></span><br><span class="line">        self.parent = parent</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_open</span>(<span class="params">self, url</span>):</span></span><br><span class="line">        url = self.base_url + url</span><br><span class="line">        self.driver.get(url)</span><br><span class="line">        <span class="comment"># 这里初始化会判断当前页的ip，然后打印出来，如果不一致则会报错</span></span><br><span class="line">        <span class="keyword">assert</span> self.on_page(), <span class="string">&#x27;Did not land on %s&#x27;</span> % url</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_page</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;当前登录页ip：%s&#x27;</span> % self.driver.current_url)</span><br><span class="line">        <span class="keyword">return</span> self.driver.current_url == (self.base_url + self.url)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open</span>(<span class="params">self</span>):</span></span><br><span class="line">        self._<span class="built_in">open</span>(self.url)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">script</span>(<span class="params">self, src</span>):</span></span><br><span class="line">        self.driver.execute_script(src)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_element</span>(<span class="params">self, *loc</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.driver.find_element(*loc)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_elements</span>(<span class="params">self, *loc</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.driver.find_elements(*loc)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取弹出框内的文案</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">alert_info</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.driver.switch_to_alert()</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>创建BBS对象登录类loginPage.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.action_chains <span class="keyword">import</span> ActionChains</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.remote.webelement <span class="keyword">import</span> WebElement</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> .base <span class="keyword">import</span> Page</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep, time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Login</span>(<span class="params">Page</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    用户登录页面</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="comment"># url = &#x27;/baobeipc/html/login.html&#x27;</span></span><br><span class="line">    url = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="comment"># bbs_login_user_loc = (By.XPATH,&quot;.//*[@id=&#x27;mzCust&#x27;]/div/div[1]/img[1]&quot;)</span></span><br><span class="line">    <span class="comment"># bbs_login_button_loc = (By.ID,&quot;mzLogin&quot;)</span></span><br><span class="line">    <span class="comment"># /html/body/div/div[2]/div/div/div/div/div/a[2]</span></span><br><span class="line">    bbs_login_button_loc = (By.XPATH, <span class="string">&#x27;/html/body/div/div[2]/div/div/div/div/div/a[2]&#x27;</span>)</span><br><span class="line">    <span class="comment"># bbs_login_button_loc = (By.XPATH, &#x27;//*[@id=&quot;loginLink&quot;]&#x27;)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 鼠标悬停</span></span><br><span class="line">    <span class="comment"># def hover(self, by, value):</span></span><br><span class="line">    <span class="comment">#     element = self.findbyElement(by, value)</span></span><br><span class="line">    <span class="comment">#     ActionChains(self.driver).move_to_element(element).perform()</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># # ## 通过不同的方式查找界面元素</span></span><br><span class="line">    <span class="comment"># def findbyElement(self, by, value):</span></span><br><span class="line">    <span class="comment">#     if (by == &quot;id&quot;):</span></span><br><span class="line">    <span class="comment">#         element = self.driver.find_element_by_id(value)</span></span><br><span class="line">    <span class="comment">#         return element</span></span><br><span class="line">    <span class="comment">#     elif (by == &quot;name&quot;):</span></span><br><span class="line">    <span class="comment">#         element = self.driver.find_element_by_name(value)</span></span><br><span class="line">    <span class="comment">#         return element</span></span><br><span class="line">    <span class="comment">#     elif (by == &quot;XPATH&quot;):</span></span><br><span class="line">    <span class="comment">#         element = self.driver.find_element_by_xpath(value)</span></span><br><span class="line">    <span class="comment">#         return element</span></span><br><span class="line">    <span class="comment">#     elif (by == &quot;classname&quot;):</span></span><br><span class="line">    <span class="comment">#         element = self.driver.find_element_by_class_name(value)</span></span><br><span class="line">    <span class="comment">#         return element</span></span><br><span class="line">    <span class="comment">#     elif (by == &quot;css&quot;):</span></span><br><span class="line">    <span class="comment">#         element = self.driver.find_element_by_css_selector(value)</span></span><br><span class="line">    <span class="comment">#         return element</span></span><br><span class="line">    <span class="comment">#     elif (by == &quot;link_text&quot;):</span></span><br><span class="line">    <span class="comment">#         element = self.driver.find_element_by_link_text(value)</span></span><br><span class="line">    <span class="comment">#         return element</span></span><br><span class="line">    <span class="comment">#     else:</span></span><br><span class="line">    <span class="comment">#         print(&quot;无对应方法，请检查&quot;)</span></span><br><span class="line">    <span class="comment">#         return None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bbs_login</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.find_element(*self.bbs_login_button_loc).click()</span><br><span class="line">        <span class="comment">#self.find_element(*self.bbs_login_user_loc).click()</span></span><br><span class="line">        <span class="comment"># 获取登录头像，获取后移动到弹窗，然后点击登录</span></span><br><span class="line">        <span class="comment"># above = self.find_element(*self.bbs_my_link_loc)</span></span><br><span class="line">        <span class="comment"># ActionChains(self.driver).move_to_element(above).perform()</span></span><br><span class="line">        <span class="comment"># element = self.find_element(*self.bbs_login_button_loc)</span></span><br><span class="line">        <span class="comment"># print(&quot;---------找到登录按钮----------&quot; + element.get_attribute(id))</span></span><br><span class="line">        <span class="comment"># self.find_element(*self.bbs_my_link_loc).click()</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># //*[@id=&quot;loginLink&quot;]</span></span><br><span class="line">        <span class="comment"># self.hover(by=&#x27;XPATH&#x27;, value=&#x27;//*[@id=&quot;loginLink&quot;]&#x27;)</span></span><br><span class="line">        <span class="comment"># loginbutton = self.driver.findElement(by=&#x27;XPATH&#x27;, value=&#x27;//*[@id=&quot;loginLink&quot;]&#x27;)</span></span><br><span class="line">        <span class="comment"># print(&quot;---------loginbutton----------&quot; + loginbutton)</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># if loginbutton != None:</span></span><br><span class="line">        <span class="comment">#     self.assertEqual(1, 1)</span></span><br><span class="line">        <span class="comment"># else:</span></span><br><span class="line">        <span class="comment">#     self.assertEqual(1, 0)</span></span><br><span class="line">        <span class="comment">#     time.sleep(3)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># login_username_loc = (By.CSS_SELECTOR,&quot;ipt-account inp-focus&quot;)</span></span><br><span class="line">    <span class="comment"># login_password_loc = (By.CSS_SELECTOR,&quot;inp-focus&quot;)</span></span><br><span class="line">    <span class="comment"># login_button_loc = (By.CLASS_NAME,&quot;tipInfo&quot;)</span></span><br><span class="line"></span><br><span class="line">    login_username_loc = (By.XPATH, <span class="string">&#x27;//*[@id=&quot;Email&quot;]&#x27;</span>)</span><br><span class="line">    login_password_loc = (By.XPATH, <span class="string">&#x27;//*[@id=&quot;Password&quot;]&#x27;</span>)</span><br><span class="line">    <span class="comment"># /html/body/div/div[3]/div/div/div/div/div/div[1]/form/div[5]/button</span></span><br><span class="line">    login_button_loc = (By.XPATH, <span class="string">&quot;/html/body/div/div[3]/div/div/div/div/div/div[1]/form/div[5]/button&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#登陆用户名</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login_username</span>(<span class="params">self,username</span>):</span></span><br><span class="line">        self.find_element(*self.login_username_loc).clear()</span><br><span class="line">        self.find_element(*self.login_username_loc).send_keys(username)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#登录密码</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login_password</span>(<span class="params">self,password</span>):</span></span><br><span class="line">        self.find_element(*self.login_password_loc).clear()</span><br><span class="line">        self.find_element(*self.login_password_loc).send_keys(password)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#登录按钮</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login_botton</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.find_element(*self.login_button_loc).click()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#定义统一的登录入口</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">user_login</span>(<span class="params">self,username=<span class="string">&quot;username&quot;</span>,password=<span class="string">&quot;1111&quot;</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;获取的用户名登录&quot;&quot;&quot;</span></span><br><span class="line">        self.<span class="built_in">open</span>()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------base open验证完毕----------&quot;</span> )</span><br><span class="line">        self.bbs_login()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------bbs login验证完毕----------&quot;</span> )</span><br><span class="line">        self.login_username(username)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------用户名 验证完毕----------&quot;</span> )</span><br><span class="line">        self.login_password(password)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------密码 验证完毕----------&quot;</span> )</span><br><span class="line">        self.login_botton()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------点击登录按钮 验证完毕----------&quot;</span> )</span><br><span class="line">        sleep(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># #登录断言</span></span><br><span class="line">    <span class="comment"># username_erro_loc = (By.XPATH,&quot;//span[@for=&#x27;account&#x27;]&quot;)</span></span><br><span class="line">    <span class="comment"># password_erro_loc = (By.XPATH,&quot;//span[@for=&#x27;password&#x27;]&quot;)</span></span><br><span class="line">    user_login_sucess_loc = (By.XPATH, <span class="string">&quot;/html/body/div/div[2]/div/div/div/div[1]/div/a[1]&quot;</span>)</span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># #用户名错误</span></span><br><span class="line">    <span class="comment"># def username_erro(self):</span></span><br><span class="line">    <span class="comment">#     return self.find_element(*self.username_erro_loc).text</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># #密码错误</span></span><br><span class="line">    <span class="comment"># def password_erro(self):</span></span><br><span class="line">    <span class="comment">#     return self.find_element(*self.password_erro_loc).text</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#登录成功</span></span><br><span class="line">    <span class="comment"># def user_login_success(self):</span></span><br><span class="line">    <span class="comment">#     return self.find_element(*self.user_login_sucess_loc).text</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>编写测试用例login_sta.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> unittest, sys, random</span><br><span class="line"></span><br><span class="line">sys.path.append(<span class="string">&quot;./models&quot;</span>)</span><br><span class="line">sys.path.append(<span class="string">&quot;./page_obj&quot;</span>)</span><br><span class="line"><span class="keyword">from</span> models <span class="keyword">import</span> myunit, function</span><br><span class="line"><span class="keyword">from</span> page_obj.loginPage <span class="keyword">import</span> Login</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginTest</span>(<span class="params">myunit.MyTest</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;社区登录&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 测试用户登录</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">user_login_verify</span>(<span class="params">self, username=<span class="string">&quot;&quot;</span>, password=<span class="string">&quot;&quot;</span></span>):</span></span><br><span class="line">        Login(self.driver).user_login(username, password)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_login1</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;用户名和密码都为空&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------用户名密码开始验证----------&quot;</span> )</span><br><span class="line">        self.user_login_verify()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------用户名密码验证完成----------&quot;</span> )</span><br><span class="line">        po = Login(self.driver)</span><br><span class="line">        <span class="comment"># alert = po.alert_info()</span></span><br><span class="line">        <span class="comment"># print(alert)</span></span><br><span class="line">        <span class="comment"># username_mes = alert.text</span></span><br><span class="line">        username_mes = po.find_element(By.ID, <span class="string">&quot;Email-error&quot;</span>).text</span><br><span class="line">        <span class="built_in">print</span>(username_mes)</span><br><span class="line">        self.assertEqual(username_mes, <span class="string">&#x27;请输入邮箱&#x27;</span>)</span><br><span class="line">        <span class="comment"># alert.accept()</span></span><br><span class="line">        sleep(<span class="number">1</span>)</span><br><span class="line">        function.insert_img(self.driver, <span class="string">&#x27;username_pass_kong.jpg&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_login2</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment">#     &#x27;&#x27;&#x27;用户名正确，密码为空&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------用户名密码开始验证2----------&quot;</span> )</span><br><span class="line">        self.user_login_verify(username=<span class="string">&#x27;305030951@qq.com&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------用户名密码验证完成2----------&quot;</span> )</span><br><span class="line">        po = Login(self.driver)</span><br><span class="line">        <span class="comment"># alert = po.alert_info()</span></span><br><span class="line">        <span class="comment"># print(alert)</span></span><br><span class="line">        <span class="comment"># username_mes = alert.text</span></span><br><span class="line">        password_mes = po.find_element(By.ID, <span class="string">&quot;Password-error&quot;</span>).text</span><br><span class="line">        <span class="built_in">print</span>(password_mes)</span><br><span class="line">        self.assertEqual(password_mes, <span class="string">&#x27;请输入密码&#x27;</span>)</span><br><span class="line">        <span class="comment"># alert.accept()</span></span><br><span class="line">        sleep(<span class="number">1</span>)</span><br><span class="line">        function.insert_img(self.driver, <span class="string">&#x27;password_pass_kong.jpg&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># def test_login2(self):</span></span><br><span class="line">    <span class="comment">#     &#x27;&#x27;&#x27;用户名正确，密码为空&#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="comment">#     self.user_login_verify(username=&#x27;18565660212&#x27;)</span></span><br><span class="line">    <span class="comment">#     po = Login(self.driver)</span></span><br><span class="line">    <span class="comment">#     alert = po.alert_info()</span></span><br><span class="line">    <span class="comment">#     username_mes = alert.text</span></span><br><span class="line">    <span class="comment">#     print(username_mes)</span></span><br><span class="line">    <span class="comment">#     self.assertEqual(username_mes, &#x27;账号或密码不能为空！&#x27;)</span></span><br><span class="line">    <span class="comment">#     alert.accept()</span></span><br><span class="line">    <span class="comment">#     sleep(1)</span></span><br><span class="line">    <span class="comment">#     function.insert_img(self.driver, &#x27;password_kong.jpg&#x27;)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_login3</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment">#     &#x27;&#x27;&#x27;用户名或者密码错误&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------用户名密码开始验证3----------&quot;</span> )</span><br><span class="line">        self.user_login_verify(username=<span class="string">&#x27;305030952@qq.com&#x27;</span>,password=<span class="string">&#x27;Change_Me123&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------用户名密码验证完成3---------&quot;</span> )</span><br><span class="line">        po = Login(self.driver)</span><br><span class="line">        <span class="comment"># alert = po.alert_info()</span></span><br><span class="line">        <span class="comment"># print(alert)</span></span><br><span class="line">        <span class="comment"># username_mes = alert.text</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># / html / body / div / div[3] / div / div / div / div / div / div[1] / form / div[5] / ul / li</span></span><br><span class="line"></span><br><span class="line">        error_message = po.find_element(By.XPATH, <span class="string">&quot;/html/body/div/div[3]/div/div/div/div/div/div[1]/form/div[5]/ul/li&quot;</span>).text</span><br><span class="line">        <span class="built_in">print</span>(error_message)</span><br><span class="line">        self.assertEqual(error_message, <span class="string">&#x27;账号或密码错误&#x27;</span>)</span><br><span class="line">        <span class="comment"># alert.accept()</span></span><br><span class="line">        sleep(<span class="number">1</span>)</span><br><span class="line">        function.insert_img(self.driver, <span class="string">&#x27;username_or_password_error.jpg&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_login4</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment">#     &#x27;&#x27;&#x27;用户名或者密码正确&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------用户名密码开始验证4----------&quot;</span> )</span><br><span class="line">        self.user_login_verify(username=<span class="string">&#x27;305030951@qq.com&#x27;</span>,password=<span class="string">&#x27;Change_Me123&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---------用户名密码验证完成4---------&quot;</span> )</span><br><span class="line">        po = Login(self.driver)</span><br><span class="line">        success_message = po.find_element(By.XPATH, <span class="string">&quot;/html/body/div/div[2]/div/div/div/div[1]/div/a[1]&quot;</span>).text</span><br><span class="line">        <span class="built_in">print</span>(success_message)</span><br><span class="line">        success_message2 = <span class="string">&#x27;您好，shenle！&#x27;</span></span><br><span class="line">        self.assertEqual(success_message, success_message2)</span><br><span class="line">        sleep(<span class="number">1</span>)</span><br><span class="line">        function.insert_img(self.driver, <span class="string">&#x27;username_or_password_correct.jpg&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    unittest.main()</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>执行用例总入口run_bbs_test.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"><span class="keyword">from</span> HTMLTestRunner <span class="keyword">import</span> HTMLTestRunner</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</span><br><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">import</span> time, sys, os</span><br><span class="line"></span><br><span class="line">sys.path.append(<span class="string">&#x27;./package&#x27;</span>)</span><br><span class="line">sys.path.append(<span class="string">&#x27;./bbs/test_case/models&#x27;</span>)</span><br><span class="line">sys.path.append(<span class="string">&#x27;./bbs/test_case/report&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># from package import email_send</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ==================定义发送邮件==========================</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_mail</span>(<span class="params">file_new</span>):</span></span><br><span class="line">    f = <span class="built_in">open</span>(file_new, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">    mail_body = f.read()</span><br><span class="line">    f.close()</span><br><span class="line"></span><br><span class="line">    msg = MIMEText(mail_body, <span class="string">&#x27;html&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    msg[<span class="string">&#x27;Subject&#x27;</span>] = Header(<span class="string">&quot;python+selenium 自动化测试报告&quot;</span>, <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    msg[<span class="string">&#x27;from&#x27;</span>] = <span class="string">&#x27;emptymiss@126.com&#x27;</span></span><br><span class="line">    msg[<span class="string">&#x27;to&#x27;</span>] = <span class="string">&#x27;305030951@qq.com&#x27;</span></span><br><span class="line"></span><br><span class="line">    smtp = smtplib.SMTP()</span><br><span class="line">    smtp.connect(<span class="string">&quot;smtp.126.com&quot;</span>)</span><br><span class="line">    smtp.login(<span class="string">&quot;emptymiss@126.com&quot;</span>, <span class="string">&quot;MDTFMYZKLYOCDGFR&quot;</span>)</span><br><span class="line">    smtp.sendmail(<span class="string">&quot;emptymiss@126.com&quot;</span>, <span class="string">&quot;305030951@qq.com&quot;</span>, msg.as_string())</span><br><span class="line">    smtp.quit()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;email has send out&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ==========获取最新的测试报告，用于发送测试报告邮件=========</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">new_report</span>(<span class="params">testreport</span>):</span></span><br><span class="line">    lists = os.listdir(testreport)</span><br><span class="line">    lists.sort(key=<span class="keyword">lambda</span> fn: os.path.getmtime(testreport + <span class="string">&quot;\\&quot;</span> + fn))</span><br><span class="line">    file_new = os.path.join(testreport, lists[-<span class="number">1</span>])</span><br><span class="line">    <span class="built_in">print</span>(file_new)</span><br><span class="line">    <span class="keyword">return</span> file_new</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="comment"># 生成测试报告</span></span><br><span class="line">    now = time.strftime(<span class="string">&quot;%Y-%m-%d %H_%M_%S&quot;</span>)</span><br><span class="line">    <span class="comment"># filename = &quot;./bbs/report/result&quot; + str(time.time()) + &quot;.html&quot;</span></span><br><span class="line">    filename = <span class="string">&quot;./bbs/report/&quot;</span> + now + <span class="string">&#x27;result.html&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># with open(filename, &quot;w&quot;, encoding=&quot;utf-8&quot;) as fp:</span></span><br><span class="line">    <span class="comment">#     runner = HTMLTestRunner.HTMLTestRunner(stream=fp,</span></span><br><span class="line">    <span class="comment">#                                            title=&quot;login测试报告&quot;,</span></span><br><span class="line">    <span class="comment">#                                            description=&quot;登录测试&quot;)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        runner = HTMLTestRunner.HTMLTestRunner(stream=fp,</span><br><span class="line">                                               title=<span class="string">&#x27;博文视点测试报告&#x27;</span>,</span><br><span class="line">                                               description=<span class="string">&#x27;win10+Chrome+用例执行情况&#x27;</span>)</span><br><span class="line">        test_dir = <span class="string">&#x27;./bbs/test_case&#x27;</span></span><br><span class="line">        discover = unittest.defaultTestLoader.discover(test_dir, pattern=<span class="string">&#x27;login*.py&#x27;</span>)</span><br><span class="line">        <span class="comment"># runner = unittest.TextTestRunner()</span></span><br><span class="line">        runner.run(discover)</span><br><span class="line">        fp.close()  <span class="comment"># 关闭生成的报告</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取最新的测试报告</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># file_path = os.path.dirname(__file__) + &#x27;/bbs/report/&#x27;</span></span><br><span class="line">    <span class="comment"># new_file = new_report(file_path)</span></span><br><span class="line">    <span class="comment"># file_name = file_path + new_file</span></span><br><span class="line">        file_path = new_report(<span class="string">&#x27;./bbs/report/&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 发送邮件</span></span><br><span class="line">        send_mail(file_path)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>项目源码：<a target="_blank" rel="noopener" href="https://github.com/shenle2019/pythontest100/tree/master/mztestpro">https://github.com/shenle2019/pythontest100/tree/master/mztestpro</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2021/12/06/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6-UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/" title="软件测试进阶-UI自动化测试框架">https://shenle2019.github.io/2021/12/06/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6-UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/" rel="tag"># UI自动化测试框架</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/12/06/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%9B%E9%98%B6%E6%80%9D%E8%B7%AF/" rel="next" title="软件测试进阶思路">
+                <i class="fa fa-chevron-left"></i> 软件测试进阶思路
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/12/13/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%BB%E5%8A%A1-%E6%8F%90%E5%8F%96%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E5%92%8Cemail/" rel="prev" title="Python自动化任务-提取电话号码和email">
+                Python自动化任务-提取电话号码和email <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-selenium%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">Python+selenium实现自动化测试框架</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'VLcgBQixkeBQUATGzDVaqcpk-gzGzoHsz',
+        appKey: 'hdVMQzxTmu7ohwxMg6TvuY9W',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script></body>
+</html>

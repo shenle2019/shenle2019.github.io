@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python面试题整理-V1 day3 Filter 列出所有奇数，并构造新列表 123456789a &#x3D; [1,2,3,4,5,6,7,8,9,10]def funa(x):    return x % 2 &#x3D;&#x3D; 1newlist &#x3D; filter(funa, a)print(newlist)newlist &#x3D; [i for i in newlist]print(newlist) 列表推导式，列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python面试题整理-V1 day3">
+<meta property="og:url" content="https://shenle2019.github.io/2022/05/05/Python%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86-V1-day3/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="Python面试题整理-V1 day3 Filter 列出所有奇数，并构造新列表 123456789a &#x3D; [1,2,3,4,5,6,7,8,9,10]def funa(x):    return x % 2 &#x3D;&#x3D; 1newlist &#x3D; filter(funa, a)print(newlist)newlist &#x3D; [i for i in newlist]print(newlist) 列表推导式，列">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-05-04T22:48:33.000Z">
+<meta property="article:modified_time" content="2022-05-04T14:49:26.000Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2022/05/05/Python面试题整理-V1-day3/"/>
+
+
+
+
+
+  <title>Python面试题整理-V1 day3 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2022/05/05/Python%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86-V1-day3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python面试题整理-V1 day3</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-05T06:48:33+08:00">
+                2022-05-04
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-04T22:49:26+08:00">
+                2022-05-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2022/05/05/Python%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86-V1-day3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2022/05/05/Python%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86-V1-day3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Python面试题整理-V1-day3"><a href="#Python面试题整理-V1-day3" class="headerlink" title="Python面试题整理-V1 day3"></a>Python面试题整理-V1 day3</h3><ul>
+<li><p>Filter 列出所有奇数，并构造新列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">funa</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x % <span class="number">2</span> == <span class="number">1</span></span><br><span class="line"></span><br><span class="line">newlist = <span class="built_in">filter</span>(funa, a)</span><br><span class="line"><span class="built_in">print</span>(newlist)</span><br><span class="line">newlist = [i <span class="keyword">for</span> i <span class="keyword">in</span> newlist]</span><br><span class="line"><span class="built_in">print</span>(newlist)</span><br></pre></td></tr></table></figure></li>
+<li><p>列表推导式，列出所有奇数。并构造新列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>]</span><br><span class="line"></span><br><span class="line">res = [i <span class="keyword">for</span> i <span class="keyword">in</span> a <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">1</span>]</span><br><span class="line"><span class="built_in">print</span>(res)</span><br></pre></td></tr></table></figure></li>
+<li><p>a = (1,),b = (1),c=(“1”)，分别是什么数据类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">1</span>,)</span><br><span class="line">b = (<span class="number">1</span>)</span><br><span class="line">c = (<span class="string">&quot;1&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(b))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(c))</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">tuple</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> &#x27;<span class="title">int</span>&#x27;&gt;</span></span><br><span class="line"><span class="class">&lt;<span class="title">class</span> &#x27;<span class="title">str</span>&#x27;&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>合并两个列表  a = [1,2,3,3,9] ,b = [1,4,5,6,7,7]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">9</span>]</span><br><span class="line">b = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">7</span>]</span><br><span class="line"></span><br><span class="line">a.extend(b)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line">newlist = <span class="built_in">sorted</span>(a,reverse=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(newlist)</span><br></pre></td></tr></table></figure></li>
+<li><p>打印时间戳</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">a = <span class="built_in">str</span>(datetime.datetime.now().strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S &#x27;</span>)) + <span class="string">&#x27;星期：&#x27;</span>+ <span class="built_in">str</span>(datetime.datetime.now().isoweekday())</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure></li>
+<li><p>自定义异常</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span>():</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">            <span class="keyword">if</span> i &gt; <span class="number">5</span>:</span><br><span class="line">                <span class="keyword">raise</span> Exception(<span class="string">&quot;the number is bigger than 5&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> ret:</span><br><span class="line">        <span class="built_in">print</span>(ret)</span><br><span class="line"></span><br><span class="line">func()</span><br></pre></td></tr></table></figure></li>
+<li><p>正则中.* 和 .*？的区别？</p>
+<p>贪婪匹配 以及 非贪婪匹配，注意正则的匹配（ .*？）带括号与不带括号 .*？有区别。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">s = <span class="string">&quot;&lt;a&gt;呵呵&lt;/a&gt;&lt;a&gt;哈哈&lt;/a&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">res1 = re.findall(<span class="string">&quot;&lt;a&gt;(.*)&lt;/a&gt;&quot;</span>,s)</span><br><span class="line"><span class="built_in">print</span>(res1)</span><br><span class="line">res2 = re.findall(<span class="string">&quot;&lt;a&gt;(.*?)&lt;/a&gt;&quot;</span>,s)</span><br><span class="line"><span class="built_in">print</span>(res2)</span><br></pre></td></tr></table></figure>
+
+<p>[‘呵呵</a><a>哈哈’]<br>[‘呵呵’, ‘哈哈’]</p>
+</li>
+</ul>
+<p>​        </p>
+<ul>
+<li><p>一行代码展开列表a = [[1,2],[3,4],[5,6]]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = [[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>]]</span><br><span class="line">x = [j <span class="keyword">for</span> i <span class="keyword">in</span> a <span class="keyword">for</span> j <span class="keyword">in</span> i]</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>x = “abc”,y = “def”,z = [“d”,”e”,”f”] 分别求x.join(y),x.join(z)的结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###x.join(y)，意思y是可迭代对象，x插入其中。两个结果一样。</span></span><br><span class="line">x = <span class="string">&quot;abc&quot;</span></span><br><span class="line">y = <span class="string">&quot;def&quot;</span></span><br><span class="line">z = [<span class="string">&quot;d&quot;</span>,<span class="string">&quot;e&quot;</span>,<span class="string">&quot;f&quot;</span>]</span><br><span class="line"></span><br><span class="line">m = x.join(y)</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"><span class="comment">###dabceabcf</span></span><br><span class="line">n = x.join(z)</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"><span class="comment">####dabceabcf</span></span><br></pre></td></tr></table></figure></li>
+<li><p>捕获异常的语法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    num = <span class="number">10</span></span><br><span class="line">    <span class="built_in">print</span>(num)</span><br><span class="line"><span class="keyword">except</span> NameError <span class="keyword">as</span> Errormsg:</span><br><span class="line">    <span class="built_in">print</span>(Errormsg)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;没有报错，打印此行&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    num = <span class="number">10</span></span><br><span class="line">    <span class="built_in">print</span>(num)</span><br><span class="line"><span class="keyword">except</span> NameError <span class="keyword">as</span> Errormsg:</span><br><span class="line">    <span class="built_in">print</span>(Errormsg)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;无论如何，打印此行&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>Python中交换两个数值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">3</span></span><br><span class="line">b = <span class="number">4</span></span><br><span class="line">(a, b) = (b, a)</span><br><span class="line"><span class="built_in">print</span>(a , b)</span><br></pre></td></tr></table></figure></li>
+<li><p>zip函数的用法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span> , <span class="number">3</span>]</span><br><span class="line">b = [<span class="number">2</span> , <span class="number">4</span>]</span><br><span class="line">m = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">zip</span>(a, b)]</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"></span><br><span class="line">x = (<span class="number">1</span> , <span class="number">3</span>)</span><br><span class="line">y = (<span class="number">2</span> , <span class="number">4</span>)</span><br><span class="line">n = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">zip</span>(x, y)]</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"></span><br><span class="line">c = <span class="string">&quot;xy&quot;</span></span><br><span class="line">d = <span class="string">&quot;123456&quot;</span></span><br><span class="line">o = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">zip</span>(c, d)]</span><br><span class="line"><span class="built_in">print</span>(o)</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<p>[(1, 2), (3, 4)]<br>[(1, 2), (3, 4)]<br>[(‘x’, ‘1’), (‘y’, ‘2’)]</p>
+</li>
+<li><p>a = “张明 98 分” 用re.sub 替换98为100</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">a = <span class="string">&quot;张明 98 分&quot;</span></span><br><span class="line">ret = re.sub(<span class="string">r&#x27;\d+&#x27;</span>,<span class="string">&#x27;100&#x27;</span>,a)</span><br><span class="line"><span class="built_in">print</span>(ret)</span><br></pre></td></tr></table></figure></li>
+<li><p>a=”hello”和b=”你好”编码成bytes类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="string">&quot;hello&quot;</span></span><br><span class="line">b=<span class="string">&quot;你好&quot;</span></span><br><span class="line">m = <span class="string">b&quot;hello&quot;</span></span><br><span class="line"><span class="comment">###将str编码成bytes</span></span><br><span class="line">n = b.encode()</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"><span class="comment">###将bytes解码成str</span></span><br><span class="line">p = m.decode()</span><br><span class="line"><span class="built_in">print</span>(p)</span><br></pre></td></tr></table></figure></li>
+<li><p>提高python运行效率的方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、使用局部变量</span><br><span class="line">尽量使用局部变量代替全局变量：便于维护，提高性能并节省内存。</span><br><span class="line">一方面可以提高程序性能，局部变量查找速度更快;另一方面可用简短标识符替代冗长的模块变量，提高可读性。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、使用较新的Python版本</span><br><span class="line">Python已经更新了很多个版本，每个版本的Python都会包含优化内容，使其运行速度优于之前的版本，所以大家记得经常更新版本哦！</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、先编译后调用</span><br><span class="line">使用<span class="built_in">eval</span>()、<span class="built_in">exec</span>()函数执行代码时，最好调用代码对象(提前通过<span class="built_in">compile</span>()函数编译成字节码)，而不是直接调用<span class="built_in">str</span>，可以避免多次执行重复编译过程，提高程序性能。</span><br><span class="line"></span><br><span class="line">正则表达式模式匹配也类似，也最好先将正则表达式模式编译成regex对象(通过re.complie()函数)，然后再执行比较和匹配。</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>、采用生成器表达式替代列表解析</span><br><span class="line">列表解析会产生整个列表，对大量数据的迭代会产生负面效应。而生成器表达式则不会，其不会真正创建列表，而是返回一个生成器，在需要时产生一个值(延迟计算)，对内存更加友好。</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>、关键代码使用外部功能包</span><br><span class="line"></span><br><span class="line">使用 C/C++ 或机器语言的外部功能包处理时间敏感任务，可以有效提高应用的运行效率。这些功能包往往依附于特定的平台，因此你要根据自己所用的平台选择合适的功能包 。比如下面四个功能包：Cython、Pylnlne、PyPy、Pyrex 。</span><br><span class="line"></span><br><span class="line"><span class="number">6</span>、在排序时使用键</span><br><span class="line"></span><br><span class="line">Python 含有许多古老的排序规则，这些规则在你创建定制的排序方法时会占用很多时间，而这些排序方法运行时也会拖延程序实际的运行速度。最佳的排序方法其实是尽可能多地使用键和内置的 sort() 方法。</span><br><span class="line"></span><br><span class="line"><span class="number">7</span>、优化算法时间</span><br><span class="line"></span><br><span class="line">算法的时间复杂度对程序的执行效率影响最大，在Python中可以通过选择合适的数据结构来优化时间复杂度，如<span class="built_in">list</span>和<span class="built_in">set</span>查找某一个元素的时间复杂度分别是O(n)和O(<span class="number">1</span>)。不同的场景有不同的优化方式，总得来说，一般有分治，分支界限，贪心，动态规划等思想。</span><br><span class="line"></span><br><span class="line">例如：<span class="built_in">set</span>的用法</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>的union，intersection，difference操作要比<span class="built_in">list</span>的迭代要快。因此如果涉及到求<span class="built_in">list</span>交集，并集或者差的问题可以转换为<span class="built_in">set</span>来操作。</span><br><span class="line"></span><br><span class="line"><span class="number">8</span>、循环优化</span><br><span class="line"></span><br><span class="line">每种编程语言都会强调需要优化循环。当使用Python的时候，你可以依靠大量的技巧使得循环运行得更快。</span><br><span class="line"></span><br><span class="line">技巧 <span class="number">1</span>：减少循环内部不必要的计算</span><br><span class="line"></span><br><span class="line">技巧 <span class="number">2</span>：嵌套循环中，尽量减少内层循环的计算</span><br><span class="line"></span><br><span class="line">技巧 <span class="number">3</span>：尽量使用局部变量</span><br><span class="line"></span><br><span class="line">技巧 <span class="number">4</span>：使用 join() 连接字符串</span><br><span class="line"></span><br><span class="line"><span class="number">9</span>、交叉编译你的应用</span><br><span class="line"></span><br><span class="line">计算机其实并不理解用来创建现代应用程序的编程语言，计算机理解的是机器语言。所以我们可以用Python语言编写应用，再以C++这样的语言运行你的应用，这在运行的角度来说，是可行的。</span><br><span class="line"></span><br><span class="line">Nuitka是一款有趣的交叉编译器，能将你的Python代码转化成C++代码。这样，你就可以在native模式下执行自己的应用，而无需依赖于解释器程序。你会发现自己的应用运行效率有了较大的提高，但是这会因平台和任务的差异而有所不同。</span><br><span class="line"></span><br><span class="line"><span class="number">10</span>、充分利用多核CPU的优势</span><br><span class="line"></span><br><span class="line">因为GIL的存在，Python很难充分利用多核CPU的优势。但是，可以通过内置的模块multiprocessing实现下面几种并行模式：</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>、 多进程并行编程</span><br><span class="line"></span><br><span class="line">对于CPU密集型的程序，可以使用multiprocessing的Process,Pool等封装好的类，通过多进程的方式实现并行计算。但是因为进程中的通信成本比较大，对于进程之间需要大量数据交互的程序效率未必有大的提高。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、 多线程并行编程</span><br><span class="line"></span><br><span class="line">对于IO密集型的程序，multiprocessing.dummy模块使用multiprocessing的接口封装threading，使得多线程编程也变得非常轻松(比如可以使用Pool的<span class="built_in">map</span>接口，简洁高效)。分布式：multiprocessing中的Managers类提供了可以在不同进程之共享数据的方式，可以在此基础上开发出分布式的程序。 不同的业务场景可以选择其中的一种或几种的组合实现程序性能的优化。</span><br></pre></td></tr></table></figure></li>
+<li><p>[1,2,3] + [4,5,6]的结果是多少？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] + [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># [1, 2, 3, 4, 5, 6]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>正则匹配，匹配日期2018-03-20？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">url=<span class="string">&#x27;https://sycm.taobao.com/bda/tradinganaly/overview/get_summary.json?dateRange=2018-03-20%7C2018-03-20&amp;dateType=recent1&amp;device=1&amp;token=ff25b109b&amp;_=1521595613462&#x27;</span></span><br><span class="line"></span><br><span class="line">m = re.findall(<span class="string">r&#x27;\d+\-\d+\-\d+&#x27;</span>,url)</span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"></span><br><span class="line">ret = re.findall(<span class="string">r&quot;dateRange=(.+?)%7C(.+?)&amp;&quot;</span>, url)</span><br><span class="line"><span class="built_in">print</span>(ret)</span><br></pre></td></tr></table></figure></li>
+<li><p>list = [2,3,5,4,9,6] 不用sort排序，输出[2,3,4,5,6,9]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">6</span>]</span><br><span class="line">list1 = <span class="built_in">sorted</span>(<span class="built_in">list</span>)</span><br><span class="line"><span class="built_in">print</span>(list1)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### 妙啊</span></span><br><span class="line">list2 = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">if</span> i <span class="keyword">in</span> <span class="built_in">list</span>:</span><br><span class="line">        list2.append(i)</span><br><span class="line"><span class="built_in">print</span>(list2)</span><br></pre></td></tr></table></figure></li>
+<li><p>写一个单例模式</p>
+<p>单例模式是一个软件的设计模式，为了保证一个类，无论调用多少次产生的实例对象，都是指向同一个内存地址，仅仅只有一个实例（只有一个对象）。</p>
+<p>实现单例模式的手段有很多种，但总的原则是保证一个类只要实例化一个对象，下一次再实例的时候就直接返回这个对象，不再做实例化的操作。所以这里面的关键一点就是，如何判断这个类是否实例化过一个对象。</p>
+<p>这里介绍两类方式：</p>
+<p>一类是通过模块导入的方式；<br>一类是通过魔法方法判断的方式；</p>
+<p>基本原理：</p>
+<ul>
+<li><p>第一类通过模块导入的方式，借用了模块导入时的底层原理实现。</p>
+</li>
+<li><p>当一个模块（py文件）被导入时，首先会执行这个模块的代码，然后将这个模块的名称空间加载到内存。</p>
+</li>
+<li><p>当这个模块第二次再被导入时，不会再执行该文件，而是直接在内存中找。</p>
+</li>
+<li><p>于是，如果第一次导入模块，执行文件源代码时实例化了一个类，那再次导入的时候，就不会再实例化。</p>
+</li>
+<li><p>第二类主要是基于类和元类实现，在’对象’的魔法方法中判断是否已经实例化过一个对象</p>
+</li>
+<li><p>这类方式，根据实现的手法不同，又分为不同的方法，如：</p>
+</li>
+<li><p>通过类的绑定方法；通过元类；通过类下的__new__；通过装饰器（函数装饰器，类装饰器）实现等。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cls_singleton.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">  <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">instance = Foo()</span><br><span class="line"></span><br><span class="line"><span class="comment"># test.py</span></span><br><span class="line"><span class="keyword">import</span> cls_singleton</span><br><span class="line"></span><br><span class="line">obj1 = cls_singleton.instance</span><br><span class="line">obj2 = cls_singleton.instance</span><br><span class="line"><span class="built_in">print</span>(obj1 <span class="keyword">is</span> obj2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原理：模块第二次导入从内存找的机制</span></span><br><span class="line">打印结果：true</span><br></pre></td></tr></table></figure></li>
+</ul>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>:</span></span><br><span class="line">  _instance = <span class="literal">None</span>	<span class="comment"># 记录实例化对象</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age</span>):</span></span><br><span class="line">    self.name = name</span><br><span class="line">    self.age = age</span><br><span class="line"></span><br><span class="line"><span class="meta">  @classmethod</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_singleton</span>(<span class="params">cls, *args, **kwargs</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> cls._instance:</span><br><span class="line">      cls._instance = cls(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> cls._instance</span><br><span class="line"></span><br><span class="line">stu1 = Student.get_singleton(<span class="string">&#x27;jack&#x27;</span>, <span class="number">18</span>)</span><br><span class="line">stu2 = Student.get_singleton(<span class="string">&#x27;jack&#x27;</span>, <span class="number">18</span>)</span><br><span class="line"><span class="built_in">print</span>(stu1 <span class="keyword">is</span> stu2)</span><br><span class="line"><span class="built_in">print</span>(stu1.__dict__, stu2.__dict__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原理：类的绑定方法是第二种实例化对象的方式，</span></span><br><span class="line"><span class="comment"># 第一次实例化的对象保存成类的数据属性 _instance，</span></span><br><span class="line"><span class="comment"># 第二次再实例化时，在get_singleton中判断已经有了实例对象，直接返回类的数据属性 _instance</span></span><br><span class="line"><span class="comment">### 补充：这种方式实现的单例模式有一个明显的bug；bug的根源在于如果用户不通过绑定类的方法实例化对象，而是直接通过类名加括号实例化对象，那这样不再是单例模式了。</span></span><br></pre></td></tr></table></figure>
+
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>:</span></span><br><span class="line"></span><br><span class="line">  _instance = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age</span>):</span></span><br><span class="line">    self.name = name</span><br><span class="line">    self.age = age</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__new__</span>(<span class="params">cls, *args, **kwargs</span>):</span></span><br><span class="line">    <span class="comment"># if cls._instance:</span></span><br><span class="line">    <span class="comment">#   return cls._instance	        # 有实例则直接返回</span></span><br><span class="line">    <span class="comment"># else:</span></span><br><span class="line">    <span class="comment">#   cls._instance = super().__new__(cls)	# 没有实例则new一个并保存</span></span><br><span class="line">    <span class="comment">#   return cls._instance	        # 这个返回是给是给init，再实例化一次，也没有关系</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> cls._instance:	            <span class="comment"># 这是简化的写法，上面注释的写法更容易提现判断思路</span></span><br><span class="line">      cls._instance = <span class="built_in">super</span>().__new__(cls)</span><br><span class="line">    <span class="keyword">return</span> cls._instance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">stu1 = Student(<span class="string">&#x27;jack&#x27;</span>, <span class="number">18</span>)</span><br><span class="line">stu2 = Student(<span class="string">&#x27;jack&#x27;</span>, <span class="number">18</span>)</span><br><span class="line"><span class="built_in">print</span>(stu1 <span class="keyword">is</span> stu2)</span><br><span class="line"><span class="built_in">print</span>(stu1.__dict__, stu2.__dict__)</span><br><span class="line"></span><br><span class="line">stu3 = Student(<span class="string">&#x27;mick&#x27;</span>, <span class="number">19</span>)</span><br><span class="line"><span class="built_in">print</span>(stu1 <span class="keyword">is</span> stu3)</span><br><span class="line"><span class="built_in">print</span>(stu1.__dict__, stu3.__dict__)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(stu2.__dict__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原理：和方法2类似，将判断的实现方式，从类的绑定方法中转移到类的__new__中</span></span><br><span class="line"><span class="comment"># 归根结底都是 判断类有没有实例，有则直接返回，无则实例化并保存到_instance中。</span></span><br></pre></td></tr></table></figure>
+
+<p>  ##通过元类**</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mymeta</span>(<span class="params"><span class="built_in">type</span></span>):</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">cls, name, bases, dic</span>):</span></span><br><span class="line">    <span class="built_in">super</span>().__init__(name, bases, dic)</span><br><span class="line">    cls._instance = <span class="literal">None</span>		         <span class="comment"># 将记录类的实例对象的数据属性放在元类中自动定义了</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">cls, *args, **kwargs</span>):</span>	         <span class="comment"># 此call会在类被调用（即实例化时触发）</span></span><br><span class="line">    <span class="keyword">if</span> cls._instance:				 <span class="comment"># 判断类有没有实例化对象</span></span><br><span class="line">      <span class="keyword">return</span> cls._instance</span><br><span class="line">    <span class="keyword">else</span>:						 <span class="comment"># 没有实例化对象时，控制类造空对象并初始化</span></span><br><span class="line">      obj = cls.__new__(cls, *args, **kwargs)</span><br><span class="line">      obj.__init__(*args, **kwargs)</span><br><span class="line">      cls._instance = obj			     <span class="comment"># 保存对象，下一次再实例化可以直接返回而不用再造对象</span></span><br><span class="line">      <span class="keyword">return</span> obj</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params">metaclass=Mymeta</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age</span>):</span></span><br><span class="line">    self.name = name</span><br><span class="line">    self.age = age</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">stu1 = Student(<span class="string">&#x27;jack&#x27;</span>, <span class="number">18</span>)</span><br><span class="line">stu2 = Student(<span class="string">&#x27;jack&#x27;</span>, <span class="number">18</span>)</span><br><span class="line"><span class="built_in">print</span>(stu1 <span class="keyword">is</span> stu2)</span><br><span class="line"><span class="built_in">print</span>(stu1.__dict__, stu2.__dict__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原理：类定义时会调用元类下的__init__，类调用(实例化对象)时会触发元类下的__call__方法</span></span><br><span class="line"><span class="comment"># 类定义时，给类新增一个空的数据属性，</span></span><br><span class="line"><span class="comment"># 第一次实例化时，实例化之后就将这个对象赋值给类的数据属性；第二次再实例化时，直接返回类的这个数据属性</span></span><br><span class="line"><span class="comment"># 和方式3的不同之处1：类的这个数据属性是放在元类中自动定义的，而不是在类中显示的定义的。</span></span><br><span class="line"><span class="comment"># 和方式3的不同之处2：类调用时触发元类__call__方法判断是否有实例化对象，而不是在类的绑定方法中判断</span></span><br></pre></td></tr></table></figure>
+
+<p>  ##函数装饰器</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleton</span>(<span class="params">cls</span>):</span></span><br><span class="line">  _instance_dict = &#123;&#125;		         <span class="comment"># 采用字典，可以装饰多个类，控制多个类实现单例模式</span></span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">inner</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">    <span class="keyword">if</span> cls <span class="keyword">not</span> <span class="keyword">in</span> _instance_dict:</span><br><span class="line">      _instance_dict[cls] = cls(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> _instance_dict.get(cls)</span><br><span class="line">  <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@singleton</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age</span>):</span></span><br><span class="line">    self.name = name</span><br><span class="line">    self.age = age</span><br><span class="line"></span><br><span class="line">  <span class="comment"># def __new__(cls, *args, **kwargs):	 # 将方法3的这部分代码搬到了函数装饰器中</span></span><br><span class="line">  <span class="comment">#   if not cls._instance:</span></span><br><span class="line">  <span class="comment">#     cls._instance = super().__new__(cls)</span></span><br><span class="line">  <span class="comment">#   return cls._instan</span></span><br><span class="line">  </span><br><span class="line">stu1 = Student(<span class="string">&#x27;jack&#x27;</span>, <span class="number">18</span>)</span><br><span class="line">stu2 = Student(<span class="string">&#x27;jack&#x27;</span>, <span class="number">18</span>)</span><br><span class="line"><span class="built_in">print</span>(stu1 <span class="keyword">is</span> stu2)</span><br><span class="line"><span class="built_in">print</span>(stu1.__dict__, stu2.__dict__)</span><br></pre></td></tr></table></figure>
+
+<p>  ##类装饰器</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingleTon</span>:</span></span><br><span class="line">  _instance_dict = &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, cls_name</span>):</span></span><br><span class="line">    self.cls_name = cls_name</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self, *args, **kwargs</span>):</span></span><br><span class="line">    <span class="keyword">if</span> self.cls_name <span class="keyword">not</span> <span class="keyword">in</span> SingleTon._instance_dict:</span><br><span class="line">      SingleTon._instance_dict[self.cls_name] = self.cls_name(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> SingleTon._instance_dict.get(self.cls_name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@SingleTon		               </span><span class="comment"># 这个语法糖相当于Student = SingleTon(Student),即Student是SingleTon的实例对象</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age</span>):</span></span><br><span class="line">    self.name = name</span><br><span class="line">    self.age = age</span><br><span class="line"></span><br><span class="line">stu1 = Student(<span class="string">&#x27;jack&#x27;</span>, <span class="number">18</span>)</span><br><span class="line">stu2 = Student(<span class="string">&#x27;jack&#x27;</span>, <span class="number">18</span>)</span><br><span class="line"><span class="built_in">print</span>(stu1 <span class="keyword">is</span> stu2)</span><br><span class="line"><span class="built_in">print</span>(stu1.__dict__, stu2.__dict__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原理：在函数装饰器的思路上，将装饰器封装成类。</span></span><br><span class="line"><span class="comment"># 程序执行到与语法糖时，会实例化一个Student对象，这个对象是SingleTon的对象。</span></span><br><span class="line"><span class="comment"># 后面使用的Student本质上使用的是SingleTon的对象。</span></span><br><span class="line"><span class="comment"># 所以使用Student(&#x27;jack&#x27;, 18)来实例化对象，其实是在调用SingleTon的对象，会触发其__call__的执行</span></span><br><span class="line"><span class="comment"># 所以就在__call__中，判断Student类有没有实例对象了。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>  本部分主要是补充介绍多线程并发情况下，多线程高并发时，如果同时有多个线程同一时刻（极端条件下）事例化对象，那么就会出现多个对象，这就不再是单例模式了。<br>  解决这个多线程并发带来的竞争问题，第一个想到的是加互斥锁，于是我们就用互斥锁的原理来解决这个问题。<br>  解决的关键点，无非就是将具体示例化操作的部分加一把锁，这样同时来的多个线程就需要排队。<br>  这样一来只有第一个抢到锁的线程实例化一个对象并保存在_instance中，同一时刻抢锁的其他线程再抢到锁后，不会进入这个判断if not cls._instance，直接把保存在_instance的对象返回了。这样就实现了多线程下的单例模式。<br>  此时还有一个问题需要解决，后面所有再事例对象时都需要再次抢锁，这会大大降低执行效率。解决这个问题也很简单，直接在抢锁前，判断下是否有单例对象了，如果有就不再往下抢锁了（代码第11行判断存在的意义）。</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>:</span></span><br><span class="line"></span><br><span class="line">  _instance = <span class="literal">None</span>				<span class="comment"># 保存单例对象</span></span><br><span class="line">  _lock = threading.RLock()		    <span class="comment"># 锁</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__new__</span>(<span class="params">cls, *args, **kwargs</span>):</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> cls._instance:			<span class="comment"># 如果已经有单例了就不再去抢锁，避免IO等待</span></span><br><span class="line">      <span class="keyword">return</span> cls._instance</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">with</span> cls._lock:				<span class="comment"># 使用with语法，方便抢锁释放锁</span></span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">not</span> cls._instance:	</span><br><span class="line">        cls._instance = <span class="built_in">super</span>().__new__(cls, *args, **kwargs)</span><br><span class="line">      <span class="keyword">return</span> cls._instance</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>保留两位小数,几种方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">1.3333333333</span></span><br><span class="line">b = <span class="built_in">round</span>(a,<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;%.2f&#x27;</span>%a)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;:.2f&#125;&#x27;</span>.<span class="built_in">format</span>(a))</span><br></pre></td></tr></table></figure></li>
+<li><p>求三种方法打印结果</p>
+<p>fn(“one”,1）直接将键值对传给字典；</p>
+<p>fn(“two”,2)因为字典在内存中是可变数据类型，所以指向同一个地址，传了新的额参数后，会相当于给字典增加键值对</p>
+<p>fn(“three”,3,{})因为传了一个新字典，所以不再是原先默认参数的字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span>(<span class="params">k,v,dic=&#123;&#125;</span>):</span></span><br><span class="line">    dic[k] = v</span><br><span class="line">    <span class="built_in">print</span>(dic)</span><br><span class="line">    </span><br><span class="line">fn(<span class="string">&quot;one&quot;</span>,<span class="number">1</span>)</span><br><span class="line">fn(<span class="string">&quot;two&quot;</span>,<span class="number">2</span>)</span><br><span class="line">fn(<span class="string">&quot;three&quot;</span>,<span class="number">3</span>,&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>输出：<br>{‘one’: 1}<br>{‘one’: 1, ‘two’: 2}<br>{‘three’: 3}</p>
+</li>
+<li><p>列出常见的状态码和意义</p>
+<p>200 OK </p>
+<p>请求正常处理完毕</p>
+<p>204 No Content </p>
+<p>请求成功处理，没有实体的主体返回</p>
+<p>206 Partial Content </p>
+<p>GET范围请求已成功处理</p>
+<p>301 Moved Permanently </p>
+<p>永久重定向，资源已永久分配新URI</p>
+<p>302 Found </p>
+<p>临时重定向，资源已临时分配新URI</p>
+<p>303 See Other </p>
+<p>临时重定向，期望使用GET定向获取</p>
+<p>304 Not Modified </p>
+<p>发送的附带条件请求未满足</p>
+<p>307 Temporary Redirect </p>
+<p>临时重定向，POST不会变成GET</p>
+<p>400 Bad Request </p>
+<p>请求报文语法错误或参数错误</p>
+<p>401 Unauthorized </p>
+<p>需要通过HTTP认证，或认证失败</p>
+<p>403 Forbidden </p>
+<p>请求资源被拒绝</p>
+<p>404 Not Found </p>
+<p>无法找到请求资源（服务器无理由拒绝）</p>
+<p>500 Internal Server Error </p>
+<p>服务器故障或Web应用故障</p>
+<p>503 Service Unavailable </p>
+<p>服务器超负载或停机维护</p>
+</li>
+<li><p>分别从前端、后端、数据库阐述web项目的性能优化</p>
+<p>前端优化：</p>
+<p>1、减少http请求、例如制作精灵图</p>
+<p>2、html和CSS放在页面上部，javascript放在页面下面，因为js加载比HTML和Css加载慢，所以要优先加载html和css,以防页面显示不全，性能差，也影响用户体验差</p>
+<p>后端优化：</p>
+<p>1、缓存存储读写次数高，变化少的数据，比如网站首页的信息、商品的信息等。应用程序读取数据时，一般是先从缓存中读取，如果读取不到或数据已失效，再访问磁盘数据库，并将数据再次写入缓存。</p>
+<p>2、异步方式，如果有耗时操作，可以采用异步，比如celery</p>
+<p>3、代码优化，避免循环和判断次数太多，如果多个if else判断，优先判断最有可能先发生的情况</p>
+<p>数据库优化：</p>
+<p>1、如有条件，数据可以存放于redis，读取速度快</p>
+<p>2、建立索引、外键等</p>
+</li>
+<li><p>dict = {“name”:”zhangsan”,”age”:18} 删除name的kv</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dict</span> = &#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;zhangsan&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">18</span>&#125;</span><br><span class="line"><span class="keyword">del</span> <span class="built_in">dict</span>[<span class="string">&quot;name&quot;</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dict</span>)</span><br><span class="line"></span><br><span class="line">dict2 = &#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;zhangsan&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">18</span>&#125;</span><br><span class="line">dict2.pop(<span class="string">&quot;name&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(dict2)</span><br></pre></td></tr></table></figure></li>
+<li><p>A =zip((“a”,”b”,”c”,”d”,”e”),(1,2,3,4,5)) 转化为字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">A =<span class="built_in">zip</span>((<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>,<span class="string">&quot;d&quot;</span>,<span class="string">&quot;e&quot;</span>),(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>))</span><br><span class="line"><span class="built_in">print</span>(A)</span><br><span class="line">A0 = <span class="built_in">dict</span>(A)</span><br><span class="line"><span class="built_in">print</span>(A0)</span><br><span class="line"></span><br><span class="line">A1 = <span class="built_in">range</span>(<span class="number">10</span>)</span><br><span class="line">A2 = [i <span class="keyword">for</span> i <span class="keyword">in</span> A1 <span class="keyword">if</span> i <span class="keyword">in</span> A0]</span><br><span class="line"><span class="built_in">print</span>(A2)</span><br><span class="line"></span><br><span class="line"><span class="comment">### s in A0 即a，b，c，d，e  然后获取A0[a-z]的值</span></span><br><span class="line">A3 = [A0[s] <span class="keyword">for</span> s <span class="keyword">in</span> A0]</span><br><span class="line"><span class="built_in">print</span>(A3)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> A0:</span><br><span class="line">    <span class="built_in">print</span>(s)</span><br><span class="line"></span><br><span class="line"><span class="comment">### dict 创建字典的方法</span></span><br><span class="line">s1 = <span class="built_in">dict</span>([[<span class="string">&quot;name&quot;</span>,<span class="string">&quot;zhangsan&quot;</span>],[<span class="string">&quot;age&quot;</span>,<span class="number">18</span>]])</span><br><span class="line"><span class="built_in">print</span>(s1)</span><br><span class="line"></span><br><span class="line">s2 = <span class="built_in">dict</span>([(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;zhangsan&quot;</span>),(<span class="string">&quot;age&quot;</span>,<span class="number">18</span>)])</span><br><span class="line"><span class="built_in">print</span>(s2)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>简述同源策略</p>
+</li>
+</ul>
+<p>  同源策略需要同时满足以下三点要求： </p>
+<p>  1）协议相同 </p>
+<p>  2）域名相同 </p>
+<p>  3）端口相同 </p>
+<p>  http:<a href="http://www.test.com与https:www.test.com">www.test.com与https:www.test.com</a> 不同源——协议不同 </p>
+<p>  http:<a href="http://www.test.com与http:www.admin.com">www.test.com与http:www.admin.com</a> 不同源——域名不同 </p>
+<p>  http:<a href="http://www.test.com与http:www.test.com:8081">www.test.com与http:www.test.com:8081</a> 不同源——端口不同</p>
+<p>  只要不满足其中任意一个要求，就不符合同源策略，就会出现“跨域”</p>
+<ul>
+<li><p>简述cookie和session的区别</p>
+<p>1，session 在服务器端，cookie 在客户端（浏览器）</p>
+<p>2、session 的运行依赖 session id，而 session id 是存在 cookie 中的，也就是说，如果浏览器禁用了 cookie ，同时 session 也会失效，存储Session时，键与Cookie中的sessionid相同，值是开发人员设置的键值对信息，进行了base64编码，过期时间由开发人员设置</p>
+<p>3、cookie安全性比session差</p>
+</li>
+<li><p>简述多线程、多进程</p>
+<p>进程：</p>
+<p>1、操作系统进行资源分配和调度的基本单位，多个进程之间相互独立</p>
+<p>2、稳定性好，如果一个进程崩溃，不影响其他进程，但是进程消耗资源大，开启的进程数量有限制</p>
+<p>线程：</p>
+<p>1、CPU进行资源分配和调度的基本单位，线程是进程的一部分，是比进程更小的能独立运行的基本单位，一个进程下的多个线程可以共享该进程的所有资源</p>
+<p>2、如果IO操作密集，则可以多线程运行效率高，缺点是如果一个线程崩溃，都会造成进程的崩溃</p>
+<p>应用：</p>
+<p>IO密集的用多线程，在用户输入，sleep 时候，可以切换到其他线程执行，减少等待的时间</p>
+<p>CPU密集的用多进程，因为假如IO操作少，用多线程的话，因为线程共享一个全局解释器锁，当前运行的线程会霸占GIL，其他线程没有GIL，就不能充分利用多核CPU的优势</p>
+</li>
+<li><p>简述any()和all()方法</p>
+<p>any():只要迭代器中有一个元素为真就为真</p>
+<p>all():迭代器中所有的判断项返回都是真，结果才为真</p>
+<p>python中什么元素为假？</p>
+<p>答案：（0，空字符串，空列表、空字典、空元组、None, False）</p>
+</li>
+<li><p>IOError、AttributeError、ImportError、IndentationError、IndexError、KeyError、SyntaxError、NameError分别代表什么异常</p>
+<p>IOError：输入输出异常</p>
+<p>AttributeError：试图访问一个对象没有的属性</p>
+<p>ImportError：无法引入模块或包，基本是路径问题</p>
+<p>IndentationError：语法错误，代码没有正确的对齐</p>
+<p>IndexError：下标索引超出序列边界</p>
+<p>KeyError:试图访问你字典里不存在的键</p>
+<p>SyntaxError:Python代码逻辑语法出错，不能执行</p>
+<p>NameError:使用一个还未赋予对象的变量</p>
+</li>
+<li><p>列出几种魔法方法并简要介绍用途</p>
+<p><strong>init</strong>:对象初始化方法</p>
+<p><strong>new</strong>:创建对象时候执行的方法，单列模式会用到</p>
+<p><strong>str</strong>:当使用print输出对象的时候，只要自己定义了__str__(self)方法，那么就会打印从在这个方法中return的数据</p>
+<p><strong>del</strong>:删除对象执行的方法</p>
+</li>
+<li><p>python 1.py 22 33命令行启动程序并传参，print(sys.argv)会输出什么数据？</p>
+<p>文件名和参数构成的列表,[‘1.py’ , ‘22’ ,’33’]</p>
+</li>
+<li><p>将[i for i in range(3)]迭代器改成生成器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>)]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">list</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">### 待研究</span></span><br><span class="line"><span class="built_in">tuple</span> = (i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">tuple</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(<span class="built_in">tuple</span>))</span><br></pre></td></tr></table></figure></li>
+<li><p>去掉字符串的空格，a = ‘hehehad    ‘</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&#x27;hehehad    &#x27;</span></span><br><span class="line">b = a.strip()</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(b))</span><br></pre></td></tr></table></figure></li>
+<li><p>举例sort 和 sorted 来对列表处理结果 a = [-1,0,2,-10,200,3,5]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = [-<span class="number">1</span>,<span class="number">0</span>,<span class="number">2</span>,-<span class="number">10</span>,<span class="number">200</span>,<span class="number">3</span>,<span class="number">5</span>]</span><br><span class="line">a.sort(reverse=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line">b = <span class="built_in">sorted</span>(a,reverse=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br></pre></td></tr></table></figure></li>
+<li><p>对list使用lamada函数进行排序，list = [1,0,-2,-30,-6,5,-7,16,88,-89]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = [<span class="number">1</span>,<span class="number">0</span>,-<span class="number">2</span>,-<span class="number">30</span>,-<span class="number">6</span>,<span class="number">5</span>,-<span class="number">7</span>,<span class="number">16</span>,<span class="number">88</span>,-<span class="number">89</span>]</span><br><span class="line">a = <span class="built_in">sorted</span>(<span class="built_in">list</span>,key = <span class="keyword">lambda</span> x:x)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：[-89, -30, -7, -6, -2, 0, 1, 5, 16, 88]</p>
+</li>
+<li><p>对list使用lamada函数进行排序，list = [1,0,-2,-30,-6,5,-7,16,88,-89],正数小到大，负数大到小。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list2 = [<span class="number">1</span>,<span class="number">0</span>,-<span class="number">2</span>,-<span class="number">30</span>,-<span class="number">6</span>,<span class="number">5</span>,-<span class="number">7</span>,<span class="number">16</span>,<span class="number">88</span>,-<span class="number">89</span>]</span><br><span class="line">b = <span class="built_in">sorted</span>(list2,key = <span class="keyword">lambda</span> x:(x&lt;<span class="number">0</span>,<span class="built_in">abs</span>(x)))</span><br><span class="line"><span class="built_in">print</span>(b)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：[0, 1, 5, 16, 88, -2, -6, -7, -30, -89]</p>
+</li>
+<li><p>列表嵌套字典的排序，分别根据年龄和姓名排序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = [&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;zs&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">19</span>&#125;,&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;ls&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">17</span>&#125;</span><br><span class="line">    ,&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;ww&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">25</span>&#125;,&#123;<span class="string">&quot;name&quot;</span>:<span class="string">&quot;zl&quot;</span>,<span class="string">&quot;age&quot;</span>:<span class="number">21</span>&#125;]</span><br><span class="line"></span><br><span class="line"><span class="comment">### 按姓名排序</span></span><br><span class="line">b = <span class="built_in">sorted</span>(<span class="built_in">list</span>,key = <span class="keyword">lambda</span> x:x[<span class="string">&quot;name&quot;</span>],reverse=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"></span><br><span class="line"><span class="comment">### 按年龄排序，从大到小。</span></span><br><span class="line">c = <span class="built_in">sorted</span>(<span class="built_in">list</span>,key = <span class="keyword">lambda</span> x:x[<span class="string">&quot;age&quot;</span>],reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure></li>
+<li><p>列表嵌套元组的排序，分别根据年龄和姓名排序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = [(<span class="string">&quot;age&quot;</span>,<span class="number">18</span>),(<span class="string">&quot;name&quot;</span>,<span class="number">19</span>),(<span class="string">&quot;lll&quot;</span>,<span class="number">15</span>),(<span class="string">&quot;xxx&quot;</span>,<span class="number">25</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment">### 按姓名排序</span></span><br><span class="line">b = <span class="built_in">sorted</span>(<span class="built_in">list</span>,key = <span class="keyword">lambda</span> x:x[<span class="number">0</span>],reverse=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"></span><br><span class="line"><span class="comment">### 按年龄排序，从大到小。</span></span><br><span class="line">c = <span class="built_in">sorted</span>(<span class="built_in">list</span>,key = <span class="keyword">lambda</span> x:x[<span class="number">1</span>],reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>列表嵌套列表的排序，分别根据年龄和姓名排序。年龄有相同？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span> = [[<span class="string">&quot;age&quot;</span>,<span class="number">18</span>],[<span class="string">&quot;name&quot;</span>,<span class="number">19</span>],[<span class="string">&quot;lll&quot;</span>,<span class="number">15</span>],[<span class="string">&quot;xxx&quot;</span>,<span class="number">25</span>],[<span class="string">&quot;zzz&quot;</span>,<span class="number">25</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment">### 按姓名排序</span></span><br><span class="line">b = <span class="built_in">sorted</span>(<span class="built_in">list</span>,key = <span class="keyword">lambda</span> x:x[<span class="number">0</span>],reverse=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"></span><br><span class="line"><span class="comment">### 按年龄排序，从大到小。有相同年龄，可以再加一个字段，来排序姓名。</span></span><br><span class="line">c = <span class="built_in">sorted</span>(<span class="built_in">list</span>,key = <span class="keyword">lambda</span> x:(x[<span class="number">1</span>],x[<span class="number">0</span>]),reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2022/05/05/Python%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86-V1-day3/" title="Python面试题整理-V1 day3">https://shenle2019.github.io/2022/05/05/Python%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86-V1-day3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/25/Python%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86-V1-day2/" rel="next" title="Python面试题整理-V1 day2">
+                <i class="fa fa-chevron-left"></i> Python面试题整理-V1 day2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/08/22/Selenium-3/" rel="prev" title="Selenium 3">
+                Selenium 3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86-V1-day3"><span class="nav-number">1.</span> <span class="nav-text">Python面试题整理-V1 day3</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'VLcgBQixkeBQUATGzDVaqcpk-gzGzoHsz',
+        appKey: 'hdVMQzxTmu7ohwxMg6TvuY9W',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script></body>
+</html>

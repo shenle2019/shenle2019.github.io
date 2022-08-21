@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="处理PDF和Word文档安装模块pip install PyPDF2 PDF文档的相关操作 从 PDF 提取文本 123456789101112131415161718&gt;&gt;&gt; import PyPDF2&gt;&gt;&gt; pdfFileObj &#x3D; open(&amp;#x27;meetingminutes.pdf&amp;#x27;, &amp;#x27;rb&amp;#x27;)Traceback (m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="处理PDF和Word文档">
+<meta property="og:url" content="https://shenle2019.github.io/2022/01/18/%E5%A4%84%E7%90%86PDF%E5%92%8CWord%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="处理PDF和Word文档安装模块pip install PyPDF2 PDF文档的相关操作 从 PDF 提取文本 123456789101112131415161718&gt;&gt;&gt; import PyPDF2&gt;&gt;&gt; pdfFileObj &#x3D; open(&amp;#x27;meetingminutes.pdf&amp;#x27;, &amp;#x27;rb&amp;#x27;)Traceback (m">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-01-17T20:17:52.000Z">
+<meta property="article:modified_time" content="2022-01-17T12:20:08.000Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2022/01/18/处理PDF和Word文档/"/>
+
+
+
+
+
+  <title>处理PDF和Word文档 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2022/01/18/%E5%A4%84%E7%90%86PDF%E5%92%8CWord%E6%96%87%E6%A1%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">处理PDF和Word文档</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-18T04:17:52+08:00">
+                2022-01-17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-01-17T20:20:08+08:00">
+                2022-01-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2022/01/18/%E5%A4%84%E7%90%86PDF%E5%92%8CWord%E6%96%87%E6%A1%A3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2022/01/18/%E5%A4%84%E7%90%86PDF%E5%92%8CWord%E6%96%87%E6%A1%A3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="处理PDF和Word文档"><a href="#处理PDF和Word文档" class="headerlink" title="处理PDF和Word文档"></a>处理PDF和Word文档</h3><p>安装模块pip install PyPDF2</p>
+<h4 id="PDF文档的相关操作"><a href="#PDF文档的相关操作" class="headerlink" title="PDF文档的相关操作"></a>PDF文档的相关操作</h4><ul>
+<li><p>从 PDF 提取文本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> PyPDF2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfFileObj = <span class="built_in">open</span>(<span class="string">&#x27;meetingminutes.pdf&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">FileNotFoundError: [Errno <span class="number">2</span>] No such file <span class="keyword">or</span> directory: <span class="string">&#x27;meetingminutes.pdf&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfFileObj = <span class="built_in">open</span>(<span class="string">&#x27;meetingminutes.pdf&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span> pdfReader = PyPDF2.PdfFileReader(pdfFileObj)</span><br><span class="line">  File <span class="string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="number">1</span></span><br><span class="line">    pdfReader = PyPDF2.PdfFileReader(pdfFileObj)</span><br><span class="line">IndentationError: unexpected indent</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfReader = PyPDF2.PdfFileReader(pdfFileObj)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfReader.numPages</span><br><span class="line"><span class="number">19</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pageObj = pdfReader.getPage(<span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pageObj.extractText()</span><br><span class="line"><span class="string">&#x27;OOFFFFIICCIIAALL  BBOOAARRDD  MMIINNUUTTEESS   Meeting of \nMarch 7\n, 2014\n        \n     The Board of Elementary and Secondary Education shall provide leadership and \ncreate policies for education that expand opportunities for chi</span></span><br><span class="line"><span class="string">ldren, empower \nfamilies and communities, and advance Louisiana in an increasingly \ncompetitive glob\nal market.\n BOARD \n of ELEMENTARY\n and \n SECONDARY\n EDUCATION\n  &#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>解密PDF,比如已经用口令rosebud加密了，则使用对应口令解密即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> PyPDF2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfReader = PyPDF2.PdfFileReader(<span class="built_in">open</span>(<span class="string">&#x27;encrypted.pdf&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>))</span><br><span class="line"> &gt;&gt;&gt; pdfReader.isEncrypted</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfReader.getPage(<span class="number">0</span>)</span><br><span class="line"> Traceback (most recent call last):</span><br><span class="line">File <span class="string">&quot;&lt;pyshell#173&gt;&quot;</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">pdfReader.getPage()</span><br><span class="line">--snip--</span><br><span class="line">File <span class="string">&quot;C:\Python34\lib\site-packages\PyPDF2\pdf.py&quot;</span>, line <span class="number">1173</span>, <span class="keyword">in</span> getObject</span><br><span class="line"><span class="keyword">raise</span> utils.PdfReadError(<span class="string">&quot;file has not been decrypted&quot;</span>)</span><br><span class="line">PyPDF2.utils.PdfReadError: file has <span class="keyword">not</span> been decrypted</span><br><span class="line"> &gt;&gt;&gt; pdfReader.decrypt(<span class="string">&#x27;rosebud&#x27;</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pageObj = pdfReader.getPage(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>创建PDF</p>
+<p>1．打开一个或多个已有的 PDF（源 PDF），得到 PdfFileReader 对象。</p>
+<p>2．创建一个新的 PdfFileWriter 对象。</p>
+<p>3．将页面从 PdfFileReader 对象拷贝到 PdfFileWriter 对象中。</p>
+<p>4．最后，利用 PdfFileWriter 对象写入输出的 PDF。</p>
+</li>
+<li><p>拷贝页面</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> PyPDF2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdf1File = <span class="built_in">open</span>(<span class="string">&#x27;meetingminutes.pdf&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdf2File = <span class="built_in">open</span>(<span class="string">&#x27;meetingminutes2.pdf&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdf1Reader = PyPDF2.PdfFileReader(pdf1File)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdf2Reader = PyPDF2.PdfFileReader(pdf2File)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfWriter = PyPDF2.PdfFileWriter()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> pageNum <span class="keyword">in</span> <span class="built_in">range</span>(pdf1Reader.numPages):</span><br><span class="line">		pageObj = pdf1Reader.getPage(pageNum)</span><br><span class="line">		pdfWriter.addPage(pageObj)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> pageNum <span class="keyword">in</span> <span class="built_in">range</span>(pdf2Reader.numPages):</span><br><span class="line">		pageObj = pdf2Reader.getPage(pageNum)</span><br><span class="line">		pdfWriter.addPage(pageObj)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfOutputFile = <span class="built_in">open</span>(<span class="string">&#x27;combinedminutes.pdf&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfWriter.write(pdfOutputFile)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfOutputFile.close()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdf1File.close()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdf2File.close()</span><br></pre></td></tr></table></figure></li>
+<li><p>旋转页面</p>
+<p>利用 rotateClockwise()和 rotateCounterClockwise()方法，PDF 文档的页面也可以</p>
+<p>旋转 90 度的整数倍。向这些方法传入整数 90、180 或 270 就可以了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> PyPDF2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>minutesFile = <span class="built_in">open</span>(<span class="string">&#x27;meetingminutes.pdf&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfReader = PyPDF2.PdfFileReader(minutesFile)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>page = pdfReader.getPage(<span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>page.rotateClockwise(<span class="number">90</span>)</span><br><span class="line">&#123;<span class="string">&#x27;/Contents&#x27;</span>: [IndirectObject(<span class="number">961</span>, <span class="number">0</span>), IndirectObject(<span class="number">962</span>, <span class="number">0</span>),</span><br><span class="line">--snip--</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfWriter = PyPDF2.PdfFileWriter()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfWriter.addPage(page)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>resultPdfFile = <span class="built_in">open</span>(<span class="string">&#x27;rotatedPage.pdf&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfWriter.write(resultPdfFile)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>resultPdfFile.close()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>minutesFile.close()</span><br></pre></td></tr></table></figure></li>
+<li><p>叠加页面，使用mergePage()方法添加水印。使用addPage方法往后添加PDF页面</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> PyPDF2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>minutesFile = <span class="built_in">open</span>(<span class="string">&#x27;meetingminutes.pdf&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfReader = PyPDF2.PdfFileReader(minutesFile)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>minutesFirstPage = pdfReader.getPage(<span class="number">0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfWatermarkReader = PyPDF2.PdfFileReader(<span class="built_in">open</span>(<span class="string">&#x27;watermark.pdf&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>minutesFirstPage.mergePage(pdfWatermarkReader.getPage(<span class="number">0</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfWriter = PyPDF2.PdfFileWriter()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfWriter.addPage(minutesFirstPage)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> pageNum <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, pdfReader.numPages):</span><br><span class="line">		pageObj = pdfReader.getPage(pageNum)</span><br><span class="line">		pdfWriter.addPage(pageObj)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>resultPdfFile = <span class="built_in">open</span>(<span class="string">&#x27;watermarkedCover.pdf&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfWriter.write(resultPdfFile)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>minutesFile.close()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>resultPdfFile.close()</span><br></pre></td></tr></table></figure></li>
+<li><p>加密PDF文件,加密时同样使用加密口令</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> PyPDF2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfFile = <span class="built_in">open</span>(<span class="string">&#x27;meetingminutes.pdf&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfReader = PyPDF2.PdfFileReader(pdfFile)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfWriter = PyPDF2.PdfFileWriter()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> pageNum <span class="keyword">in</span> <span class="built_in">range</span>(pdfReader.numPages):</span><br><span class="line">		pdfWriter.addPage(pdfReader.getPage(pageNum))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfWriter.encrypt(<span class="string">&#x27;swordfish&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>resultPdf = <span class="built_in">open</span>(<span class="string">&#x27;encryptedminutes.pdf&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pdfWriter.write(resultPdf)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>resultPdf.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="项目：从多个PDF中合并选择的页面"><a href="#项目：从多个PDF中合并选择的页面" class="headerlink" title="项目：从多个PDF中合并选择的页面"></a>项目：从多个PDF中合并选择的页面</h4><p>假定你有一个很无聊的任务，需要将几十个 PDF 文件合并成一个 PDF 文件。每一个文件都有一个封面作为第一页，但你不希望合并后的文件中重复出现这些封面。即使有许多免费的程序可以合并 PDF，很多也只是简单的将文件合并在一起。让我们来写一个 Python 程序，定制需要合并到 PDF 中的页面。</p>
+<p>总的来说，该程序需要完成：</p>
+<p> 找到当前工作目录中所有 PDF 文件。</p>
+<p> 按文件名排序，这样就能有序地添加这些 PDF。 </p>
+<p> 除了第一页之外，将每个 PDF 的所有页面写入输出的文件。</p>
+<p>从实现的角度来看，代码需要完成下列任务：</p>
+<p> 调用 os.listdir()，找到当前工作目录中的所有文件，去除掉非 PDF 文件。</p>
+<p> 调用 Python 的 sort()列表方法，对文件名按字母排序。</p>
+<p> 为输出的 PDF 文件创建 PdfFileWriter 对象。</p>
+<p> 循环遍历每个 PDF 文件，为它创建 PdfFileReader 对象。</p>
+<p> 针对每个 PDF 文件，循环遍历每一页，第一页除外。</p>
+<p> 将页面添加到输出的 PDF。 </p>
+<p> 将输出的 PDF 写入一个文件，名为 <em>allminutes.pdf</em>。</p>
+<p>针对这个项目，打开一个新的文件编辑器窗口，将它保存为 combinePdfs.py。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! python3</span></span><br><span class="line"><span class="comment"># combinePdfs.py - Combines all the PDFs in the current working directory into</span></span><br><span class="line"><span class="comment"># a single PDF.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> PyPDF2, os</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get all the PDF filenames.</span></span><br><span class="line">file_names = []</span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(<span class="string">r&quot;D:\pythontest\autowork\venv&quot;</span>):</span><br><span class="line">    <span class="comment"># 获取filename的后缀，使用的是endswith</span></span><br><span class="line">    <span class="keyword">if</span> filename.endswith(<span class="string">&#x27;.pdf&#x27;</span>):</span><br><span class="line">        file_names.append(filename)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取到的文件名，按照字典顺序排序</span></span><br><span class="line">file_names.sort(key=<span class="built_in">str</span>.lower)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建PdfFileWriter对象,这里方法名后有括号</span></span><br><span class="line">pdfWriter = PyPDF2.PdfFileWriter()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环pdf对象，获取reader对象</span></span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> file_names:</span><br><span class="line">    pdfFileObj = <span class="built_in">open</span>(filename, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">    pdfReader =  PyPDF2.PdfFileReader(pdfFileObj)</span><br><span class="line">    <span class="comment">#在pdfWriter中添加打开的pdf内容，从第二页开始</span></span><br><span class="line">    <span class="keyword">for</span> pageNum <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, pdfReader.numPages):</span><br><span class="line">        pageObj = pdfReader.getPage(pageNum)</span><br><span class="line">        pdfWriter.addPage(pageObj)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存结果，关闭文件</span></span><br><span class="line">pdfOutput = <span class="built_in">open</span>(<span class="string">&#x27;allminutestest.pdf&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">pdfWriter.write(pdfOutput)</span><br><span class="line">pdfOutput.close()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="Word文档"><a href="#Word文档" class="headerlink" title="Word文档"></a>Word文档</h4><p>在最高一层，Document 对象表示整个文档。Document 对象包含一个 Paragraph 对象的列表，表示文档中的段落（用户在 Word 文档中输入时，如</p>
+<p>果按下回车，新的段落就开始了）。每个 Paragraph 对象都包含一个 Run 对象的列表。————Word文档组织方式</p>
+<p><strong>pip install python-docx</strong></p>
+<ul>
+<li><p>读取 Word 文档</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> docx</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc = docx.Document(<span class="string">&#x27;demo.docx&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">len</span>(doc.paragraphs)</span><br><span class="line"><span class="number">7</span> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">0</span>].text</span><br><span class="line"><span class="string">&#x27;Document Title&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">1</span>].text</span><br><span class="line"><span class="string">&#x27;A plain paragraph with some bold and some italic&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">len</span>(doc.paragraphs[<span class="number">1</span>].runs)</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">1</span>].runs[<span class="number">0</span>].text</span><br><span class="line"><span class="string">&#x27;A plain paragraph with some &#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">1</span>].runs[<span class="number">1</span>].text</span><br><span class="line"><span class="string">&#x27;bold&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">1</span>].runs[<span class="number">2</span>].text</span><br><span class="line"><span class="string">&#x27; and some &#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">1</span>].runs[<span class="number">3</span>].text</span><br><span class="line"><span class="string">&#x27;italic&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>从.docx 文件中取得完整的文本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! python3</span></span><br><span class="line"><span class="comment">### readDocx.py：</span></span><br><span class="line"><span class="keyword">import</span> docx</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getText</span>(<span class="params">filename</span>):</span></span><br><span class="line">doc = docx.Document(filename)</span><br><span class="line">fullText = []</span><br><span class="line"><span class="keyword">for</span> para <span class="keyword">in</span> doc.paragraphs:</span><br><span class="line">fullText.append(para.text)</span><br><span class="line"><span class="keyword">return</span> <span class="string">&#x27;\n&#x27;</span>.join(fullText)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> readDocx</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(readDocx.getText(<span class="string">&#x27;demo.docx&#x27;</span>))</span><br><span class="line">Document Title</span><br><span class="line">A plain paragraph <span class="keyword">with</span> some bold <span class="keyword">and</span> some italic</span><br><span class="line">Heading, level <span class="number">1</span></span><br><span class="line">Intense quote</span><br><span class="line">first item <span class="keyword">in</span> unordered <span class="built_in">list</span></span><br><span class="line">first item <span class="keyword">in</span> ordered <span class="built_in">list</span></span><br></pre></td></tr></table></figure>
+
+<p>注意添加缩进：</p>
+<p>fullText.append(<strong>‘ ‘ +</strong> para.text)</p>
+<p>添加空行：</p>
+<p>return ‘\n<strong>\n</strong>‘.join(fullText)</p>
+</li>
+<li><p>设置 Paragraph 和 Run 对象的样式</p>
+<p>对于 Word 文档，有 3 种类型的样式：段落样式可以应用于 Paragraph 对象，字</p>
+<p>符样式可以应用于 Run 对象，链接的样式可以应用于这两种对象。可以将 Paragraph 和</p>
+<p>Run 对象的 style 属性设置为一个字符串，从而设置样式。这个字符串应该是一种样</p>
+<p>式的名称。如果 style 被设置为 None，就没有样式与 Paragraph 或 Run 对象关联。</p>
+</li>
+<li><p>创建带有非默认样式的 Word 文档</p>
+<p>打开“Creat New Style from Formatting”对话框，在这里可以输入新样式。</p>
+<p>然后，回到交互式环境，用 docx.Document()打开这个空白 Word 文档，利用它作为</p>
+<p>Word 文档的基础。这种样式的名称现在就可以被 python-docx 使用了。</p>
+</li>
+<li><p>Run 属性</p>
+<p>bold </p>
+<p>文本以粗体出现</p>
+<p>italic </p>
+<p>文本以斜体出现</p>
+<p>underline </p>
+<p>文本带下划线</p>
+<p>strike </p>
+<p>文本带删除线</p>
+<p>double_strike </p>
+<p>文本带双删除线</p>
+<p>all_caps </p>
+<p>文本以大写首字母出现</p>
+<p>small_caps </p>
+<p>文本以大写首字母出现，小写字母小两个点</p>
+<p>shadow </p>
+<p>文本带阴影</p>
+<p>outline </p>
+<p>文本以轮廓线出现，而不是实心</p>
+<p>rtl </p>
+<p>文本从右至左书写</p>
+<p>imprint </p>
+<p>文本以刻入页面的方式出现</p>
+<p>emboss </p>
+<p>文本以凸出页面的方式出现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc = docx.Document(<span class="string">&#x27;demo.docx&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">0</span>].text</span><br><span class="line"><span class="string">&#x27;Document Title&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">0</span>].style</span><br><span class="line"><span class="string">&#x27;Title&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">0</span>].style = <span class="string">&#x27;Normal&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">1</span>].text</span><br><span class="line"><span class="string">&#x27;A plain paragraph with some bold and some italic&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(doc.paragraphs[<span class="number">1</span>].runs[<span class="number">0</span>].text, doc.paragraphs[<span class="number">1</span>].runs[<span class="number">1</span>].text, doc.</span><br><span class="line">paragraphs[<span class="number">1</span>].runs[<span class="number">2</span>].text, doc.paragraphs[<span class="number">1</span>].runs[<span class="number">3</span>].text)</span><br><span class="line">(<span class="string">&#x27;A plain paragraph with some &#x27;</span>, <span class="string">&#x27;bold&#x27;</span>, <span class="string">&#x27; and some &#x27;</span>, <span class="string">&#x27;italic&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">1</span>].runs[<span class="number">0</span>].style = <span class="string">&#x27;QuoteChar&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">1</span>].runs[<span class="number">1</span>].underline = <span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">1</span>].runs[<span class="number">3</span>].underline = <span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.save(<span class="string">&#x27;restyled.docx&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>写入 Word 文档</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> docx</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc = docx.Document()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.add_paragraph(<span class="string">&#x27;Hello world!&#x27;</span>)</span><br><span class="line">&lt;docx.text.Paragraph <span class="built_in">object</span> at <span class="number">0x0000000003B56F60</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.save(<span class="string">&#x27;helloworld.docx&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> docx</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc = docx.Document()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.add_paragraph(<span class="string">&#x27;Hello world!&#x27;</span>)</span><br><span class="line">&lt;docx.text.Paragraph <span class="built_in">object</span> at <span class="number">0x000000000366AD30</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>paraObj1 = doc.add_paragraph(<span class="string">&#x27;This is a second paragraph.&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>paraObj2 = doc.add_paragraph(<span class="string">&#x27;This is a yet another paragraph.&#x27;</span>)</span><br><span class="line"><span class="comment">###add_run方法在已有段落后添加文字</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>paraObj1.add_run(<span class="string">&#x27; This text is being added to the second paragraph.&#x27;</span>)</span><br><span class="line">&lt;docx.text.Run <span class="built_in">object</span> at <span class="number">0x0000000003A2C860</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.save(<span class="string">&#x27;multipleParagraphs.docx&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>add_paragraph()和 add_run()都接受可选的第二个参数，它是表示 Paragraph 或Run 对象样式的字符串。</p>
+</li>
+</ul>
+<p>​    如 <strong>doc.add</strong>**_****paragraph(‘Hello world!’, ‘Title’)**，样式就是Title</p>
+<ul>
+<li><p>添加标题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc = docx.Document()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.add_heading(<span class="string">&#x27;Header 0&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">&lt;docx.text.Paragraph <span class="built_in">object</span> at <span class="number">0x00000000036CB3C8</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.add_heading(<span class="string">&#x27;Header 1&#x27;</span>, <span class="number">1</span>)</span><br><span class="line">&lt;docx.text.Paragraph <span class="built_in">object</span> at <span class="number">0x00000000036CB630</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.add_heading(<span class="string">&#x27;Header 2&#x27;</span>, <span class="number">2</span>)</span><br><span class="line">&lt;docx.text.Paragraph <span class="built_in">object</span> at <span class="number">0x00000000036CB828</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.add_heading(<span class="string">&#x27;Header 3&#x27;</span>, <span class="number">3</span>)</span><br><span class="line">&lt;docx.text.Paragraph <span class="built_in">object</span> at <span class="number">0x00000000036CB2E8</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.add_heading(<span class="string">&#x27;Header 4&#x27;</span>, <span class="number">4</span>)</span><br><span class="line">&lt;docx.text.Paragraph <span class="built_in">object</span> at <span class="number">0x00000000036CB3C8</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.save(<span class="string">&#x27;headings.docx&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>添加换行符和换页符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc = docx.Document()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.add_paragraph(<span class="string">&#x27;This is on the first page!&#x27;</span>)</span><br><span class="line">&lt;docx.text.Paragraph <span class="built_in">object</span> at <span class="number">0x0000000003785518</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.paragraphs[<span class="number">0</span>].runs[<span class="number">0</span>].add_break(docx.text.WD_BREAK.PAGE)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.add_paragraph(<span class="string">&#x27;This is on the second page!&#x27;</span>)</span><br><span class="line">&lt;docx.text.Paragraph <span class="built_in">object</span> at <span class="number">0x00000000037855F8</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.save(<span class="string">&#x27;twoPage.docx&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>添加图像</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>doc.add_picture(<span class="string">&#x27;zophie.png&#x27;</span>, width=docx.shared.Inches(<span class="number">1</span>),</span><br><span class="line">height=docx.shared.Cm(<span class="number">4</span>))</span><br><span class="line">&lt;docx.shape.InlineShape <span class="built_in">object</span> at <span class="number">0x00000000036C7D30</span>&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2022/01/18/%E5%A4%84%E7%90%86PDF%E5%92%8CWord%E6%96%87%E6%A1%A3/" title="处理PDF和Word文档">https://shenle2019.github.io/2022/01/18/%E5%A4%84%E7%90%86PDF%E5%92%8CWord%E6%96%87%E6%A1%A3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/01/11/Python%E5%A4%84%E7%90%86Excel%E7%94%B5%E5%AD%90%E8%A1%A8%E6%A0%BC/" rel="next" title="Python处理Excel电子表格">
+                <i class="fa fa-chevron-left"></i> Python处理Excel电子表格
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/02/14/%E4%BF%9D%E6%8C%81%E6%97%B6%E9%97%B4%E3%80%81%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F/" rel="prev" title="保持时间、计划任务和启动程序">
+                保持时间、计划任务和启动程序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86PDF%E5%92%8CWord%E6%96%87%E6%A1%A3"><span class="nav-number">1.</span> <span class="nav-text">处理PDF和Word文档</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PDF%E6%96%87%E6%A1%A3%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.</span> <span class="nav-text">PDF文档的相关操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%EF%BC%9A%E4%BB%8E%E5%A4%9A%E4%B8%AAPDF%E4%B8%AD%E5%90%88%E5%B9%B6%E9%80%89%E6%8B%A9%E7%9A%84%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.2.</span> <span class="nav-text">项目：从多个PDF中合并选择的页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Word%E6%96%87%E6%A1%A3"><span class="nav-number">1.3.</span> <span class="nav-text">Word文档</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'VLcgBQixkeBQUATGzDVaqcpk-gzGzoHsz',
+        appKey: 'hdVMQzxTmu7ohwxMg6TvuY9W',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
