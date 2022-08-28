@@ -2990,4 +2990,47 @@
         <tag>python</tag>
       </tags>
   </entry>
+  <entry>
+    <title>interface testing basic</title>
+    <url>/2022/08/28/interface-testing-basic/</url>
+    <content><![CDATA[<h2 id="接口测试"><a href="#接口测试" class="headerlink" title="接口测试"></a>接口测试</h2><h3 id="接口测试的定义"><a href="#接口测试的定义" class="headerlink" title="接口测试的定义"></a>接口测试的定义</h3><p>接口测试是测试系统组件间接口的一种测试。重点是检查数据交换、传递和控制管理过程，以及系统间相互逻辑依赖关系等。</p>
+<p>一般分为两种：程序内部的接口，系统对外的接口。</p>
+<h3 id="接口测试的目的"><a href="#接口测试的目的" class="headerlink" title="接口测试的目的"></a>接口测试的目的</h3><ul>
+<li>检查UI系统无法发下的bug</li>
+<li>检查系统的安全性和稳定性</li>
+<li>相对于UI自动化测试，接口测试比较稳定，容易实现自动化持续集成</li>
+<li>尽早发现系统的底层缺陷</li>
+<li>缩短测试周期，支持后端快速发版本的需求</li>
+<li>支持前端的随意变化，后端不用变。</li>
+</ul>
+<h3 id="接口测试原理"><a href="#接口测试原理" class="headerlink" title="接口测试原理"></a>接口测试原理</h3><p>可以理解为http请求的流程，通过测试程序或者测试工具模拟客户端向服务器发送请求报文。<br>服务器接受请求报文后对其做处理，然后将响应结果报文返回发给客户端。</p>
+<h3 id="接口测试流程"><a href="#接口测试流程" class="headerlink" title="接口测试流程"></a>接口测试流程</h3><p>黑盒测试范畴，</p>
+<ul>
+<li>接口需求分析</li>
+</ul>
+<p>对接口文档进行充分研读。<br>接口文档一般包括：接口说明、请求地址、请求方式如get和post等、<br>请求参数、参数类型、参数约束、正常响应报文、异常响应报文等。</p>
+<ul>
+<li>接口测试用例编写</li>
+</ul>
+<p>等价类、边界值测试分析：<br>输入参数是否合法、是否为空、参数是否可包含特殊字符、数值范围及大小等。<br>参数组合验证：参数排列组合。<br>接口安全验证：是否有验证，是否有加密等<br>业务逻辑验证：存在上下游的逻辑关系等。</p>
+<ul>
+<li>测试工具选择。</li>
+</ul>
+<p>如postman、Jmeter、SoupUI、LoadRunner、<br>Robot Framework + RequestsLibrary、Java + HttpClient 和Python + Requests等。</p>
+<ul>
+<li>构造请求并执行测试。</li>
+</ul>
+<p>根据测试用例来设计测试用例、执行测试、检查接口返回的数据是否达到预期。</p>
+<h3 id="接口测试用例的设计"><a href="#接口测试用例的设计" class="headerlink" title="接口测试用例的设计"></a>接口测试用例的设计</h3><p>包括用例名称、前置条件、请求地址、请求header、请求参数、响应检查点。</p>
+<h3 id="http基础"><a href="#http基础" class="headerlink" title="http基础"></a>http基础</h3><p>http请求，常见包括get、post等报文，主要包括请求行、请求头信息、空行、请求体等。<br>http响应，可以抓包看看，主要包括响应状态行、响应头信息、空行、响应体等。<br>http状态码：<br>1xx 服务端接受到请求，需要进一步处理，客户端请等待。<br>2xx 请求处理成功，常见200 ok<br>3xx 重定向操作，需要进一步操作完成请求，如301、302等。<br>4xx 客户端请求错误，有语法错误或者无法实现，如400语法错误、401未经授权、403服务器理解客户端的请求，但拒绝服务。404 请求资源不存在<br>5xx 服务器内部错误，不能正确处理请求，如500内部错误，无法完成请求。</p>
+<p>除了post、get其他还有如put 传送数据取代指定文档内容等。delete 删除服务器的资源等。</p>
+<h3 id="cookie-和-session"><a href="#cookie-和-session" class="headerlink" title="cookie 和 session"></a>cookie 和 session</h3><p>主要用于确定用户身份，cookie在客户端记录信息确认身份，发送给服务器后，（cookie主要包含id、密码、浏览过的网站、停留时间、过期时间等内容）<br>服务器在cookie基础上添加session id 返回给客户端确认存储。（session包含cookie + session id）<br>下次客户端发送cookie就会带上session id再次请求与session就关联上了。</p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试开发</tag>
+      </tags>
+  </entry>
 </search>
