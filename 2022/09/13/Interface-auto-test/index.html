@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="测试开发," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python接口自动化实战接口自动化常用，python + requests requests常用实例，get、post、json、requests headers、response 等结合cookie 、session、token等操作。最后整合DDT    数据驱动进行接口自动化实战。 安装request库pip install requests requests 发送请求和参数传递12345">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Interface auto test">
+<meta property="og:url" content="https://shenle2019.github.io/2022/09/13/Interface-auto-test/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="Python接口自动化实战接口自动化常用，python + requests requests常用实例，get、post、json、requests headers、response 等结合cookie 、session、token等操作。最后整合DDT    数据驱动进行接口自动化实战。 安装request库pip install requests requests 发送请求和参数传递12345">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-09-12T19:53:00.000Z">
+<meta property="article:modified_time" content="2022-09-12T11:54:36.562Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="测试开发">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2022/09/13/Interface-auto-test/"/>
+
+
+
+
+
+  <title>Interface auto test | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2022/09/13/Interface-auto-test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Interface auto test</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-13T03:53:00+08:00">
+                2022-09-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-09-12T19:54:36+08:00">
+                2022-09-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2022/09/13/Interface-auto-test/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2022/09/13/Interface-auto-test/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Python接口自动化实战"><a href="#Python接口自动化实战" class="headerlink" title="Python接口自动化实战"></a>Python接口自动化实战</h2><p>接口自动化常用，python + requests</p>
+<p>requests常用实例，get、post、json、requests headers、response 等结合cookie 、session、token等操作。<br>最后整合DDT    数据驱动进行接口自动化实战。</p>
+<h3 id="安装request库"><a href="#安装request库" class="headerlink" title="安装request库"></a>安装request库</h3><p>pip install requests</p>
+<h3 id="requests-发送请求和参数传递"><a href="#requests-发送请求和参数传递" class="headerlink" title="requests 发送请求和参数传递"></a>requests 发送请求和参数传递</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#6.2.2  发送get请求</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">response = requests.get(<span class="string">&#x27;http://www.baidu.com&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(r.url)</span><br><span class="line"></span><br><span class="line"><span class="comment">#6.2.2  发送get请求 带参数</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.get(<span class="string">&#x27;http://www.baidu.com/s?&#x27;</span>,params=&#123;<span class="string">&#x27;wd&#x27;</span>:<span class="string">&#x27;python&#x27;</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(r.url)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#6.2.3  发送form表单</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">payload = &#123;<span class="string">&#x27;account&#x27;</span>:<span class="string">&#x27;admin&#x27;</span>,</span><br><span class="line">           <span class="string">&#x27;password&#x27;</span>:<span class="string">&quot;123456&quot;</span>,</span><br><span class="line">           <span class="string">&#x27;referer&#x27;</span>:<span class="string">&quot;http://192.168.0.162:4444/zentao/www/my/&quot;</span>&#125;</span><br><span class="line">r = requests.post(<span class="string">&#x27;http://192.168.1.116:8011/zentao/www/user-login.html&#x27;</span>,data=payload,</span><br><span class="line">                  headers=&#123;<span class="string">&quot;Content-Type&quot;</span>:<span class="string">&quot;application/x-www-form-urlencoded&quot;</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(r.text)</span><br><span class="line"></span><br><span class="line"><span class="comment">#6.2.4  发送xml数据</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url  =  <span class="string">&#x27;http://ws.webxml.com.cn/WebServices/WeatherWS.asmx&#x27;</span></span><br><span class="line">payload = <span class="string">&#x27;&#x27;&#x27;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="string">&lt;soap:Envelope xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;</span></span><br><span class="line"><span class="string">  &lt;soap:Body&gt;</span></span><br><span class="line"><span class="string">    &lt;getSupportCityString xmlns=&quot;http://WebXml.com.cn/&quot;&gt;</span></span><br><span class="line"><span class="string">      &lt;theRegionCode&gt;3114&lt;/theRegionCode&gt;</span></span><br><span class="line"><span class="string">    &lt;/getSupportCityString&gt;</span></span><br><span class="line"><span class="string">  &lt;/soap:Body&gt;</span></span><br><span class="line"><span class="string">&lt;/soap:Envelope&gt;&#x27;&#x27;&#x27;</span></span><br><span class="line">r = requests.post(url=url, data=payload, headers=&#123;<span class="string">&quot;Content-Type&quot;</span>:<span class="string">&quot;text/xml&quot;</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(r.text)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">####6.2.5  发送json请求</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests,json</span><br><span class="line"></span><br><span class="line">url  = <span class="string">&#x27;http://183.62.166.42:11125/CyzgMobileConfigService/GetDataInfo&#x27;</span></span><br><span class="line">payload = &#123;<span class="string">&#x27;CommandCode&#x27;</span>: <span class="string">&#x27;GetAllCityData&#x27;</span>,</span><br><span class="line">           <span class="string">&#x27;Marker&#x27;</span>: <span class="string">&#x27;1482638389646&#x27;</span>, <span class="string">&quot;TransferData&quot;</span>: <span class="string">&quot;&#123;\&#x27;CityId\&#x27;:4565110&#125;&quot;</span>&#125;</span><br><span class="line">r = requests.post(url=url, json=payload, headers=&#123;<span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(r.text)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="处理cookie、session以及-token"><a href="#处理cookie、session以及-token" class="headerlink" title="处理cookie、session以及 token"></a>处理cookie、session以及 token</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">####6.3  处理 token </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&#x27;http://212.123.456.123:1112/login&#x27;</span></span><br><span class="line">data = &#123;<span class="string">&#x27;username&#x27;</span>:<span class="string">&#x27;admin&#x27;</span>,<span class="string">&#x27;password&#x27;</span>:<span class="string">&#x27;admin&#x27;</span>&#125;</span><br><span class="line">response = requests.post(url=url,json=data,</span><br><span class="line">                         headers=&#123;<span class="string">&#x27;Content-Type&#x27;</span>:<span class="string">&quot;application/json&quot;</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(response.json())</span><br><span class="line"></span><br><span class="line"><span class="comment">### 把上述内容封装成写token文件输出，</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;token.md&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(response.json()[<span class="string">&#x27;token&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">### 再补充一个读取token文件函数：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_token</span>(<span class="params">self</span>):</span></span><br><span class="line">	<span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;token.md&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">		<span class="keyword">return</span> f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment">### 后续response中requests.get函数中可以带上headers=self.read_token()参数即可</span></span><br><span class="line"></span><br><span class="line"><span class="comment">###6.4  处理 cookie</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span>():</span></span><br><span class="line">   <span class="string">&#x27;&#x27;&#x27;登录禅道获取登录后的session&#x27;&#x27;&#x27;</span></span><br><span class="line">   r=requests.post(<span class="string">&#x27;url=http://192.168.0.162:4444/zentao/www/user-login.html&#x27;</span>,</span><br><span class="line">                   data=&#123;<span class="string">&#x27;account&#x27;</span>:<span class="string">&#x27;admin&#x27;</span>,</span><br><span class="line">                    <span class="string">&#x27;password&#x27;</span>:<span class="string">&#x27;123456&#x27;</span>,</span><br><span class="line">                    <span class="string">&#x27;referer&#x27;</span>:<span class="string">&quot;http://192.168.0.162:4444/zentao/www/my/&quot;</span>&#125;)</span><br><span class="line">   <span class="keyword">return</span> r.cookies</span><br><span class="line">   </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ViewBug</span>():</span></span><br><span class="line">   <span class="string">&#x27;&#x27;&#x27;查看bug单&#x27;&#x27;&#x27;</span></span><br><span class="line">   r = requests.get(url=<span class="string">&#x27;http://192.168.0.162:4444/zentao/www/my-bug.html&#x27;</span>,cookies=login())</span><br><span class="line">   <span class="keyword">return</span> r.text</span><br><span class="line"><span class="built_in">print</span>(ViewBug())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">###6.5  处理 session</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&quot;email&quot;</span>:<span class="string">&quot;18513600xxx&quot;</span>,</span><br><span class="line">    <span class="string">&quot;icode&quot;</span>:<span class="string">&quot;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;origURL&quot;</span>:<span class="string">&quot;http://www.renren.com/home&quot;</span>,</span><br><span class="line">    <span class="string">&quot;domain&quot;</span>:<span class="string">&quot;renren.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;key_id&quot;</span>:<span class="number">1</span>,</span><br><span class="line">    <span class="string">&quot;captcha_type&quot;</span>:<span class="string">&quot;web_login&quot;</span>,</span><br><span class="line">    <span class="string">&quot;password&quot;</span>:<span class="string">&quot;403ebf9eelri59d8df30669206e8885236klaece4884c0cca4642365b0e4096a&quot;</span>,</span><br><span class="line">    <span class="string">&quot;rkey&quot;</span>:<span class="string">&quot;41602f6afc3b0686fd38866f4cd6d5c8&quot;</span>,</span><br><span class="line">    <span class="string">&quot;f&quot;</span>:<span class="string">&quot;&quot;</span>&#125;</span><br><span class="line">url = <span class="string">&#x27;http://www.renren.com/ajaxLogin/login?1=1&amp;uniqueTimestamp=20181131458439&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span>  <span class="title">RenrenLogin</span>():</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;登陆接口&#x27;&#x27;&#x27;</span></span><br><span class="line">    s = requests.Session()</span><br><span class="line">    r = s.post(url=url,data=data)</span><br><span class="line">    <span class="keyword">return</span>  s</span><br></pre></td></tr></table></figure>
+
+<p>后续的请求r = RenrenLogin().post(url=url,data=data)，这个就带上了cookie信息了<br>return r.text</p>
+<h3 id="处理超时等待"><a href="#处理超时等待" class="headerlink" title="处理超时等待"></a>处理超时等待</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests  <span class="comment">#导入requests库</span></span><br><span class="line"></span><br><span class="line">response = requests.get(url=<span class="string">&#x27;http://www.baidu.com&#x27;</span>,timeout=<span class="number">0.001</span>)</span><br><span class="line"><span class="built_in">print</span>(response.text)</span><br></pre></td></tr></table></figure>
+
+<h3 id="response对象解析"><a href="#response对象解析" class="headerlink" title="response对象解析"></a>response对象解析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">###7.7  Response对象解析</span></span><br><span class="line"><span class="keyword">import</span> requests </span><br><span class="line">r = requests.get(<span class="string">&#x27;http://httpbin.org/get&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;HTTP状态码:&#x27;</span>,r.status_code)  <span class="comment">#响应状态码 常见 200 301 302 404 500 </span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;返回原始响应体&#x27;</span>,r.raw)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;请求的响应体&#x27;</span>,r.content)  <span class="comment">#字节方式的响应体，会自动解码gzip和deflate 压缩</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;响应内容&#x27;</span>,r.text)         <span class="comment">#字符串方式的响应体，会自动根据响应头部的字符编码进行解码</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;获取headers&#x27;</span>,r.headers)  <span class="comment">#以字典对象存储服务器响应头</span></span><br><span class="line"><span class="built_in">print</span>(r.json())    <span class="comment">#Requests中内置的 Json 解码器 将响应结果转换为JSON字符串</span></span><br><span class="line"><span class="built_in">print</span>(r.raise_for_status())   <span class="comment">#失败请求(非200 响应)抛出异常</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="文件上传实战"><a href="#文件上传实战" class="headerlink" title="文件上传实战"></a>文件上传实战</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#####7.8  Requests文件上传实战</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">zentaoLogin</span>():</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;登录请求&quot;&quot;&quot;</span></span><br><span class="line">   data = &#123;</span><br><span class="line">      <span class="string">&#x27;account&#x27;</span>: <span class="string">&#x27;admin&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;password&#x27;</span>: <span class="string">&#x27;123456&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;referer&#x27;</span>: <span class="string">&#x27;http://192.168.1.106:8011/zentao/www/doc-browse-product-0-59-0.html&#x27;</span>&#125;</span><br><span class="line">   <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span>():</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;获取登录后返回cookie&quot;&quot;&quot;</span></span><br><span class="line">   r = requests.post(</span><br><span class="line">      url=<span class="string">&#x27;http://192.168.1.106:8011/zentao/www/user-login.html&#x27;</span>,</span><br><span class="line">      data=zentaoLogin(),</span><br><span class="line">      headers=&#123;<span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>&#125;)</span><br><span class="line">   <span class="keyword">return</span> r.cookies</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uploadData</span>():</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;接口参数&quot;&quot;&quot;</span></span><br><span class="line">   data = &#123;</span><br><span class="line">       <span class="string">&quot;product&quot;</span>: <span class="string">&quot;59&quot;</span>,</span><br><span class="line">       <span class="string">&quot;module&quot;</span>:  <span class="string">&quot;0&quot;</span>,</span><br><span class="line">       <span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;file&#x27;</span>,</span><br><span class="line">       <span class="string">&quot;title&quot;</span>: <span class="string">&#x27;looking1&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;url&#x27;</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;content&#x27;</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;keywords&#x27;</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;digest&#x27;</span>:<span class="string">&#x27;&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;labels[]&#x27;</span>:<span class="string">&#x27;&#x27;</span>,</span><br><span class="line">       <span class="string">&#x27;lib&#x27;</span>:<span class="string">&#x27;product&#x27;</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uploadFile</span>():</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;上传文件接口&quot;&quot;&quot;</span></span><br><span class="line">   r = requests.post(</span><br><span class="line">      url= <span class="string">&#x27;http://192.168.1.106:8011/zentao/www/doc-create-product-0-0-0-doc.html&#x27;</span>,</span><br><span class="line">      data=uploadData(),</span><br><span class="line">      headers=&#123;<span class="string">&#x27;Conteny-Type&#x27;</span>: <span class="string">&#x27;multipart/form-data&#x27;</span>&#125;,</span><br><span class="line">      files=&#123;<span class="string">&quot;file&quot;</span>: (<span class="string">&quot;1.jpg&quot;</span>, <span class="built_in">open</span>(<span class="string">r&quot;C:/1.jpg&quot;</span>, <span class="string">&quot;rb&quot;</span>), <span class="string">&quot;image/jpeg&quot;</span>, &#123;&#125;)&#125;,</span><br><span class="line">      cookies=login())</span><br><span class="line">   <span class="built_in">print</span>(r.status_code)</span><br><span class="line">   <span class="built_in">print</span>(r.text)</span><br><span class="line">uploadFile()</span><br></pre></td></tr></table></figure>
+
+<h3 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json  <span class="comment">#导入json库</span></span><br><span class="line"><span class="comment">#定义字典</span></span><br><span class="line">dict1=&#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&quot;fighter&quot;</span>,</span><br><span class="line">      <span class="string">&#x27;age&#x27;</span>:<span class="number">28</span>,</span><br><span class="line">      <span class="string">&#x27;address&#x27;</span>:<span class="string">&#x27;shenzhen&#x27;</span>&#125;</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;未序列化前的数据类型为:&#x27;</span>,<span class="built_in">type</span>(dict1))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;未序列化前的数据:&#x27;</span>,dict1)</span><br><span class="line"><span class="comment">#对python对象进行序列化操作</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;begin对python对象进行序列化操作------------&gt;&#x27;</span>)</span><br><span class="line">str1 = json.dumps(dict1)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;序列化后的数据类型为:&#x27;</span>,<span class="built_in">type</span>(str1))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;序列化后的数据为:&#x27;</span>,str1)</span><br><span class="line"><span class="comment">#对str1进行反序列化操作</span></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;begin对str1对象进行反序列化操作------------&gt;&#x27;</span>)</span><br><span class="line">dict2 = json.loads(str1)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;反序列化后的数据类型:&#x27;</span>,<span class="built_in">type</span>(dict2))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&#x27;反序列化后的数据:&#x27;</span>,dict2)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="XML与JSON数据之间的转换"><a href="#XML与JSON数据之间的转换" class="headerlink" title="XML与JSON数据之间的转换"></a>XML与JSON数据之间的转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#7.11  XML与JSON数据之间的转换</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> xmltodict</span><br><span class="line"><span class="comment">#定义xml转json的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xmltojson</span>(<span class="params">xmlstr</span>):</span></span><br><span class="line">  xmlparse = xmltodict.parse(xmlstr)    <span class="comment">#parse是的xml解析器</span></span><br><span class="line">  jsonstr = json.dumps(xmlparse,indent=<span class="number">2</span>,sort_keys=<span class="literal">True</span>)</span><br><span class="line">  <span class="built_in">print</span>(jsonstr)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">  xmlinfo = <span class="string">&quot;&quot;&quot;&lt;student&gt;</span></span><br><span class="line"><span class="string">    &lt;bokeid&gt;fighter006&lt;/bokeid&gt;</span></span><br><span class="line"><span class="string">    &lt;bokeinfo&gt;</span></span><br><span class="line"><span class="string">      &lt;cnbologsname&gt;laolu&lt;/cnbologsname&gt;</span></span><br><span class="line"><span class="string">      &lt;page&gt;230&lt;/page&gt;</span></span><br><span class="line"><span class="string">    &lt;/bokeinfo&gt;</span></span><br><span class="line"><span class="string">    &lt;date&gt;</span></span><br><span class="line"><span class="string">      &lt;address&gt;http://www.baidu.com&lt;/address&gt;</span></span><br><span class="line"><span class="string">      &lt;title&gt;python+ddt+requests&lt;/title&gt;</span></span><br><span class="line"><span class="string">    &lt;/date&gt;</span></span><br><span class="line"><span class="string">  &lt;/student&gt;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">  xmltojson(xmlinfo)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="接口测试框架设计和开发"><a href="#接口测试框架设计和开发" class="headerlink" title="接口测试框架设计和开发"></a>接口测试框架设计和开发</h3><p>测试框架<br>Config：<br><strong>init</strong>.py<br>config.ini<br>HTMLTestRunner.py<br>readConfig.py<br>Data：<br><strong>init</strong>.py<br>data.xlsx<br>taskID<br>Token.md<br>Log：<br><strong>init</strong>.py<br>log.txt<br>Reports：<br>2019-01-04 14_05_59result.html<br>2019-01-08 22_29_59result.html<br>2019-01-08 22_30_45result.html<br>2019-02-12 20_22_39result.html<br>2019-02-15 21_03_33result.html<br>2019-03-07 20_52_13result.html<br><strong>init</strong>.py<br>TestCases：<br><strong>init</strong>.py<br>test_tasks.py<br>Utils：<br><strong>init</strong>.py<br>excles.py<br>page.py</p>
+<p><strong>init</strong>.py<br>runMain.py</p>
+<p>config.ini:</p>
+<p>[EMAIL]<br>mail_host = smtp.126.com<br>mail_user = <a href="mailto:&#x6c;&#117;&#114;&#x75;&#105;&#102;&#x65;&#x6e;&#103;&#64;&#49;&#50;&#x36;&#46;&#99;&#111;&#x6d;">&#x6c;&#117;&#114;&#x75;&#105;&#102;&#x65;&#x6e;&#103;&#64;&#49;&#50;&#x36;&#46;&#99;&#111;&#x6d;</a><br>mail_pass = qq123456789<br>sender = <a href="mailto:&#108;&#x75;&#x72;&#x75;&#x69;&#102;&#101;&#110;&#103;&#x78;&#64;&#x31;&#x32;&#54;&#46;&#99;&#111;&#x6d;">&#108;&#x75;&#x72;&#x75;&#x69;&#102;&#101;&#110;&#103;&#x78;&#64;&#x31;&#x32;&#54;&#46;&#99;&#111;&#x6d;</a><br>receiver = <a href="mailto:&#x6c;&#117;&#x72;&#x75;&#105;&#x66;&#x65;&#x6e;&#x67;&#120;&#x40;&#x31;&#50;&#54;&#46;&#99;&#111;&#109;">&#x6c;&#117;&#x72;&#x75;&#105;&#x66;&#x65;&#x6e;&#x67;&#120;&#x40;&#x31;&#50;&#54;&#46;&#99;&#111;&#109;</a><br>subject = 接口自动化测试报告</p>
+<p>readConfig.py:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">创建configParser对象cf</span><br><span class="line">cf = configparser.ConfigParser()</span><br><span class="line"><span class="comment"># read(filename) 读文件内容</span></span><br><span class="line">filename = cf.read(<span class="string">&quot;config.ini&quot;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(filename)</span><br><span class="line"><span class="comment"># sections() 得到所有的section，以列表形式返回</span></span><br><span class="line">sec = cf.sections()</span><br><span class="line"><span class="built_in">print</span>(sec)</span><br><span class="line"><span class="comment"># options(section) 得到section下的所有option</span></span><br><span class="line">opt = cf.options(<span class="string">&quot;EMAIL&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(opt)</span><br><span class="line"><span class="comment"># items 得到section的所有键值对</span></span><br><span class="line">value = cf.items(<span class="string">&quot;EMAIL&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(value)</span><br><span class="line"><span class="comment"># get(section,option) 得到section中的option值，返回string/int类型的结果</span></span><br><span class="line">email_host = cf.get(<span class="string">&quot;EMAIL&quot;</span>,<span class="string">&quot;mail_host&quot;</span>)</span><br><span class="line">email_password = cf.get(<span class="string">&quot;EMAIL&quot;</span>,<span class="string">&quot;mail_pass&quot;</span>)</span><br><span class="line">email_sender = cf.get(<span class="string">&#x27;EMAIL&#x27;</span>,<span class="string">&#x27;sender&#x27;</span>)</span><br><span class="line">email_user = cf.get(<span class="string">&#x27;EMAIL&#x27;</span>,<span class="string">&#x27;mail_user&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>data下放<br>xlsx：<br>请求地址    是否携带请求数据    是否携带token    请求方式    参数依赖<br><a target="_blank" rel="noopener" href="http://211.149.163.145:3000/register">http://211.149.163.145:3000/register</a>    {“username”:”jackLu”,”password”:”jackLu”,”password_confirmation”:”jackLu”}    “无”    post    “无”<br><a target="_blank" rel="noopener" href="http://211.149.163.145:3000/login">http://211.149.163.145:3000/login</a>    {“username”: “jackLu”, “password”:”jackLu”}    “无”    post    “无”<br><a target="_blank" rel="noopener" href="http://211.149.163.145:3000/api/tasks">http://211.149.163.145:3000/api/tasks</a>    否    {“token”:”asdfasdfsdfssfdsafdsafds”}    get    “无”<br><a target="_blank" rel="noopener" href="http://211.149.163.145:3000/api/tasks">http://211.149.163.145:3000/api/tasks</a>    {“title”:”<a target="_blank" rel="noopener" href="https://www.cnblogs.co/fighter007&quot;,&quot;desc&quot;:&quot;%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0&quot;%7D">https://www.cnblogs.co/fighter007&quot;,&quot;desc&quot;:&quot;接口描述&quot;}</a>    {“token”:”dsfsdsdfsdccxzvzcxttryu”}    post    “无”<br><a target="_blank" rel="noopener" href="http://211.149.163.145:3000/api/tasks/">http://211.149.163.145:3000/api/tasks/</a>:    否    {“token”:”ryrtyrtytreytryretryngfng”}    delete    有</p>
+<p>taskID<br>Token.md</p>
+<p>LOG下放日志</p>
+<p>Reports下放测试报告文件</p>
+<p>测试用例，test_tasks.py:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">from</span> testAPI.Utils.page <span class="keyword">import</span>  *   <span class="comment">#导入Helper工具类</span></span><br><span class="line"><span class="keyword">from</span> testAPI.Utils.excles <span class="keyword">import</span> *  <span class="comment">#导入Excels工具类</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Totasks</span>(<span class="params">unittest.TestCase,Helper,Excels</span>):</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUpClass</span>(<span class="params">cls</span>):</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tearDownClass</span>(<span class="params">cls</span>):</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_register</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;注册接口&#x27;&#x27;&#x27;</span></span><br><span class="line">        r = self.post(self.readUrl(<span class="number">1</span>),self.readData(<span class="number">1</span>))</span><br><span class="line">        self.assertEqual(r.json()[<span class="string">&#x27;username&#x27;</span>],<span class="string">&#x27;jackLu&#x27;</span>)</span><br><span class="line">        self.Makelog(<span class="string">&#x27;接口断言：注册接口响应数据检验jackLu&#x27;</span>)</span><br><span class="line">        self.assertEqual(r.status_code,<span class="number">200</span>)</span><br><span class="line">        self.Makelog(<span class="string">&#x27;接口断言：注册接口响应状态码检验200&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_login</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;登录接口&#x27;&#x27;&#x27;</span></span><br><span class="line">        r = self.post(self.readUrl(<span class="number">2</span>),self.readData(<span class="number">2</span>))</span><br><span class="line">        self.assertEqual(r.status_code,<span class="number">200</span>)</span><br><span class="line">        self.Makelog(<span class="string">&#x27;接口断言：登陆接口响应状态码检验200&#x27;</span>)</span><br><span class="line">        self.assertEqual(r.json()[<span class="string">&#x27;username&#x27;</span>],<span class="string">&#x27;jackLu&#x27;</span>)</span><br><span class="line">        self.Makelog(<span class="string">&#x27;接口断言：登陆接口响应数据检验jackLu&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_writeToken</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;将token写入到Token.md文件中&#x27;&#x27;&#x27;</span></span><br><span class="line">        r = requests.post(self.readUrl(<span class="number">2</span>),self.readData(<span class="number">2</span>))</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(self.dirname(<span class="string">&#x27;Token.md&#x27;</span>),<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span>  f:</span><br><span class="line">            self.Makelog(<span class="string">&#x27;日志跟踪：将token写入到Token.md文件中&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> f.write(r.json()[<span class="string">&#x27;token&#x27;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">read_Token</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;读取Token.md文件中的token值&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(self.dirname(<span class="string">&#x27;Token.md&#x27;</span>),<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            self.Makelog(<span class="string">&#x27;日志跟踪：读取Token.md文件中的token&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span>  f.read()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setToken</span>(<span class="params">self,rx</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;对动态参数token赋值&#x27;&#x27;&#x27;</span></span><br><span class="line">        dinfo = self.readToken(rx)</span><br><span class="line">        self.Makelog(<span class="string">&#x27;动态参数处理：读取Excel表中的Token值&#x27;</span>)</span><br><span class="line">        dinfo[<span class="string">&#x27;token&#x27;</span>] = self.read_Token()</span><br><span class="line">        self.Makelog(<span class="string">&#x27;动态参数处理：对token重新赋值为最新服务器生成的token值&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">&quot;Authorization&quot;</span>:<span class="string">&quot;Bearer &quot;</span> + dinfo[<span class="string">&#x27;token&#x27;</span>]&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_getApiTask</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;获取所有文章&#x27;&#x27;&#x27;</span></span><br><span class="line">        r = self.get(self.readUrl(<span class="number">3</span>),self.setToken(<span class="number">3</span>))</span><br><span class="line">        self.assertEqual(r.status_code,<span class="number">200</span>)</span><br><span class="line">        self.Makelog(<span class="string">&#x27;接口断言：获取所有文章响应状态码检验200&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_postApiTasks</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;创建文章接口&#x27;&#x27;&#x27;</span></span><br><span class="line">        r = self.post(self.readUrl(<span class="number">4</span>),self.readData(<span class="number">4</span>),self.setToken(<span class="number">4</span>))</span><br><span class="line">        self.assertEqual(r.json()[<span class="string">&#x27;desc&#x27;</span>],<span class="string">&#x27;接口描述&#x27;</span>)</span><br><span class="line">        self.Makelog(<span class="string">&#x27;接口断言：创建文章响应数据断言[接口描述]&#x27;</span>)</span><br><span class="line">        self.assertEqual(r.status_code, <span class="number">200</span>)</span><br><span class="line">        self.Makelog(<span class="string">&#x27;接口断言：创建文章响应状态码检验200&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">writeTaskId</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;写入Token到taskID文件中&#x27;&#x27;&#x27;</span></span><br><span class="line">        r = requests.post(self.readUrl(<span class="number">4</span>),self.readData(<span class="number">4</span>),self.setToken(<span class="number">5</span>))</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(self.dirname(<span class="string">&#x27;taskID&#x27;</span>),<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(<span class="built_in">str</span>(r.json()[<span class="string">&#x27;id&#x27;</span>]))</span><br><span class="line">            self.Makelog(<span class="string">&#x27;接口业务：将创建后的文章ID写入到taskID文件中&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getTaskID</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;读取taskID&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(self.dirname(<span class="string">&#x27;taskID&#x27;</span>),<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            self.Makelog(<span class="string">&#x27;接口业务：读取创建文章后的文章ID&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span>  f.read()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_deleteApiTasks</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;删除文章接口&#x27;&#x27;&#x27;</span></span><br><span class="line">        r = self.delete(self.readUrl(<span class="number">5</span>) + self.getTaskID(),self.setToken(<span class="number">5</span>))</span><br><span class="line">        self.assertEqual(r.status_code,<span class="number">200</span>)</span><br><span class="line">        self.Makelog(<span class="string">&#x27;接口断言:删除文章响应状态码检验200&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    unittest.main(verbosity=<span class="number">2</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>excels.py:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> xlrd,json</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Excels</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;构造 Excel 工具类&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">readExcelData</span>(<span class="params">self,rowx</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;读取rowx行数&#x27;&#x27;&#x27;</span></span><br><span class="line">        book  = xlrd.open_workbook(<span class="string">r&#x27;D:\project\testAPI\Data\data.xlsx&#x27;</span>)</span><br><span class="line">        table = book.sheet_by_index(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> table.row_values(rowx)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">readUrl</span>(<span class="params">self,rowx</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;读取接口地址&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> self.readExcelData(rowx)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">readData</span>(<span class="params">self,rowx</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;读取请求参数&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> json.loads(self.readExcelData(rowx)[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">readToken</span>(<span class="params">self,rowx</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;读取Token&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> json.loads(self.readExcelData(rowx)[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># e = Excels()</span></span><br><span class="line"><span class="comment"># print(e.readUrl(1))</span></span><br><span class="line"><span class="comment"># print(e.readData(1),type(e.readData(1)))</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>page.py:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> os,requests</span><br><span class="line"><span class="keyword">import</span> configparser <span class="comment">#导入configparser模块</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Helper</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dirname</span>(<span class="params">self,fileName=<span class="string">&#x27;&#x27;</span>,filepath=<span class="string">&#x27;Data&#x27;</span></span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        :param fileName: 文件名字</span></span><br><span class="line"><span class="string">        :param filepath: 写入指定目录</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> os.path.join(os.path.dirname(os.path.dirname(__file__)),filepath,fileName)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self,url,headers=<span class="string">&#x27;&#x27;</span></span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;重构GET请求&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> url:</span><br><span class="line">            r = requests.get(url=url,headers=headers)</span><br><span class="line">            <span class="keyword">return</span> r</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;接口地址有误！&#x27;</span>)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> M:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;错误原因：%s&#x27;</span>%M)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span>(<span class="params">self,url,data,headers=<span class="string">&#x27;&#x27;</span></span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;重构POST请求&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> url:</span><br><span class="line">            r = requests.post(url=url,json=data,headers=headers)</span><br><span class="line">            <span class="keyword">return</span> r</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;接口地址有误！&#x27;</span>)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> M:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;错误原因：%s&#x27;</span>%M)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">delete</span>(<span class="params">self,url,headers=<span class="string">&#x27;&#x27;</span></span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;重构DELETE请求&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> url:</span><br><span class="line">            r = requests.delete(url=url,headers=headers)</span><br><span class="line">            <span class="keyword">return</span> r</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;接口地址有误！&#x27;</span>)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> M:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;错误原因：%s&#x27;</span>%M)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Makelog</span>(<span class="params">self,log_content</span>):</span></span><br><span class="line">       <span class="string">&#x27;&#x27;&#x27;定义log日志级别&#x27;&#x27;&#x27;</span></span><br><span class="line">       <span class="comment">#定义日志文件</span></span><br><span class="line">       logFile = logging.FileHandler(self.dirname(<span class="string">&#x27;log.txt&#x27;</span>,<span class="string">&#x27;Log&#x27;</span>), <span class="string">&#x27;a&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">       <span class="comment"># 设置log格式</span></span><br><span class="line">       fmt=logging.Formatter(fmt=<span class="string">&#x27;%(asctime)s-%(name)s-%(levelname)s-%(module)s:%(message)s&#x27;</span>)</span><br><span class="line">       logFile.setFormatter(fmt)</span><br><span class="line">       logger1 = logging.Logger(<span class="string">&#x27;logTest&#x27;</span>,level=logging.DEBUG)   <span class="comment">#定义日志</span></span><br><span class="line">       logger1.addHandler(logFile)</span><br><span class="line">       logger1.info(log_content)</span><br><span class="line">       logFile.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">readConfig</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;读取配置文件中的内容&#x27;&#x27;&#x27;</span></span><br><span class="line">        l = []</span><br><span class="line">        config = configparser.ConfigParser()</span><br><span class="line">        config.read(self.dirname(<span class="string">&#x27;config.ini&#x27;</span>,<span class="string">&#x27;Config&#x27;</span>),encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">        email_host = config.get(<span class="string">&quot;EMAIL&quot;</span>,<span class="string">&quot;mail_host&quot;</span>)</span><br><span class="line">        email_password = config.get(<span class="string">&quot;EMAIL&quot;</span>,<span class="string">&quot;mail_pass&quot;</span>)</span><br><span class="line">        email_sender = config.get(<span class="string">&#x27;EMAIL&#x27;</span>,<span class="string">&#x27;sender&#x27;</span>)</span><br><span class="line">        email_user = config.get(<span class="string">&#x27;EMAIL&#x27;</span>,<span class="string">&#x27;mail_user&#x27;</span>)</span><br><span class="line">        email_receiver = config.get(<span class="string">&#x27;EMAIL&#x27;</span>,<span class="string">&#x27;receiver&#x27;</span>)</span><br><span class="line">        email_subject = config.get(<span class="string">&#x27;EMAIL&#x27;</span>,<span class="string">&#x27;subject&#x27;</span>)</span><br><span class="line">        l.append(email_host)</span><br><span class="line">        l.append(email_password)</span><br><span class="line">        l.append(email_sender)</span><br><span class="line">        l.append(email_user)</span><br><span class="line">        l.append(email_receiver)</span><br><span class="line">        l.append(email_subject)</span><br><span class="line">        <span class="keyword">return</span>  l</span><br><span class="line"></span><br><span class="line">p = Helper()</span><br><span class="line"><span class="built_in">print</span>(p.readConfig())</span><br><span class="line"><span class="comment"># print(per.dirname(&#x27;token&#x27;))</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>runMain.py:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> smtplib  <span class="comment">#邮箱服务器</span></span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText  <span class="comment">#邮件模版类</span></span><br><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">from</span> testAPI.Config.HTMLTestRunner <span class="keyword">import</span> HTMLTestRunner</span><br><span class="line"><span class="keyword">import</span> time,os</span><br><span class="line"><span class="keyword">from</span> email.mime.multipart <span class="keyword">import</span> MIMEMultipart <span class="comment">#邮件附件类</span></span><br><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header  <span class="comment">#邮件头部模版</span></span><br><span class="line"><span class="keyword">import</span> configparser  <span class="comment">#导入configparser模块</span></span><br><span class="line"><span class="keyword">from</span> testAPI.Utils.page <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#发送带邮件的函数 动作</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_mail</span>(<span class="params">file_new</span>):</span></span><br><span class="line">    f = <span class="built_in">open</span>(file_new,<span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">    mail_body = f.read()</span><br><span class="line">    f.close()</span><br><span class="line"></span><br><span class="line">    <span class="comment">#基本信息</span></span><br><span class="line">    smtpserver = Helper().readConfig()[<span class="number">0</span>]</span><br><span class="line">    pwd = Helper().readConfig()[<span class="number">1</span>] <span class="comment">#126邮箱授权码</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#定义邮件主题</span></span><br><span class="line">    msg=MIMEMultipart()</span><br><span class="line">    msg[<span class="string">&#x27;subject&#x27;</span>] = Header(Helper().readConfig()[-<span class="number">1</span>],<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    msg[<span class="string">&#x27;from&#x27;</span>] = Helper().readConfig()[<span class="number">2</span>]   <span class="comment">#必须加 不加报错  发送者的邮箱</span></span><br><span class="line">    msg[<span class="string">&#x27;to&#x27;</span>] =  Helper().readConfig()[<span class="number">3</span>]     <span class="comment">#必须加 不加报错  接收者的邮箱</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#不加msg[&#x27;to&#x27;] msg[&#x27;from&#x27;]报错原因，是因为“发件人和收件人参数没有进行定义</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#HTML邮件正文 直接发送附件的代码片段</span></span><br><span class="line">    body=MIMEText(mail_body,<span class="string">&quot;html&quot;</span>,<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">    msg.attach(body)</span><br><span class="line">    att = MIMEText(mail_body,<span class="string">&quot;base64&quot;</span>,<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">    att[<span class="string">&quot;Content-Type&quot;</span>] = <span class="string">&quot;application/octet-stream&quot;</span></span><br><span class="line">    att[<span class="string">&quot;Content-Disposition&quot;</span>] = <span class="string">&#x27;attachment; filename=&quot;Interface_report.html&quot;&#x27;</span></span><br><span class="line">    msg.attach(att)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#链接邮箱服务器发送邮件</span></span><br><span class="line">    smtp = smtplib.SMTP()</span><br><span class="line">    smtp.connect(smtpserver)</span><br><span class="line">    smtp.login(msg[<span class="string">&#x27;from&#x27;</span>],pwd)</span><br><span class="line">    smtp.sendmail(msg[<span class="string">&#x27;from&#x27;</span>],msg[<span class="string">&#x27;to&#x27;</span>],msg.as_string())</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;邮件发送成功&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#查找最新邮件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">new_file</span>(<span class="params">test_dir</span>):</span></span><br><span class="line">    result_dir = test_dir</span><br><span class="line">    lists = os.listdir(result_dir)  <span class="comment">#print(lists)  #列出测试报告目录下面所有的文件</span></span><br><span class="line">    lists.sort()   <span class="comment">#从小到大排序 文件</span></span><br><span class="line">    file = [x <span class="keyword">for</span> x <span class="keyword">in</span> lists <span class="keyword">if</span> x.endswith(<span class="string">&#x27;.html&#x27;</span>)]  <span class="comment">#for循环遍历以.html格式的测试报告</span></span><br><span class="line">    file_path = os.path.join(result_dir,file[-<span class="number">1</span>])  <span class="comment">#找到测试报告目录下面最新的测试报告</span></span><br><span class="line">    <span class="keyword">return</span> file_path  <span class="comment">#返回最新的测试报告</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    base_dir = os.path.dirname(os.path.realpath(__file__))  <span class="comment">#获取文件当前路径 D:\project\PO\</span></span><br><span class="line">    test_dir = os.path.join(base_dir,<span class="string">&#x27;TestCases&#x27;</span>)  <span class="comment">#D:\project\PO\testCases</span></span><br><span class="line">    test_report = os.path.join(base_dir,<span class="string">&#x27;Reports&#x27;</span>)  <span class="comment">#D:\project\PO\report</span></span><br><span class="line">    testlist = unittest.defaultTestLoader.discover(test_dir,pattern = <span class="string">&#x27;test*.py&#x27;</span>)</span><br><span class="line">    now = time.strftime(<span class="string">&quot;%Y-%m-%d %H_%M_%S&quot;</span>)</span><br><span class="line">    filename = test_report + <span class="string">&quot;\\&quot;</span> + now + <span class="string">&#x27;result.html&#x27;</span></span><br><span class="line">    fp = <span class="built_in">open</span>(filename,<span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">    runner = HTMLTestRunner(stream = fp,</span><br><span class="line">                            title = <span class="string">u&#x27;接口自动化测试框架设计报告&#x27;</span>,</span><br><span class="line">                            description = <span class="string">u&#x27;系统环境:Win10 用例执行情况:&#x27;</span>)</span><br><span class="line">    runner.run(testlist)</span><br><span class="line">    fp.close()</span><br><span class="line">    new_report = new_file(test_report)   <span class="comment">#获取最新报告文件</span></span><br><span class="line">    send_mail(new_report)                <span class="comment">#发送最新的测试报告</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2022/09/13/Interface-auto-test/" title="Interface auto test">https://shenle2019.github.io/2022/09/13/Interface-auto-test/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" rel="tag"># 测试开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/08/28/interface-testing-basic/" rel="next" title="interface testing basic">
+                <i class="fa fa-chevron-left"></i> interface testing basic
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98"><span class="nav-number">1.</span> <span class="nav-text">Python接口自动化实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85request%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">安装request库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#requests-%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82%E5%92%8C%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="nav-number">1.2.</span> <span class="nav-text">requests 发送请求和参数传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86cookie%E3%80%81session%E4%BB%A5%E5%8F%8A-token"><span class="nav-number">1.3.</span> <span class="nav-text">处理cookie、session以及 token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E8%B6%85%E6%97%B6%E7%AD%89%E5%BE%85"><span class="nav-number">1.4.</span> <span class="nav-text">处理超时等待</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#response%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%90"><span class="nav-number">1.5.</span> <span class="nav-text">response对象解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%AE%9E%E6%88%98"><span class="nav-number">1.6.</span> <span class="nav-text">文件上传实战</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">1.7.</span> <span class="nav-text">序列化与反序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML%E4%B8%8EJSON%E6%95%B0%E6%8D%AE%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.8.</span> <span class="nav-text">XML与JSON数据之间的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%BC%80%E5%8F%91"><span class="nav-number">1.9.</span> <span class="nav-text">接口测试框架设计和开发</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'VLcgBQixkeBQUATGzDVaqcpk-gzGzoHsz',
+        appKey: 'hdVMQzxTmu7ohwxMg6TvuY9W',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
