@@ -3482,4 +3482,115 @@
         <tag>意义</tag>
       </tags>
   </entry>
+  <entry>
+    <title>python教程学习笔记002</title>
+    <url>/2023/01/25/python%E6%95%99%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0002/</url>
+    <content><![CDATA[<ol>
+<li>模块</li>
+</ol>
+<p>每一个包目录下面都会有一个__init__.py的文件，这个文件是必须存在的，否则，Python就把这个目录当成普通目录，而不是一个包。<strong>init</strong>.py可以是空文件，也可以有Python代码，因为__init__.py本身就是一个模块<br>自己创建模块时要注意命名，不能和Python自带的模块名称冲突。例如，系统自带了sys模块，自己的模块就不可命名为sys.py，否则将无法导入系统自带的sys模块。<br>我们以内建的sys模块为例，编写一个hello的模块：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; a test module &#x27;</span></span><br><span class="line"></span><br><span class="line">__author__ = <span class="string">&#x27;Michael Liao&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>():</span></span><br><span class="line">    args = sys.argv</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(args)==<span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, world!&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">len</span>(args)==<span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, %s!&#x27;</span> % args[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Too many arguments!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    test()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>当我们在命令行运行hello模块文件时，Python解释器把一个特殊变量__name__置为__main__，而如果在其他地方导入该hello模块时，if判断将失败，因此，这种if测试可以让一个模块通过命令行运行时执行一些额外的代码，最常见的就是运行测试。</p>
+<p>我们可以用命令行运行hello.py看看效果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ python3 hello.py</span><br><span class="line">Hello, world!</span><br><span class="line">$ python hello.py Michael</span><br><span class="line">Hello, Michael!</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>作用域</li>
+</ol>
+<p>在Python中，是通过_前缀来实现的。</p>
+<p>正常的函数和变量名是公开的（public），可以被直接引用，比如：abc，x123，PI等；</p>
+<p>类似__xxx__这样的变量是特殊变量，可以被直接引用，但是有特殊用途，比如上面的__author__，__name__就是特殊变量，hello模块定义的文档注释也可以用特殊变量__doc__访问，我们自己的变量一般不要用这种变量名；</p>
+<p>类似_xxx和__xxx这样的函数或变量就是非公开的（private），不应该被直接引用，比如_abc，__abc等；</p>
+<p>之所以我们说，private函数和变量“不应该”被直接引用，而不是“不能”被直接引用，是因为Python并没有一种方法可以完全限制访问private函数或变量，但是，从编程习惯上不应该引用private函数或变量。</p>
+<ol start="3">
+<li>面向对象编程</li>
+</ol>
+<p>类（Class）和实例（Instance）的概念是很自然的。Class是一种抽象概念，比如我们定义的Class——Student，是指学生这个概念，而实例（Instance）则是一个个具体的Student，比如，Bart Simpson和Lisa Simpson是两个具体的Student。<br>所以，面向对象的设计思想是抽象出Class，根据Class创建Instance。<br>面向对象的抽象程度又比函数要高，因为一个Class既包含数据，又包含操作数据的方法。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, score</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br></pre></td></tr></table></figure>
+
+<p>注意：特殊方法“__init__”前后分别有两个下划线！！！<br>注意到__init__方法的第一个参数永远是self，表示创建的实例本身，因此，在__init__方法内部，就可以把各种属性绑定到self，因为self就指向创建的实例本身。</p>
+<p>有了__init__方法，在创建实例的时候，就不能传入空的参数了，必须传入与__init__方法匹配的参数，但self不需要传，Python解释器自己会把实例变量传进去<br>和普通的函数相比，在类中定义的函数只有一点不同，就是第一个参数永远是实例变量self，并且，调用时，不用传递该参数。除此之外，类的方法和普通函数没有什么区别，所以，你仍然可以用默认参数、可变参数、关键字参数和命名关键字参数。</p>
+<p>原先那种直接通过bart.score = 99也可以修改啊，为什么要定义一个方法大费周折？因为在方法中，可以对参数做检查，避免传入无效的参数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span>(<span class="params">self, score</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt;= score &lt;= <span class="number">100</span>:</span><br><span class="line">            self.__score = score</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;bad score&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，在Python中，变量名类似__xxx__的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是private变量，所以，不能用__name__、__score__这样的变量名。</p>
+<p>继承与多态：<br>继承可以把父类的所有功能都直接拿过来，这样就不必重零做起，子类只需要新增自己特有的方法，也可以把父类不适合的方法覆盖重写。<br>动态语言的鸭子类型特点决定了继承不像静态语言那样是必须的。</p>
+<p>获取对象信息：<br>当我们拿到一个对象的引用时，如何知道这个对象是什么类型、有哪些方法呢？<br>使用type()<br>首先，我们来判断对象类型，使用type()函数<br>基本类型都可以用type()判断<br>如果一个变量指向函数或者类，也可以用type()判断<br>判断基本数据类型可以直接写int，str等，但如果要判断一个对象是否是函数怎么办？可以使用types模块中定义的常量<br>对于class的继承关系来说，使用type()就很不方便。我们要判断class的类型，可以使用isinstance()函数。<br>如果要获得一个对象的所有属性和方法，可以使用dir()函数，它返回一个包含字符串的list</p>
+<ol start="4">
+<li>面向对象高级编程</li>
+</ol>
+<p>使用__slots__ ：<br>如果我们想要限制实例的属性怎么办？比如，只允许对Student实例添加name和age属性。<br>为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的__slots__变量，来限制该class实例能添加的属性：<br>class Student(object):<br>    <strong>slots</strong> = (‘name’, ‘age’) # 用tuple定义允许绑定的属性名称<br>然后，我们试试：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>s = Student() # 创建新的实例<br>s.name = ‘Michael’ # 绑定属性’name’<br>s.age = 25 # 绑定属性’age’<br>s.score = 99 # 绑定属性’score’<br>Traceback (most recent call last):<br>  File “<stdin>“, line 1, in <module><br>AttributeError: ‘Student’ object has no attribute ‘score’<br>由于’score’没有被放到__slots__中，所以不能绑定score属性，试图绑定score将得到AttributeError的错误。<br>使用__slots__要注意，__slots__定义的属性仅对当前类实例起作用，对继承的子类是不起作用的</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>使用@property ：</p>
+<p>在绑定属性时，如果我们直接把属性暴露出去，虽然写起来很简单，但是，没办法检查参数，导致可以把成绩随便改：</p>
+<p>s = Student()<br>s.score = 9999<br>这显然不合逻辑。为了限制score的范围，可以通过一个set_score()方法来设置成绩，再通过一个get_score()来获取成绩，这样，在set_score()方法里，就可以检查参数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_score</span>(<span class="params">self</span>):</span></span><br><span class="line">         <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must be an integer!&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must between 0 ~ 100!&#x27;</span>)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure>
+
+<p>对于类的方法，装饰器一样起作用。Python内置的@property装饰器就是负责把一个方法变成属性调用的：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line"><span class="meta">    @score.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must be an integer!&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must between 0 ~ 100!&#x27;</span>)</span><br><span class="line">        self._score = value</span><br><span class="line">```		</span><br><span class="line"></span><br><span class="line"><span class="meta">@property的实现比较复杂，我们先考察如何使用。把一个getter方法变成属性，只需要加上@property就可以了，此时，@property本身又创建了另一个装饰器@score.setter，负责把一个setter方法变成属性赋值，于是，我们就拥有一个可控的属性操作：</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = Student()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">60</span> <span class="comment"># OK，实际转化为s.set_score(60)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score <span class="comment"># OK，实际转化为s.get_score()</span></span><br><span class="line"><span class="number">60</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">9999</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between <span class="number">0</span> ~ <span class="number">100</span>!</span><br><span class="line">注意到这个神奇的@<span class="built_in">property</span>，我们在对实例属性操作的时候，就知道该属性很可能不是直接暴露的，而是通过getter和setter方法来实现的。</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">多重继承：</span><br><span class="line">对于需要Runnable功能的动物，就多继承一个Runnable，例如Dog：</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>(<span class="params">Mammal, Runnable</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">对于需要Flyable功能的动物，就多继承一个Flyable，例如Bat：</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bat</span>(<span class="params">Mammal, Flyable</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">通过多重继承，一个子类就可以同时获得多个父类的所有功能。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MixIn：</span><br><span class="line">在设计类的继承关系时，通常，主线都是单一继承下来的，例如，Ostrich继承自Bird。但是，如果需要“混入”额外的功能，通过多重继承就可以实现，比如，让Ostrich除了继承自Bird外，再同时继承Runnable。这种设计通常称之为MixIn。</span><br><span class="line">为了更好地看出继承关系，我们把Runnable和Flyable改为RunnableMixIn和FlyableMixIn。类似的，你还可以定义出肉食动物CarnivorousMixIn和植食动物HerbivoresMixIn，让某个动物同时拥有好几个MixIn：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>(<span class="params">Mammal, RunnableMixIn, CarnivorousMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">MixIn的目的就是给一个类增加多个功能，这样，在设计类的时候，我们优先考虑通过多重继承来组合多个MixIn的功能，而不是设计多层次的复杂的继承关系。</span><br><span class="line">Python自带的很多库也使用了MixIn。举个例子，Python自带了TCPServer和UDPServer这两类网络服务，而要同时服务多个用户就必须使用多进程或多线程模型，这两种模型由ForkingMixIn和ThreadingMixIn提供。通过组合，我们就可以创造出合适的服务来。</span><br><span class="line">比如，编写一个多进程模式的TCP服务，定义如下：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTCPServer</span>(<span class="params">TCPServer, ForkingMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">编写一个多线程模式的UDP服务，定义如下：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyUDPServer</span>(<span class="params">UDPServer, ThreadingMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">如果你打算搞一个更先进的协程模型，可以编写一个CoroutineMixIn：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTCPServer</span>(<span class="params">TCPServer, CoroutineMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">这样一来，我们不需要复杂而庞大的继承链，只要选择组合不同的类的功能，就可以快速构造出所需的子类。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">定制类：</span><br><span class="line">看到类似__slots__这种形如__xxx__的变量或者函数名就要注意，这些在Python中是有特殊用途的。</span><br><span class="line">__slots__我们已经知道怎么用了，__len__()方法我们也知道是为了能让<span class="class"><span class="keyword">class</span>作用于<span class="title">len</span>()函数。</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">通常<span class="title">__str__</span>()和<span class="title">__repr__</span>()代码都是一样的，所以，有个偷懒的写法：</span></span><br><span class="line"><span class="class">```<span class="title">python</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Student object (name=%s)&#x27;</span> % self.name</span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>iter</strong><br>如果一个类想被用于for … in循环，类似list或tuple那样，就必须实现一个__iter__()方法，该方法返回一个迭代对象，然后，Python的for循环就会不断调用该迭代对象的__next__()方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环。</p>
+<p><strong>getitem</strong><br>要表现得像list那样按照下标取出元素，需要实现__getitem__()方法</p>
+<p>Python还有另一个机制，那就是写一个__getattr__()方法，动态返回一个属性。修改如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.name = <span class="string">&#x27;Michael&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, attr</span>):</span></span><br><span class="line">        <span class="keyword">if</span> attr==<span class="string">&#x27;score&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">99</span></span><br></pre></td></tr></table></figure>
+
+<p>当调用不存在的属性时，比如score，Python解释器会试图调用__getattr__(self, ‘score’)来尝试获得属性，这样，我们就有机会返回score的值</p>
+<p><strong>call</strong><br>一个对象实例可以有自己的属性和方法，当我们调用实例方法时，我们用instance.method()来调用。能不能直接在实例本身上调用呢？在Python中，答案是肯定的。<br>任何类，只需要定义一个__call__()方法，就可以直接对实例进行调用。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;My name is %s.&#x27;</span> % self.name)</span><br></pre></td></tr></table></figure>
+
+<p>调用方式如下：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>s = Student(‘Michael’)<br>s() # self参数不要传入<br>My name is Michael.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>通过callable()函数，我们就可以判断一个对象是否是“可调用”对象。</p>
+<p>更多方法参考：<a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">https://docs.python.org/3/reference/datamodel.html#special-method-names</a></p>
+<p>枚举类：</p>
+<p>为这样的枚举类型定义一个class类型，然后，每个常量都是class的一个唯一实例。Python提供了Enum类来实现这个功能：</p>
+<p>from enum import Enum<br>Month = Enum(‘Month’, (‘Jan’, ‘Feb’, ‘Mar’, ‘Apr’, ‘May’, ‘Jun’, ‘Jul’, ‘Aug’, ‘Sep’, ‘Oct’, ‘Nov’, ‘Dec’))</p>
+<p>如果需要更精确地控制枚举类型，可以从Enum派生出自定义类：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum, unique</span><br><span class="line"></span><br><span class="line"><span class="meta">@unique</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Weekday</span>(<span class="params">Enum</span>):</span></span><br><span class="line">    Sun = <span class="number">0</span> <span class="comment"># Sun的value被设定为0</span></span><br><span class="line">    Mon = <span class="number">1</span></span><br><span class="line">    Tue = <span class="number">2</span></span><br><span class="line">    Wed = <span class="number">3</span></span><br><span class="line">    Thu = <span class="number">4</span></span><br><span class="line">    Fri = <span class="number">5</span></span><br><span class="line">    Sat = <span class="number">6</span></span><br></pre></td></tr></table></figure>
+<p>@unique装饰器可以帮助我们检查保证没有重复值。</p>
+<p>使用元类：<br>type()<br>动态语言和静态语言最大的不同，就是函数和类的定义，不是编译时定义的，而是运行时动态创建的。</p>
+<p>比方说我们要定义一个Hello的class，就写一个hello.py模块：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hello</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hello</span>(<span class="params">self, name=<span class="string">&#x27;world&#x27;</span></span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, %s.&#x27;</span> % name)</span><br></pre></td></tr></table></figure>
+
+<p>当Python解释器载入hello模块时，就会依次执行该模块的所有语句，执行结果就是动态创建出一个Hello的class对象，测试如下：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>from hello import Hello<br>h = Hello()<br>h.hello()<br>Hello, world.<br>print(type(Hello))<br>&lt;class ‘type’&gt;<br>print(type(h))<br>&lt;class ‘hello.Hello’&gt;<br>type()函数可以查看一个类型或变量的类型，Hello是一个class，它的类型就是type，而h是一个实例，它的类型就是class Hello。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>我们说class的定义是运行时动态创建的，而创建class的方法就是使用type()函数。</p>
+<p>type()函数既可以返回一个对象的类型，又可以创建出新的类型，比如，我们可以通过type()函数创建出Hello类，而无需通过class Hello(object)…的定义：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>def fn(self, name=’world’): # 先定义函数<br>…     print(‘Hello, %s.’ % name)<br>…<br>Hello = type(‘Hello’, (object,), dict(hello=fn)) # 创建Hello class<br>h = Hello()<br>h.hello()<br>Hello, world.<br>print(type(Hello))<br>&lt;class ‘type’&gt;<br>print(type(h))<br>&lt;class ‘__main__.Hello’&gt;<br>要创建一个class对象，type()函数依次传入3个参数：</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>class的名称；<br>继承的父类集合，注意Python支持多重继承，如果只有一个父类，别忘了tuple的单元素写法；<br>class的方法名称与函数绑定，这里我们把函数fn绑定到方法名hello上。<br>通过type()函数创建的类和直接写class是完全一样的，因为Python解释器遇到class定义时，仅仅是扫描一下class定义的语法，然后调用type()函数创建出class。</p>
+<p>正常情况下，我们都用class Xxx…来定义类，但是，type()函数也允许我们动态创建出类来，也就是说，动态语言本身支持运行期动态创建类，这和静态语言有非常大的不同，要在静态语言运行期创建类，必须构造源代码字符串再调用编译器，或者借助一些工具生成字节码实现，本质上都是动态编译，会非常复杂。</p>
+<p>metaclass（了解即可，较为复杂，不常用。可用于ORM）：<br>除了使用type()动态创建类以外，要控制类的创建行为，还可以使用metaclass。<br>metaclass，直译为元类，简单的解释就是：<br>当我们定义了类以后，就可以根据这个类创建出实例，所以：先定义类，然后创建实例。<br>但是如果我们想创建出类呢？那就必须根据metaclass创建出类，所以：先定义metaclass，然后创建类。<br>连接起来就是：先定义metaclass，就可以创建类，最后创建实例。<br>所以，metaclass允许你创建类或者修改类。换句话说，你可以把类看成是metaclass创建出来的“实例”。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>测试开发</tag>
+      </tags>
+  </entry>
 </search>
