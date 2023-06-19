@@ -365,16 +365,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2022/09/13/Interface-auto-test/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2022/09/13/Interface-auto-test/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -427,7 +417,7 @@
 <h3 id="接口测试框架设计和开发"><a href="#接口测试框架设计和开发" class="headerlink" title="接口测试框架设计和开发"></a>接口测试框架设计和开发</h3><p>测试框架<br>Config：<br><strong>init</strong>.py<br>config.ini<br>HTMLTestRunner.py<br>readConfig.py<br>Data：<br><strong>init</strong>.py<br>data.xlsx<br>taskID<br>Token.md<br>Log：<br><strong>init</strong>.py<br>log.txt<br>Reports：<br>2019-01-04 14_05_59result.html<br>2019-01-08 22_29_59result.html<br>2019-01-08 22_30_45result.html<br>2019-02-12 20_22_39result.html<br>2019-02-15 21_03_33result.html<br>2019-03-07 20_52_13result.html<br><strong>init</strong>.py<br>TestCases：<br><strong>init</strong>.py<br>test_tasks.py<br>Utils：<br><strong>init</strong>.py<br>excles.py<br>page.py</p>
 <p><strong>init</strong>.py<br>runMain.py</p>
 <p>config.ini:</p>
-<p>[EMAIL]<br>mail_host = smtp.126.com<br>mail_user = <a href="mailto:&#x6c;&#117;&#114;&#117;&#x69;&#102;&#x65;&#110;&#103;&#64;&#x31;&#50;&#54;&#x2e;&#99;&#x6f;&#x6d;">&#x6c;&#117;&#114;&#117;&#x69;&#102;&#x65;&#110;&#103;&#64;&#x31;&#50;&#54;&#x2e;&#99;&#x6f;&#x6d;</a><br>mail_pass = qq123456789<br>sender = <a href="mailto:&#x6c;&#x75;&#x72;&#117;&#x69;&#102;&#x65;&#110;&#103;&#x78;&#64;&#x31;&#x32;&#54;&#x2e;&#99;&#111;&#x6d;">&#x6c;&#x75;&#x72;&#117;&#x69;&#102;&#x65;&#110;&#103;&#x78;&#64;&#x31;&#x32;&#54;&#x2e;&#99;&#111;&#x6d;</a><br>receiver = <a href="mailto:&#108;&#117;&#114;&#117;&#x69;&#102;&#101;&#x6e;&#103;&#x78;&#64;&#49;&#50;&#54;&#x2e;&#x63;&#x6f;&#109;">&#108;&#117;&#114;&#117;&#x69;&#102;&#101;&#x6e;&#103;&#x78;&#64;&#49;&#50;&#54;&#x2e;&#x63;&#x6f;&#109;</a><br>subject = 接口自动化测试报告</p>
+<p>[EMAIL]<br>mail_host = smtp.126.com<br>mail_user = <a href="mailto:&#108;&#x75;&#114;&#117;&#105;&#x66;&#x65;&#110;&#103;&#x40;&#x31;&#50;&#54;&#x2e;&#99;&#111;&#109;">&#108;&#x75;&#114;&#117;&#105;&#x66;&#x65;&#110;&#103;&#x40;&#x31;&#50;&#54;&#x2e;&#99;&#111;&#109;</a><br>mail_pass = qq123456789<br>sender = <a href="mailto:&#x6c;&#x75;&#114;&#117;&#105;&#102;&#101;&#110;&#103;&#120;&#64;&#49;&#50;&#x36;&#x2e;&#x63;&#111;&#109;">&#x6c;&#x75;&#114;&#117;&#105;&#102;&#101;&#110;&#103;&#120;&#64;&#49;&#50;&#x36;&#x2e;&#x63;&#111;&#109;</a><br>receiver = <a href="mailto:&#x6c;&#x75;&#114;&#x75;&#105;&#102;&#x65;&#110;&#103;&#120;&#64;&#x31;&#50;&#x36;&#x2e;&#x63;&#111;&#x6d;">&#x6c;&#x75;&#114;&#x75;&#105;&#102;&#x65;&#110;&#103;&#120;&#64;&#x31;&#50;&#x36;&#x2e;&#x63;&#111;&#x6d;</a><br>subject = 接口自动化测试报告</p>
 <p>readConfig.py:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">创建configParser对象cf</span><br><span class="line">cf = configparser.ConfigParser()</span><br><span class="line"><span class="comment"># read(filename) 读文件内容</span></span><br><span class="line">filename = cf.read(<span class="string">&quot;config.ini&quot;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(filename)</span><br><span class="line"><span class="comment"># sections() 得到所有的section，以列表形式返回</span></span><br><span class="line">sec = cf.sections()</span><br><span class="line"><span class="built_in">print</span>(sec)</span><br><span class="line"><span class="comment"># options(section) 得到section下的所有option</span></span><br><span class="line">opt = cf.options(<span class="string">&quot;EMAIL&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(opt)</span><br><span class="line"><span class="comment"># items 得到section的所有键值对</span></span><br><span class="line">value = cf.items(<span class="string">&quot;EMAIL&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(value)</span><br><span class="line"><span class="comment"># get(section,option) 得到section中的option值，返回string/int类型的结果</span></span><br><span class="line">email_host = cf.get(<span class="string">&quot;EMAIL&quot;</span>,<span class="string">&quot;mail_host&quot;</span>)</span><br><span class="line">email_password = cf.get(<span class="string">&quot;EMAIL&quot;</span>,<span class="string">&quot;mail_pass&quot;</span>)</span><br><span class="line">email_sender = cf.get(<span class="string">&#x27;EMAIL&#x27;</span>,<span class="string">&#x27;sender&#x27;</span>)</span><br><span class="line">email_user = cf.get(<span class="string">&#x27;EMAIL&#x27;</span>,<span class="string">&#x27;mail_user&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -903,28 +893,6 @@
 
 
 
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: 'VLcgBQixkeBQUATGzDVaqcpk-gzGzoHsz',
-        appKey: 'hdVMQzxTmu7ohwxMg6TvuY9W',
-        placeholder: 'Just go go',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
 
 
 

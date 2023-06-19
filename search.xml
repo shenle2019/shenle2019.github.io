@@ -57,7 +57,7 @@
 <h3 id="接口测试框架设计和开发"><a href="#接口测试框架设计和开发" class="headerlink" title="接口测试框架设计和开发"></a>接口测试框架设计和开发</h3><p>测试框架<br>Config：<br><strong>init</strong>.py<br>config.ini<br>HTMLTestRunner.py<br>readConfig.py<br>Data：<br><strong>init</strong>.py<br>data.xlsx<br>taskID<br>Token.md<br>Log：<br><strong>init</strong>.py<br>log.txt<br>Reports：<br>2019-01-04 14_05_59result.html<br>2019-01-08 22_29_59result.html<br>2019-01-08 22_30_45result.html<br>2019-02-12 20_22_39result.html<br>2019-02-15 21_03_33result.html<br>2019-03-07 20_52_13result.html<br><strong>init</strong>.py<br>TestCases：<br><strong>init</strong>.py<br>test_tasks.py<br>Utils：<br><strong>init</strong>.py<br>excles.py<br>page.py</p>
 <p><strong>init</strong>.py<br>runMain.py</p>
 <p>config.ini:</p>
-<p>[EMAIL]<br>mail_host = smtp.126.com<br>mail_user = <a href="mailto:&#x6c;&#117;&#114;&#117;&#x69;&#102;&#x65;&#110;&#103;&#64;&#x31;&#50;&#54;&#x2e;&#99;&#x6f;&#x6d;">&#x6c;&#117;&#114;&#117;&#x69;&#102;&#x65;&#110;&#103;&#64;&#x31;&#50;&#54;&#x2e;&#99;&#x6f;&#x6d;</a><br>mail_pass = qq123456789<br>sender = <a href="mailto:&#x6c;&#x75;&#x72;&#117;&#x69;&#102;&#x65;&#110;&#103;&#x78;&#64;&#x31;&#x32;&#54;&#x2e;&#99;&#111;&#x6d;">&#x6c;&#x75;&#x72;&#117;&#x69;&#102;&#x65;&#110;&#103;&#x78;&#64;&#x31;&#x32;&#54;&#x2e;&#99;&#111;&#x6d;</a><br>receiver = <a href="mailto:&#108;&#117;&#114;&#117;&#x69;&#102;&#101;&#x6e;&#103;&#x78;&#64;&#49;&#50;&#54;&#x2e;&#x63;&#x6f;&#109;">&#108;&#117;&#114;&#117;&#x69;&#102;&#101;&#x6e;&#103;&#x78;&#64;&#49;&#50;&#54;&#x2e;&#x63;&#x6f;&#109;</a><br>subject = 接口自动化测试报告</p>
+<p>[EMAIL]<br>mail_host = smtp.126.com<br>mail_user = <a href="mailto:&#108;&#x75;&#114;&#117;&#105;&#x66;&#x65;&#110;&#103;&#x40;&#x31;&#50;&#54;&#x2e;&#99;&#111;&#109;">&#108;&#x75;&#114;&#117;&#105;&#x66;&#x65;&#110;&#103;&#x40;&#x31;&#50;&#54;&#x2e;&#99;&#111;&#109;</a><br>mail_pass = qq123456789<br>sender = <a href="mailto:&#x6c;&#x75;&#114;&#117;&#105;&#102;&#101;&#110;&#103;&#120;&#64;&#49;&#50;&#x36;&#x2e;&#x63;&#111;&#109;">&#x6c;&#x75;&#114;&#117;&#105;&#102;&#101;&#110;&#103;&#120;&#64;&#49;&#50;&#x36;&#x2e;&#x63;&#111;&#109;</a><br>receiver = <a href="mailto:&#x6c;&#x75;&#114;&#x75;&#105;&#102;&#x65;&#110;&#103;&#120;&#64;&#x31;&#50;&#x36;&#x2e;&#x63;&#111;&#x6d;">&#x6c;&#x75;&#114;&#x75;&#105;&#102;&#x65;&#110;&#103;&#120;&#64;&#x31;&#50;&#x36;&#x2e;&#x63;&#111;&#x6d;</a><br>subject = 接口自动化测试报告</p>
 <p>readConfig.py:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">创建configParser对象cf</span><br><span class="line">cf = configparser.ConfigParser()</span><br><span class="line"><span class="comment"># read(filename) 读文件内容</span></span><br><span class="line">filename = cf.read(<span class="string">&quot;config.ini&quot;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(filename)</span><br><span class="line"><span class="comment"># sections() 得到所有的section，以列表形式返回</span></span><br><span class="line">sec = cf.sections()</span><br><span class="line"><span class="built_in">print</span>(sec)</span><br><span class="line"><span class="comment"># options(section) 得到section下的所有option</span></span><br><span class="line">opt = cf.options(<span class="string">&quot;EMAIL&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(opt)</span><br><span class="line"><span class="comment"># items 得到section的所有键值对</span></span><br><span class="line">value = cf.items(<span class="string">&quot;EMAIL&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(value)</span><br><span class="line"><span class="comment"># get(section,option) 得到section中的option值，返回string/int类型的结果</span></span><br><span class="line">email_host = cf.get(<span class="string">&quot;EMAIL&quot;</span>,<span class="string">&quot;mail_host&quot;</span>)</span><br><span class="line">email_password = cf.get(<span class="string">&quot;EMAIL&quot;</span>,<span class="string">&quot;mail_pass&quot;</span>)</span><br><span class="line">email_sender = cf.get(<span class="string">&#x27;EMAIL&#x27;</span>,<span class="string">&#x27;sender&#x27;</span>)</span><br><span class="line">email_user = cf.get(<span class="string">&#x27;EMAIL&#x27;</span>,<span class="string">&#x27;mail_user&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -1429,6 +1429,64 @@
       </tags>
   </entry>
   <entry>
+    <title>UI自动化测试补充内容</title>
+    <url>/2023/06/20/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E8%A1%A5%E5%85%85%E5%86%85%E5%AE%B9/</url>
+    <content><![CDATA[<h3 id="UI自动化测试补充内容："><a href="#UI自动化测试补充内容：" class="headerlink" title="UI自动化测试补充内容："></a>UI自动化测试补充内容：</h3><p>Q:如何让selenium自动下载driver，一次代码即可永久使用？<br>A:你可以使用webdriver_manager库来自动下载Chrome的driver，并且该库可以确保每次调用时都使用最新版本的driver。<br>以下是一个示例代码，使用webdriver_manager库来下载和管理Chrome驱动器：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> webdriver_manager.chrome <span class="keyword">import</span> ChromeDriverManager</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载并安装Chrome驱动程序</span></span><br><span class="line">driver = webdriver.Chrome(ChromeDriverManager().install())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行你的Selenium代码...</span></span><br></pre></td></tr></table></figure>
+
+<p>这将在第一次运行代码时自动下载最新版本的Chrome驱动程序，并在后续的调用中重复使用已下载的驱动程序。</p>
+<p>Q:元素定位中的难点问题，比如日期控件中的时间如何选择？</p>
+<p>A:日期控件是Selenium中常见的难点之一，因为日期控件通常包含不同的HTML元素和JavaScript代码。以下是一些可以帮助你定位和选择日期控件中的时间的方法：<br>使用JavaScript执行点击操作：如果日期控件是通过JavaScript实现的，你可以使用Selenium的execute_script()方法来模拟JavaScript点击事件。例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">&quot;https://www.example.com/&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 点击日期控件中的某个日期</span></span><br><span class="line">date_input = driver.find_element_by_xpath(<span class="string">&quot;//input[@id=&#x27;date-picker&#x27;]&quot;</span>)</span><br><span class="line">driver.execute_script(<span class="string">&quot;arguments[0].click();&quot;</span>, date_input)</span><br><span class="line"></span><br><span class="line">date_picker = driver.find_element_by_xpath(<span class="string">&quot;//div[@class=&#x27;date-picker-container&#x27;]&quot;</span>)</span><br><span class="line">selected_date = date_picker.find_element_by_xpath(<span class="string">&quot;//td[@class=&#x27;selected&#x27;]//span&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(selected_date.text)</span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中，我们使用execute_script()方法单击日期控件，并在控件弹出窗口中选择了选定的日期。<br>直接发送日期值：对于某些日期控件，可以直接将日期文本值输入到文本框中。例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">&quot;https://www.example.com/&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入日期并提交表单</span></span><br><span class="line">date_input = driver.find_element_by_xpath(<span class="string">&quot;//input[@id=&#x27;date-picker&#x27;]&quot;</span>)</span><br><span class="line">date_input.send_keys(<span class="string">&quot;2022-12-31&quot;</span>)</span><br><span class="line">submit_button = driver.find_element_by_xpath(<span class="string">&quot;//button[@type=&#x27;submit&#x27;]&quot;</span>)</span><br><span class="line">submit_button.click()</span><br></pre></td></tr></table></figure>
+
+
+<p>在上面的示例中，我们直接将日期文本值输入到日期输入框中，并单击提交按钮。<br>使用第三方库：有一些第三方Python库可以帮助你定位和选择日期控件。例如，如果你使用的是jQuery UI DatePicker控件，则可以使用dateutil库来解析日期字符串并设置日期值。例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> dateutil.parser <span class="keyword">import</span> parse</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">&quot;https://www.example.com/&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入日期并提交表单</span></span><br><span class="line">date_input = driver.find_element_by_xpath(<span class="string">&quot;//input[@id=&#x27;date-picker&#x27;]&quot;</span>)</span><br><span class="line">date_input.click()</span><br><span class="line"></span><br><span class="line">date_picker = driver.find_element_by_xpath(<span class="string">&quot;//div[@class=&#x27;date-picker-container&#x27;]&quot;</span>)</span><br><span class="line">selected_date = date_picker.find_element_by_xpath(<span class="string">&quot;//td[@class=&#x27;selected&#x27;]//span&quot;</span>)</span><br><span class="line">date_str = selected_date.text + <span class="string">&quot; 2022&quot;</span></span><br><span class="line">date_value = parse(date_str, fuzzy=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">date_input.clear()</span><br><span class="line">date_input.send_keys(date_value.strftime(<span class="string">&#x27;%m/%d/%Y&#x27;</span>))</span><br><span class="line"></span><br><span class="line">submit_button = driver.find_element_by_xpath(<span class="string">&quot;//button[@type=&#x27;submit&#x27;]&quot;</span>)</span><br><span class="line">submit_button.click()</span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中，我们使用dateutil库来解析日期字符串，并将其转换为datetime对象。然后，我们清除了日期输入框中的任何现有文本，并发送格式化的日期值。</p>
+<p>Q:POM分层设计思想的理解。<br>A:本质，面向对象编程，而不是面向过程编程。<br>每一个页面，定义一个类，分为数据以及方法两个层面。<br>基础的内容可以放到basepage中，然后继承这个page的属性，比如初始化一个drivier，geturl，点击跳转，退出等等操作。</p>
+<p>POM（Page Object Model）分层设计思想是一种将页面元素和操作分离的设计模式，<br>通过创建一个与页面相关的类，来管理页面上的所有元素和操作。<br>这种设计模式使得测试用例更加清晰、可维护、可扩展，并且提高了测试脚本的可重用性。<br>POM分层设计通常包括以下三个层次：<br>页面层：这一层主要负责页面元素的封装和页面操作的实现，将页面中的元素和操作封装到一个Page类中，提供给业务层使用。</p>
+<p>业务层：这一层主要负责业务逻辑的实现，将测试用例中的步骤分解成具体的业务操作，并调用页面层的方法来实现。</p>
+<p>测试用例层：这一层主要负责编写测试用例，调用业务层的方法来实现具体的测试场景。</p>
+<p>下面是一个简单的示例：<br>页面层：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginPage</span>:</span></span><br><span class="line">    url = <span class="string">&#x27;https://www.example.com/login&#x27;</span></span><br><span class="line"></span><br><span class="line">    username_input = (By.ID, <span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">    password_input = (By.ID, <span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">    login_button = (By.XPATH, <span class="string">&#x27;//button[contains(text(), &quot;Login&quot;)]&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, driver</span>):</span></span><br><span class="line">        self.driver = driver</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.driver.get(self.url)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">input_username</span>(<span class="params">self, username</span>):</span></span><br><span class="line">        self.driver.find_element(*self.username_input).send_keys(username)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">input_password</span>(<span class="params">self, password</span>):</span></span><br><span class="line">        self.driver.find_element(*self.password_input).send_keys(password)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">click_login_button</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.driver.find_element(*self.login_button).click()</span><br></pre></td></tr></table></figure>
+
+
+<p>业务层：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginService</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, driver</span>):</span></span><br><span class="line">        self.login_page = LoginPage(driver)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login</span>(<span class="params">self, username, password</span>):</span></span><br><span class="line">        self.login_page.<span class="built_in">open</span>()</span><br><span class="line">        self.login_page.input_username(username)</span><br><span class="line">        self.login_page.input_password(password)</span><br><span class="line">        self.login_page.click_login_button()</span><br></pre></td></tr></table></figure>
+
+<p>测试用例层：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestLogin</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.driver = webdriver.Chrome()</span><br><span class="line">        self.login_service = LoginService(self.driver)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_login_success</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.login_service.login(<span class="string">&#x27;testuser&#x27;</span>, <span class="string">&#x27;testpassword&#x27;</span>)</span><br><span class="line">        <span class="comment"># 断言登录成功后的页面跳转或页面元素</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tearDown</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.driver.quit()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    unittest.main()</span><br></pre></td></tr></table></figure>
+<p>通过以上示例，我们可以看到，POM分层设计将页面元素和操作封装到了Page类中，将具体的业务操作封装到了Service类中，并且使得测试用例更加清晰、可维护、可扩展。</p>
+<p>Q:pytest框架的使用方法。<br>A:pytest是一个流行的Python测试框架，它提供了简单易用、灵活的测试用例编写方式和丰富的插件机制。pytest可以用于各种类型的测试，包括单元测试、功能测试、端到端测试等。<br>使用pytest的原理是基于Python标准库中的unittest模块，并扩展了更多的功能和特性。<br>pytest支持自动发现测试用例，不需要继承TestCase类，而是通过函数定义来编写测试用例，<br>测试函数的名称必须以test_开头，pytest会自动执行这些函数并生成测试报告。</p>
+<p>下面是一个简单的pytest测试用例示例：<br>def test_add():<br>    assert 1 + 2 == 3</p>
+<p>def test_subtract():<br>    assert 5 - 3 == 2</p>
+<p>上述代码中，我们定义了两个测试函数，分别用于测试加法和减法操作。在函数中使用assert语句来进行断言，如果断言失败，则测试用例会失败。<br>在终端中运行pytest命令即可执行这些测试用例：<br>$ pytest test_sample.py</p>
+<p>pytest还提供了许多内置插件和第三方插件，可以扩展其功能，例如：<br>pytest-html：生成漂亮的HTML测试报告<br>pytest-xdist：多进程并行执行测试用例<br>pytest-selenium：集成selenium WebDriver来进行Web应用程序的测试<br>下面是一个使用pytest+selenium的测试用例示例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pytest</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line"><span class="meta">@pytest.fixture(<span class="params">scope=<span class="string">&#x27;session&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">browser</span>():</span></span><br><span class="line">    driver = webdriver.Chrome()</span><br><span class="line">    <span class="keyword">yield</span> driver</span><br><span class="line">    driver.quit()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_login_success</span>(<span class="params">browser</span>):</span></span><br><span class="line">    browser.get(<span class="string">&#x27;https://www.example.com/login&#x27;</span>)</span><br><span class="line">    username_input = browser.find_element_by_id(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">    password_input = browser.find_element_by_id(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">    login_button = browser.find_element_by_xpath(<span class="string">&#x27;//button[contains(text(), &quot;Login&quot;)]&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    username_input.send_keys(<span class="string">&#x27;testuser&#x27;</span>)</span><br><span class="line">    password_input.send_keys(<span class="string">&#x27;testpassword&#x27;</span>)</span><br><span class="line">    login_button.click()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> browser.current_url == <span class="string">&#x27;https://www.example.com/home&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，我们使用pytest的fixture机制来管理WebDriver对象的生命周期，在测试用例中通过browser参数来访问WebDriver对象。这个测试用例使用selenium WebDriver来模拟用户登录行为，并进行断言验证。<br>综上所述，pytest是一个简单易用、灵活的测试框架，通过函数定义来编写测试用例，支持自动发现测试用例和丰富的插件机制。同时，结合selenium WebDriver可以方便地进行Web应用程序的测试。</p>
+<p>Q:selenium grid 分布式的原理思路。<br>A:分布式，不同于进程、线程那些概念，分布式是多台机器协同完成一个工作。</p>
+<p>什么是分布式系统？<br>分布式系统是一种由多台计算机组成的系统，它们可以通过网络连接在一起，共同完成某项任务。它们可以共享资源，允许计算机之间的通信，并且可以提高系统的可靠性和可扩展性。<br>分布式系统一般跟什么系统来作比较？<br>分布式系统通常与集中式系统进行比较。集中式系统是一种由单台计算机组成的系统，它可以独立完成某项任务，但是它的可靠性和可扩展性较低？<br>分布式系统相比较集中式系统的优缺点有哪些？<br>分布式系统相比集中式系统的优点有：<br>更高的可靠性，更高的可扩展性，更高的可用性，更低的成本，更高的安全性，更高的可管理性等。<br>缺点是：更复杂的系统结构，更复杂的网络管理，更复杂的数据同步，更复杂的安全管理等。</p>
+<p>理解：多台机器完成一项任务。</p>
+<p>Selenium Grid是Selenium的一个组件，它允许将测试用例分发到不同的机器和浏览器上并行运行。Selenium Grid有两个主要组成部分：Hub和Node。<br>Hub是中心节点，负责管理所有的测试请求和分发给各个Node进行执行。而Node则是实际执行测试的节点，每个Node可以同时运行多个浏览器实例，根据测试需求来决定使用哪种浏览器。<br>下面以一个简单的示例来说明Python+Selenium Grid的使用方法：<br>启动Hub<br>在终端输入以下命令启动Hub：<br>java -jar selenium-server-standalone-3.x.x.jar -role hub</p>
+<p>其中selenium-server-standalone-3.x.x.jar为Selenium Server的JAR包路径，可以从官网下载。<br>启动Node<br>在另一个终端窗口中输入以下命令启动Node：<br>java -jar selenium-server-standalone-3.x.x.jar -role node -hub <a href="http://localhost:4444/grid/register">http://localhost:4444/grid/register</a> -browser browserName=chrome,maxInstances=5 -browser browserName=firefox,maxInstances=5</p>
+<p>其中<a href="http://localhost:4444/grid/register%E4%B8%BAHub%E7%9A%84%E5%9C%B0%E5%9D%80%EF%BC%8C-browser%E5%8F%82%E6%95%B0%E6%8C%87%E5%AE%9A%E4%BA%86Node%E6%89%80%E6%94%AF%E6%8C%81%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%8A%E6%9C%80%E5%A4%A7%E5%AE%9E%E4%BE%8B%E6%95%B0%E3%80%82">http://localhost:4444/grid/register为Hub的地址，-browser参数指定了Node所支持的浏览器及最大实例数。</a><br>编写测试脚本<br>假设我们有一个测试用例，需要在Chrome和Firefox上分别打开百度首页，并搜索关键字“selenium”。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.desired_capabilities <span class="keyword">import</span> DesiredCapabilities</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义浏览器配置</span></span><br><span class="line">chrome_caps = DesiredCapabilities.CHROME.copy()</span><br><span class="line">chrome_caps[<span class="string">&#x27;platform&#x27;</span>] = <span class="string">&#x27;WINDOWS&#x27;</span></span><br><span class="line">chrome_caps[<span class="string">&#x27;version&#x27;</span>] = <span class="string">&#x27;10&#x27;</span></span><br><span class="line"></span><br><span class="line">firefox_caps = DesiredCapabilities.FIREFOX.copy()</span><br><span class="line">firefox_caps[<span class="string">&#x27;platform&#x27;</span>] = <span class="string">&#x27;WINDOWS&#x27;</span></span><br><span class="line">firefox_caps[<span class="string">&#x27;version&#x27;</span>] = <span class="string">&#x27;10&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动远程浏览器</span></span><br><span class="line">chrome_driver = webdriver.Remote(</span><br><span class="line">    command_executor=<span class="string">&#x27;http://localhost:4444/wd/hub&#x27;</span>,</span><br><span class="line">    desired_capabilities=chrome_caps)</span><br><span class="line"></span><br><span class="line">firefox_driver = webdriver.Remote(</span><br><span class="line">    command_executor=<span class="string">&#x27;http://localhost:4444/wd/hub&#x27;</span>,</span><br><span class="line">    desired_capabilities=firefox_caps)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开百度首页</span></span><br><span class="line">chrome_driver.get(<span class="string">&#x27;https://www.baidu.com&#x27;</span>)</span><br><span class="line">firefox_driver.get(<span class="string">&#x27;https://www.baidu.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索关键字</span></span><br><span class="line">chrome_input = chrome_driver.find_element_by_css_selector(<span class="string">&#x27;#kw&#x27;</span>)</span><br><span class="line">chrome_input.send_keys(<span class="string">&#x27;selenium&#x27;</span>)</span><br><span class="line">chrome_input.submit()</span><br><span class="line"></span><br><span class="line">firefox_input = firefox_driver.find_element_by_css_selector(<span class="string">&#x27;#kw&#x27;</span>)</span><br><span class="line">firefox_input.send_keys(<span class="string">&#x27;selenium&#x27;</span>)</span><br><span class="line">firefox_input.submit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭浏览器</span></span><br><span class="line">chrome_driver.quit()</span><br><span class="line">firefox_driver.quit()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在代码中，我们使用DesiredCapabilities类来定义不同浏览器的配置信息，<br>然后通过webdriver.Remote()方法启动远程浏览器，并指定执行测试的Hub地址。<br>最后，分别在Chrome和Firefox上打开百度首页，并搜索关键字“selenium”。<br>运行测试脚本<br>在终端中输入以下命令运行测试脚本：<br>python test.py</p>
+<p>此时，测试脚本会向Hub发送请求，将测试任务分配给可用的Node进行执行。<br>如果有多个Node可用，则测试会在多个浏览器实例上并行运行，从而提高测试效率。<br>以上就是Python+Selenium Grid的使用方法，通过启动Hub和Node来实现分布式测试，<br>并在测试脚本中指定远程浏览器的配置和执行地址，从而实现对不同浏览器和操作系统的并行测试。</p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试开发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>interface testing basic</title>
     <url>/2022/08/28/interface-testing-basic/</url>
     <content><![CDATA[<h2 id="接口测试"><a href="#接口测试" class="headerlink" title="接口测试"></a>接口测试</h2><h3 id="接口测试的定义"><a href="#接口测试的定义" class="headerlink" title="接口测试的定义"></a>接口测试的定义</h3><p>接口测试是测试系统组件间接口的一种测试。重点是检查数据交换、传递和控制管理过程，以及系统间相互逻辑依赖关系等。</p>
@@ -1469,6 +1527,73 @@
       </categories>
       <tags>
         <tag>测试开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>markdown语法</title>
+    <url>/2021/11/29/markdown%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<p>markdown的语法非常简单，常见的标记符合不超过10个，用于日常写作记录绰绰有余，不到半个小时就能完全掌握。</p>
+<p>1.标题</p>
+<p>标题是每篇文章必备而且最常用的格式。<br>在Markdown中，如果想将一段文字定义为标题，只需要在这段文字前面加上 #，再在 # 后加一个空格即可。<br>还可增加二、三、四、五、六级标题，总共六级，只需要增加 # ，增加一个 # ，标题字号相应降低一级。</p>
+<p>#一级标题<br>##二级标题<br>###三级标题<br>####四级标题</p>
+<p>2.列表</p>
+<p>列表格式也很常用，它可以让你的文稿变得井井有条。在 Markdown 中，你只需要在文字前面加上 - 就可以了；<br>如果你希望是有序列表，在文字前面加上 1. 2. 3. 即可。<br>注：-、1.和文字之间要保留一个字符的空格。</p>
+<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><ul>
+<li>列表1<ul>
+<li>列表1.1</li>
+<li>列表1.2</li>
+</ul>
+</li>
+<li>列表2</li>
+<li>列表3</li>
+</ul>
+<p>3.引用</p>
+<p>如果你需要在文稿中引用一段别处的句子，那么就要用到「引用」格式。</p>
+<p>　　在引用文字前加上 &gt; 并与文字保留一个字符的空格，即可。</p>
+<p>###引用</p>
+<blockquote>
+<p>记录，成为最好的自己，为此而奋斗</p>
+</blockquote>
+<p>4.粗体和斜体</p>
+<p>Markdown 的粗体和斜体也非常简单：</p>
+<p>　　用两个 * 包含一段文本就是粗体的语法；</p>
+<p>　　用一个 * 包含一段文本就是斜体的语法。</p>
+<p><em>这是粗体</em><br><strong>这是斜体</strong></p>
+<h4 id="注意：符号和文本之间无须空格"><a href="#注意：符号和文本之间无须空格" class="headerlink" title="注意：符号和文本之间无须空格"></a>注意：符号和文本之间无须空格</h4><p>5.链接与图片</p>
+<p>链接：在 Markdown 中，插入链接只需要使用 <a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">显示文本</a> 即可。</p>
+<p>　　图片：在 Markdown 中，插入图片只需要使用 <img src="%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" alt="显示文本">即可。</p>
+<p>　　注：插入图片的语法和链接的语法很像，只是前面多了一个 ！</p>
+<h3 id="插入链接"><a href="#插入链接" class="headerlink" title="插入链接"></a>插入链接</h3><p><a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">显示文本</a></p>
+<h3 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h3><p><img src="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" alt="显示文本"></p>
+<p>6.分割线<br>　分割线的语法只需要另起一行，连续输入三个星号 *** 即可分割两段文字内容。</p>
+<p>###分割线<br>这是第一段的内容</p>
+<hr>
+<p>这是第二段的内容</p>
+<p>7.表格</p>
+<p>当你需要在Markdown文稿中键入表格，代码如下：</p>
+<table>
+<thead>
+<tr>
+<th>header 1</th>
+<th>header 2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>row 1 col 1</td>
+<td>row 1 col 2</td>
+</tr>
+<tr>
+<td>row 2 col 1</td>
+<td>row 2 col 2</td>
+</tr>
+</tbody></table>
+<p>8.windows程序如何生成目录结构树？<br>电脑中打开cmd<br>在cmd中进入要生成目录结构的目录<br>输入：tree /f &gt; list.txt（目录结构输入成功，并保存为一个list.txt文件）<br>打开此文件，即可看到生成的目录结构树</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
       </tags>
   </entry>
   <entry>
@@ -1647,114 +1772,6 @@
       </tags>
   </entry>
   <entry>
-    <title>markdown语法</title>
-    <url>/2021/11/29/markdown%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<p>markdown的语法非常简单，常见的标记符合不超过10个，用于日常写作记录绰绰有余，不到半个小时就能完全掌握。</p>
-<p>1.标题</p>
-<p>标题是每篇文章必备而且最常用的格式。<br>在Markdown中，如果想将一段文字定义为标题，只需要在这段文字前面加上 #，再在 # 后加一个空格即可。<br>还可增加二、三、四、五、六级标题，总共六级，只需要增加 # ，增加一个 # ，标题字号相应降低一级。</p>
-<p>#一级标题<br>##二级标题<br>###三级标题<br>####四级标题</p>
-<p>2.列表</p>
-<p>列表格式也很常用，它可以让你的文稿变得井井有条。在 Markdown 中，你只需要在文字前面加上 - 就可以了；<br>如果你希望是有序列表，在文字前面加上 1. 2. 3. 即可。<br>注：-、1.和文字之间要保留一个字符的空格。</p>
-<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><ul>
-<li>列表1<ul>
-<li>列表1.1</li>
-<li>列表1.2</li>
-</ul>
-</li>
-<li>列表2</li>
-<li>列表3</li>
-</ul>
-<p>3.引用</p>
-<p>如果你需要在文稿中引用一段别处的句子，那么就要用到「引用」格式。</p>
-<p>　　在引用文字前加上 &gt; 并与文字保留一个字符的空格，即可。</p>
-<p>###引用</p>
-<blockquote>
-<p>记录，成为最好的自己，为此而奋斗</p>
-</blockquote>
-<p>4.粗体和斜体</p>
-<p>Markdown 的粗体和斜体也非常简单：</p>
-<p>　　用两个 * 包含一段文本就是粗体的语法；</p>
-<p>　　用一个 * 包含一段文本就是斜体的语法。</p>
-<p><em>这是粗体</em><br><strong>这是斜体</strong></p>
-<h4 id="注意：符号和文本之间无须空格"><a href="#注意：符号和文本之间无须空格" class="headerlink" title="注意：符号和文本之间无须空格"></a>注意：符号和文本之间无须空格</h4><p>5.链接与图片</p>
-<p>链接：在 Markdown 中，插入链接只需要使用 <a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">显示文本</a> 即可。</p>
-<p>　　图片：在 Markdown 中，插入图片只需要使用 <img src="%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" alt="显示文本">即可。</p>
-<p>　　注：插入图片的语法和链接的语法很像，只是前面多了一个 ！</p>
-<h3 id="插入链接"><a href="#插入链接" class="headerlink" title="插入链接"></a>插入链接</h3><p><a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">显示文本</a></p>
-<h3 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h3><p><img src="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" alt="显示文本"></p>
-<p>6.分割线<br>　分割线的语法只需要另起一行，连续输入三个星号 *** 即可分割两段文字内容。</p>
-<p>###分割线<br>这是第一段的内容</p>
-<hr>
-<p>这是第二段的内容</p>
-<p>7.表格</p>
-<p>当你需要在Markdown文稿中键入表格，代码如下：</p>
-<table>
-<thead>
-<tr>
-<th>header 1</th>
-<th>header 2</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>row 1 col 1</td>
-<td>row 1 col 2</td>
-</tr>
-<tr>
-<td>row 2 col 1</td>
-<td>row 2 col 2</td>
-</tr>
-</tbody></table>
-<p>8.windows程序如何生成目录结构树？<br>电脑中打开cmd<br>在cmd中进入要生成目录结构的目录<br>输入：tree /f &gt; list.txt（目录结构输入成功，并保存为一个list.txt文件）<br>打开此文件，即可看到生成的目录结构树</p>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>nexo-Next中添加网易云音乐+切换页面自动播放</title>
-    <url>/2021/11/29/nexo-Next%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90-%E5%88%87%E6%8D%A2%E9%A1%B5%E9%9D%A2%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE/</url>
-    <content><![CDATA[<h3 id="网易云音乐歌单生成外链播放器"><a href="#网易云音乐歌单生成外链播放器" class="headerlink" title="网易云音乐歌单生成外链播放器"></a>网易云音乐歌单生成外链播放器</h3><p>参考<br><a href="https://www.cnblogs.com/yuan2333/p/7244380.html">https://www.cnblogs.com/yuan2333/p/7244380.html</a></p>
-<ul>
-<li>注意网页版网易云看的比较清楚</li>
-<li>创建歌单</li>
-<li>点击分享</li>
-<li>查看【朋友】-【我的动态】</li>
-<li>点进歌单-【生成外链播放器】</li>
-</ul>
-<h3 id="在网页中添加网易云音乐歌单"><a href="#在网页中添加网易云音乐歌单" class="headerlink" title="在网页中添加网易云音乐歌单"></a>在网页中添加网易云音乐歌单</h3><p>参考：<br><a href="https://otakurice.github.io/2018/07/20/hexo%20%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E6%AD%8C%E5%8D%95/">https://otakurice.github.io/2018/07/20/hexo%20%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E6%AD%8C%E5%8D%95/</a></p>
-<ul>
-<li>基本操作，如果只需要加一首歌或者主页面加歌单列表，手动播放，则只需要<br>修改主题文件夹下layout_macro\sidebar.swig文件(这是侧边栏路径)，将上述代码贴入到想放的位置。<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;music163player&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginwidth</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginheight</span>=<span class="string">&quot;0&quot;</span> <span class="attr">width</span>=<span class="string">280</span> <span class="attr">height</span>=<span class="string">86</span> <span class="attr">src</span>=<span class="string">&quot;//music.163.com/outchain/player?type=2&amp;id=28885472&amp;auto=1&amp;height=66&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;music163player&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginwidth</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginheight</span>=<span class="string">&quot;0&quot;</span> <span class="attr">width</span>=<span class="string">280</span> <span class="attr">height</span>=<span class="string">86</span> <span class="attr">src</span>=<span class="string">&quot;//music.163.com/outchain/player?type=2&amp;id=28885472&amp;auto=1&amp;height=66&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="想全局播放-切网页自动播放"><a href="#想全局播放-切网页自动播放" class="headerlink" title="想全局播放+切网页自动播放"></a>想全局播放+切网页自动播放</h3><p>参考：<br><a href="https://blog.csdn.net/qq_39720594/article/details/105401774https://blog.csdn.net/qq_39720594/article/details/105401774">https://blog.csdn.net/qq_39720594/article/details/105401774https://blog.csdn.net/qq_39720594/article/details/105401774</a></p>
-<p>git cmd 安装：<br>npm install aplayer –save</p>
-<p>使用Aplayer + MetingJS插件<br>打开我们主题文件：themes\next\layout_macro\sidebar.swig找到sidebar-inner，复制下面代码粘贴到此<div>标签后即可。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- require APlayer --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- require MetingJS--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="comment">&lt;!--网易云--&gt;</span>   </span><br><span class="line"><span class="tag">&lt;<span class="name">meting-js</span></span></span><br><span class="line"><span class="tag"><span class="attr">server</span>=<span class="string">&quot;netease&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">id</span>=<span class="string">&quot;7091778006&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">type</span>=<span class="string">&quot;playlist&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">mini</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">fixed</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">list-folded</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">autoplay</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">volume</span>=<span class="string">&quot;0.5&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">theme</span>=<span class="string">&quot;#FADFA3&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">order</span>=<span class="string">&quot;random&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">loop</span>=<span class="string">&quot;all&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">preload</span>=<span class="string">&quot;auto&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">mutex</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">meting-js</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这里面注意修改id为自己的歌单id即可。</p>
-<p>其他配置项参考：<br><a href="https://github.com/metowolf/MetingJS">MetingJS配置</a></p>
-<p>全局播放背景音乐（使用 Pajx 实现）<br>即实现页面跳转刷新后音乐不间断播放</p>
-<p>打开themes\next\layout文件夹找到_layout.swig</p>
-<p>在&lt;\head&gt;标签前添加下面代码，并保存。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span>   //粘贴到这里</span><br><span class="line">    </span><br><span class="line">  <span class="comment">&lt;!--pjax：防止跳转页面音乐暂停--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br></pre></td></tr></table></figure>
-
-<p>在主题的配置文件中找到pajx，将它设置为true，并保存。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"># Easily enable fast Ajax navigation on your website.</span><br><span class="line"># Dependencies: https://github.com/theme-next/theme-next-pjax</span><br><span class="line">pjax: true</span><br></pre></td></tr></table></figure>
-<p>在博客文件夹打开GitBash执行hexo clean、hexo g、hexo s，跳转页面时即可看到效果。</p>
-]]></content>
-      <categories>
-        <category>部署</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>github pages</tag>
-        <tag>next</tag>
-        <tag>网易云</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python interview 4</title>
     <url>/2022/08/22/python-interview-4/</url>
     <content><![CDATA[<h2 id="Python面试题整理-V1-day4"><a href="#Python面试题整理-V1-day4" class="headerlink" title="Python面试题整理-V1 day4"></a>Python面试题整理-V1 day4</h2><ul>
@@ -1833,6 +1850,47 @@
       </categories>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nexo-Next中添加网易云音乐+切换页面自动播放</title>
+    <url>/2021/11/29/nexo-Next%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90-%E5%88%87%E6%8D%A2%E9%A1%B5%E9%9D%A2%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE/</url>
+    <content><![CDATA[<h3 id="网易云音乐歌单生成外链播放器"><a href="#网易云音乐歌单生成外链播放器" class="headerlink" title="网易云音乐歌单生成外链播放器"></a>网易云音乐歌单生成外链播放器</h3><p>参考<br><a href="https://www.cnblogs.com/yuan2333/p/7244380.html">https://www.cnblogs.com/yuan2333/p/7244380.html</a></p>
+<ul>
+<li>注意网页版网易云看的比较清楚</li>
+<li>创建歌单</li>
+<li>点击分享</li>
+<li>查看【朋友】-【我的动态】</li>
+<li>点进歌单-【生成外链播放器】</li>
+</ul>
+<h3 id="在网页中添加网易云音乐歌单"><a href="#在网页中添加网易云音乐歌单" class="headerlink" title="在网页中添加网易云音乐歌单"></a>在网页中添加网易云音乐歌单</h3><p>参考：<br><a href="https://otakurice.github.io/2018/07/20/hexo%20%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E6%AD%8C%E5%8D%95/">https://otakurice.github.io/2018/07/20/hexo%20%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E6%AD%8C%E5%8D%95/</a></p>
+<ul>
+<li>基本操作，如果只需要加一首歌或者主页面加歌单列表，手动播放，则只需要<br>修改主题文件夹下layout_macro\sidebar.swig文件(这是侧边栏路径)，将上述代码贴入到想放的位置。<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;music163player&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginwidth</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginheight</span>=<span class="string">&quot;0&quot;</span> <span class="attr">width</span>=<span class="string">280</span> <span class="attr">height</span>=<span class="string">86</span> <span class="attr">src</span>=<span class="string">&quot;//music.163.com/outchain/player?type=2&amp;id=28885472&amp;auto=1&amp;height=66&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;music163player&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginwidth</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginheight</span>=<span class="string">&quot;0&quot;</span> <span class="attr">width</span>=<span class="string">280</span> <span class="attr">height</span>=<span class="string">86</span> <span class="attr">src</span>=<span class="string">&quot;//music.163.com/outchain/player?type=2&amp;id=28885472&amp;auto=1&amp;height=66&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="想全局播放-切网页自动播放"><a href="#想全局播放-切网页自动播放" class="headerlink" title="想全局播放+切网页自动播放"></a>想全局播放+切网页自动播放</h3><p>参考：<br><a href="https://blog.csdn.net/qq_39720594/article/details/105401774https://blog.csdn.net/qq_39720594/article/details/105401774">https://blog.csdn.net/qq_39720594/article/details/105401774https://blog.csdn.net/qq_39720594/article/details/105401774</a></p>
+<p>git cmd 安装：<br>npm install aplayer –save</p>
+<p>使用Aplayer + MetingJS插件<br>打开我们主题文件：themes\next\layout_macro\sidebar.swig找到sidebar-inner，复制下面代码粘贴到此<div>标签后即可。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- require APlayer --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- require MetingJS--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="comment">&lt;!--网易云--&gt;</span>   </span><br><span class="line"><span class="tag">&lt;<span class="name">meting-js</span></span></span><br><span class="line"><span class="tag"><span class="attr">server</span>=<span class="string">&quot;netease&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">id</span>=<span class="string">&quot;7091778006&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">type</span>=<span class="string">&quot;playlist&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">mini</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">fixed</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">list-folded</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">autoplay</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">volume</span>=<span class="string">&quot;0.5&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">theme</span>=<span class="string">&quot;#FADFA3&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">order</span>=<span class="string">&quot;random&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">loop</span>=<span class="string">&quot;all&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">preload</span>=<span class="string">&quot;auto&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">mutex</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">meting-js</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里面注意修改id为自己的歌单id即可。</p>
+<p>其他配置项参考：<br><a href="https://github.com/metowolf/MetingJS">MetingJS配置</a></p>
+<p>全局播放背景音乐（使用 Pajx 实现）<br>即实现页面跳转刷新后音乐不间断播放</p>
+<p>打开themes\next\layout文件夹找到_layout.swig</p>
+<p>在&lt;\head&gt;标签前添加下面代码，并保存。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span>   //粘贴到这里</span><br><span class="line">    </span><br><span class="line">  <span class="comment">&lt;!--pjax：防止跳转页面音乐暂停--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>在主题的配置文件中找到pajx，将它设置为true，并保存。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"># Easily enable fast Ajax navigation on your website.</span><br><span class="line"># Dependencies: https://github.com/theme-next/theme-next-pjax</span><br><span class="line">pjax: true</span><br></pre></td></tr></table></figure>
+<p>在博客文件夹打开GitBash执行hexo clean、hexo g、hexo s，跳转页面时即可看到效果。</p>
+]]></content>
+      <categories>
+        <category>部署</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>github pages</tag>
+        <tag>next</tag>
+        <tag>网易云</tag>
       </tags>
   </entry>
   <entry>
@@ -2203,6 +2261,342 @@
       </tags>
   </entry>
   <entry>
+    <title>python教程学习笔记003</title>
+    <url>/2023/01/26/python%E6%95%99%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0003/</url>
+    <content><![CDATA[<ol>
+<li>错误、调试</li>
+</ol>
+<p>有的错误是程序编写有问题造成的，比如本来应该输出整数结果输出了字符串，这种错误我们通常称之为bug，bug是必须修复的。<br>有的错误是用户输入造成的，比如让用户输入email地址，结果得到一个空字符串，这种错误可以通过检查用户输入来做相应的处理。<br>还有一类错误是完全无法在程序运行过程中预测的，比如写入文件的时候，磁盘满了，写不进去了，或者从网络抓取数据，网络突然断掉了。这类错误也称为异常，在程序中通常是必须处理的，否则，程序会因为各种问题终止并退出。<br>Python内置了一套异常处理机制，来帮助我们进行错误处理。</p>
+<p>try<br>让我们用一个例子来看看try的机制：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;try...&#x27;</span>)</span><br><span class="line">    r = <span class="number">10</span> / <span class="number">0</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;result:&#x27;</span>, r)</span><br><span class="line"><span class="keyword">except</span> ZeroDivisionError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;except:&#x27;</span>, e)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;finally...&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;END&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;try...&#x27;</span>)</span><br><span class="line">    r = <span class="number">10</span> / <span class="built_in">int</span>(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;result:&#x27;</span>, r)</span><br><span class="line"><span class="keyword">except</span> ValueError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;ValueError:&#x27;</span>, e)</span><br><span class="line"><span class="keyword">except</span> ZeroDivisionError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;ZeroDivisionError:&#x27;</span>, e)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;no error!&#x27;</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;finally...&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;END&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>调用栈<br>如果错误没有被捕获，它就会一直往上抛，最后被Python解释器捕获，打印一个错误信息，然后程序退出。</p>
+<p>记录错误<br>如果不捕获错误，自然可以让Python解释器来打印出错误堆栈，但程序也被结束了。既然我们能捕获错误，就可以把错误堆栈打印出来，然后分析错误原因，同时，让程序继续执行下去。</p>
+<p>Python内置的logging模块可以非常容易地记录错误信息：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># err_logging.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">s</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span> / <span class="built_in">int</span>(s)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span>(<span class="params">s</span>):</span></span><br><span class="line">    <span class="keyword">return</span> foo(s) * <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        bar(<span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        logging.exception(e)</span><br><span class="line"></span><br><span class="line">main()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;END&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>抛出错误<br>因为错误是class，捕获一个错误就是捕获到该class的一个实例。因此，错误并不是凭空产生的，而是有意创建并抛出的。Python的内置函数会抛出很多类型的错误，我们自己编写的函数也可以抛出错误。<br>如果要抛出错误，首先根据需要，可以定义一个错误的class，选择好继承关系，然后，用raise语句抛出一个错误</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># err_raise.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooError</span>(<span class="params">ValueError</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">s</span>):</span></span><br><span class="line">    n = <span class="built_in">int</span>(s)</span><br><span class="line">    <span class="keyword">if</span> n==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">raise</span> FooError(<span class="string">&#x27;invalid value: %s&#x27;</span> % s)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span> / n</span><br><span class="line"></span><br><span class="line">foo(<span class="string">&#x27;0&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>执行，可以最后跟踪到我们自己定义的错误：</p>
+<p>$ python3 err_raise.py<br>Traceback (most recent call last):<br>  File “err_throw.py”, line 11, in <module><br>    foo(‘0’)<br>  File “err_throw.py”, line 8, in foo<br>    raise FooError(‘invalid value: %s’ % s)<br><strong>main</strong>.FooError: invalid value: 0</p>
+<p>只有在必要的时候才定义我们自己的错误类型。如果可以选择Python已有的内置的错误类型（比如ValueError，TypeError），尽量使用Python内置的错误类型。<br>raise语句如果不带参数，就会把当前错误原样抛出。此外，在except中raise一个Error，还可以把一种类型的错误转化成另一种类型：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="number">10</span> / <span class="number">0</span></span><br><span class="line"><span class="keyword">except</span> ZeroDivisionError:</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">&#x27;input error!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>只要是合理的转换逻辑就可以，但是，决不应该把一个IOError转换成毫不相干的ValueError。</p>
+<p>logging:</p>
+<p>允许你指定记录信息的级别，有debug，info，warning，error等几个级别，当我们指定level=INFO时，logging.debug就不起作用了。同理，指定level=WARNING后，debug和info就不起作用了。这样一来，你可以放心地输出不同级别的信息，也不用删除，最后统一控制输出哪个级别的信息。<br>logging的另一个好处是通过简单的配置，一条语句可以同时输出到不同的地方，比如console和文件。</p>
+<ol start="2">
+<li>单元测试</li>
+</ol>
+<p>mydict.py代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dict</span>(<span class="params"><span class="built_in">dict</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, **kw</span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__(**kw)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, key</span>):</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">return</span> self[key]</span><br><span class="line">        <span class="keyword">except</span> KeyError:</span><br><span class="line">            <span class="keyword">raise</span> AttributeError(<span class="string">r&quot;&#x27;Dict&#x27; object has no attribute &#x27;%s&#x27;&quot;</span> % key)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span>(<span class="params">self, key, value</span>):</span></span><br><span class="line">        self[key] = value</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>为了编写单元测试，我们需要引入Python自带的unittest模块，编写mydict_test.py如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mydict <span class="keyword">import</span> <span class="type">Dict</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestDict</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_init</span>(<span class="params">self</span>):</span></span><br><span class="line">        d = <span class="type">Dict</span>(a=<span class="number">1</span>, b=<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">        self.assertEqual(d.a, <span class="number">1</span>)</span><br><span class="line">        self.assertEqual(d.b, <span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">        self.assertTrue(<span class="built_in">isinstance</span>(d, <span class="built_in">dict</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_key</span>(<span class="params">self</span>):</span></span><br><span class="line">        d = <span class="type">Dict</span>()</span><br><span class="line">        d[<span class="string">&#x27;key&#x27;</span>] = <span class="string">&#x27;value&#x27;</span></span><br><span class="line">        self.assertEqual(d.key, <span class="string">&#x27;value&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_attr</span>(<span class="params">self</span>):</span></span><br><span class="line">        d = <span class="type">Dict</span>()</span><br><span class="line">        d.key = <span class="string">&#x27;value&#x27;</span></span><br><span class="line">        self.assertTrue(<span class="string">&#x27;key&#x27;</span> <span class="keyword">in</span> d)</span><br><span class="line">        self.assertEqual(d[<span class="string">&#x27;key&#x27;</span>], <span class="string">&#x27;value&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_keyerror</span>(<span class="params">self</span>):</span></span><br><span class="line">        d = <span class="type">Dict</span>()</span><br><span class="line">        <span class="keyword">with</span> self.assertRaises(KeyError):</span><br><span class="line">            value = d[<span class="string">&#x27;empty&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_attrerror</span>(<span class="params">self</span>):</span></span><br><span class="line">        d = <span class="type">Dict</span>()</span><br><span class="line">        <span class="keyword">with</span> self.assertRaises(AttributeError):</span><br><span class="line">            value = d.empty</span><br><span class="line">			</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    unittest.main()</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+
+
+<p>$ python -m unittest mydict_test<br>…..</p>
+<hr>
+<p>Ran 5 tests in 0.000s</p>
+<p>OK</p>
+<p>setUp与tearDown</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestDict</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;setUp...&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tearDown</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;tearDown...&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>单元测试可以有效地测试某个程序模块的行为，是未来重构代码的信心保证。<br>单元测试的测试用例要覆盖常用的输入组合、边界条件和异常。<br>单元测试代码要非常简单，如果测试代码太复杂，那么测试代码本身就可能有bug。<br>单元测试通过了并不意味着程序就没有bug了，但是不通过程序肯定有bug。        </p>
+<ol start="3">
+<li>IO编程</li>
+</ol>
+<p>IO在计算机中指Input/Output，也就是输入和输出。由于程序和运行时数据是在内存中驻留，由CPU这个超快的计算核心来执行，涉及到数据交换的地方，通常是磁盘、网络等，就需要IO接口。<br>比如你打开浏览器，访问新浪首页，浏览器这个程序就需要通过网络IO获取新浪的网页。浏览器首先会发送数据给新浪服务器，告诉它我想要首页的HTML，这个动作是往外发数据，叫Output，随后新浪服务器把网页发过来，这个动作是从外面接收数据，叫Input。所以，通常，程序完成IO操作会有Input和Output两个数据流。当然也有只用一个的情况，比如，从磁盘读取文件到内存，就只有Input操作，反过来，把数据写到磁盘文件里，就只是一个Output操作。<br>IO编程中，Stream（流）是一个很重要的概念，可以把流想象成一个水管，数据就是水管里的水，但是只能单向流动。Input Stream就是数据从外面（磁盘、网络）流进内存，Output Stream就是数据从内存流到外面去。对于浏览网页来说，浏览器和新浪服务器之间至少需要建立两根水管，才可以既能发数据，又能收数据。<br>由于CPU和内存的速度远远高于外设的速度，所以，在IO编程中，就存在速度严重不匹配的问题。举个例子来说，比如要把100M的数据写入磁盘，CPU输出100M的数据只需要0.01秒，可是磁盘要接收这100M数据可能需要10秒，怎么办呢？有两种办法：<br>第一种是CPU等着，也就是程序暂停执行后续代码，等100M的数据在10秒后写入磁盘，再接着往下执行，这种模式称为同步IO；<br>另一种方法是CPU不等待，只是告诉磁盘，“您老慢慢写，不着急，我接着干别的事去了”，于是，后续代码可以立刻接着执行，这种模式称为异步IO。<br>很明显，使用异步IO来编写程序性能会远远高于同步IO，但是异步IO的缺点是编程模型复杂。想想看，你得知道什么时候通知你“汉堡做好了”，而通知你的方法也各不相同。如果是服务员跑过来找到你，这是回调模式，如果服务员发短信通知你，你就得不停地检查手机，这是轮询模式。总之，异步IO的复杂度远远高于同步IO。</p>
+<p>读文件：<br>Python引入了with语句来自动帮我们调用close()方法：<br>with open(‘/path/to/file’, ‘r’) as f:<br>    print(f.read())<br>如果文件很小，read()一次性读取最方便；如果不能确定文件大小，反复调用read(size)比较保险；如果是配置文件，调用readlines()最方便：<br>for line in f.readlines():<br>    print(line.strip()) # 把末尾的’\n’删掉</p>
+<p>file-like Object：<br>像open()函数返回的这种有个read()方法的对象，在Python中统称为file-like Object。除了file外，还可以是内存的字节流，网络流，自定义流等等。file-like Object不要求从特定类继承，只要写个read()方法就行。<br>StringIO就是在内存中创建的file-like Object，常用作临时缓冲。</p>
+<p>写文件：<br>with open(‘/Users/michael/test.txt’, ‘w’) as f:<br>    f.write(‘Hello, world!’)</p>
+<p>StringIO：<br>getvalue()方法用于获得写入后的str。</p>
+<p>要读取StringIO，可以用一个str初始化StringIO，然后，像读文件一样读取：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> io <span class="keyword">import</span> StringIO</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = StringIO(<span class="string">&#x27;Hello!\nHi!\nGoodbye!&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line"><span class="meta">... </span>    s = f.readline()</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> s == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">break</span></span><br><span class="line"><span class="meta">... </span>    <span class="built_in">print</span>(s.strip())</span><br><span class="line">...</span><br><span class="line">Hello!</span><br><span class="line">Hi!</span><br><span class="line">Goodbye!</span><br></pre></td></tr></table></figure>
+
+<p>BytesIO<br>StringIO操作的只能是str，如果要操作二进制数据，就需要使用BytesIO。<br>BytesIO实现了在内存中读写bytes，我们创建一个BytesIO，然后写入一些bytes：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = BytesIO()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.write(<span class="string">&#x27;中文&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(f.getvalue())</span><br><span class="line"><span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>请注意，写入的不是str，而是经过UTF-8编码的bytes。</p>
+<p>和StringIO类似，可以用一个bytes初始化BytesIO，然后，像读文件一样读取：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = BytesIO(<span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.read()</span><br><span class="line"><span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>操作文件和目录:</p>
+<p>操作文件和目录的函数一部分放在os模块中，一部分放在os.path模块中，这一点要注意一下。查看、创建和删除目录可以这么调用：</p>
+<h1 id="查看当前目录的绝对路径"><a href="#查看当前目录的绝对路径" class="headerlink" title="查看当前目录的绝对路径:"></a>查看当前目录的绝对路径:</h1><blockquote>
+<blockquote>
+<blockquote>
+<p>os.path.abspath(‘.’)<br>‘/Users/michael’</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1 id="在某个目录下创建一个新目录，首先把新目录的完整路径表示出来"><a href="#在某个目录下创建一个新目录，首先把新目录的完整路径表示出来" class="headerlink" title="在某个目录下创建一个新目录，首先把新目录的完整路径表示出来:"></a>在某个目录下创建一个新目录，首先把新目录的完整路径表示出来:</h1><blockquote>
+<blockquote>
+<blockquote>
+<p>os.path.join(‘/Users/michael’, ‘testdir’)<br>‘/Users/michael/testdir’</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1 id="然后创建一个目录"><a href="#然后创建一个目录" class="headerlink" title="然后创建一个目录:"></a>然后创建一个目录:</h1><blockquote>
+<blockquote>
+<blockquote>
+<p>os.mkdir(‘/Users/michael/testdir’)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1 id="删掉一个目录"><a href="#删掉一个目录" class="headerlink" title="删掉一个目录:"></a>删掉一个目录:</h1><blockquote>
+<blockquote>
+<blockquote>
+<p>os.rmdir(‘/Users/michael/testdir’)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>同样的道理，要拆分路径时，也不要直接去拆字符串，而要通过os.path.split()函数，这样可以把一个路径拆分为两部分，后一部分总是最后级别的目录或文件名：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>os.path.split(‘/Users/michael/testdir/file.txt’)<br>(‘/Users/michael/testdir’, ‘file.txt’)<br>os.path.splitext()可以直接让你得到文件扩展名，很多时候非常方便：</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>os.path.splitext(‘/path/to/file.txt’)<br>(‘/path/to/file’, ‘.txt’)<br>这些合并、拆分路径的函数并不要求目录和文件要真实存在，它们只对字符串进行操作。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>文件操作使用下面的函数。假定当前目录下有一个test.txt文件：</p>
+<h1 id="对文件重命名"><a href="#对文件重命名" class="headerlink" title="对文件重命名:"></a>对文件重命名:</h1><blockquote>
+<blockquote>
+<blockquote>
+<p>os.rename(‘test.txt’, ‘test.py’)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1 id="删掉文件"><a href="#删掉文件" class="headerlink" title="删掉文件:"></a>删掉文件:</h1><blockquote>
+<blockquote>
+<blockquote>
+<p>os.remove(‘test.py’)<br>但是复制文件的函数居然在os模块中不存在！原因是复制文件并非由操作系统提供的系统调用。理论上讲，我们通过上一节的读写文件可以完成文件复制，只不过要多写很多代码。<br>幸运的是shutil模块提供了copyfile()的函数，你还可以在shutil模块中找到很多实用函数，它们可以看做是os模块的补充。<br>最后看看如何利用Python的特性来过滤文件。比如我们要列出当前目录下的所有目录，只需要一行代码：</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>[x for x in os.listdir(‘.’) if os.path.isdir(x)]<br>[‘.lein’, ‘.local’, ‘.m2’, ‘.npm’, ‘.ssh’, ‘.Trash’, ‘.vim’, ‘Applications’, ‘Desktop’, …]<br>要列出所有的.py文件，也只需一行代码：</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>[x for x in os.listdir(‘.’) if os.path.isfile(x) and os.path.splitext(x)[1]==’.py’]<br>[‘apis.py’, ‘config.py’, ‘models.py’, ‘pymonitor.py’, ‘test_db.py’, ‘urls.py’, ‘wsgiapp.py’]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>我们把变量从内存中变成可存储或传输的过程称之为序列化，在Python中叫pickling，在其他语言中也被称之为serialization，marshalling，flattening等等，都是一个意思。</p>
+<p>序列化之后，就可以把序列化后的内容写入磁盘，或者通过网络传输到别的机器上。</p>
+<p>反过来，把变量内容从序列化的对象重新读到内存里称之为反序列化，即unpickling。</p>
+<p>Python提供了pickle模块来实现序列化。</p>
+<p>首先，我们尝试把一个对象序列化并写入文件：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import pickle<br>d = dict(name=’Bob’, age=20, score=88)<br>pickle.dumps(d)<br>b’\x80\x03}q\x00(X\x03\x00\x00\x00ageq\x01K\x14X\x05\x00\x00\x00scoreq\x02KXX\x04\x00\x00\x00nameq\x03X\x03\x00\x00\x00Bobq\x04u.’<br>pickle.dumps()方法把任意对象序列化成一个bytes，然后，就可以把这个bytes写入文件。或者用另一个方法pickle.dump()直接把对象序列化后写入一个file-like Object：</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>f = open(‘dump.txt’, ‘wb’)<br>pickle.dump(d, f)<br>f.close()<br>看看写入的dump.txt文件，一堆乱七八糟的内容，这些都是Python保存的对象内部信息。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>当我们要把对象从磁盘读到内存时，可以先把内容读到一个bytes，然后用pickle.loads()方法反序列化出对象，也可以直接用pickle.load()方法从一个file-like Object中直接反序列化出对象。我们打开另一个Python命令行来反序列化刚才保存的对象：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>f = open(‘dump.txt’, ‘rb’)<br>d = pickle.load(f)<br>f.close()<br>d<br>{‘age’: 20, ‘score’: 88, ‘name’: ‘Bob’}</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>JSON:<br>Python内置的json模块提供了非常完善的Python对象到JSON格式的转换。我们先看看如何把Python对象变成一个JSON：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import json<br>d = dict(name=’Bob’, age=20, score=88)<br>json.dumps(d)<br>‘{“age”: 20, “score”: 88, “name”: “Bob”}’<br>dumps()方法返回一个str，内容就是标准的JSON。类似的，dump()方法可以直接把JSON写入一个file-like Object。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>要把JSON反序列化为Python对象，用loads()或者对应的load()方法，前者把JSON的字符串反序列化，后者从file-like Object中读取字符串并反序列化：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>json_str = ‘{“age”: 20, “score”: 88, “name”: “Bob”}’<br>json.loads(json_str)<br>{‘age’: 20, ‘score’: 88, ‘name’: ‘Bob’}<br>由于JSON标准规定JSON编码是UTF-8，所以我们总是能正确地在Python的str与JSON的字符串之间转换。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>JSON进阶:<br>无法把类实例序列化为JSON，是因为默认情况下，dumps()方法不知道如何将实例变为一个JSON的{}对象。<br>可选参数default就是把任意一个对象变成一个可序列为JSON的对象，我们只需要为Student专门写一个转换函数，再把函数传进去即可<br>同样的道理，如果我们要把JSON反序列化为一个对象实例，loads()方法首先转换出一个对象，然后，我们传入的object_hook函数负责把dict转换为实例;</p>
+<ol start="4">
+<li>进程与线程</li>
+</ol>
+<p>任务的实现有3种方式：</p>
+<p>多进程模式；<br>多线程模式；<br>多进程+多线程模式。<br>同时执行多个任务通常各个任务之间并不是没有关联的，而是需要相互通信和协调，有时，任务1必须暂停等待任务2完成后才能继续执行，有时，任务3和任务4又不能同时执行，所以，多进程和多线程的程序的复杂度要远远高于我们前面写的单进程单线程的程序。</p>
+<p>要让Python程序实现多进程（multiprocessing），我们先了解操作系统的相关知识。</p>
+<p>Unix/Linux操作系统提供了一个fork()系统调用，它非常特殊。普通的函数调用，调用一次，返回一次，但是fork()调用一次，返回两次，因为操作系统自动把当前进程（称为父进程）复制了一份（称为子进程），然后，分别在父进程和子进程内返回。</p>
+<p>子进程永远返回0，而父进程返回子进程的ID。这样做的理由是，一个父进程可以fork出很多子进程，所以，父进程要记下每个子进程的ID，而子进程只需要调用getppid()就可以拿到父进程的ID。</p>
+<p>Python的os模块封装了常见的系统调用，其中就包括fork，可以在Python程序中轻松创建子进程：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Process (%s) start...&#x27;</span> % os.getpid())</span><br><span class="line"><span class="comment"># Only works on Unix/Linux/Mac:</span></span><br><span class="line">pid = os.fork()</span><br><span class="line"><span class="keyword">if</span> pid == <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;I am child process (%s) and my parent is %s.&#x27;</span> % (os.getpid(), os.getppid()))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;I (%s) just created a child process (%s).&#x27;</span> % (os.getpid(), pid))</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<p>Process (876) start…<br>I (876) just created a child process (877).<br>I am child process (877) and my parent is 876.<br>由于Windows没有fork调用，上面的代码在Windows上无法运行。而Mac系统是基于BSD（Unix的一种）内核，所以，在Mac下运行是没有问题的，推荐大家用Mac学Python！</p>
+<p>有了fork调用，一个进程在接到新任务时就可以复制出一个子进程来处理新任务，常见的Apache服务器就是由父进程监听端口，每当有新的http请求时，就fork出子进程来处理新的http请求。</p>
+<p>multiprocessing：</p>
+<p>如果你打算编写多进程的服务程序，Unix/Linux无疑是正确的选择。由于Windows没有fork调用，难道在Windows上无法用Python编写多进程的程序？</p>
+<p>由于Python是跨平台的，自然也应该提供一个跨平台的多进程支持。multiprocessing模块就是跨平台版本的多进程模块。</p>
+<p>multiprocessing模块提供了一个Process类来代表一个进程对象，下面的例子演示了启动一个子进程并等待其结束：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 子进程要执行的代码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_proc</span>(<span class="params">name</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Run child process %s (%s)...&#x27;</span> % (name, os.getpid()))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Parent process %s.&#x27;</span> % os.getpid())</span><br><span class="line">    p = Process(target=run_proc, args=(<span class="string">&#x27;test&#x27;</span>,))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Child process will start.&#x27;</span>)</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Child process end.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Pool：<br>如果要启动大量的子进程，可以用进程池的方式批量创建子进程：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">long_time_task</span>(<span class="params">name</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Run task %s (%s)...&#x27;</span> % (name, os.getpid()))</span><br><span class="line">    start = time.time()</span><br><span class="line">    time.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line">    end = time.time()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Task %s runs %0.2f seconds.&#x27;</span> % (name, (end - start)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Parent process %s.&#x27;</span> % os.getpid())</span><br><span class="line">    p = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        p.apply_async(long_time_task, args=(i,))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Waiting for all subprocesses done...&#x27;</span>)</span><br><span class="line">    p.close()</span><br><span class="line">    p.join()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;All subprocesses done.&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>子进程：<br>很多时候，子进程并不是自身，而是一个外部进程。我们创建了子进程后，还需要控制子进程的输入和输出。<br>subprocess模块可以让我们非常方便地启动一个子进程，然后控制其输入和输出。</p>
+<p>进程间通信<br>Process之间肯定是需要通信的，操作系统提供了很多机制来实现进程间的通信。Python的multiprocessing模块包装了底层的机制，提供了Queue、Pipes等多种方式来交换数据。<br>在Unix/Linux下，multiprocessing模块封装了fork()调用，使我们不需要关注fork()的细节。由于Windows没有fork调用，因此，multiprocessing需要“模拟”出fork的效果，父进程所有Python对象都必须通过pickle序列化再传到子进程去，所以，如果multiprocessing在Windows下调用失败了，要先考虑是不是pickle失败了。</p>
+<p>在Unix/Linux下，可以使用fork()调用实现多进程。<br>要实现跨平台的多进程，可以使用multiprocessing模块。<br>进程间通信是通过Queue、Pipes等实现的。</p>
+<p>多线程：<br>Python的标准库提供了两个模块：_thread和threading，_thread是低级模块，threading是高级模块，对_thread进行了封装。绝大多数情况下，我们只需要使用threading这个高级模块。<br>启动一个线程就是把一个函数传入并创建Thread实例，然后调用start()开始执行：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> time, threading</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新线程执行的代码:</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;thread %s is running...&#x27;</span> % threading.current_thread().name)</span><br><span class="line">    n = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; <span class="number">5</span>:</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;thread %s &gt;&gt;&gt; %s&#x27;</span> % (threading.current_thread().name, n))</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;thread %s ended.&#x27;</span> % threading.current_thread().name)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;thread %s is running...&#x27;</span> % threading.current_thread().name)</span><br><span class="line">t = threading.Thread(target=loop, name=<span class="string">&#x27;LoopThread&#x27;</span>)</span><br><span class="line">t.start()</span><br><span class="line">t.join()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;thread %s ended.&#x27;</span> % threading.current_thread().name)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Lock：</p>
+<p>多线程和多进程最大的不同在于，多进程中，同一个变量，各自有一份拷贝存在于每个进程中，互不影响，而多线程中，所有变量都由所有线程共享，所以，任何一个变量都可以被任何一个线程修改，因此，线程之间共享数据最大的危险在于多个线程同时改一个变量，把内容给改乱了。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">balance = <span class="number">0</span></span><br><span class="line">lock = threading.Lock()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_thread</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100000</span>):</span><br><span class="line">        <span class="comment"># 先要获取锁:</span></span><br><span class="line">        lock.acquire()</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 放心地改吧:</span></span><br><span class="line">            change_it(n)</span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            <span class="comment"># 改完了一定要释放锁:</span></span><br><span class="line">            lock.release()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>ThreadLocal：<br>ThreadLocal最常用的地方就是为每个线程绑定一个数据库连接，HTTP请求，用户身份信息等，这样一个线程的所有调用到的处理函数都可以非常方便地访问这些资源。<br>一个ThreadLocal变量虽然是全局变量，但每个线程都只能读写自己线程的独立副本，互不干扰。ThreadLocal解决了参数在一个线程中各个函数之间互相传递的问题。</p>
+<p>分布式进程：<br>在Thread和Process中，应当优选Process，因为Process更稳定，而且，Process可以分布到多台机器上，而Thread最多只能分布到同一台机器的多个CPU上。</p>
+<p>Python的multiprocessing模块不但支持多进程，其中managers子模块还支持把多进程分布到多台机器上。一个服务进程可以作为调度者，将任务分布到其他多个进程中，依靠网络通信。由于managers模块封装很好，不必了解网络通信的细节，就可以很容易地编写分布式多进程程序。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>测试开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python教程学习笔记002</title>
+    <url>/2023/01/25/python%E6%95%99%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0002/</url>
+    <content><![CDATA[<ol>
+<li>模块</li>
+</ol>
+<p>每一个包目录下面都会有一个__init__.py的文件，这个文件是必须存在的，否则，Python就把这个目录当成普通目录，而不是一个包。<strong>init</strong>.py可以是空文件，也可以有Python代码，因为__init__.py本身就是一个模块<br>自己创建模块时要注意命名，不能和Python自带的模块名称冲突。例如，系统自带了sys模块，自己的模块就不可命名为sys.py，否则将无法导入系统自带的sys模块。<br>我们以内建的sys模块为例，编写一个hello的模块：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; a test module &#x27;</span></span><br><span class="line"></span><br><span class="line">__author__ = <span class="string">&#x27;Michael Liao&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>():</span></span><br><span class="line">    args = sys.argv</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(args)==<span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, world!&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">len</span>(args)==<span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, %s!&#x27;</span> % args[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Too many arguments!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    test()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>当我们在命令行运行hello模块文件时，Python解释器把一个特殊变量__name__置为__main__，而如果在其他地方导入该hello模块时，if判断将失败，因此，这种if测试可以让一个模块通过命令行运行时执行一些额外的代码，最常见的就是运行测试。</p>
+<p>我们可以用命令行运行hello.py看看效果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ python3 hello.py</span><br><span class="line">Hello, world!</span><br><span class="line">$ python hello.py Michael</span><br><span class="line">Hello, Michael!</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>作用域</li>
+</ol>
+<p>在Python中，是通过_前缀来实现的。</p>
+<p>正常的函数和变量名是公开的（public），可以被直接引用，比如：abc，x123，PI等；</p>
+<p>类似__xxx__这样的变量是特殊变量，可以被直接引用，但是有特殊用途，比如上面的__author__，__name__就是特殊变量，hello模块定义的文档注释也可以用特殊变量__doc__访问，我们自己的变量一般不要用这种变量名；</p>
+<p>类似_xxx和__xxx这样的函数或变量就是非公开的（private），不应该被直接引用，比如_abc，__abc等；</p>
+<p>之所以我们说，private函数和变量“不应该”被直接引用，而不是“不能”被直接引用，是因为Python并没有一种方法可以完全限制访问private函数或变量，但是，从编程习惯上不应该引用private函数或变量。</p>
+<ol start="3">
+<li>面向对象编程</li>
+</ol>
+<p>类（Class）和实例（Instance）的概念是很自然的。Class是一种抽象概念，比如我们定义的Class——Student，是指学生这个概念，而实例（Instance）则是一个个具体的Student，比如，Bart Simpson和Lisa Simpson是两个具体的Student。<br>所以，面向对象的设计思想是抽象出Class，根据Class创建Instance。<br>面向对象的抽象程度又比函数要高，因为一个Class既包含数据，又包含操作数据的方法。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, score</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br></pre></td></tr></table></figure>
+
+<p>注意：特殊方法“__init__”前后分别有两个下划线！！！<br>注意到__init__方法的第一个参数永远是self，表示创建的实例本身，因此，在__init__方法内部，就可以把各种属性绑定到self，因为self就指向创建的实例本身。</p>
+<p>有了__init__方法，在创建实例的时候，就不能传入空的参数了，必须传入与__init__方法匹配的参数，但self不需要传，Python解释器自己会把实例变量传进去<br>和普通的函数相比，在类中定义的函数只有一点不同，就是第一个参数永远是实例变量self，并且，调用时，不用传递该参数。除此之外，类的方法和普通函数没有什么区别，所以，你仍然可以用默认参数、可变参数、关键字参数和命名关键字参数。</p>
+<p>原先那种直接通过bart.score = 99也可以修改啊，为什么要定义一个方法大费周折？因为在方法中，可以对参数做检查，避免传入无效的参数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span>(<span class="params">self, score</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt;= score &lt;= <span class="number">100</span>:</span><br><span class="line">            self.__score = score</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;bad score&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，在Python中，变量名类似__xxx__的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是private变量，所以，不能用__name__、__score__这样的变量名。</p>
+<p>继承与多态：<br>继承可以把父类的所有功能都直接拿过来，这样就不必重零做起，子类只需要新增自己特有的方法，也可以把父类不适合的方法覆盖重写。<br>动态语言的鸭子类型特点决定了继承不像静态语言那样是必须的。</p>
+<p>获取对象信息：<br>当我们拿到一个对象的引用时，如何知道这个对象是什么类型、有哪些方法呢？<br>使用type()<br>首先，我们来判断对象类型，使用type()函数<br>基本类型都可以用type()判断<br>如果一个变量指向函数或者类，也可以用type()判断<br>判断基本数据类型可以直接写int，str等，但如果要判断一个对象是否是函数怎么办？可以使用types模块中定义的常量<br>对于class的继承关系来说，使用type()就很不方便。我们要判断class的类型，可以使用isinstance()函数。<br>如果要获得一个对象的所有属性和方法，可以使用dir()函数，它返回一个包含字符串的list</p>
+<ol start="4">
+<li>面向对象高级编程</li>
+</ol>
+<p>使用__slots__ ：<br>如果我们想要限制实例的属性怎么办？比如，只允许对Student实例添加name和age属性。<br>为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的__slots__变量，来限制该class实例能添加的属性：<br>class Student(object):<br>    <strong>slots</strong> = (‘name’, ‘age’) # 用tuple定义允许绑定的属性名称<br>然后，我们试试：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>s = Student() # 创建新的实例<br>s.name = ‘Michael’ # 绑定属性’name’<br>s.age = 25 # 绑定属性’age’<br>s.score = 99 # 绑定属性’score’<br>Traceback (most recent call last):<br>  File “<stdin>“, line 1, in <module><br>AttributeError: ‘Student’ object has no attribute ‘score’<br>由于’score’没有被放到__slots__中，所以不能绑定score属性，试图绑定score将得到AttributeError的错误。<br>使用__slots__要注意，__slots__定义的属性仅对当前类实例起作用，对继承的子类是不起作用的</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>使用@property ：</p>
+<p>在绑定属性时，如果我们直接把属性暴露出去，虽然写起来很简单，但是，没办法检查参数，导致可以把成绩随便改：</p>
+<p>s = Student()<br>s.score = 9999<br>这显然不合逻辑。为了限制score的范围，可以通过一个set_score()方法来设置成绩，再通过一个get_score()来获取成绩，这样，在set_score()方法里，就可以检查参数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_score</span>(<span class="params">self</span>):</span></span><br><span class="line">         <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must be an integer!&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must between 0 ~ 100!&#x27;</span>)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure>
+
+<p>对于类的方法，装饰器一样起作用。Python内置的@property装饰器就是负责把一个方法变成属性调用的：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line"><span class="meta">    @score.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must be an integer!&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must between 0 ~ 100!&#x27;</span>)</span><br><span class="line">        self._score = value</span><br><span class="line">```		</span><br><span class="line"></span><br><span class="line"><span class="meta">@property的实现比较复杂，我们先考察如何使用。把一个getter方法变成属性，只需要加上@property就可以了，此时，@property本身又创建了另一个装饰器@score.setter，负责把一个setter方法变成属性赋值，于是，我们就拥有一个可控的属性操作：</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = Student()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">60</span> <span class="comment"># OK，实际转化为s.set_score(60)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score <span class="comment"># OK，实际转化为s.get_score()</span></span><br><span class="line"><span class="number">60</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">9999</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between <span class="number">0</span> ~ <span class="number">100</span>!</span><br><span class="line">注意到这个神奇的@<span class="built_in">property</span>，我们在对实例属性操作的时候，就知道该属性很可能不是直接暴露的，而是通过getter和setter方法来实现的。</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">多重继承：</span><br><span class="line">对于需要Runnable功能的动物，就多继承一个Runnable，例如Dog：</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>(<span class="params">Mammal, Runnable</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">对于需要Flyable功能的动物，就多继承一个Flyable，例如Bat：</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bat</span>(<span class="params">Mammal, Flyable</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">通过多重继承，一个子类就可以同时获得多个父类的所有功能。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MixIn：</span><br><span class="line">在设计类的继承关系时，通常，主线都是单一继承下来的，例如，Ostrich继承自Bird。但是，如果需要“混入”额外的功能，通过多重继承就可以实现，比如，让Ostrich除了继承自Bird外，再同时继承Runnable。这种设计通常称之为MixIn。</span><br><span class="line">为了更好地看出继承关系，我们把Runnable和Flyable改为RunnableMixIn和FlyableMixIn。类似的，你还可以定义出肉食动物CarnivorousMixIn和植食动物HerbivoresMixIn，让某个动物同时拥有好几个MixIn：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>(<span class="params">Mammal, RunnableMixIn, CarnivorousMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">MixIn的目的就是给一个类增加多个功能，这样，在设计类的时候，我们优先考虑通过多重继承来组合多个MixIn的功能，而不是设计多层次的复杂的继承关系。</span><br><span class="line">Python自带的很多库也使用了MixIn。举个例子，Python自带了TCPServer和UDPServer这两类网络服务，而要同时服务多个用户就必须使用多进程或多线程模型，这两种模型由ForkingMixIn和ThreadingMixIn提供。通过组合，我们就可以创造出合适的服务来。</span><br><span class="line">比如，编写一个多进程模式的TCP服务，定义如下：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTCPServer</span>(<span class="params">TCPServer, ForkingMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">编写一个多线程模式的UDP服务，定义如下：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyUDPServer</span>(<span class="params">UDPServer, ThreadingMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">如果你打算搞一个更先进的协程模型，可以编写一个CoroutineMixIn：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTCPServer</span>(<span class="params">TCPServer, CoroutineMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">这样一来，我们不需要复杂而庞大的继承链，只要选择组合不同的类的功能，就可以快速构造出所需的子类。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">定制类：</span><br><span class="line">看到类似__slots__这种形如__xxx__的变量或者函数名就要注意，这些在Python中是有特殊用途的。</span><br><span class="line">__slots__我们已经知道怎么用了，__len__()方法我们也知道是为了能让<span class="class"><span class="keyword">class</span>作用于<span class="title">len</span>()函数。</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">通常<span class="title">__str__</span>()和<span class="title">__repr__</span>()代码都是一样的，所以，有个偷懒的写法：</span></span><br><span class="line"><span class="class">```<span class="title">python</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Student object (name=%s)&#x27;</span> % self.name</span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>iter</strong><br>如果一个类想被用于for … in循环，类似list或tuple那样，就必须实现一个__iter__()方法，该方法返回一个迭代对象，然后，Python的for循环就会不断调用该迭代对象的__next__()方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环。</p>
+<p><strong>getitem</strong><br>要表现得像list那样按照下标取出元素，需要实现__getitem__()方法</p>
+<p>Python还有另一个机制，那就是写一个__getattr__()方法，动态返回一个属性。修改如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.name = <span class="string">&#x27;Michael&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, attr</span>):</span></span><br><span class="line">        <span class="keyword">if</span> attr==<span class="string">&#x27;score&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">99</span></span><br></pre></td></tr></table></figure>
+
+<p>当调用不存在的属性时，比如score，Python解释器会试图调用__getattr__(self, ‘score’)来尝试获得属性，这样，我们就有机会返回score的值</p>
+<p><strong>call</strong><br>一个对象实例可以有自己的属性和方法，当我们调用实例方法时，我们用instance.method()来调用。能不能直接在实例本身上调用呢？在Python中，答案是肯定的。<br>任何类，只需要定义一个__call__()方法，就可以直接对实例进行调用。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;My name is %s.&#x27;</span> % self.name)</span><br></pre></td></tr></table></figure>
+
+<p>调用方式如下：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>s = Student(‘Michael’)<br>s() # self参数不要传入<br>My name is Michael.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>通过callable()函数，我们就可以判断一个对象是否是“可调用”对象。</p>
+<p>更多方法参考：<a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">https://docs.python.org/3/reference/datamodel.html#special-method-names</a></p>
+<p>枚举类：</p>
+<p>为这样的枚举类型定义一个class类型，然后，每个常量都是class的一个唯一实例。Python提供了Enum类来实现这个功能：</p>
+<p>from enum import Enum<br>Month = Enum(‘Month’, (‘Jan’, ‘Feb’, ‘Mar’, ‘Apr’, ‘May’, ‘Jun’, ‘Jul’, ‘Aug’, ‘Sep’, ‘Oct’, ‘Nov’, ‘Dec’))</p>
+<p>如果需要更精确地控制枚举类型，可以从Enum派生出自定义类：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum, unique</span><br><span class="line"></span><br><span class="line"><span class="meta">@unique</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Weekday</span>(<span class="params">Enum</span>):</span></span><br><span class="line">    Sun = <span class="number">0</span> <span class="comment"># Sun的value被设定为0</span></span><br><span class="line">    Mon = <span class="number">1</span></span><br><span class="line">    Tue = <span class="number">2</span></span><br><span class="line">    Wed = <span class="number">3</span></span><br><span class="line">    Thu = <span class="number">4</span></span><br><span class="line">    Fri = <span class="number">5</span></span><br><span class="line">    Sat = <span class="number">6</span></span><br></pre></td></tr></table></figure>
+<p>@unique装饰器可以帮助我们检查保证没有重复值。</p>
+<p>使用元类：<br>type()<br>动态语言和静态语言最大的不同，就是函数和类的定义，不是编译时定义的，而是运行时动态创建的。</p>
+<p>比方说我们要定义一个Hello的class，就写一个hello.py模块：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hello</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hello</span>(<span class="params">self, name=<span class="string">&#x27;world&#x27;</span></span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, %s.&#x27;</span> % name)</span><br></pre></td></tr></table></figure>
+
+<p>当Python解释器载入hello模块时，就会依次执行该模块的所有语句，执行结果就是动态创建出一个Hello的class对象，测试如下：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>from hello import Hello<br>h = Hello()<br>h.hello()<br>Hello, world.<br>print(type(Hello))<br>&lt;class ‘type’&gt;<br>print(type(h))<br>&lt;class ‘hello.Hello’&gt;<br>type()函数可以查看一个类型或变量的类型，Hello是一个class，它的类型就是type，而h是一个实例，它的类型就是class Hello。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>我们说class的定义是运行时动态创建的，而创建class的方法就是使用type()函数。</p>
+<p>type()函数既可以返回一个对象的类型，又可以创建出新的类型，比如，我们可以通过type()函数创建出Hello类，而无需通过class Hello(object)…的定义：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>def fn(self, name=’world’): # 先定义函数<br>…     print(‘Hello, %s.’ % name)<br>…<br>Hello = type(‘Hello’, (object,), dict(hello=fn)) # 创建Hello class<br>h = Hello()<br>h.hello()<br>Hello, world.<br>print(type(Hello))<br>&lt;class ‘type’&gt;<br>print(type(h))<br>&lt;class ‘__main__.Hello’&gt;<br>要创建一个class对象，type()函数依次传入3个参数：</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>class的名称；<br>继承的父类集合，注意Python支持多重继承，如果只有一个父类，别忘了tuple的单元素写法；<br>class的方法名称与函数绑定，这里我们把函数fn绑定到方法名hello上。<br>通过type()函数创建的类和直接写class是完全一样的，因为Python解释器遇到class定义时，仅仅是扫描一下class定义的语法，然后调用type()函数创建出class。</p>
+<p>正常情况下，我们都用class Xxx…来定义类，但是，type()函数也允许我们动态创建出类来，也就是说，动态语言本身支持运行期动态创建类，这和静态语言有非常大的不同，要在静态语言运行期创建类，必须构造源代码字符串再调用编译器，或者借助一些工具生成字节码实现，本质上都是动态编译，会非常复杂。</p>
+<p>metaclass（了解即可，较为复杂，不常用。可用于ORM）：<br>除了使用type()动态创建类以外，要控制类的创建行为，还可以使用metaclass。<br>metaclass，直译为元类，简单的解释就是：<br>当我们定义了类以后，就可以根据这个类创建出实例，所以：先定义类，然后创建实例。<br>但是如果我们想创建出类呢？那就必须根据metaclass创建出类，所以：先定义metaclass，然后创建类。<br>连接起来就是：先定义metaclass，就可以创建类，最后创建实例。<br>所以，metaclass允许你创建类或者修改类。换句话说，你可以把类看成是metaclass创建出来的“实例”。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>测试开发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python读写文件</title>
     <url>/2021/12/20/python%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<h4 id="OS模块的常用方法"><a href="#OS模块的常用方法" class="headerlink" title="OS模块的常用方法"></a>OS模块的常用方法</h4><ul>
@@ -2278,6 +2672,55 @@
       </tags>
   </entry>
   <entry>
+    <title>《认知觉醒》读书心得+笔记整理</title>
+    <url>/2021/12/18/%E3%80%8A%E8%AE%A4%E7%9F%A5%E8%A7%89%E9%86%92%E3%80%8B%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97-%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<h3 id="个人成长记录："><a href="#个人成长记录：" class="headerlink" title="个人成长记录："></a>个人成长记录：</h3><p>今年最幸运的事情之一，就是读到了周岭老师的《认知觉醒》。<br>从八月份知道这本书，到现在将近四个月，陆陆续续读了也有四五遍了。<br>然后改变量也确实有一点，虽然进步不大，但也可以记录一下。</p>
+<ul>
+<li><p>开始写个人博客网站<br><a href="https://shenle2019.github.io/">https://shenle2019.github.io/</a><br>这个博客将会持续记录我的个人总结内容，我的想法是写任何内容都行，每周1-2篇输出。</p>
+</li>
+<li><p>Java-web的学习笔记，终于整理一版出来了。<br>对java的基础知识、博客网站的搭建流程、操作系统相关知识、Spring框架的基本应用等有一定的理解。<br>github地址：<a href="https://github.com/shenle2019/javaonline">https://github.com/shenle2019/javaonline</a></p>
+</li>
+</ul>
+<p>后续无论是Java，还是Python，C等，都可以按照这个思路，先把基础语法过一遍，然后做成一个项目，<br>将中间的一些关键步骤、思考内容记录下来，记录自己成长的同时，增强自信心。</p>
+<ul>
+<li><p>开始搭建个人知识体系，目前用有道云笔记来持续更新自己的全量知识体系。</p>
+</li>
+<li><p>开始实行【早冥读写跑】这人生五件套。<br>  其中阅读和跑步以前就一直很喜欢，现在更加强了这两个习惯。<br>  做的不好的是早起、冥想和写作。<br>  后续计划：早起，每天早上7点起床，对我来说是合适的。<br>  冥想：中午午睡时，30min+的冥想练习。<br>  写作：坚持以目标为导向来写博客。</p>
+</li>
+</ul>
+<h3 id="关键触动点记录："><a href="#关键触动点记录：" class="headerlink" title="关键触动点记录："></a>关键触动点记录：</h3><ul>
+<li><p>自己需要养成这些基础习惯，然后驱动自己做一些真实的改变，不是为了表面上的上进或者心理安慰，<br>而是内心的真实渴望：<br>比如想以后能写任何东西，那么就需要用写作来梳理自己的思路，锻炼笔力；<br>要想身体回到健康状态，要身材变好看，就得保持运动的习惯；<br>要做成想做的事，就要运用冥想来锻炼专注力等等。<br>早冥读写跑，可以为我搭建一个进阶的框架，后续有新的认知好的习惯，可以继续往里面添加即可。</p>
+</li>
+<li><p>另一个最关键的成长，就是耐心的增强。<br>焦虑的根源是自己想做的事情太多，而又立即想看到效果。<br>特别是眼里看见别人的成就，有对比就有焦虑。<br>而忽视了自己当前的能力，这就属于是盲目的焦虑了，实属没有必要。<br>可行的方法，第一条就是时刻提醒自己保持足够的耐心。<br>先找出目前来说最想做的、最重要的事情，只做一件事，<br>然后着眼于当下的事情，一点一滴地去解决它，感受进一寸的欢喜。<br>再有急躁时，运用元认知来温和提醒自己即可保持内心的平静。</p>
+</li>
+</ul>
+<p>以上两点，就已经让我醍醐灌顶，解决了很多问题，后续会一直坚持：<br>专注当下，保持平静和耐心，一点一滴地进步，学到新知识新习惯可以往已有的框架中添加。</p>
+<h3 id="读书笔记："><a href="#读书笔记：" class="headerlink" title="读书笔记："></a>读书笔记：</h3><p>这本书里还有很多其他的触动点，按自己的理解来记录如下</p>
+<ul>
+<li>要养成运动习惯，锻炼身体作为生活的一种状态，因为这是赋予无数个0的意义前面的1。</li>
+<li>有清晰的目标和执行的方法，消除实现路径的模糊。<br>  在拉伸区练习，且每项内容让自己讲出来，消除知识逻辑的模糊。<br>  这个过程，要求自己不要浮于表面或者只做表面工作，而要直面核心问题。</li>
+<li>执行过程中，践行所有高手都拥有的优点，可能也是惟一的优点，那就是专注。<br>  保持专注，追求心流、禅定 状态。这是毕生追求。<br>  比如编程写作，都需要练习练习再练习，最后达到真正的闭环状态。</li>
+<li>日常冥想可以锻炼自己的专注力。</li>
+<li>心态平和。解决困难问题时，要有打游戏闯关升级心态。<br>  有自信，相信自己一定能学会，做得到。</li>
+<li>每日反省。用 元认知来审视自己，从更全局的眼光来发现问题。<br>  然后用内心触动磨合、扩大自己的认知系统。<br>  如此反复刻意练习，来提高能力。</li>
+<li>最后，勤阅读，来聆听与各个领域 的大神的教诲。勤思考勤输出，来缩小差距。<br>  独立思考与输出，来慢慢变强。</li>
+</ul>
+<h3 id="其他感想："><a href="#其他感想：" class="headerlink" title="其他感想："></a>其他感想：</h3><ul>
+<li>这是一本关于【个人成长】的书（当然还可以解释、解决生活中的一些其它问题）。<br>  讨论的主要是我们作为普通人，想要变得【优秀】或者【厉害】一点，中间会有哪些问题？这些问题背后的原理是什么？<br>  知道这些原理后，我们应该怎么做？<br>  所以我们得先有让自己变好的心，否则这本书确实没啥意思，推荐再多次也没有意义。<br>  这是【前提】，毕竟我们不希望五年后、十年后的自己，跟现在一样没啥变化。<br>  只有我们的能力足够强的时候，才能解决生活中的很多问题。</li>
+<li>这本书讲的内容，我是这样理解的，主要分为两块。<br>  一个是我们身上出现各种各样问题的原因，即【原理】部分。<br>  另一个就是作者通过这些原因，来找到一些解决的办法，俗称【方法论】。<br>  各种问题比如焦虑、不够耐心、情感冲动、缺乏自控力、不够专注、学习不得法、行动力不强等等。<br>  作者把这些问题都一一罗列出来，说明问题背后的原因，想搞懂的话，可看对应章节的内容。<br>  方法论就是解决实际的问题了，知道原因后对症下药，参考上述读书笔记内容。</li>
+<li>一本书也不会教会所有成长相关的内容，只是这本书给我的触动很大，解决了我以前的很多困惑，所以希望大家也有所收获。<br>  当然也没有刻意来制造焦虑，或者执意要给你喝鸡汤打鸡血。<br>  这本书的原理是有科学依据的，而不是心灵鸡汤。  绝大部分人应该都可以从中学到一些东西，所以我觉得还是有必要读一读。<br>  比如你现在要教你的娃一些学习的方法，就可以作为参考。如果自己也能做到，那就更好了，毕竟【父母是孩子最好的老师】。    比如你现在想跟别人谈恋爱，也可以学习变得优秀的方法。因为【爱一个人最好的方式，是经营好自己，给对方一个优质的爱人】。<br>  至于我的话，没有那么多想法，只是单纯地感觉我要践行下去会变强而已。</li>
+</ul>
+<pre><code>—— 乌索普大将，2021.12.18，杭州。
+</code></pre>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>《认知觉醒》</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《控方证人》影评-usopp</title>
     <url>/2021/11/24/%E3%80%8A%E6%8E%A7%E6%96%B9%E8%AF%81%E4%BA%BA%E3%80%8B%E5%BD%B1%E8%AF%84-usopp/</url>
     <content><![CDATA[<h3 id="控方证人"><a href="#控方证人" class="headerlink" title="控方证人"></a>控方证人</h3><p>电影的名称，英文名得记一下，《The Witness for the Prosecution》，以示尊重。</p>
@@ -2326,55 +2769,6 @@
       </categories>
       <tags>
         <tag>控方证人</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《认知觉醒》读书心得+笔记整理</title>
-    <url>/2021/12/18/%E3%80%8A%E8%AE%A4%E7%9F%A5%E8%A7%89%E9%86%92%E3%80%8B%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97-%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<h3 id="个人成长记录："><a href="#个人成长记录：" class="headerlink" title="个人成长记录："></a>个人成长记录：</h3><p>今年最幸运的事情之一，就是读到了周岭老师的《认知觉醒》。<br>从八月份知道这本书，到现在将近四个月，陆陆续续读了也有四五遍了。<br>然后改变量也确实有一点，虽然进步不大，但也可以记录一下。</p>
-<ul>
-<li><p>开始写个人博客网站<br><a href="https://shenle2019.github.io/">https://shenle2019.github.io/</a><br>这个博客将会持续记录我的个人总结内容，我的想法是写任何内容都行，每周1-2篇输出。</p>
-</li>
-<li><p>Java-web的学习笔记，终于整理一版出来了。<br>对java的基础知识、博客网站的搭建流程、操作系统相关知识、Spring框架的基本应用等有一定的理解。<br>github地址：<a href="https://github.com/shenle2019/javaonline">https://github.com/shenle2019/javaonline</a></p>
-</li>
-</ul>
-<p>后续无论是Java，还是Python，C等，都可以按照这个思路，先把基础语法过一遍，然后做成一个项目，<br>将中间的一些关键步骤、思考内容记录下来，记录自己成长的同时，增强自信心。</p>
-<ul>
-<li><p>开始搭建个人知识体系，目前用有道云笔记来持续更新自己的全量知识体系。</p>
-</li>
-<li><p>开始实行【早冥读写跑】这人生五件套。<br>  其中阅读和跑步以前就一直很喜欢，现在更加强了这两个习惯。<br>  做的不好的是早起、冥想和写作。<br>  后续计划：早起，每天早上7点起床，对我来说是合适的。<br>  冥想：中午午睡时，30min+的冥想练习。<br>  写作：坚持以目标为导向来写博客。</p>
-</li>
-</ul>
-<h3 id="关键触动点记录："><a href="#关键触动点记录：" class="headerlink" title="关键触动点记录："></a>关键触动点记录：</h3><ul>
-<li><p>自己需要养成这些基础习惯，然后驱动自己做一些真实的改变，不是为了表面上的上进或者心理安慰，<br>而是内心的真实渴望：<br>比如想以后能写任何东西，那么就需要用写作来梳理自己的思路，锻炼笔力；<br>要想身体回到健康状态，要身材变好看，就得保持运动的习惯；<br>要做成想做的事，就要运用冥想来锻炼专注力等等。<br>早冥读写跑，可以为我搭建一个进阶的框架，后续有新的认知好的习惯，可以继续往里面添加即可。</p>
-</li>
-<li><p>另一个最关键的成长，就是耐心的增强。<br>焦虑的根源是自己想做的事情太多，而又立即想看到效果。<br>特别是眼里看见别人的成就，有对比就有焦虑。<br>而忽视了自己当前的能力，这就属于是盲目的焦虑了，实属没有必要。<br>可行的方法，第一条就是时刻提醒自己保持足够的耐心。<br>先找出目前来说最想做的、最重要的事情，只做一件事，<br>然后着眼于当下的事情，一点一滴地去解决它，感受进一寸的欢喜。<br>再有急躁时，运用元认知来温和提醒自己即可保持内心的平静。</p>
-</li>
-</ul>
-<p>以上两点，就已经让我醍醐灌顶，解决了很多问题，后续会一直坚持：<br>专注当下，保持平静和耐心，一点一滴地进步，学到新知识新习惯可以往已有的框架中添加。</p>
-<h3 id="读书笔记："><a href="#读书笔记：" class="headerlink" title="读书笔记："></a>读书笔记：</h3><p>这本书里还有很多其他的触动点，按自己的理解来记录如下</p>
-<ul>
-<li>要养成运动习惯，锻炼身体作为生活的一种状态，因为这是赋予无数个0的意义前面的1。</li>
-<li>有清晰的目标和执行的方法，消除实现路径的模糊。<br>  在拉伸区练习，且每项内容让自己讲出来，消除知识逻辑的模糊。<br>  这个过程，要求自己不要浮于表面或者只做表面工作，而要直面核心问题。</li>
-<li>执行过程中，践行所有高手都拥有的优点，可能也是惟一的优点，那就是专注。<br>  保持专注，追求心流、禅定 状态。这是毕生追求。<br>  比如编程写作，都需要练习练习再练习，最后达到真正的闭环状态。</li>
-<li>日常冥想可以锻炼自己的专注力。</li>
-<li>心态平和。解决困难问题时，要有打游戏闯关升级心态。<br>  有自信，相信自己一定能学会，做得到。</li>
-<li>每日反省。用 元认知来审视自己，从更全局的眼光来发现问题。<br>  然后用内心触动磨合、扩大自己的认知系统。<br>  如此反复刻意练习，来提高能力。</li>
-<li>最后，勤阅读，来聆听与各个领域 的大神的教诲。勤思考勤输出，来缩小差距。<br>  独立思考与输出，来慢慢变强。</li>
-</ul>
-<h3 id="其他感想："><a href="#其他感想：" class="headerlink" title="其他感想："></a>其他感想：</h3><ul>
-<li>这是一本关于【个人成长】的书（当然还可以解释、解决生活中的一些其它问题）。<br>  讨论的主要是我们作为普通人，想要变得【优秀】或者【厉害】一点，中间会有哪些问题？这些问题背后的原理是什么？<br>  知道这些原理后，我们应该怎么做？<br>  所以我们得先有让自己变好的心，否则这本书确实没啥意思，推荐再多次也没有意义。<br>  这是【前提】，毕竟我们不希望五年后、十年后的自己，跟现在一样没啥变化。<br>  只有我们的能力足够强的时候，才能解决生活中的很多问题。</li>
-<li>这本书讲的内容，我是这样理解的，主要分为两块。<br>  一个是我们身上出现各种各样问题的原因，即【原理】部分。<br>  另一个就是作者通过这些原因，来找到一些解决的办法，俗称【方法论】。<br>  各种问题比如焦虑、不够耐心、情感冲动、缺乏自控力、不够专注、学习不得法、行动力不强等等。<br>  作者把这些问题都一一罗列出来，说明问题背后的原因，想搞懂的话，可看对应章节的内容。<br>  方法论就是解决实际的问题了，知道原因后对症下药，参考上述读书笔记内容。</li>
-<li>一本书也不会教会所有成长相关的内容，只是这本书给我的触动很大，解决了我以前的很多困惑，所以希望大家也有所收获。<br>  当然也没有刻意来制造焦虑，或者执意要给你喝鸡汤打鸡血。<br>  这本书的原理是有科学依据的，而不是心灵鸡汤。  绝大部分人应该都可以从中学到一些东西，所以我觉得还是有必要读一读。<br>  比如你现在要教你的娃一些学习的方法，就可以作为参考。如果自己也能做到，那就更好了，毕竟【父母是孩子最好的老师】。    比如你现在想跟别人谈恋爱，也可以学习变得优秀的方法。因为【爱一个人最好的方式，是经营好自己，给对方一个优质的爱人】。<br>  至于我的话，没有那么多想法，只是单纯地感觉我要践行下去会变强而已。</li>
-</ul>
-<pre><code>—— 乌索普大将，2021.12.18，杭州。
-</code></pre>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>《认知觉醒》</tag>
       </tags>
   </entry>
   <entry>
@@ -2587,43 +2981,6 @@
       </tags>
   </entry>
   <entry>
-    <title>写个人博客的主体思路-usopp</title>
-    <url>/2021/11/24/%E5%86%99%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%BB%E4%BD%93%E6%80%9D%E8%B7%AF-usopp/</url>
-    <content><![CDATA[<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
-<li>使用github page作为自己的博客网站，写任意内容都行，关键在持续输出。</li>
-</ul>
-<h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><ul>
-<li>搭建、整理自己的个人知识体系。</li>
-<li>养成习惯，克服惰性，记录此时此刻的想法，锻炼自己的笔力。培养自己持续做一件事情的能力。</li>
-<li>写作输出倒逼输入。</li>
-</ul>
-<h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><p>项目类的，则尽量自己实际从头到尾做一遍，记录过程即可。<br>编程知识类的，如果自己不懂，则不要瞎写误人子弟。<br>哲学、文学、历史、小说、影视、剧集、音乐等等感兴趣的，看心情，随便写。<br>其他想法，也可以记录。</p>
-<p>参考选题：</p>
-<ul>
-<li>自我感悟或思考；</li>
-<li>图文故事；</li>
-<li>知识分享；</li>
-<li>好文章总结；</li>
-<li>歌曲、书籍和电影推荐，注明推荐理由；</li>
-<li>写作技巧积累；</li>
-<li>知乎搜一下有意思的话题；</li>
-</ul>
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
-<li>不要流水账。</li>
-<li>追求质量，务实。</li>
-<li>无需吹嘘自己，也没必要讨好别人。</li>
-<li>分享自己的所思所想，经验总结。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>思路</category>
-      </categories>
-      <tags>
-        <tag>usopp</tag>
-        <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>保持时间、计划任务和启动程序</title>
     <url>/2022/02/14/%E4%BF%9D%E6%8C%81%E6%97%B6%E9%97%B4%E3%80%81%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F/</url>
     <content><![CDATA[<h3 id="保持时间、、计划任务和启动程序"><a href="#保持时间、、计划任务和启动程序" class="headerlink" title="保持时间、、计划任务和启动程序"></a>保持时间、、计划任务和启动程序</h3><h4 id="time-模块"><a href="#time-模块" class="headerlink" title="time 模块"></a>time 模块</h4><ul>
@@ -2710,6 +3067,43 @@
       </categories>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>写个人博客的主体思路-usopp</title>
+    <url>/2021/11/24/%E5%86%99%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%BB%E4%BD%93%E6%80%9D%E8%B7%AF-usopp/</url>
+    <content><![CDATA[<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
+<li>使用github page作为自己的博客网站，写任意内容都行，关键在持续输出。</li>
+</ul>
+<h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>搭建、整理自己的个人知识体系。</li>
+<li>养成习惯，克服惰性，记录此时此刻的想法，锻炼自己的笔力。培养自己持续做一件事情的能力。</li>
+<li>写作输出倒逼输入。</li>
+</ul>
+<h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><p>项目类的，则尽量自己实际从头到尾做一遍，记录过程即可。<br>编程知识类的，如果自己不懂，则不要瞎写误人子弟。<br>哲学、文学、历史、小说、影视、剧集、音乐等等感兴趣的，看心情，随便写。<br>其他想法，也可以记录。</p>
+<p>参考选题：</p>
+<ul>
+<li>自我感悟或思考；</li>
+<li>图文故事；</li>
+<li>知识分享；</li>
+<li>好文章总结；</li>
+<li>歌曲、书籍和电影推荐，注明推荐理由；</li>
+<li>写作技巧积累；</li>
+<li>知乎搜一下有意思的话题；</li>
+</ul>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>不要流水账。</li>
+<li>追求质量，务实。</li>
+<li>无需吹嘘自己，也没必要讨好别人。</li>
+<li>分享自己的所思所想，经验总结。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>思路</category>
+      </categories>
+      <tags>
+        <tag>usopp</tag>
+        <tag>blog</tag>
       </tags>
   </entry>
   <entry>
@@ -3483,342 +3877,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python教程学习笔记002</title>
-    <url>/2023/01/25/python%E6%95%99%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0002/</url>
-    <content><![CDATA[<ol>
-<li>模块</li>
-</ol>
-<p>每一个包目录下面都会有一个__init__.py的文件，这个文件是必须存在的，否则，Python就把这个目录当成普通目录，而不是一个包。<strong>init</strong>.py可以是空文件，也可以有Python代码，因为__init__.py本身就是一个模块<br>自己创建模块时要注意命名，不能和Python自带的模块名称冲突。例如，系统自带了sys模块，自己的模块就不可命名为sys.py，否则将无法导入系统自带的sys模块。<br>我们以内建的sys模块为例，编写一个hello的模块：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; a test module &#x27;</span></span><br><span class="line"></span><br><span class="line">__author__ = <span class="string">&#x27;Michael Liao&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>():</span></span><br><span class="line">    args = sys.argv</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(args)==<span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, world!&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">len</span>(args)==<span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, %s!&#x27;</span> % args[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Too many arguments!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    test()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>当我们在命令行运行hello模块文件时，Python解释器把一个特殊变量__name__置为__main__，而如果在其他地方导入该hello模块时，if判断将失败，因此，这种if测试可以让一个模块通过命令行运行时执行一些额外的代码，最常见的就是运行测试。</p>
-<p>我们可以用命令行运行hello.py看看效果：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ python3 hello.py</span><br><span class="line">Hello, world!</span><br><span class="line">$ python hello.py Michael</span><br><span class="line">Hello, Michael!</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>作用域</li>
-</ol>
-<p>在Python中，是通过_前缀来实现的。</p>
-<p>正常的函数和变量名是公开的（public），可以被直接引用，比如：abc，x123，PI等；</p>
-<p>类似__xxx__这样的变量是特殊变量，可以被直接引用，但是有特殊用途，比如上面的__author__，__name__就是特殊变量，hello模块定义的文档注释也可以用特殊变量__doc__访问，我们自己的变量一般不要用这种变量名；</p>
-<p>类似_xxx和__xxx这样的函数或变量就是非公开的（private），不应该被直接引用，比如_abc，__abc等；</p>
-<p>之所以我们说，private函数和变量“不应该”被直接引用，而不是“不能”被直接引用，是因为Python并没有一种方法可以完全限制访问private函数或变量，但是，从编程习惯上不应该引用private函数或变量。</p>
-<ol start="3">
-<li>面向对象编程</li>
-</ol>
-<p>类（Class）和实例（Instance）的概念是很自然的。Class是一种抽象概念，比如我们定义的Class——Student，是指学生这个概念，而实例（Instance）则是一个个具体的Student，比如，Bart Simpson和Lisa Simpson是两个具体的Student。<br>所以，面向对象的设计思想是抽象出Class，根据Class创建Instance。<br>面向对象的抽象程度又比函数要高，因为一个Class既包含数据，又包含操作数据的方法。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, score</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br></pre></td></tr></table></figure>
-
-<p>注意：特殊方法“__init__”前后分别有两个下划线！！！<br>注意到__init__方法的第一个参数永远是self，表示创建的实例本身，因此，在__init__方法内部，就可以把各种属性绑定到self，因为self就指向创建的实例本身。</p>
-<p>有了__init__方法，在创建实例的时候，就不能传入空的参数了，必须传入与__init__方法匹配的参数，但self不需要传，Python解释器自己会把实例变量传进去<br>和普通的函数相比，在类中定义的函数只有一点不同，就是第一个参数永远是实例变量self，并且，调用时，不用传递该参数。除此之外，类的方法和普通函数没有什么区别，所以，你仍然可以用默认参数、可变参数、关键字参数和命名关键字参数。</p>
-<p>原先那种直接通过bart.score = 99也可以修改啊，为什么要定义一个方法大费周折？因为在方法中，可以对参数做检查，避免传入无效的参数：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span>(<span class="params">self, score</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt;= score &lt;= <span class="number">100</span>:</span><br><span class="line">            self.__score = score</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;bad score&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是，在Python中，变量名类似__xxx__的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是private变量，所以，不能用__name__、__score__这样的变量名。</p>
-<p>继承与多态：<br>继承可以把父类的所有功能都直接拿过来，这样就不必重零做起，子类只需要新增自己特有的方法，也可以把父类不适合的方法覆盖重写。<br>动态语言的鸭子类型特点决定了继承不像静态语言那样是必须的。</p>
-<p>获取对象信息：<br>当我们拿到一个对象的引用时，如何知道这个对象是什么类型、有哪些方法呢？<br>使用type()<br>首先，我们来判断对象类型，使用type()函数<br>基本类型都可以用type()判断<br>如果一个变量指向函数或者类，也可以用type()判断<br>判断基本数据类型可以直接写int，str等，但如果要判断一个对象是否是函数怎么办？可以使用types模块中定义的常量<br>对于class的继承关系来说，使用type()就很不方便。我们要判断class的类型，可以使用isinstance()函数。<br>如果要获得一个对象的所有属性和方法，可以使用dir()函数，它返回一个包含字符串的list</p>
-<ol start="4">
-<li>面向对象高级编程</li>
-</ol>
-<p>使用__slots__ ：<br>如果我们想要限制实例的属性怎么办？比如，只允许对Student实例添加name和age属性。<br>为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的__slots__变量，来限制该class实例能添加的属性：<br>class Student(object):<br>    <strong>slots</strong> = (‘name’, ‘age’) # 用tuple定义允许绑定的属性名称<br>然后，我们试试：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>s = Student() # 创建新的实例<br>s.name = ‘Michael’ # 绑定属性’name’<br>s.age = 25 # 绑定属性’age’<br>s.score = 99 # 绑定属性’score’<br>Traceback (most recent call last):<br>  File “<stdin>“, line 1, in <module><br>AttributeError: ‘Student’ object has no attribute ‘score’<br>由于’score’没有被放到__slots__中，所以不能绑定score属性，试图绑定score将得到AttributeError的错误。<br>使用__slots__要注意，__slots__定义的属性仅对当前类实例起作用，对继承的子类是不起作用的</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>使用@property ：</p>
-<p>在绑定属性时，如果我们直接把属性暴露出去，虽然写起来很简单，但是，没办法检查参数，导致可以把成绩随便改：</p>
-<p>s = Student()<br>s.score = 9999<br>这显然不合逻辑。为了限制score的范围，可以通过一个set_score()方法来设置成绩，再通过一个get_score()来获取成绩，这样，在set_score()方法里，就可以检查参数：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_score</span>(<span class="params">self</span>):</span></span><br><span class="line">         <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must be an integer!&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must between 0 ~ 100!&#x27;</span>)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure>
-
-<p>对于类的方法，装饰器一样起作用。Python内置的@property装饰器就是负责把一个方法变成属性调用的：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line"><span class="meta">    @score.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must be an integer!&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must between 0 ~ 100!&#x27;</span>)</span><br><span class="line">        self._score = value</span><br><span class="line">```		</span><br><span class="line"></span><br><span class="line"><span class="meta">@property的实现比较复杂，我们先考察如何使用。把一个getter方法变成属性，只需要加上@property就可以了，此时，@property本身又创建了另一个装饰器@score.setter，负责把一个setter方法变成属性赋值，于是，我们就拥有一个可控的属性操作：</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = Student()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">60</span> <span class="comment"># OK，实际转化为s.set_score(60)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score <span class="comment"># OK，实际转化为s.get_score()</span></span><br><span class="line"><span class="number">60</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">9999</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between <span class="number">0</span> ~ <span class="number">100</span>!</span><br><span class="line">注意到这个神奇的@<span class="built_in">property</span>，我们在对实例属性操作的时候，就知道该属性很可能不是直接暴露的，而是通过getter和setter方法来实现的。</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">多重继承：</span><br><span class="line">对于需要Runnable功能的动物，就多继承一个Runnable，例如Dog：</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>(<span class="params">Mammal, Runnable</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">对于需要Flyable功能的动物，就多继承一个Flyable，例如Bat：</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bat</span>(<span class="params">Mammal, Flyable</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">通过多重继承，一个子类就可以同时获得多个父类的所有功能。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MixIn：</span><br><span class="line">在设计类的继承关系时，通常，主线都是单一继承下来的，例如，Ostrich继承自Bird。但是，如果需要“混入”额外的功能，通过多重继承就可以实现，比如，让Ostrich除了继承自Bird外，再同时继承Runnable。这种设计通常称之为MixIn。</span><br><span class="line">为了更好地看出继承关系，我们把Runnable和Flyable改为RunnableMixIn和FlyableMixIn。类似的，你还可以定义出肉食动物CarnivorousMixIn和植食动物HerbivoresMixIn，让某个动物同时拥有好几个MixIn：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>(<span class="params">Mammal, RunnableMixIn, CarnivorousMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">MixIn的目的就是给一个类增加多个功能，这样，在设计类的时候，我们优先考虑通过多重继承来组合多个MixIn的功能，而不是设计多层次的复杂的继承关系。</span><br><span class="line">Python自带的很多库也使用了MixIn。举个例子，Python自带了TCPServer和UDPServer这两类网络服务，而要同时服务多个用户就必须使用多进程或多线程模型，这两种模型由ForkingMixIn和ThreadingMixIn提供。通过组合，我们就可以创造出合适的服务来。</span><br><span class="line">比如，编写一个多进程模式的TCP服务，定义如下：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTCPServer</span>(<span class="params">TCPServer, ForkingMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">编写一个多线程模式的UDP服务，定义如下：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyUDPServer</span>(<span class="params">UDPServer, ThreadingMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">如果你打算搞一个更先进的协程模型，可以编写一个CoroutineMixIn：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTCPServer</span>(<span class="params">TCPServer, CoroutineMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">这样一来，我们不需要复杂而庞大的继承链，只要选择组合不同的类的功能，就可以快速构造出所需的子类。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">定制类：</span><br><span class="line">看到类似__slots__这种形如__xxx__的变量或者函数名就要注意，这些在Python中是有特殊用途的。</span><br><span class="line">__slots__我们已经知道怎么用了，__len__()方法我们也知道是为了能让<span class="class"><span class="keyword">class</span>作用于<span class="title">len</span>()函数。</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">通常<span class="title">__str__</span>()和<span class="title">__repr__</span>()代码都是一样的，所以，有个偷懒的写法：</span></span><br><span class="line"><span class="class">```<span class="title">python</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Student object (name=%s)&#x27;</span> % self.name</span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>iter</strong><br>如果一个类想被用于for … in循环，类似list或tuple那样，就必须实现一个__iter__()方法，该方法返回一个迭代对象，然后，Python的for循环就会不断调用该迭代对象的__next__()方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环。</p>
-<p><strong>getitem</strong><br>要表现得像list那样按照下标取出元素，需要实现__getitem__()方法</p>
-<p>Python还有另一个机制，那就是写一个__getattr__()方法，动态返回一个属性。修改如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.name = <span class="string">&#x27;Michael&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, attr</span>):</span></span><br><span class="line">        <span class="keyword">if</span> attr==<span class="string">&#x27;score&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">99</span></span><br></pre></td></tr></table></figure>
-
-<p>当调用不存在的属性时，比如score，Python解释器会试图调用__getattr__(self, ‘score’)来尝试获得属性，这样，我们就有机会返回score的值</p>
-<p><strong>call</strong><br>一个对象实例可以有自己的属性和方法，当我们调用实例方法时，我们用instance.method()来调用。能不能直接在实例本身上调用呢？在Python中，答案是肯定的。<br>任何类，只需要定义一个__call__()方法，就可以直接对实例进行调用。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;My name is %s.&#x27;</span> % self.name)</span><br></pre></td></tr></table></figure>
-
-<p>调用方式如下：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>s = Student(‘Michael’)<br>s() # self参数不要传入<br>My name is Michael.</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>通过callable()函数，我们就可以判断一个对象是否是“可调用”对象。</p>
-<p>更多方法参考：<a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">https://docs.python.org/3/reference/datamodel.html#special-method-names</a></p>
-<p>枚举类：</p>
-<p>为这样的枚举类型定义一个class类型，然后，每个常量都是class的一个唯一实例。Python提供了Enum类来实现这个功能：</p>
-<p>from enum import Enum<br>Month = Enum(‘Month’, (‘Jan’, ‘Feb’, ‘Mar’, ‘Apr’, ‘May’, ‘Jun’, ‘Jul’, ‘Aug’, ‘Sep’, ‘Oct’, ‘Nov’, ‘Dec’))</p>
-<p>如果需要更精确地控制枚举类型，可以从Enum派生出自定义类：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum, unique</span><br><span class="line"></span><br><span class="line"><span class="meta">@unique</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Weekday</span>(<span class="params">Enum</span>):</span></span><br><span class="line">    Sun = <span class="number">0</span> <span class="comment"># Sun的value被设定为0</span></span><br><span class="line">    Mon = <span class="number">1</span></span><br><span class="line">    Tue = <span class="number">2</span></span><br><span class="line">    Wed = <span class="number">3</span></span><br><span class="line">    Thu = <span class="number">4</span></span><br><span class="line">    Fri = <span class="number">5</span></span><br><span class="line">    Sat = <span class="number">6</span></span><br></pre></td></tr></table></figure>
-<p>@unique装饰器可以帮助我们检查保证没有重复值。</p>
-<p>使用元类：<br>type()<br>动态语言和静态语言最大的不同，就是函数和类的定义，不是编译时定义的，而是运行时动态创建的。</p>
-<p>比方说我们要定义一个Hello的class，就写一个hello.py模块：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hello</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hello</span>(<span class="params">self, name=<span class="string">&#x27;world&#x27;</span></span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, %s.&#x27;</span> % name)</span><br></pre></td></tr></table></figure>
-
-<p>当Python解释器载入hello模块时，就会依次执行该模块的所有语句，执行结果就是动态创建出一个Hello的class对象，测试如下：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>from hello import Hello<br>h = Hello()<br>h.hello()<br>Hello, world.<br>print(type(Hello))<br>&lt;class ‘type’&gt;<br>print(type(h))<br>&lt;class ‘hello.Hello’&gt;<br>type()函数可以查看一个类型或变量的类型，Hello是一个class，它的类型就是type，而h是一个实例，它的类型就是class Hello。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>我们说class的定义是运行时动态创建的，而创建class的方法就是使用type()函数。</p>
-<p>type()函数既可以返回一个对象的类型，又可以创建出新的类型，比如，我们可以通过type()函数创建出Hello类，而无需通过class Hello(object)…的定义：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>def fn(self, name=’world’): # 先定义函数<br>…     print(‘Hello, %s.’ % name)<br>…<br>Hello = type(‘Hello’, (object,), dict(hello=fn)) # 创建Hello class<br>h = Hello()<br>h.hello()<br>Hello, world.<br>print(type(Hello))<br>&lt;class ‘type’&gt;<br>print(type(h))<br>&lt;class ‘__main__.Hello’&gt;<br>要创建一个class对象，type()函数依次传入3个参数：</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>class的名称；<br>继承的父类集合，注意Python支持多重继承，如果只有一个父类，别忘了tuple的单元素写法；<br>class的方法名称与函数绑定，这里我们把函数fn绑定到方法名hello上。<br>通过type()函数创建的类和直接写class是完全一样的，因为Python解释器遇到class定义时，仅仅是扫描一下class定义的语法，然后调用type()函数创建出class。</p>
-<p>正常情况下，我们都用class Xxx…来定义类，但是，type()函数也允许我们动态创建出类来，也就是说，动态语言本身支持运行期动态创建类，这和静态语言有非常大的不同，要在静态语言运行期创建类，必须构造源代码字符串再调用编译器，或者借助一些工具生成字节码实现，本质上都是动态编译，会非常复杂。</p>
-<p>metaclass（了解即可，较为复杂，不常用。可用于ORM）：<br>除了使用type()动态创建类以外，要控制类的创建行为，还可以使用metaclass。<br>metaclass，直译为元类，简单的解释就是：<br>当我们定义了类以后，就可以根据这个类创建出实例，所以：先定义类，然后创建实例。<br>但是如果我们想创建出类呢？那就必须根据metaclass创建出类，所以：先定义metaclass，然后创建类。<br>连接起来就是：先定义metaclass，就可以创建类，最后创建实例。<br>所以，metaclass允许你创建类或者修改类。换句话说，你可以把类看成是metaclass创建出来的“实例”。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>测试开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python教程学习笔记003</title>
-    <url>/2023/01/26/python%E6%95%99%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0003/</url>
-    <content><![CDATA[<ol>
-<li>错误、调试</li>
-</ol>
-<p>有的错误是程序编写有问题造成的，比如本来应该输出整数结果输出了字符串，这种错误我们通常称之为bug，bug是必须修复的。<br>有的错误是用户输入造成的，比如让用户输入email地址，结果得到一个空字符串，这种错误可以通过检查用户输入来做相应的处理。<br>还有一类错误是完全无法在程序运行过程中预测的，比如写入文件的时候，磁盘满了，写不进去了，或者从网络抓取数据，网络突然断掉了。这类错误也称为异常，在程序中通常是必须处理的，否则，程序会因为各种问题终止并退出。<br>Python内置了一套异常处理机制，来帮助我们进行错误处理。</p>
-<p>try<br>让我们用一个例子来看看try的机制：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;try...&#x27;</span>)</span><br><span class="line">    r = <span class="number">10</span> / <span class="number">0</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;result:&#x27;</span>, r)</span><br><span class="line"><span class="keyword">except</span> ZeroDivisionError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;except:&#x27;</span>, e)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;finally...&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;END&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;try...&#x27;</span>)</span><br><span class="line">    r = <span class="number">10</span> / <span class="built_in">int</span>(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;result:&#x27;</span>, r)</span><br><span class="line"><span class="keyword">except</span> ValueError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;ValueError:&#x27;</span>, e)</span><br><span class="line"><span class="keyword">except</span> ZeroDivisionError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;ZeroDivisionError:&#x27;</span>, e)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;no error!&#x27;</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;finally...&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;END&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<p>调用栈<br>如果错误没有被捕获，它就会一直往上抛，最后被Python解释器捕获，打印一个错误信息，然后程序退出。</p>
-<p>记录错误<br>如果不捕获错误，自然可以让Python解释器来打印出错误堆栈，但程序也被结束了。既然我们能捕获错误，就可以把错误堆栈打印出来，然后分析错误原因，同时，让程序继续执行下去。</p>
-<p>Python内置的logging模块可以非常容易地记录错误信息：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># err_logging.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">s</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span> / <span class="built_in">int</span>(s)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span>(<span class="params">s</span>):</span></span><br><span class="line">    <span class="keyword">return</span> foo(s) * <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        bar(<span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        logging.exception(e)</span><br><span class="line"></span><br><span class="line">main()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;END&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>抛出错误<br>因为错误是class，捕获一个错误就是捕获到该class的一个实例。因此，错误并不是凭空产生的，而是有意创建并抛出的。Python的内置函数会抛出很多类型的错误，我们自己编写的函数也可以抛出错误。<br>如果要抛出错误，首先根据需要，可以定义一个错误的class，选择好继承关系，然后，用raise语句抛出一个错误</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># err_raise.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooError</span>(<span class="params">ValueError</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">s</span>):</span></span><br><span class="line">    n = <span class="built_in">int</span>(s)</span><br><span class="line">    <span class="keyword">if</span> n==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">raise</span> FooError(<span class="string">&#x27;invalid value: %s&#x27;</span> % s)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span> / n</span><br><span class="line"></span><br><span class="line">foo(<span class="string">&#x27;0&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>执行，可以最后跟踪到我们自己定义的错误：</p>
-<p>$ python3 err_raise.py<br>Traceback (most recent call last):<br>  File “err_throw.py”, line 11, in <module><br>    foo(‘0’)<br>  File “err_throw.py”, line 8, in foo<br>    raise FooError(‘invalid value: %s’ % s)<br><strong>main</strong>.FooError: invalid value: 0</p>
-<p>只有在必要的时候才定义我们自己的错误类型。如果可以选择Python已有的内置的错误类型（比如ValueError，TypeError），尽量使用Python内置的错误类型。<br>raise语句如果不带参数，就会把当前错误原样抛出。此外，在except中raise一个Error，还可以把一种类型的错误转化成另一种类型：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="number">10</span> / <span class="number">0</span></span><br><span class="line"><span class="keyword">except</span> ZeroDivisionError:</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">&#x27;input error!&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>只要是合理的转换逻辑就可以，但是，决不应该把一个IOError转换成毫不相干的ValueError。</p>
-<p>logging:</p>
-<p>允许你指定记录信息的级别，有debug，info，warning，error等几个级别，当我们指定level=INFO时，logging.debug就不起作用了。同理，指定level=WARNING后，debug和info就不起作用了。这样一来，你可以放心地输出不同级别的信息，也不用删除，最后统一控制输出哪个级别的信息。<br>logging的另一个好处是通过简单的配置，一条语句可以同时输出到不同的地方，比如console和文件。</p>
-<ol start="2">
-<li>单元测试</li>
-</ol>
-<p>mydict.py代码如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dict</span>(<span class="params"><span class="built_in">dict</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, **kw</span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__(**kw)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, key</span>):</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">return</span> self[key]</span><br><span class="line">        <span class="keyword">except</span> KeyError:</span><br><span class="line">            <span class="keyword">raise</span> AttributeError(<span class="string">r&quot;&#x27;Dict&#x27; object has no attribute &#x27;%s&#x27;&quot;</span> % key)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span>(<span class="params">self, key, value</span>):</span></span><br><span class="line">        self[key] = value</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>为了编写单元测试，我们需要引入Python自带的unittest模块，编写mydict_test.py如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mydict <span class="keyword">import</span> <span class="type">Dict</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestDict</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_init</span>(<span class="params">self</span>):</span></span><br><span class="line">        d = <span class="type">Dict</span>(a=<span class="number">1</span>, b=<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">        self.assertEqual(d.a, <span class="number">1</span>)</span><br><span class="line">        self.assertEqual(d.b, <span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">        self.assertTrue(<span class="built_in">isinstance</span>(d, <span class="built_in">dict</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_key</span>(<span class="params">self</span>):</span></span><br><span class="line">        d = <span class="type">Dict</span>()</span><br><span class="line">        d[<span class="string">&#x27;key&#x27;</span>] = <span class="string">&#x27;value&#x27;</span></span><br><span class="line">        self.assertEqual(d.key, <span class="string">&#x27;value&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_attr</span>(<span class="params">self</span>):</span></span><br><span class="line">        d = <span class="type">Dict</span>()</span><br><span class="line">        d.key = <span class="string">&#x27;value&#x27;</span></span><br><span class="line">        self.assertTrue(<span class="string">&#x27;key&#x27;</span> <span class="keyword">in</span> d)</span><br><span class="line">        self.assertEqual(d[<span class="string">&#x27;key&#x27;</span>], <span class="string">&#x27;value&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_keyerror</span>(<span class="params">self</span>):</span></span><br><span class="line">        d = <span class="type">Dict</span>()</span><br><span class="line">        <span class="keyword">with</span> self.assertRaises(KeyError):</span><br><span class="line">            value = d[<span class="string">&#x27;empty&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_attrerror</span>(<span class="params">self</span>):</span></span><br><span class="line">        d = <span class="type">Dict</span>()</span><br><span class="line">        <span class="keyword">with</span> self.assertRaises(AttributeError):</span><br><span class="line">            value = d.empty</span><br><span class="line">			</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    unittest.main()</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
-
-
-<p>$ python -m unittest mydict_test<br>…..</p>
-<hr>
-<p>Ran 5 tests in 0.000s</p>
-<p>OK</p>
-<p>setUp与tearDown</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestDict</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;setUp...&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tearDown</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;tearDown...&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>单元测试可以有效地测试某个程序模块的行为，是未来重构代码的信心保证。<br>单元测试的测试用例要覆盖常用的输入组合、边界条件和异常。<br>单元测试代码要非常简单，如果测试代码太复杂，那么测试代码本身就可能有bug。<br>单元测试通过了并不意味着程序就没有bug了，但是不通过程序肯定有bug。        </p>
-<ol start="3">
-<li>IO编程</li>
-</ol>
-<p>IO在计算机中指Input/Output，也就是输入和输出。由于程序和运行时数据是在内存中驻留，由CPU这个超快的计算核心来执行，涉及到数据交换的地方，通常是磁盘、网络等，就需要IO接口。<br>比如你打开浏览器，访问新浪首页，浏览器这个程序就需要通过网络IO获取新浪的网页。浏览器首先会发送数据给新浪服务器，告诉它我想要首页的HTML，这个动作是往外发数据，叫Output，随后新浪服务器把网页发过来，这个动作是从外面接收数据，叫Input。所以，通常，程序完成IO操作会有Input和Output两个数据流。当然也有只用一个的情况，比如，从磁盘读取文件到内存，就只有Input操作，反过来，把数据写到磁盘文件里，就只是一个Output操作。<br>IO编程中，Stream（流）是一个很重要的概念，可以把流想象成一个水管，数据就是水管里的水，但是只能单向流动。Input Stream就是数据从外面（磁盘、网络）流进内存，Output Stream就是数据从内存流到外面去。对于浏览网页来说，浏览器和新浪服务器之间至少需要建立两根水管，才可以既能发数据，又能收数据。<br>由于CPU和内存的速度远远高于外设的速度，所以，在IO编程中，就存在速度严重不匹配的问题。举个例子来说，比如要把100M的数据写入磁盘，CPU输出100M的数据只需要0.01秒，可是磁盘要接收这100M数据可能需要10秒，怎么办呢？有两种办法：<br>第一种是CPU等着，也就是程序暂停执行后续代码，等100M的数据在10秒后写入磁盘，再接着往下执行，这种模式称为同步IO；<br>另一种方法是CPU不等待，只是告诉磁盘，“您老慢慢写，不着急，我接着干别的事去了”，于是，后续代码可以立刻接着执行，这种模式称为异步IO。<br>很明显，使用异步IO来编写程序性能会远远高于同步IO，但是异步IO的缺点是编程模型复杂。想想看，你得知道什么时候通知你“汉堡做好了”，而通知你的方法也各不相同。如果是服务员跑过来找到你，这是回调模式，如果服务员发短信通知你，你就得不停地检查手机，这是轮询模式。总之，异步IO的复杂度远远高于同步IO。</p>
-<p>读文件：<br>Python引入了with语句来自动帮我们调用close()方法：<br>with open(‘/path/to/file’, ‘r’) as f:<br>    print(f.read())<br>如果文件很小，read()一次性读取最方便；如果不能确定文件大小，反复调用read(size)比较保险；如果是配置文件，调用readlines()最方便：<br>for line in f.readlines():<br>    print(line.strip()) # 把末尾的’\n’删掉</p>
-<p>file-like Object：<br>像open()函数返回的这种有个read()方法的对象，在Python中统称为file-like Object。除了file外，还可以是内存的字节流，网络流，自定义流等等。file-like Object不要求从特定类继承，只要写个read()方法就行。<br>StringIO就是在内存中创建的file-like Object，常用作临时缓冲。</p>
-<p>写文件：<br>with open(‘/Users/michael/test.txt’, ‘w’) as f:<br>    f.write(‘Hello, world!’)</p>
-<p>StringIO：<br>getvalue()方法用于获得写入后的str。</p>
-<p>要读取StringIO，可以用一个str初始化StringIO，然后，像读文件一样读取：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> io <span class="keyword">import</span> StringIO</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = StringIO(<span class="string">&#x27;Hello!\nHi!\nGoodbye!&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line"><span class="meta">... </span>    s = f.readline()</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> s == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">break</span></span><br><span class="line"><span class="meta">... </span>    <span class="built_in">print</span>(s.strip())</span><br><span class="line">...</span><br><span class="line">Hello!</span><br><span class="line">Hi!</span><br><span class="line">Goodbye!</span><br></pre></td></tr></table></figure>
-
-<p>BytesIO<br>StringIO操作的只能是str，如果要操作二进制数据，就需要使用BytesIO。<br>BytesIO实现了在内存中读写bytes，我们创建一个BytesIO，然后写入一些bytes：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = BytesIO()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.write(<span class="string">&#x27;中文&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(f.getvalue())</span><br><span class="line"><span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>请注意，写入的不是str，而是经过UTF-8编码的bytes。</p>
-<p>和StringIO类似，可以用一个bytes初始化BytesIO，然后，像读文件一样读取：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = BytesIO(<span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.read()</span><br><span class="line"><span class="string">b&#x27;\xe4\xb8\xad\xe6\x96\x87&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-<p>操作文件和目录:</p>
-<p>操作文件和目录的函数一部分放在os模块中，一部分放在os.path模块中，这一点要注意一下。查看、创建和删除目录可以这么调用：</p>
-<h1 id="查看当前目录的绝对路径"><a href="#查看当前目录的绝对路径" class="headerlink" title="查看当前目录的绝对路径:"></a>查看当前目录的绝对路径:</h1><blockquote>
-<blockquote>
-<blockquote>
-<p>os.path.abspath(‘.’)<br>‘/Users/michael’</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h1 id="在某个目录下创建一个新目录，首先把新目录的完整路径表示出来"><a href="#在某个目录下创建一个新目录，首先把新目录的完整路径表示出来" class="headerlink" title="在某个目录下创建一个新目录，首先把新目录的完整路径表示出来:"></a>在某个目录下创建一个新目录，首先把新目录的完整路径表示出来:</h1><blockquote>
-<blockquote>
-<blockquote>
-<p>os.path.join(‘/Users/michael’, ‘testdir’)<br>‘/Users/michael/testdir’</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h1 id="然后创建一个目录"><a href="#然后创建一个目录" class="headerlink" title="然后创建一个目录:"></a>然后创建一个目录:</h1><blockquote>
-<blockquote>
-<blockquote>
-<p>os.mkdir(‘/Users/michael/testdir’)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h1 id="删掉一个目录"><a href="#删掉一个目录" class="headerlink" title="删掉一个目录:"></a>删掉一个目录:</h1><blockquote>
-<blockquote>
-<blockquote>
-<p>os.rmdir(‘/Users/michael/testdir’)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>同样的道理，要拆分路径时，也不要直接去拆字符串，而要通过os.path.split()函数，这样可以把一个路径拆分为两部分，后一部分总是最后级别的目录或文件名：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>os.path.split(‘/Users/michael/testdir/file.txt’)<br>(‘/Users/michael/testdir’, ‘file.txt’)<br>os.path.splitext()可以直接让你得到文件扩展名，很多时候非常方便：</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>os.path.splitext(‘/path/to/file.txt’)<br>(‘/path/to/file’, ‘.txt’)<br>这些合并、拆分路径的函数并不要求目录和文件要真实存在，它们只对字符串进行操作。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>文件操作使用下面的函数。假定当前目录下有一个test.txt文件：</p>
-<h1 id="对文件重命名"><a href="#对文件重命名" class="headerlink" title="对文件重命名:"></a>对文件重命名:</h1><blockquote>
-<blockquote>
-<blockquote>
-<p>os.rename(‘test.txt’, ‘test.py’)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h1 id="删掉文件"><a href="#删掉文件" class="headerlink" title="删掉文件:"></a>删掉文件:</h1><blockquote>
-<blockquote>
-<blockquote>
-<p>os.remove(‘test.py’)<br>但是复制文件的函数居然在os模块中不存在！原因是复制文件并非由操作系统提供的系统调用。理论上讲，我们通过上一节的读写文件可以完成文件复制，只不过要多写很多代码。<br>幸运的是shutil模块提供了copyfile()的函数，你还可以在shutil模块中找到很多实用函数，它们可以看做是os模块的补充。<br>最后看看如何利用Python的特性来过滤文件。比如我们要列出当前目录下的所有目录，只需要一行代码：</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>[x for x in os.listdir(‘.’) if os.path.isdir(x)]<br>[‘.lein’, ‘.local’, ‘.m2’, ‘.npm’, ‘.ssh’, ‘.Trash’, ‘.vim’, ‘Applications’, ‘Desktop’, …]<br>要列出所有的.py文件，也只需一行代码：</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>[x for x in os.listdir(‘.’) if os.path.isfile(x) and os.path.splitext(x)[1]==’.py’]<br>[‘apis.py’, ‘config.py’, ‘models.py’, ‘pymonitor.py’, ‘test_db.py’, ‘urls.py’, ‘wsgiapp.py’]</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>我们把变量从内存中变成可存储或传输的过程称之为序列化，在Python中叫pickling，在其他语言中也被称之为serialization，marshalling，flattening等等，都是一个意思。</p>
-<p>序列化之后，就可以把序列化后的内容写入磁盘，或者通过网络传输到别的机器上。</p>
-<p>反过来，把变量内容从序列化的对象重新读到内存里称之为反序列化，即unpickling。</p>
-<p>Python提供了pickle模块来实现序列化。</p>
-<p>首先，我们尝试把一个对象序列化并写入文件：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>import pickle<br>d = dict(name=’Bob’, age=20, score=88)<br>pickle.dumps(d)<br>b’\x80\x03}q\x00(X\x03\x00\x00\x00ageq\x01K\x14X\x05\x00\x00\x00scoreq\x02KXX\x04\x00\x00\x00nameq\x03X\x03\x00\x00\x00Bobq\x04u.’<br>pickle.dumps()方法把任意对象序列化成一个bytes，然后，就可以把这个bytes写入文件。或者用另一个方法pickle.dump()直接把对象序列化后写入一个file-like Object：</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>f = open(‘dump.txt’, ‘wb’)<br>pickle.dump(d, f)<br>f.close()<br>看看写入的dump.txt文件，一堆乱七八糟的内容，这些都是Python保存的对象内部信息。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>当我们要把对象从磁盘读到内存时，可以先把内容读到一个bytes，然后用pickle.loads()方法反序列化出对象，也可以直接用pickle.load()方法从一个file-like Object中直接反序列化出对象。我们打开另一个Python命令行来反序列化刚才保存的对象：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>f = open(‘dump.txt’, ‘rb’)<br>d = pickle.load(f)<br>f.close()<br>d<br>{‘age’: 20, ‘score’: 88, ‘name’: ‘Bob’}</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>JSON:<br>Python内置的json模块提供了非常完善的Python对象到JSON格式的转换。我们先看看如何把Python对象变成一个JSON：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>import json<br>d = dict(name=’Bob’, age=20, score=88)<br>json.dumps(d)<br>‘{“age”: 20, “score”: 88, “name”: “Bob”}’<br>dumps()方法返回一个str，内容就是标准的JSON。类似的，dump()方法可以直接把JSON写入一个file-like Object。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>要把JSON反序列化为Python对象，用loads()或者对应的load()方法，前者把JSON的字符串反序列化，后者从file-like Object中读取字符串并反序列化：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>json_str = ‘{“age”: 20, “score”: 88, “name”: “Bob”}’<br>json.loads(json_str)<br>{‘age’: 20, ‘score’: 88, ‘name’: ‘Bob’}<br>由于JSON标准规定JSON编码是UTF-8，所以我们总是能正确地在Python的str与JSON的字符串之间转换。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>JSON进阶:<br>无法把类实例序列化为JSON，是因为默认情况下，dumps()方法不知道如何将实例变为一个JSON的{}对象。<br>可选参数default就是把任意一个对象变成一个可序列为JSON的对象，我们只需要为Student专门写一个转换函数，再把函数传进去即可<br>同样的道理，如果我们要把JSON反序列化为一个对象实例，loads()方法首先转换出一个对象，然后，我们传入的object_hook函数负责把dict转换为实例;</p>
-<ol start="4">
-<li>进程与线程</li>
-</ol>
-<p>任务的实现有3种方式：</p>
-<p>多进程模式；<br>多线程模式；<br>多进程+多线程模式。<br>同时执行多个任务通常各个任务之间并不是没有关联的，而是需要相互通信和协调，有时，任务1必须暂停等待任务2完成后才能继续执行，有时，任务3和任务4又不能同时执行，所以，多进程和多线程的程序的复杂度要远远高于我们前面写的单进程单线程的程序。</p>
-<p>要让Python程序实现多进程（multiprocessing），我们先了解操作系统的相关知识。</p>
-<p>Unix/Linux操作系统提供了一个fork()系统调用，它非常特殊。普通的函数调用，调用一次，返回一次，但是fork()调用一次，返回两次，因为操作系统自动把当前进程（称为父进程）复制了一份（称为子进程），然后，分别在父进程和子进程内返回。</p>
-<p>子进程永远返回0，而父进程返回子进程的ID。这样做的理由是，一个父进程可以fork出很多子进程，所以，父进程要记下每个子进程的ID，而子进程只需要调用getppid()就可以拿到父进程的ID。</p>
-<p>Python的os模块封装了常见的系统调用，其中就包括fork，可以在Python程序中轻松创建子进程：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Process (%s) start...&#x27;</span> % os.getpid())</span><br><span class="line"><span class="comment"># Only works on Unix/Linux/Mac:</span></span><br><span class="line">pid = os.fork()</span><br><span class="line"><span class="keyword">if</span> pid == <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;I am child process (%s) and my parent is %s.&#x27;</span> % (os.getpid(), os.getppid()))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;I (%s) just created a child process (%s).&#x27;</span> % (os.getpid(), pid))</span><br></pre></td></tr></table></figure>
-
-<p>运行结果如下：</p>
-<p>Process (876) start…<br>I (876) just created a child process (877).<br>I am child process (877) and my parent is 876.<br>由于Windows没有fork调用，上面的代码在Windows上无法运行。而Mac系统是基于BSD（Unix的一种）内核，所以，在Mac下运行是没有问题的，推荐大家用Mac学Python！</p>
-<p>有了fork调用，一个进程在接到新任务时就可以复制出一个子进程来处理新任务，常见的Apache服务器就是由父进程监听端口，每当有新的http请求时，就fork出子进程来处理新的http请求。</p>
-<p>multiprocessing：</p>
-<p>如果你打算编写多进程的服务程序，Unix/Linux无疑是正确的选择。由于Windows没有fork调用，难道在Windows上无法用Python编写多进程的程序？</p>
-<p>由于Python是跨平台的，自然也应该提供一个跨平台的多进程支持。multiprocessing模块就是跨平台版本的多进程模块。</p>
-<p>multiprocessing模块提供了一个Process类来代表一个进程对象，下面的例子演示了启动一个子进程并等待其结束：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 子进程要执行的代码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_proc</span>(<span class="params">name</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Run child process %s (%s)...&#x27;</span> % (name, os.getpid()))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Parent process %s.&#x27;</span> % os.getpid())</span><br><span class="line">    p = Process(target=run_proc, args=(<span class="string">&#x27;test&#x27;</span>,))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Child process will start.&#x27;</span>)</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Child process end.&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>Pool：<br>如果要启动大量的子进程，可以用进程池的方式批量创建子进程：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"><span class="keyword">import</span> os, time, random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">long_time_task</span>(<span class="params">name</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Run task %s (%s)...&#x27;</span> % (name, os.getpid()))</span><br><span class="line">    start = time.time()</span><br><span class="line">    time.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line">    end = time.time()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Task %s runs %0.2f seconds.&#x27;</span> % (name, (end - start)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Parent process %s.&#x27;</span> % os.getpid())</span><br><span class="line">    p = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        p.apply_async(long_time_task, args=(i,))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Waiting for all subprocesses done...&#x27;</span>)</span><br><span class="line">    p.close()</span><br><span class="line">    p.join()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;All subprocesses done.&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>子进程：<br>很多时候，子进程并不是自身，而是一个外部进程。我们创建了子进程后，还需要控制子进程的输入和输出。<br>subprocess模块可以让我们非常方便地启动一个子进程，然后控制其输入和输出。</p>
-<p>进程间通信<br>Process之间肯定是需要通信的，操作系统提供了很多机制来实现进程间的通信。Python的multiprocessing模块包装了底层的机制，提供了Queue、Pipes等多种方式来交换数据。<br>在Unix/Linux下，multiprocessing模块封装了fork()调用，使我们不需要关注fork()的细节。由于Windows没有fork调用，因此，multiprocessing需要“模拟”出fork的效果，父进程所有Python对象都必须通过pickle序列化再传到子进程去，所以，如果multiprocessing在Windows下调用失败了，要先考虑是不是pickle失败了。</p>
-<p>在Unix/Linux下，可以使用fork()调用实现多进程。<br>要实现跨平台的多进程，可以使用multiprocessing模块。<br>进程间通信是通过Queue、Pipes等实现的。</p>
-<p>多线程：<br>Python的标准库提供了两个模块：_thread和threading，_thread是低级模块，threading是高级模块，对_thread进行了封装。绝大多数情况下，我们只需要使用threading这个高级模块。<br>启动一个线程就是把一个函数传入并创建Thread实例，然后调用start()开始执行：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> time, threading</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新线程执行的代码:</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">loop</span>():</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;thread %s is running...&#x27;</span> % threading.current_thread().name)</span><br><span class="line">    n = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; <span class="number">5</span>:</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;thread %s &gt;&gt;&gt; %s&#x27;</span> % (threading.current_thread().name, n))</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;thread %s ended.&#x27;</span> % threading.current_thread().name)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;thread %s is running...&#x27;</span> % threading.current_thread().name)</span><br><span class="line">t = threading.Thread(target=loop, name=<span class="string">&#x27;LoopThread&#x27;</span>)</span><br><span class="line">t.start()</span><br><span class="line">t.join()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;thread %s ended.&#x27;</span> % threading.current_thread().name)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Lock：</p>
-<p>多线程和多进程最大的不同在于，多进程中，同一个变量，各自有一份拷贝存在于每个进程中，互不影响，而多线程中，所有变量都由所有线程共享，所以，任何一个变量都可以被任何一个线程修改，因此，线程之间共享数据最大的危险在于多个线程同时改一个变量，把内容给改乱了。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">balance = <span class="number">0</span></span><br><span class="line">lock = threading.Lock()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_thread</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100000</span>):</span><br><span class="line">        <span class="comment"># 先要获取锁:</span></span><br><span class="line">        lock.acquire()</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 放心地改吧:</span></span><br><span class="line">            change_it(n)</span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            <span class="comment"># 改完了一定要释放锁:</span></span><br><span class="line">            lock.release()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>ThreadLocal：<br>ThreadLocal最常用的地方就是为每个线程绑定一个数据库连接，HTTP请求，用户身份信息等，这样一个线程的所有调用到的处理函数都可以非常方便地访问这些资源。<br>一个ThreadLocal变量虽然是全局变量，但每个线程都只能读写自己线程的独立副本，互不干扰。ThreadLocal解决了参数在一个线程中各个函数之间互相传递的问题。</p>
-<p>分布式进程：<br>在Thread和Process中，应当优选Process，因为Process更稳定，而且，Process可以分布到多台机器上，而Thread最多只能分布到同一台机器的多个CPU上。</p>
-<p>Python的multiprocessing模块不但支持多进程，其中managers子模块还支持把多进程分布到多台机器上。一个服务进程可以作为调度者，将任务分布到其他多个进程中，依靠网络通信。由于managers模块封装很好，不必了解网络通信的细节，就可以很容易地编写分布式多进程程序。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>测试开发</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>黑盒测试</title>
     <url>/2023/04/06/%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<ul>
@@ -3863,64 +3921,6 @@
 <li><p>异常处理测试也属于软件测试中的黑盒测试吗？请详细描述一下它的概念以及测试的方法。<br>异常处理测试是软件测试的一种类型，主要目的是测试应用程序在系统异常、设备故障以及不合理输入等情况下的行为是否符合预期。异常处理测试可以帮助开发人员发现并解决应用程序中的错误和潜在问题，提高应用程序的鲁棒性和可靠性。<br>异常处理测试通常包括以下几个方面：<br>输入验证：测试应用程序对各种输入数据（包括非法字符、格式、长度等）的处理能力，以避免安全隐患。<br>异常响应：测试应用程序在遇到不合理输入或者设备故障等异常情况时的响应机制是否正确，如返回错误码或者友好提示信息。<br>回滚操作：测试应用程序在执行异常操作后是否能够进行恢复，如回滚操作或者数据还原。<br>容错性：测试应用程序在系统异常或崩溃时，数据是否会丢失或损坏，是否会影响整个系统的正常运行。<br>异常处理测试可以采用黑盒测试方法，即在不了解应用程序内部实现细节的情况下，从外部对应用程序进行测试。以下是黑盒测试中常用的一些异常处理测试方法：<br>边界值测试：针对不同的边界情况，测试应用程序的反应和处理能力。<br>无效值测试：针对常见的非法输入，测试应用程序的错误处理机制和用户提示信息是否正确。<br>负载测试：通过模拟大量并发请求或者持续高负载的情况，测试应用程序在压力下的表现和容错性。<br>网络故障测试：通过模拟网络异常或者断开连接等操作，测试应用程序在这种情况下的响应和恢复能力。<br>总之，异常处理测试是软件测试中的一项重要工作，它可以帮助开发人员发现并解决应用程序中的错误和潜在问题，提高应用程序的健壮性和可靠性。</p>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>测试开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UI自动化测试补充内容</title>
-    <url>/2023/06/20/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E8%A1%A5%E5%85%85%E5%86%85%E5%AE%B9/</url>
-    <content><![CDATA[<h3 id="UI自动化测试补充内容："><a href="#UI自动化测试补充内容：" class="headerlink" title="UI自动化测试补充内容："></a>UI自动化测试补充内容：</h3><p>Q:如何让selenium自动下载driver，一次代码即可永久使用？<br>A:你可以使用webdriver_manager库来自动下载Chrome的driver，并且该库可以确保每次调用时都使用最新版本的driver。<br>以下是一个示例代码，使用webdriver_manager库来下载和管理Chrome驱动器：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> webdriver_manager.chrome <span class="keyword">import</span> ChromeDriverManager</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载并安装Chrome驱动程序</span></span><br><span class="line">driver = webdriver.Chrome(ChromeDriverManager().install())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行你的Selenium代码...</span></span><br></pre></td></tr></table></figure>
-
-<p>这将在第一次运行代码时自动下载最新版本的Chrome驱动程序，并在后续的调用中重复使用已下载的驱动程序。</p>
-<p>Q:元素定位中的难点问题，比如日期控件中的时间如何选择？</p>
-<p>A:日期控件是Selenium中常见的难点之一，因为日期控件通常包含不同的HTML元素和JavaScript代码。以下是一些可以帮助你定位和选择日期控件中的时间的方法：<br>使用JavaScript执行点击操作：如果日期控件是通过JavaScript实现的，你可以使用Selenium的execute_script()方法来模拟JavaScript点击事件。例如：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">&quot;https://www.example.com/&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 点击日期控件中的某个日期</span></span><br><span class="line">date_input = driver.find_element_by_xpath(<span class="string">&quot;//input[@id=&#x27;date-picker&#x27;]&quot;</span>)</span><br><span class="line">driver.execute_script(<span class="string">&quot;arguments[0].click();&quot;</span>, date_input)</span><br><span class="line"></span><br><span class="line">date_picker = driver.find_element_by_xpath(<span class="string">&quot;//div[@class=&#x27;date-picker-container&#x27;]&quot;</span>)</span><br><span class="line">selected_date = date_picker.find_element_by_xpath(<span class="string">&quot;//td[@class=&#x27;selected&#x27;]//span&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(selected_date.text)</span><br></pre></td></tr></table></figure>
-
-<p>在上面的示例中，我们使用execute_script()方法单击日期控件，并在控件弹出窗口中选择了选定的日期。<br>直接发送日期值：对于某些日期控件，可以直接将日期文本值输入到文本框中。例如：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">&quot;https://www.example.com/&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入日期并提交表单</span></span><br><span class="line">date_input = driver.find_element_by_xpath(<span class="string">&quot;//input[@id=&#x27;date-picker&#x27;]&quot;</span>)</span><br><span class="line">date_input.send_keys(<span class="string">&quot;2022-12-31&quot;</span>)</span><br><span class="line">submit_button = driver.find_element_by_xpath(<span class="string">&quot;//button[@type=&#x27;submit&#x27;]&quot;</span>)</span><br><span class="line">submit_button.click()</span><br></pre></td></tr></table></figure>
-
-
-<p>在上面的示例中，我们直接将日期文本值输入到日期输入框中，并单击提交按钮。<br>使用第三方库：有一些第三方Python库可以帮助你定位和选择日期控件。例如，如果你使用的是jQuery UI DatePicker控件，则可以使用dateutil库来解析日期字符串并设置日期值。例如：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> dateutil.parser <span class="keyword">import</span> parse</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">&quot;https://www.example.com/&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输入日期并提交表单</span></span><br><span class="line">date_input = driver.find_element_by_xpath(<span class="string">&quot;//input[@id=&#x27;date-picker&#x27;]&quot;</span>)</span><br><span class="line">date_input.click()</span><br><span class="line"></span><br><span class="line">date_picker = driver.find_element_by_xpath(<span class="string">&quot;//div[@class=&#x27;date-picker-container&#x27;]&quot;</span>)</span><br><span class="line">selected_date = date_picker.find_element_by_xpath(<span class="string">&quot;//td[@class=&#x27;selected&#x27;]//span&quot;</span>)</span><br><span class="line">date_str = selected_date.text + <span class="string">&quot; 2022&quot;</span></span><br><span class="line">date_value = parse(date_str, fuzzy=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">date_input.clear()</span><br><span class="line">date_input.send_keys(date_value.strftime(<span class="string">&#x27;%m/%d/%Y&#x27;</span>))</span><br><span class="line"></span><br><span class="line">submit_button = driver.find_element_by_xpath(<span class="string">&quot;//button[@type=&#x27;submit&#x27;]&quot;</span>)</span><br><span class="line">submit_button.click()</span><br></pre></td></tr></table></figure>
-
-<p>在上面的示例中，我们使用dateutil库来解析日期字符串，并将其转换为datetime对象。然后，我们清除了日期输入框中的任何现有文本，并发送格式化的日期值。</p>
-<p>Q:POM分层设计思想的理解。<br>A:本质，面向对象编程，而不是面向过程编程。<br>每一个页面，定义一个类，分为数据以及方法两个层面。<br>基础的内容可以放到basepage中，然后继承这个page的属性，比如初始化一个drivier，geturl，点击跳转，退出等等操作。</p>
-<p>POM（Page Object Model）分层设计思想是一种将页面元素和操作分离的设计模式，<br>通过创建一个与页面相关的类，来管理页面上的所有元素和操作。<br>这种设计模式使得测试用例更加清晰、可维护、可扩展，并且提高了测试脚本的可重用性。<br>POM分层设计通常包括以下三个层次：<br>页面层：这一层主要负责页面元素的封装和页面操作的实现，将页面中的元素和操作封装到一个Page类中，提供给业务层使用。</p>
-<p>业务层：这一层主要负责业务逻辑的实现，将测试用例中的步骤分解成具体的业务操作，并调用页面层的方法来实现。</p>
-<p>测试用例层：这一层主要负责编写测试用例，调用业务层的方法来实现具体的测试场景。</p>
-<p>下面是一个简单的示例：<br>页面层：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginPage</span>:</span></span><br><span class="line">    url = <span class="string">&#x27;https://www.example.com/login&#x27;</span></span><br><span class="line"></span><br><span class="line">    username_input = (By.ID, <span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">    password_input = (By.ID, <span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">    login_button = (By.XPATH, <span class="string">&#x27;//button[contains(text(), &quot;Login&quot;)]&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, driver</span>):</span></span><br><span class="line">        self.driver = driver</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.driver.get(self.url)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">input_username</span>(<span class="params">self, username</span>):</span></span><br><span class="line">        self.driver.find_element(*self.username_input).send_keys(username)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">input_password</span>(<span class="params">self, password</span>):</span></span><br><span class="line">        self.driver.find_element(*self.password_input).send_keys(password)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">click_login_button</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.driver.find_element(*self.login_button).click()</span><br></pre></td></tr></table></figure>
-
-
-<p>业务层：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginService</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, driver</span>):</span></span><br><span class="line">        self.login_page = LoginPage(driver)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login</span>(<span class="params">self, username, password</span>):</span></span><br><span class="line">        self.login_page.<span class="built_in">open</span>()</span><br><span class="line">        self.login_page.input_username(username)</span><br><span class="line">        self.login_page.input_password(password)</span><br><span class="line">        self.login_page.click_login_button()</span><br></pre></td></tr></table></figure>
-
-<p>测试用例层：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestLogin</span>(<span class="params">unittest.TestCase</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.driver = webdriver.Chrome()</span><br><span class="line">        self.login_service = LoginService(self.driver)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_login_success</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.login_service.login(<span class="string">&#x27;testuser&#x27;</span>, <span class="string">&#x27;testpassword&#x27;</span>)</span><br><span class="line">        <span class="comment"># 断言登录成功后的页面跳转或页面元素</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tearDown</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.driver.quit()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    unittest.main()</span><br></pre></td></tr></table></figure>
-<p>通过以上示例，我们可以看到，POM分层设计将页面元素和操作封装到了Page类中，将具体的业务操作封装到了Service类中，并且使得测试用例更加清晰、可维护、可扩展。</p>
-<p>Q:pytest框架的使用方法。<br>A:pytest是一个流行的Python测试框架，它提供了简单易用、灵活的测试用例编写方式和丰富的插件机制。pytest可以用于各种类型的测试，包括单元测试、功能测试、端到端测试等。<br>使用pytest的原理是基于Python标准库中的unittest模块，并扩展了更多的功能和特性。<br>pytest支持自动发现测试用例，不需要继承TestCase类，而是通过函数定义来编写测试用例，<br>测试函数的名称必须以test_开头，pytest会自动执行这些函数并生成测试报告。</p>
-<p>下面是一个简单的pytest测试用例示例：<br>def test_add():<br>    assert 1 + 2 == 3</p>
-<p>def test_subtract():<br>    assert 5 - 3 == 2</p>
-<p>上述代码中，我们定义了两个测试函数，分别用于测试加法和减法操作。在函数中使用assert语句来进行断言，如果断言失败，则测试用例会失败。<br>在终端中运行pytest命令即可执行这些测试用例：<br>$ pytest test_sample.py</p>
-<p>pytest还提供了许多内置插件和第三方插件，可以扩展其功能，例如：<br>pytest-html：生成漂亮的HTML测试报告<br>pytest-xdist：多进程并行执行测试用例<br>pytest-selenium：集成selenium WebDriver来进行Web应用程序的测试<br>下面是一个使用pytest+selenium的测试用例示例：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pytest</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line"><span class="meta">@pytest.fixture(<span class="params">scope=<span class="string">&#x27;session&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">browser</span>():</span></span><br><span class="line">    driver = webdriver.Chrome()</span><br><span class="line">    <span class="keyword">yield</span> driver</span><br><span class="line">    driver.quit()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_login_success</span>(<span class="params">browser</span>):</span></span><br><span class="line">    browser.get(<span class="string">&#x27;https://www.example.com/login&#x27;</span>)</span><br><span class="line">    username_input = browser.find_element_by_id(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">    password_input = browser.find_element_by_id(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">    login_button = browser.find_element_by_xpath(<span class="string">&#x27;//button[contains(text(), &quot;Login&quot;)]&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    username_input.send_keys(<span class="string">&#x27;testuser&#x27;</span>)</span><br><span class="line">    password_input.send_keys(<span class="string">&#x27;testpassword&#x27;</span>)</span><br><span class="line">    login_button.click()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> browser.current_url == <span class="string">&#x27;https://www.example.com/home&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>上述代码中，我们使用pytest的fixture机制来管理WebDriver对象的生命周期，在测试用例中通过browser参数来访问WebDriver对象。这个测试用例使用selenium WebDriver来模拟用户登录行为，并进行断言验证。<br>综上所述，pytest是一个简单易用、灵活的测试框架，通过函数定义来编写测试用例，支持自动发现测试用例和丰富的插件机制。同时，结合selenium WebDriver可以方便地进行Web应用程序的测试。</p>
-<p>Q:selenium grid 分布式的原理思路。<br>A:分布式，不同于进程、线程那些概念，分布式是多台机器协同完成一个工作。</p>
-<p>什么是分布式系统？<br>分布式系统是一种由多台计算机组成的系统，它们可以通过网络连接在一起，共同完成某项任务。它们可以共享资源，允许计算机之间的通信，并且可以提高系统的可靠性和可扩展性。<br>分布式系统一般跟什么系统来作比较？<br>分布式系统通常与集中式系统进行比较。集中式系统是一种由单台计算机组成的系统，它可以独立完成某项任务，但是它的可靠性和可扩展性较低？<br>分布式系统相比较集中式系统的优缺点有哪些？<br>分布式系统相比集中式系统的优点有：<br>更高的可靠性，更高的可扩展性，更高的可用性，更低的成本，更高的安全性，更高的可管理性等。<br>缺点是：更复杂的系统结构，更复杂的网络管理，更复杂的数据同步，更复杂的安全管理等。</p>
-<p>理解：多台机器完成一项任务。</p>
-<p>Selenium Grid是Selenium的一个组件，它允许将测试用例分发到不同的机器和浏览器上并行运行。Selenium Grid有两个主要组成部分：Hub和Node。<br>Hub是中心节点，负责管理所有的测试请求和分发给各个Node进行执行。而Node则是实际执行测试的节点，每个Node可以同时运行多个浏览器实例，根据测试需求来决定使用哪种浏览器。<br>下面以一个简单的示例来说明Python+Selenium Grid的使用方法：<br>启动Hub<br>在终端输入以下命令启动Hub：<br>java -jar selenium-server-standalone-3.x.x.jar -role hub</p>
-<p>其中selenium-server-standalone-3.x.x.jar为Selenium Server的JAR包路径，可以从官网下载。<br>启动Node<br>在另一个终端窗口中输入以下命令启动Node：<br>java -jar selenium-server-standalone-3.x.x.jar -role node -hub <a href="http://localhost:4444/grid/register">http://localhost:4444/grid/register</a> -browser browserName=chrome,maxInstances=5 -browser browserName=firefox,maxInstances=5</p>
-<p>其中<a href="http://localhost:4444/grid/register%E4%B8%BAHub%E7%9A%84%E5%9C%B0%E5%9D%80%EF%BC%8C-browser%E5%8F%82%E6%95%B0%E6%8C%87%E5%AE%9A%E4%BA%86Node%E6%89%80%E6%94%AF%E6%8C%81%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%8A%E6%9C%80%E5%A4%A7%E5%AE%9E%E4%BE%8B%E6%95%B0%E3%80%82">http://localhost:4444/grid/register为Hub的地址，-browser参数指定了Node所支持的浏览器及最大实例数。</a><br>编写测试脚本<br>假设我们有一个测试用例，需要在Chrome和Firefox上分别打开百度首页，并搜索关键字“selenium”。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.desired_capabilities <span class="keyword">import</span> DesiredCapabilities</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义浏览器配置</span></span><br><span class="line">chrome_caps = DesiredCapabilities.CHROME.copy()</span><br><span class="line">chrome_caps[<span class="string">&#x27;platform&#x27;</span>] = <span class="string">&#x27;WINDOWS&#x27;</span></span><br><span class="line">chrome_caps[<span class="string">&#x27;version&#x27;</span>] = <span class="string">&#x27;10&#x27;</span></span><br><span class="line"></span><br><span class="line">firefox_caps = DesiredCapabilities.FIREFOX.copy()</span><br><span class="line">firefox_caps[<span class="string">&#x27;platform&#x27;</span>] = <span class="string">&#x27;WINDOWS&#x27;</span></span><br><span class="line">firefox_caps[<span class="string">&#x27;version&#x27;</span>] = <span class="string">&#x27;10&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动远程浏览器</span></span><br><span class="line">chrome_driver = webdriver.Remote(</span><br><span class="line">    command_executor=<span class="string">&#x27;http://localhost:4444/wd/hub&#x27;</span>,</span><br><span class="line">    desired_capabilities=chrome_caps)</span><br><span class="line"></span><br><span class="line">firefox_driver = webdriver.Remote(</span><br><span class="line">    command_executor=<span class="string">&#x27;http://localhost:4444/wd/hub&#x27;</span>,</span><br><span class="line">    desired_capabilities=firefox_caps)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开百度首页</span></span><br><span class="line">chrome_driver.get(<span class="string">&#x27;https://www.baidu.com&#x27;</span>)</span><br><span class="line">firefox_driver.get(<span class="string">&#x27;https://www.baidu.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索关键字</span></span><br><span class="line">chrome_input = chrome_driver.find_element_by_css_selector(<span class="string">&#x27;#kw&#x27;</span>)</span><br><span class="line">chrome_input.send_keys(<span class="string">&#x27;selenium&#x27;</span>)</span><br><span class="line">chrome_input.submit()</span><br><span class="line"></span><br><span class="line">firefox_input = firefox_driver.find_element_by_css_selector(<span class="string">&#x27;#kw&#x27;</span>)</span><br><span class="line">firefox_input.send_keys(<span class="string">&#x27;selenium&#x27;</span>)</span><br><span class="line">firefox_input.submit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭浏览器</span></span><br><span class="line">chrome_driver.quit()</span><br><span class="line">firefox_driver.quit()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>在代码中，我们使用DesiredCapabilities类来定义不同浏览器的配置信息，<br>然后通过webdriver.Remote()方法启动远程浏览器，并指定执行测试的Hub地址。<br>最后，分别在Chrome和Firefox上打开百度首页，并搜索关键字“selenium”。<br>运行测试脚本<br>在终端中输入以下命令运行测试脚本：<br>python test.py</p>
-<p>此时，测试脚本会向Hub发送请求，将测试任务分配给可用的Node进行执行。<br>如果有多个Node可用，则测试会在多个浏览器实例上并行运行，从而提高测试效率。<br>以上就是Python+Selenium Grid的使用方法，通过启动Hub和Node来实现分布式测试，<br>并在测试脚本中指定远程浏览器的配置和执行地址，从而实现对不同浏览器和操作系统的并行测试。</p>
 ]]></content>
       <categories>
         <category>测试</category>
