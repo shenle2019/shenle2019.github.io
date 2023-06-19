@@ -365,6 +365,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/12/13/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%BB%E5%8A%A1-%E6%8F%90%E5%8F%96%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E5%92%8Cemail/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/12/13/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%BB%E5%8A%A1-%E6%8F%90%E5%8F%96%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E5%92%8Cemail/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1018,6 +1028,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'pDMnuCn44ZQITVEtQAfiiXr5-gzGzoHsz',
+        appKey: 'y43DvreFS6iyfhy7ScRCF8Cy',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

@@ -57,7 +57,7 @@
 <h3 id="接口测试框架设计和开发"><a href="#接口测试框架设计和开发" class="headerlink" title="接口测试框架设计和开发"></a>接口测试框架设计和开发</h3><p>测试框架<br>Config：<br><strong>init</strong>.py<br>config.ini<br>HTMLTestRunner.py<br>readConfig.py<br>Data：<br><strong>init</strong>.py<br>data.xlsx<br>taskID<br>Token.md<br>Log：<br><strong>init</strong>.py<br>log.txt<br>Reports：<br>2019-01-04 14_05_59result.html<br>2019-01-08 22_29_59result.html<br>2019-01-08 22_30_45result.html<br>2019-02-12 20_22_39result.html<br>2019-02-15 21_03_33result.html<br>2019-03-07 20_52_13result.html<br><strong>init</strong>.py<br>TestCases：<br><strong>init</strong>.py<br>test_tasks.py<br>Utils：<br><strong>init</strong>.py<br>excles.py<br>page.py</p>
 <p><strong>init</strong>.py<br>runMain.py</p>
 <p>config.ini:</p>
-<p>[EMAIL]<br>mail_host = smtp.126.com<br>mail_user = <a href="mailto:&#108;&#x75;&#114;&#117;&#105;&#x66;&#x65;&#110;&#103;&#x40;&#x31;&#50;&#54;&#x2e;&#99;&#111;&#109;">&#108;&#x75;&#114;&#117;&#105;&#x66;&#x65;&#110;&#103;&#x40;&#x31;&#50;&#54;&#x2e;&#99;&#111;&#109;</a><br>mail_pass = qq123456789<br>sender = <a href="mailto:&#x6c;&#x75;&#114;&#117;&#105;&#102;&#101;&#110;&#103;&#120;&#64;&#49;&#50;&#x36;&#x2e;&#x63;&#111;&#109;">&#x6c;&#x75;&#114;&#117;&#105;&#102;&#101;&#110;&#103;&#120;&#64;&#49;&#50;&#x36;&#x2e;&#x63;&#111;&#109;</a><br>receiver = <a href="mailto:&#x6c;&#x75;&#114;&#x75;&#105;&#102;&#x65;&#110;&#103;&#120;&#64;&#x31;&#50;&#x36;&#x2e;&#x63;&#111;&#x6d;">&#x6c;&#x75;&#114;&#x75;&#105;&#102;&#x65;&#110;&#103;&#120;&#64;&#x31;&#50;&#x36;&#x2e;&#x63;&#111;&#x6d;</a><br>subject = 接口自动化测试报告</p>
+<p>[EMAIL]<br>mail_host = smtp.126.com<br>mail_user = <a href="mailto:&#108;&#117;&#114;&#117;&#x69;&#102;&#x65;&#110;&#x67;&#64;&#x31;&#x32;&#54;&#46;&#99;&#x6f;&#x6d;">&#108;&#117;&#114;&#117;&#x69;&#102;&#x65;&#110;&#x67;&#64;&#x31;&#x32;&#54;&#46;&#99;&#x6f;&#x6d;</a><br>mail_pass = qq123456789<br>sender = <a href="mailto:&#108;&#x75;&#114;&#x75;&#x69;&#x66;&#x65;&#x6e;&#103;&#120;&#64;&#49;&#50;&#54;&#46;&#x63;&#x6f;&#x6d;">&#108;&#x75;&#114;&#x75;&#x69;&#x66;&#x65;&#x6e;&#103;&#120;&#64;&#49;&#50;&#54;&#46;&#x63;&#x6f;&#x6d;</a><br>receiver = <a href="mailto:&#x6c;&#117;&#x72;&#x75;&#105;&#102;&#101;&#x6e;&#103;&#x78;&#x40;&#x31;&#x32;&#x36;&#x2e;&#x63;&#111;&#109;">&#x6c;&#117;&#x72;&#x75;&#105;&#102;&#101;&#x6e;&#103;&#x78;&#x40;&#x31;&#x32;&#x36;&#x2e;&#x63;&#111;&#109;</a><br>subject = 接口自动化测试报告</p>
 <p>readConfig.py:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">创建configParser对象cf</span><br><span class="line">cf = configparser.ConfigParser()</span><br><span class="line"><span class="comment"># read(filename) 读文件内容</span></span><br><span class="line">filename = cf.read(<span class="string">&quot;config.ini&quot;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(filename)</span><br><span class="line"><span class="comment"># sections() 得到所有的section，以列表形式返回</span></span><br><span class="line">sec = cf.sections()</span><br><span class="line"><span class="built_in">print</span>(sec)</span><br><span class="line"><span class="comment"># options(section) 得到section下的所有option</span></span><br><span class="line">opt = cf.options(<span class="string">&quot;EMAIL&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(opt)</span><br><span class="line"><span class="comment"># items 得到section的所有键值对</span></span><br><span class="line">value = cf.items(<span class="string">&quot;EMAIL&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(value)</span><br><span class="line"><span class="comment"># get(section,option) 得到section中的option值，返回string/int类型的结果</span></span><br><span class="line">email_host = cf.get(<span class="string">&quot;EMAIL&quot;</span>,<span class="string">&quot;mail_host&quot;</span>)</span><br><span class="line">email_password = cf.get(<span class="string">&quot;EMAIL&quot;</span>,<span class="string">&quot;mail_pass&quot;</span>)</span><br><span class="line">email_sender = cf.get(<span class="string">&#x27;EMAIL&#x27;</span>,<span class="string">&#x27;sender&#x27;</span>)</span><br><span class="line">email_user = cf.get(<span class="string">&#x27;EMAIL&#x27;</span>,<span class="string">&#x27;mail_user&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -448,89 +448,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Python组织文件</title>
-    <url>/2021/12/27/Python%E7%BB%84%E7%BB%87%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<h3 id="Python组织文件"><a href="#Python组织文件" class="headerlink" title="Python组织文件"></a>Python组织文件</h3><h4 id="shutil模块"><a href="#shutil模块" class="headerlink" title="shutil模块"></a>shutil模块</h4><ul>
-<li><p>复制文件和文件夹</p>
-<p>shutil.copy(source,destination)，这里source处是文件名</p>
-<ul>
-<li>如果destination是文件夹，则在文件夹下复制粘贴过去</li>
-<li>如果destination是文件名，则以最新文件名将内容复制过去</li>
-</ul>
-<p>shutil.coptytree(source,destination),这里source处为文件夹，会将整个目录copy一份过去</p>
-</li>
-<li><p>文件和文件夹的移动和改名</p>
-<p>shutil.move(source,destination)，将</p>
-<ul>
-<li><p>source处的文件夹移动到目的地，并返回新位置的绝对路径</p>
-</li>
-<li><p>如果destination是文件夹，source是文件名，则将文件直接剪切过去，文件名不变。</p>
-</li>
-<li><p>如果destination本来想作为目录但没有识别到，但是最后一层目录前的路径可以识别，source是文件名，则将文件重新命名为destination的文件名。</p>
-</li>
-<li><p>如果destination中最后一层目录前的目录没有识别到，则文件夹不存在，会有报错，需要捕获异常。</p>
-</li>
-</ul>
-</li>
-<li><p>永久删除文件和文件夹</p>
-<ul>
-<li>os.unlink(path)将删除path处的文件</li>
-<li>调用os.rmdir(path)将删除path处的文件夹，文件夹必须为空，才能删除</li>
-<li>调用shutil.rmtree(path)将删除path处的文件夹，不需要文件夹为空。</li>
-</ul>
-</li>
-<li><p>使用send2trash模块安全地删除</p>
-<ul>
-<li>send2trash.send2trash()函数可以删除至回收站，可恢复。需要安装send2trash模块。</li>
-</ul>
-</li>
-</ul>
-<h4 id="遍历目录树"><a href="#遍历目录树" class="headerlink" title="遍历目录树"></a>遍历目录树</h4><ul>
-<li><p>os.walk()函数</p>
-<p>常用方法， for folderName,subfolders,filenames in os.walk(path)：</p>
-<p>os.walk()在循环的每次迭代中，返回3个值。</p>
-<ul>
-<li>当前文件夹名称的字符串</li>
-<li>当前文件夹中子文件夹的字符串列表</li>
-<li>当前文件夹中文件的字符串列表</li>
-</ul>
-</li>
-</ul>
-<h4 id="用zipfile模块压缩文件"><a href="#用zipfile模块压缩文件" class="headerlink" title="用zipfile模块压缩文件"></a>用zipfile模块压缩文件</h4><ul>
-<li><p>读取zipfile，</p>
-<p>exampleZip = zipfile.Zipfile(‘example.zip’)</p>
-<p>可以用exampleZip.namelist()函数</p>
-<p>另外还有getinfo,file_size,compress_size等内容。</p>
-</li>
-<li><p>解压缩</p>
-<p>exampleZip.extractall()</p>
-<p>可以使用extract(文件名)解压缩单个文件</p>
-</li>
-<li><p>创建和添加到zip文件</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line">newZip = zipfile.Zipfile(<span class="string">&#x27;new.zip&#x27;</span>,<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">newZip.write(<span class="string">&#x27;spam.txt&#x27;</span>,compress_type=zipfile.ZIP_DEFLATED)</span><br><span class="line">newZip.close()</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="将一个文件夹备份到一个-ZIP-文件"><a href="#将一个文件夹备份到一个-ZIP-文件" class="headerlink" title="将一个文件夹备份到一个 ZIP 文件"></a>将一个文件夹备份到一个 ZIP 文件</h4><p>假定你正在做一个项目，它的文件保存在C:\AlsPythonBook 文件夹中。你担心工作会丢失，所以希望为整个文件夹创建一个ZIP 文件，作为“快照”。你希望保存不同的版本，希望 ZIP 文件的文件名每次创建时都有所变化。例如 AlsPythonBook_1.zip、AlsPythonBook_2.zip、AlsPythonBook_3.zip，等等。你可以手工完成，但这有点烦人，而且可能不小心弄错ZIP 文件的编号。运行一个程序来完成这个烦人的任务会简单得多。针对这个项目，打开一个新的文件编辑器窗口，将它保存为 backupToZip.py。</p>
-<p>代码如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#! python3</span></span><br><span class="line"><span class="comment"># backupToZip.py - Copies an entire folder and its contents into</span></span><br><span class="line"><span class="comment"># a ZIP file whose filename increments.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> zipfile, os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backupToZip</span>(<span class="params">folder</span>):</span></span><br><span class="line">    <span class="comment"># Backup the entire contents of &quot;folder&quot; into a ZIP file.</span></span><br><span class="line"></span><br><span class="line">    folder = os.path.abspath(folder)  <span class="comment"># make sure folder is absolute</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Figure out the filename this code should use based on</span></span><br><span class="line">    <span class="comment"># what files already exist.</span></span><br><span class="line">    number = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        zipFilename = os.path.basename(folder) + <span class="string">&#x27;_&#x27;</span> + <span class="built_in">str</span>(number) + <span class="string">&#x27;.zip&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(zipFilename):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        number = number + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Create the ZIP file.</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Creating %s...&#x27;</span> % (zipFilename))</span><br><span class="line">    backupZip = zipfile.ZipFile(zipFilename, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Walk the entire folder tree and compress the files in each folder.</span></span><br><span class="line">    <span class="keyword">for</span> foldername, subfolders, filenames <span class="keyword">in</span> os.walk(folder):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Adding files in %s...&#x27;</span> % (foldername))</span><br><span class="line">        <span class="comment"># Add the current folder to the ZIP file.</span></span><br><span class="line">        backupZip.write(foldername)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Add all the files in this folder to the ZIP file.这里注意缩进为for循环中的循环</span></span><br><span class="line">        <span class="keyword">for</span> filename <span class="keyword">in</span> filenames:</span><br><span class="line">            <span class="keyword">if</span> filename.startswith(os.path.basename(folder) + <span class="string">&#x27;_&#x27;</span>) <span class="keyword">and</span> filename.endswith(<span class="string">&#x27;.zip&#x27;</span>):</span><br><span class="line">                <span class="keyword">continue</span>  <span class="comment"># don&#x27;t backup the backup ZIP files</span></span><br><span class="line">            backupZip.write(os.path.join(foldername, filename))</span><br><span class="line">    backupZip.close()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Done.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">backupToZip(<span class="string">&#x27;D:\\testfiles\\测试文档合集1.0&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>调试结果如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">D:\pythontest\autowork\venv\Scripts\python.exe D:/pythontest/autowork/venv/backuptoZip.py</span><br><span class="line">Creating 测试文档合集<span class="number">1.0_2</span>.<span class="built_in">zip</span>...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">1.</span>面试资料整理...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">2.</span>功能测试...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">3.</span>性能测试...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">4.</span>自动化测试...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">5.</span>测试相关...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">5.</span>测试相关\Docker容器管理与Jenkins持续集成...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">6.</span>编程语言...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">6.</span>编程语言\python书籍...</span><br><span class="line">Done.</span><br><span class="line"></span><br><span class="line">Process finished <span class="keyword">with</span> exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<p>生成的文件名为：</p>
-<p>测试文档合集1.0_1.zip</p>
-<p>测试文档合集1.0_2.zip</p>
-<p>…</p>
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python自动化任务-提取电话号码和email</title>
     <url>/2021/12/13/Python%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%BB%E5%8A%A1-%E6%8F%90%E5%8F%96%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E5%92%8Cemail/</url>
     <content><![CDATA[<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>本文为《Python编程快速上手-让繁琐工作自动化》的学习笔记。</p>
@@ -703,6 +620,89 @@
 </li>
 </ul>
 <p>​    </p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python组织文件</title>
+    <url>/2021/12/27/Python%E7%BB%84%E7%BB%87%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<h3 id="Python组织文件"><a href="#Python组织文件" class="headerlink" title="Python组织文件"></a>Python组织文件</h3><h4 id="shutil模块"><a href="#shutil模块" class="headerlink" title="shutil模块"></a>shutil模块</h4><ul>
+<li><p>复制文件和文件夹</p>
+<p>shutil.copy(source,destination)，这里source处是文件名</p>
+<ul>
+<li>如果destination是文件夹，则在文件夹下复制粘贴过去</li>
+<li>如果destination是文件名，则以最新文件名将内容复制过去</li>
+</ul>
+<p>shutil.coptytree(source,destination),这里source处为文件夹，会将整个目录copy一份过去</p>
+</li>
+<li><p>文件和文件夹的移动和改名</p>
+<p>shutil.move(source,destination)，将</p>
+<ul>
+<li><p>source处的文件夹移动到目的地，并返回新位置的绝对路径</p>
+</li>
+<li><p>如果destination是文件夹，source是文件名，则将文件直接剪切过去，文件名不变。</p>
+</li>
+<li><p>如果destination本来想作为目录但没有识别到，但是最后一层目录前的路径可以识别，source是文件名，则将文件重新命名为destination的文件名。</p>
+</li>
+<li><p>如果destination中最后一层目录前的目录没有识别到，则文件夹不存在，会有报错，需要捕获异常。</p>
+</li>
+</ul>
+</li>
+<li><p>永久删除文件和文件夹</p>
+<ul>
+<li>os.unlink(path)将删除path处的文件</li>
+<li>调用os.rmdir(path)将删除path处的文件夹，文件夹必须为空，才能删除</li>
+<li>调用shutil.rmtree(path)将删除path处的文件夹，不需要文件夹为空。</li>
+</ul>
+</li>
+<li><p>使用send2trash模块安全地删除</p>
+<ul>
+<li>send2trash.send2trash()函数可以删除至回收站，可恢复。需要安装send2trash模块。</li>
+</ul>
+</li>
+</ul>
+<h4 id="遍历目录树"><a href="#遍历目录树" class="headerlink" title="遍历目录树"></a>遍历目录树</h4><ul>
+<li><p>os.walk()函数</p>
+<p>常用方法， for folderName,subfolders,filenames in os.walk(path)：</p>
+<p>os.walk()在循环的每次迭代中，返回3个值。</p>
+<ul>
+<li>当前文件夹名称的字符串</li>
+<li>当前文件夹中子文件夹的字符串列表</li>
+<li>当前文件夹中文件的字符串列表</li>
+</ul>
+</li>
+</ul>
+<h4 id="用zipfile模块压缩文件"><a href="#用zipfile模块压缩文件" class="headerlink" title="用zipfile模块压缩文件"></a>用zipfile模块压缩文件</h4><ul>
+<li><p>读取zipfile，</p>
+<p>exampleZip = zipfile.Zipfile(‘example.zip’)</p>
+<p>可以用exampleZip.namelist()函数</p>
+<p>另外还有getinfo,file_size,compress_size等内容。</p>
+</li>
+<li><p>解压缩</p>
+<p>exampleZip.extractall()</p>
+<p>可以使用extract(文件名)解压缩单个文件</p>
+</li>
+<li><p>创建和添加到zip文件</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line">newZip = zipfile.Zipfile(<span class="string">&#x27;new.zip&#x27;</span>,<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">newZip.write(<span class="string">&#x27;spam.txt&#x27;</span>,compress_type=zipfile.ZIP_DEFLATED)</span><br><span class="line">newZip.close()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="将一个文件夹备份到一个-ZIP-文件"><a href="#将一个文件夹备份到一个-ZIP-文件" class="headerlink" title="将一个文件夹备份到一个 ZIP 文件"></a>将一个文件夹备份到一个 ZIP 文件</h4><p>假定你正在做一个项目，它的文件保存在C:\AlsPythonBook 文件夹中。你担心工作会丢失，所以希望为整个文件夹创建一个ZIP 文件，作为“快照”。你希望保存不同的版本，希望 ZIP 文件的文件名每次创建时都有所变化。例如 AlsPythonBook_1.zip、AlsPythonBook_2.zip、AlsPythonBook_3.zip，等等。你可以手工完成，但这有点烦人，而且可能不小心弄错ZIP 文件的编号。运行一个程序来完成这个烦人的任务会简单得多。针对这个项目，打开一个新的文件编辑器窗口，将它保存为 backupToZip.py。</p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#! python3</span></span><br><span class="line"><span class="comment"># backupToZip.py - Copies an entire folder and its contents into</span></span><br><span class="line"><span class="comment"># a ZIP file whose filename increments.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> zipfile, os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backupToZip</span>(<span class="params">folder</span>):</span></span><br><span class="line">    <span class="comment"># Backup the entire contents of &quot;folder&quot; into a ZIP file.</span></span><br><span class="line"></span><br><span class="line">    folder = os.path.abspath(folder)  <span class="comment"># make sure folder is absolute</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Figure out the filename this code should use based on</span></span><br><span class="line">    <span class="comment"># what files already exist.</span></span><br><span class="line">    number = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        zipFilename = os.path.basename(folder) + <span class="string">&#x27;_&#x27;</span> + <span class="built_in">str</span>(number) + <span class="string">&#x27;.zip&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(zipFilename):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        number = number + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Create the ZIP file.</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Creating %s...&#x27;</span> % (zipFilename))</span><br><span class="line">    backupZip = zipfile.ZipFile(zipFilename, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Walk the entire folder tree and compress the files in each folder.</span></span><br><span class="line">    <span class="keyword">for</span> foldername, subfolders, filenames <span class="keyword">in</span> os.walk(folder):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Adding files in %s...&#x27;</span> % (foldername))</span><br><span class="line">        <span class="comment"># Add the current folder to the ZIP file.</span></span><br><span class="line">        backupZip.write(foldername)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Add all the files in this folder to the ZIP file.这里注意缩进为for循环中的循环</span></span><br><span class="line">        <span class="keyword">for</span> filename <span class="keyword">in</span> filenames:</span><br><span class="line">            <span class="keyword">if</span> filename.startswith(os.path.basename(folder) + <span class="string">&#x27;_&#x27;</span>) <span class="keyword">and</span> filename.endswith(<span class="string">&#x27;.zip&#x27;</span>):</span><br><span class="line">                <span class="keyword">continue</span>  <span class="comment"># don&#x27;t backup the backup ZIP files</span></span><br><span class="line">            backupZip.write(os.path.join(foldername, filename))</span><br><span class="line">    backupZip.close()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Done.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">backupToZip(<span class="string">&#x27;D:\\testfiles\\测试文档合集1.0&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>调试结果如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">D:\pythontest\autowork\venv\Scripts\python.exe D:/pythontest/autowork/venv/backuptoZip.py</span><br><span class="line">Creating 测试文档合集<span class="number">1.0_2</span>.<span class="built_in">zip</span>...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">1.</span>面试资料整理...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">2.</span>功能测试...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">3.</span>性能测试...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">4.</span>自动化测试...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">5.</span>测试相关...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">5.</span>测试相关\Docker容器管理与Jenkins持续集成...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">6.</span>编程语言...</span><br><span class="line">Adding files <span class="keyword">in</span> D:\testfiles\测试文档合集<span class="number">1.0</span>\<span class="number">6.</span>编程语言\python书籍...</span><br><span class="line">Done.</span><br><span class="line"></span><br><span class="line">Process finished <span class="keyword">with</span> exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>生成的文件名为：</p>
+<p>测试文档合集1.0_1.zip</p>
+<p>测试文档合集1.0_2.zip</p>
+<p>…</p>
 ]]></content>
       <categories>
         <category>测试</category>
@@ -1530,73 +1530,6 @@
       </tags>
   </entry>
   <entry>
-    <title>markdown语法</title>
-    <url>/2021/11/29/markdown%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<p>markdown的语法非常简单，常见的标记符合不超过10个，用于日常写作记录绰绰有余，不到半个小时就能完全掌握。</p>
-<p>1.标题</p>
-<p>标题是每篇文章必备而且最常用的格式。<br>在Markdown中，如果想将一段文字定义为标题，只需要在这段文字前面加上 #，再在 # 后加一个空格即可。<br>还可增加二、三、四、五、六级标题，总共六级，只需要增加 # ，增加一个 # ，标题字号相应降低一级。</p>
-<p>#一级标题<br>##二级标题<br>###三级标题<br>####四级标题</p>
-<p>2.列表</p>
-<p>列表格式也很常用，它可以让你的文稿变得井井有条。在 Markdown 中，你只需要在文字前面加上 - 就可以了；<br>如果你希望是有序列表，在文字前面加上 1. 2. 3. 即可。<br>注：-、1.和文字之间要保留一个字符的空格。</p>
-<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><ul>
-<li>列表1<ul>
-<li>列表1.1</li>
-<li>列表1.2</li>
-</ul>
-</li>
-<li>列表2</li>
-<li>列表3</li>
-</ul>
-<p>3.引用</p>
-<p>如果你需要在文稿中引用一段别处的句子，那么就要用到「引用」格式。</p>
-<p>　　在引用文字前加上 &gt; 并与文字保留一个字符的空格，即可。</p>
-<p>###引用</p>
-<blockquote>
-<p>记录，成为最好的自己，为此而奋斗</p>
-</blockquote>
-<p>4.粗体和斜体</p>
-<p>Markdown 的粗体和斜体也非常简单：</p>
-<p>　　用两个 * 包含一段文本就是粗体的语法；</p>
-<p>　　用一个 * 包含一段文本就是斜体的语法。</p>
-<p><em>这是粗体</em><br><strong>这是斜体</strong></p>
-<h4 id="注意：符号和文本之间无须空格"><a href="#注意：符号和文本之间无须空格" class="headerlink" title="注意：符号和文本之间无须空格"></a>注意：符号和文本之间无须空格</h4><p>5.链接与图片</p>
-<p>链接：在 Markdown 中，插入链接只需要使用 <a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">显示文本</a> 即可。</p>
-<p>　　图片：在 Markdown 中，插入图片只需要使用 <img src="%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" alt="显示文本">即可。</p>
-<p>　　注：插入图片的语法和链接的语法很像，只是前面多了一个 ！</p>
-<h3 id="插入链接"><a href="#插入链接" class="headerlink" title="插入链接"></a>插入链接</h3><p><a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">显示文本</a></p>
-<h3 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h3><p><img src="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" alt="显示文本"></p>
-<p>6.分割线<br>　分割线的语法只需要另起一行，连续输入三个星号 *** 即可分割两段文字内容。</p>
-<p>###分割线<br>这是第一段的内容</p>
-<hr>
-<p>这是第二段的内容</p>
-<p>7.表格</p>
-<p>当你需要在Markdown文稿中键入表格，代码如下：</p>
-<table>
-<thead>
-<tr>
-<th>header 1</th>
-<th>header 2</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>row 1 col 1</td>
-<td>row 1 col 2</td>
-</tr>
-<tr>
-<td>row 2 col 1</td>
-<td>row 2 col 2</td>
-</tr>
-</tbody></table>
-<p>8.windows程序如何生成目录结构树？<br>电脑中打开cmd<br>在cmd中进入要生成目录结构的目录<br>输入：tree /f &gt; list.txt（目录结构输入成功，并保存为一个list.txt文件）<br>打开此文件，即可看到生成的目录结构树</p>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Selenium 3</title>
     <url>/2022/08/22/Selenium-3/</url>
     <content><![CDATA[<h1 id="Selenium3-自动化实战"><a href="#Selenium3-自动化实战" class="headerlink" title="Selenium3 自动化实战"></a>Selenium3 自动化实战</h1><ul>
@@ -1772,6 +1705,114 @@
       </tags>
   </entry>
   <entry>
+    <title>markdown语法</title>
+    <url>/2021/11/29/markdown%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<p>markdown的语法非常简单，常见的标记符合不超过10个，用于日常写作记录绰绰有余，不到半个小时就能完全掌握。</p>
+<p>1.标题</p>
+<p>标题是每篇文章必备而且最常用的格式。<br>在Markdown中，如果想将一段文字定义为标题，只需要在这段文字前面加上 #，再在 # 后加一个空格即可。<br>还可增加二、三、四、五、六级标题，总共六级，只需要增加 # ，增加一个 # ，标题字号相应降低一级。</p>
+<p>#一级标题<br>##二级标题<br>###三级标题<br>####四级标题</p>
+<p>2.列表</p>
+<p>列表格式也很常用，它可以让你的文稿变得井井有条。在 Markdown 中，你只需要在文字前面加上 - 就可以了；<br>如果你希望是有序列表，在文字前面加上 1. 2. 3. 即可。<br>注：-、1.和文字之间要保留一个字符的空格。</p>
+<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><ul>
+<li>列表1<ul>
+<li>列表1.1</li>
+<li>列表1.2</li>
+</ul>
+</li>
+<li>列表2</li>
+<li>列表3</li>
+</ul>
+<p>3.引用</p>
+<p>如果你需要在文稿中引用一段别处的句子，那么就要用到「引用」格式。</p>
+<p>　　在引用文字前加上 &gt; 并与文字保留一个字符的空格，即可。</p>
+<p>###引用</p>
+<blockquote>
+<p>记录，成为最好的自己，为此而奋斗</p>
+</blockquote>
+<p>4.粗体和斜体</p>
+<p>Markdown 的粗体和斜体也非常简单：</p>
+<p>　　用两个 * 包含一段文本就是粗体的语法；</p>
+<p>　　用一个 * 包含一段文本就是斜体的语法。</p>
+<p><em>这是粗体</em><br><strong>这是斜体</strong></p>
+<h4 id="注意：符号和文本之间无须空格"><a href="#注意：符号和文本之间无须空格" class="headerlink" title="注意：符号和文本之间无须空格"></a>注意：符号和文本之间无须空格</h4><p>5.链接与图片</p>
+<p>链接：在 Markdown 中，插入链接只需要使用 <a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">显示文本</a> 即可。</p>
+<p>　　图片：在 Markdown 中，插入图片只需要使用 <img src="%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" alt="显示文本">即可。</p>
+<p>　　注：插入图片的语法和链接的语法很像，只是前面多了一个 ！</p>
+<h3 id="插入链接"><a href="#插入链接" class="headerlink" title="插入链接"></a>插入链接</h3><p><a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">显示文本</a></p>
+<h3 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h3><p><img src="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" alt="显示文本"></p>
+<p>6.分割线<br>　分割线的语法只需要另起一行，连续输入三个星号 *** 即可分割两段文字内容。</p>
+<p>###分割线<br>这是第一段的内容</p>
+<hr>
+<p>这是第二段的内容</p>
+<p>7.表格</p>
+<p>当你需要在Markdown文稿中键入表格，代码如下：</p>
+<table>
+<thead>
+<tr>
+<th>header 1</th>
+<th>header 2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>row 1 col 1</td>
+<td>row 1 col 2</td>
+</tr>
+<tr>
+<td>row 2 col 1</td>
+<td>row 2 col 2</td>
+</tr>
+</tbody></table>
+<p>8.windows程序如何生成目录结构树？<br>电脑中打开cmd<br>在cmd中进入要生成目录结构的目录<br>输入：tree /f &gt; list.txt（目录结构输入成功，并保存为一个list.txt文件）<br>打开此文件，即可看到生成的目录结构树</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nexo-Next中添加网易云音乐+切换页面自动播放</title>
+    <url>/2021/11/29/nexo-Next%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90-%E5%88%87%E6%8D%A2%E9%A1%B5%E9%9D%A2%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE/</url>
+    <content><![CDATA[<h3 id="网易云音乐歌单生成外链播放器"><a href="#网易云音乐歌单生成外链播放器" class="headerlink" title="网易云音乐歌单生成外链播放器"></a>网易云音乐歌单生成外链播放器</h3><p>参考<br><a href="https://www.cnblogs.com/yuan2333/p/7244380.html">https://www.cnblogs.com/yuan2333/p/7244380.html</a></p>
+<ul>
+<li>注意网页版网易云看的比较清楚</li>
+<li>创建歌单</li>
+<li>点击分享</li>
+<li>查看【朋友】-【我的动态】</li>
+<li>点进歌单-【生成外链播放器】</li>
+</ul>
+<h3 id="在网页中添加网易云音乐歌单"><a href="#在网页中添加网易云音乐歌单" class="headerlink" title="在网页中添加网易云音乐歌单"></a>在网页中添加网易云音乐歌单</h3><p>参考：<br><a href="https://otakurice.github.io/2018/07/20/hexo%20%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E6%AD%8C%E5%8D%95/">https://otakurice.github.io/2018/07/20/hexo%20%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E6%AD%8C%E5%8D%95/</a></p>
+<ul>
+<li>基本操作，如果只需要加一首歌或者主页面加歌单列表，手动播放，则只需要<br>修改主题文件夹下layout_macro\sidebar.swig文件(这是侧边栏路径)，将上述代码贴入到想放的位置。<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;music163player&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginwidth</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginheight</span>=<span class="string">&quot;0&quot;</span> <span class="attr">width</span>=<span class="string">280</span> <span class="attr">height</span>=<span class="string">86</span> <span class="attr">src</span>=<span class="string">&quot;//music.163.com/outchain/player?type=2&amp;id=28885472&amp;auto=1&amp;height=66&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;music163player&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginwidth</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginheight</span>=<span class="string">&quot;0&quot;</span> <span class="attr">width</span>=<span class="string">280</span> <span class="attr">height</span>=<span class="string">86</span> <span class="attr">src</span>=<span class="string">&quot;//music.163.com/outchain/player?type=2&amp;id=28885472&amp;auto=1&amp;height=66&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="想全局播放-切网页自动播放"><a href="#想全局播放-切网页自动播放" class="headerlink" title="想全局播放+切网页自动播放"></a>想全局播放+切网页自动播放</h3><p>参考：<br><a href="https://blog.csdn.net/qq_39720594/article/details/105401774https://blog.csdn.net/qq_39720594/article/details/105401774">https://blog.csdn.net/qq_39720594/article/details/105401774https://blog.csdn.net/qq_39720594/article/details/105401774</a></p>
+<p>git cmd 安装：<br>npm install aplayer –save</p>
+<p>使用Aplayer + MetingJS插件<br>打开我们主题文件：themes\next\layout_macro\sidebar.swig找到sidebar-inner，复制下面代码粘贴到此<div>标签后即可。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- require APlayer --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- require MetingJS--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="comment">&lt;!--网易云--&gt;</span>   </span><br><span class="line"><span class="tag">&lt;<span class="name">meting-js</span></span></span><br><span class="line"><span class="tag"><span class="attr">server</span>=<span class="string">&quot;netease&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">id</span>=<span class="string">&quot;7091778006&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">type</span>=<span class="string">&quot;playlist&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">mini</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">fixed</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">list-folded</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">autoplay</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">volume</span>=<span class="string">&quot;0.5&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">theme</span>=<span class="string">&quot;#FADFA3&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">order</span>=<span class="string">&quot;random&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">loop</span>=<span class="string">&quot;all&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">preload</span>=<span class="string">&quot;auto&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">mutex</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">meting-js</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里面注意修改id为自己的歌单id即可。</p>
+<p>其他配置项参考：<br><a href="https://github.com/metowolf/MetingJS">MetingJS配置</a></p>
+<p>全局播放背景音乐（使用 Pajx 实现）<br>即实现页面跳转刷新后音乐不间断播放</p>
+<p>打开themes\next\layout文件夹找到_layout.swig</p>
+<p>在&lt;\head&gt;标签前添加下面代码，并保存。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span>   //粘贴到这里</span><br><span class="line">    </span><br><span class="line">  <span class="comment">&lt;!--pjax：防止跳转页面音乐暂停--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>在主题的配置文件中找到pajx，将它设置为true，并保存。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"># Easily enable fast Ajax navigation on your website.</span><br><span class="line"># Dependencies: https://github.com/theme-next/theme-next-pjax</span><br><span class="line">pjax: true</span><br></pre></td></tr></table></figure>
+<p>在博客文件夹打开GitBash执行hexo clean、hexo g、hexo s，跳转页面时即可看到效果。</p>
+]]></content>
+      <categories>
+        <category>部署</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>github pages</tag>
+        <tag>next</tag>
+        <tag>网易云</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python interview 4</title>
     <url>/2022/08/22/python-interview-4/</url>
     <content><![CDATA[<h2 id="Python面试题整理-V1-day4"><a href="#Python面试题整理-V1-day4" class="headerlink" title="Python面试题整理-V1 day4"></a>Python面试题整理-V1 day4</h2><ul>
@@ -1850,47 +1891,6 @@
       </categories>
       <tags>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>nexo-Next中添加网易云音乐+切换页面自动播放</title>
-    <url>/2021/11/29/nexo-Next%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90-%E5%88%87%E6%8D%A2%E9%A1%B5%E9%9D%A2%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE/</url>
-    <content><![CDATA[<h3 id="网易云音乐歌单生成外链播放器"><a href="#网易云音乐歌单生成外链播放器" class="headerlink" title="网易云音乐歌单生成外链播放器"></a>网易云音乐歌单生成外链播放器</h3><p>参考<br><a href="https://www.cnblogs.com/yuan2333/p/7244380.html">https://www.cnblogs.com/yuan2333/p/7244380.html</a></p>
-<ul>
-<li>注意网页版网易云看的比较清楚</li>
-<li>创建歌单</li>
-<li>点击分享</li>
-<li>查看【朋友】-【我的动态】</li>
-<li>点进歌单-【生成外链播放器】</li>
-</ul>
-<h3 id="在网页中添加网易云音乐歌单"><a href="#在网页中添加网易云音乐歌单" class="headerlink" title="在网页中添加网易云音乐歌单"></a>在网页中添加网易云音乐歌单</h3><p>参考：<br><a href="https://otakurice.github.io/2018/07/20/hexo%20%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E6%AD%8C%E5%8D%95/">https://otakurice.github.io/2018/07/20/hexo%20%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E6%AD%8C%E5%8D%95/</a></p>
-<ul>
-<li>基本操作，如果只需要加一首歌或者主页面加歌单列表，手动播放，则只需要<br>修改主题文件夹下layout_macro\sidebar.swig文件(这是侧边栏路径)，将上述代码贴入到想放的位置。<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;music163player&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginwidth</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginheight</span>=<span class="string">&quot;0&quot;</span> <span class="attr">width</span>=<span class="string">280</span> <span class="attr">height</span>=<span class="string">86</span> <span class="attr">src</span>=<span class="string">&quot;//music.163.com/outchain/player?type=2&amp;id=28885472&amp;auto=1&amp;height=66&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;music163player&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginwidth</span>=<span class="string">&quot;0&quot;</span> <span class="attr">marginheight</span>=<span class="string">&quot;0&quot;</span> <span class="attr">width</span>=<span class="string">280</span> <span class="attr">height</span>=<span class="string">86</span> <span class="attr">src</span>=<span class="string">&quot;//music.163.com/outchain/player?type=2&amp;id=28885472&amp;auto=1&amp;height=66&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="想全局播放-切网页自动播放"><a href="#想全局播放-切网页自动播放" class="headerlink" title="想全局播放+切网页自动播放"></a>想全局播放+切网页自动播放</h3><p>参考：<br><a href="https://blog.csdn.net/qq_39720594/article/details/105401774https://blog.csdn.net/qq_39720594/article/details/105401774">https://blog.csdn.net/qq_39720594/article/details/105401774https://blog.csdn.net/qq_39720594/article/details/105401774</a></p>
-<p>git cmd 安装：<br>npm install aplayer –save</p>
-<p>使用Aplayer + MetingJS插件<br>打开我们主题文件：themes\next\layout_macro\sidebar.swig找到sidebar-inner，复制下面代码粘贴到此<div>标签后即可。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- require APlayer --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- require MetingJS--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="comment">&lt;!--网易云--&gt;</span>   </span><br><span class="line"><span class="tag">&lt;<span class="name">meting-js</span></span></span><br><span class="line"><span class="tag"><span class="attr">server</span>=<span class="string">&quot;netease&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">id</span>=<span class="string">&quot;7091778006&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">type</span>=<span class="string">&quot;playlist&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">mini</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">fixed</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">list-folded</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">autoplay</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">volume</span>=<span class="string">&quot;0.5&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">theme</span>=<span class="string">&quot;#FADFA3&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">order</span>=<span class="string">&quot;random&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">loop</span>=<span class="string">&quot;all&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">preload</span>=<span class="string">&quot;auto&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">mutex</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">meting-js</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这里面注意修改id为自己的歌单id即可。</p>
-<p>其他配置项参考：<br><a href="https://github.com/metowolf/MetingJS">MetingJS配置</a></p>
-<p>全局播放背景音乐（使用 Pajx 实现）<br>即实现页面跳转刷新后音乐不间断播放</p>
-<p>打开themes\next\layout文件夹找到_layout.swig</p>
-<p>在&lt;\head&gt;标签前添加下面代码，并保存。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span>   //粘贴到这里</span><br><span class="line">    </span><br><span class="line">  <span class="comment">&lt;!--pjax：防止跳转页面音乐暂停--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br></pre></td></tr></table></figure>
-
-<p>在主题的配置文件中找到pajx，将它设置为true，并保存。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"># Easily enable fast Ajax navigation on your website.</span><br><span class="line"># Dependencies: https://github.com/theme-next/theme-next-pjax</span><br><span class="line">pjax: true</span><br></pre></td></tr></table></figure>
-<p>在博客文件夹打开GitBash执行hexo clean、hexo g、hexo s，跳转页面时即可看到效果。</p>
-]]></content>
-      <categories>
-        <category>部署</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>github pages</tag>
-        <tag>next</tag>
-        <tag>网易云</tag>
       </tags>
   </entry>
   <entry>
@@ -2261,6 +2261,117 @@
       </tags>
   </entry>
   <entry>
+    <title>python教程学习笔记002</title>
+    <url>/2023/01/25/python%E6%95%99%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0002/</url>
+    <content><![CDATA[<ol>
+<li>模块</li>
+</ol>
+<p>每一个包目录下面都会有一个__init__.py的文件，这个文件是必须存在的，否则，Python就把这个目录当成普通目录，而不是一个包。<strong>init</strong>.py可以是空文件，也可以有Python代码，因为__init__.py本身就是一个模块<br>自己创建模块时要注意命名，不能和Python自带的模块名称冲突。例如，系统自带了sys模块，自己的模块就不可命名为sys.py，否则将无法导入系统自带的sys模块。<br>我们以内建的sys模块为例，编写一个hello的模块：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; a test module &#x27;</span></span><br><span class="line"></span><br><span class="line">__author__ = <span class="string">&#x27;Michael Liao&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>():</span></span><br><span class="line">    args = sys.argv</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(args)==<span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, world!&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">len</span>(args)==<span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, %s!&#x27;</span> % args[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Too many arguments!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    test()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>当我们在命令行运行hello模块文件时，Python解释器把一个特殊变量__name__置为__main__，而如果在其他地方导入该hello模块时，if判断将失败，因此，这种if测试可以让一个模块通过命令行运行时执行一些额外的代码，最常见的就是运行测试。</p>
+<p>我们可以用命令行运行hello.py看看效果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ python3 hello.py</span><br><span class="line">Hello, world!</span><br><span class="line">$ python hello.py Michael</span><br><span class="line">Hello, Michael!</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>作用域</li>
+</ol>
+<p>在Python中，是通过_前缀来实现的。</p>
+<p>正常的函数和变量名是公开的（public），可以被直接引用，比如：abc，x123，PI等；</p>
+<p>类似__xxx__这样的变量是特殊变量，可以被直接引用，但是有特殊用途，比如上面的__author__，__name__就是特殊变量，hello模块定义的文档注释也可以用特殊变量__doc__访问，我们自己的变量一般不要用这种变量名；</p>
+<p>类似_xxx和__xxx这样的函数或变量就是非公开的（private），不应该被直接引用，比如_abc，__abc等；</p>
+<p>之所以我们说，private函数和变量“不应该”被直接引用，而不是“不能”被直接引用，是因为Python并没有一种方法可以完全限制访问private函数或变量，但是，从编程习惯上不应该引用private函数或变量。</p>
+<ol start="3">
+<li>面向对象编程</li>
+</ol>
+<p>类（Class）和实例（Instance）的概念是很自然的。Class是一种抽象概念，比如我们定义的Class——Student，是指学生这个概念，而实例（Instance）则是一个个具体的Student，比如，Bart Simpson和Lisa Simpson是两个具体的Student。<br>所以，面向对象的设计思想是抽象出Class，根据Class创建Instance。<br>面向对象的抽象程度又比函数要高，因为一个Class既包含数据，又包含操作数据的方法。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, score</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br></pre></td></tr></table></figure>
+
+<p>注意：特殊方法“__init__”前后分别有两个下划线！！！<br>注意到__init__方法的第一个参数永远是self，表示创建的实例本身，因此，在__init__方法内部，就可以把各种属性绑定到self，因为self就指向创建的实例本身。</p>
+<p>有了__init__方法，在创建实例的时候，就不能传入空的参数了，必须传入与__init__方法匹配的参数，但self不需要传，Python解释器自己会把实例变量传进去<br>和普通的函数相比，在类中定义的函数只有一点不同，就是第一个参数永远是实例变量self，并且，调用时，不用传递该参数。除此之外，类的方法和普通函数没有什么区别，所以，你仍然可以用默认参数、可变参数、关键字参数和命名关键字参数。</p>
+<p>原先那种直接通过bart.score = 99也可以修改啊，为什么要定义一个方法大费周折？因为在方法中，可以对参数做检查，避免传入无效的参数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span>(<span class="params">self, score</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt;= score &lt;= <span class="number">100</span>:</span><br><span class="line">            self.__score = score</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;bad score&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，在Python中，变量名类似__xxx__的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是private变量，所以，不能用__name__、__score__这样的变量名。</p>
+<p>继承与多态：<br>继承可以把父类的所有功能都直接拿过来，这样就不必重零做起，子类只需要新增自己特有的方法，也可以把父类不适合的方法覆盖重写。<br>动态语言的鸭子类型特点决定了继承不像静态语言那样是必须的。</p>
+<p>获取对象信息：<br>当我们拿到一个对象的引用时，如何知道这个对象是什么类型、有哪些方法呢？<br>使用type()<br>首先，我们来判断对象类型，使用type()函数<br>基本类型都可以用type()判断<br>如果一个变量指向函数或者类，也可以用type()判断<br>判断基本数据类型可以直接写int，str等，但如果要判断一个对象是否是函数怎么办？可以使用types模块中定义的常量<br>对于class的继承关系来说，使用type()就很不方便。我们要判断class的类型，可以使用isinstance()函数。<br>如果要获得一个对象的所有属性和方法，可以使用dir()函数，它返回一个包含字符串的list</p>
+<ol start="4">
+<li>面向对象高级编程</li>
+</ol>
+<p>使用__slots__ ：<br>如果我们想要限制实例的属性怎么办？比如，只允许对Student实例添加name和age属性。<br>为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的__slots__变量，来限制该class实例能添加的属性：<br>class Student(object):<br>    <strong>slots</strong> = (‘name’, ‘age’) # 用tuple定义允许绑定的属性名称<br>然后，我们试试：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>s = Student() # 创建新的实例<br>s.name = ‘Michael’ # 绑定属性’name’<br>s.age = 25 # 绑定属性’age’<br>s.score = 99 # 绑定属性’score’<br>Traceback (most recent call last):<br>  File “<stdin>“, line 1, in <module><br>AttributeError: ‘Student’ object has no attribute ‘score’<br>由于’score’没有被放到__slots__中，所以不能绑定score属性，试图绑定score将得到AttributeError的错误。<br>使用__slots__要注意，__slots__定义的属性仅对当前类实例起作用，对继承的子类是不起作用的</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>使用@property ：</p>
+<p>在绑定属性时，如果我们直接把属性暴露出去，虽然写起来很简单，但是，没办法检查参数，导致可以把成绩随便改：</p>
+<p>s = Student()<br>s.score = 9999<br>这显然不合逻辑。为了限制score的范围，可以通过一个set_score()方法来设置成绩，再通过一个get_score()来获取成绩，这样，在set_score()方法里，就可以检查参数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_score</span>(<span class="params">self</span>):</span></span><br><span class="line">         <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must be an integer!&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must between 0 ~ 100!&#x27;</span>)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure>
+
+<p>对于类的方法，装饰器一样起作用。Python内置的@property装饰器就是负责把一个方法变成属性调用的：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line"><span class="meta">    @score.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must be an integer!&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must between 0 ~ 100!&#x27;</span>)</span><br><span class="line">        self._score = value</span><br><span class="line">```		</span><br><span class="line"></span><br><span class="line"><span class="meta">@property的实现比较复杂，我们先考察如何使用。把一个getter方法变成属性，只需要加上@property就可以了，此时，@property本身又创建了另一个装饰器@score.setter，负责把一个setter方法变成属性赋值，于是，我们就拥有一个可控的属性操作：</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = Student()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">60</span> <span class="comment"># OK，实际转化为s.set_score(60)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score <span class="comment"># OK，实际转化为s.get_score()</span></span><br><span class="line"><span class="number">60</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">9999</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between <span class="number">0</span> ~ <span class="number">100</span>!</span><br><span class="line">注意到这个神奇的@<span class="built_in">property</span>，我们在对实例属性操作的时候，就知道该属性很可能不是直接暴露的，而是通过getter和setter方法来实现的。</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">多重继承：</span><br><span class="line">对于需要Runnable功能的动物，就多继承一个Runnable，例如Dog：</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>(<span class="params">Mammal, Runnable</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">对于需要Flyable功能的动物，就多继承一个Flyable，例如Bat：</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bat</span>(<span class="params">Mammal, Flyable</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">通过多重继承，一个子类就可以同时获得多个父类的所有功能。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MixIn：</span><br><span class="line">在设计类的继承关系时，通常，主线都是单一继承下来的，例如，Ostrich继承自Bird。但是，如果需要“混入”额外的功能，通过多重继承就可以实现，比如，让Ostrich除了继承自Bird外，再同时继承Runnable。这种设计通常称之为MixIn。</span><br><span class="line">为了更好地看出继承关系，我们把Runnable和Flyable改为RunnableMixIn和FlyableMixIn。类似的，你还可以定义出肉食动物CarnivorousMixIn和植食动物HerbivoresMixIn，让某个动物同时拥有好几个MixIn：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>(<span class="params">Mammal, RunnableMixIn, CarnivorousMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">MixIn的目的就是给一个类增加多个功能，这样，在设计类的时候，我们优先考虑通过多重继承来组合多个MixIn的功能，而不是设计多层次的复杂的继承关系。</span><br><span class="line">Python自带的很多库也使用了MixIn。举个例子，Python自带了TCPServer和UDPServer这两类网络服务，而要同时服务多个用户就必须使用多进程或多线程模型，这两种模型由ForkingMixIn和ThreadingMixIn提供。通过组合，我们就可以创造出合适的服务来。</span><br><span class="line">比如，编写一个多进程模式的TCP服务，定义如下：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTCPServer</span>(<span class="params">TCPServer, ForkingMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">编写一个多线程模式的UDP服务，定义如下：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyUDPServer</span>(<span class="params">UDPServer, ThreadingMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">如果你打算搞一个更先进的协程模型，可以编写一个CoroutineMixIn：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTCPServer</span>(<span class="params">TCPServer, CoroutineMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">这样一来，我们不需要复杂而庞大的继承链，只要选择组合不同的类的功能，就可以快速构造出所需的子类。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">定制类：</span><br><span class="line">看到类似__slots__这种形如__xxx__的变量或者函数名就要注意，这些在Python中是有特殊用途的。</span><br><span class="line">__slots__我们已经知道怎么用了，__len__()方法我们也知道是为了能让<span class="class"><span class="keyword">class</span>作用于<span class="title">len</span>()函数。</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">通常<span class="title">__str__</span>()和<span class="title">__repr__</span>()代码都是一样的，所以，有个偷懒的写法：</span></span><br><span class="line"><span class="class">```<span class="title">python</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Student object (name=%s)&#x27;</span> % self.name</span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>iter</strong><br>如果一个类想被用于for … in循环，类似list或tuple那样，就必须实现一个__iter__()方法，该方法返回一个迭代对象，然后，Python的for循环就会不断调用该迭代对象的__next__()方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环。</p>
+<p><strong>getitem</strong><br>要表现得像list那样按照下标取出元素，需要实现__getitem__()方法</p>
+<p>Python还有另一个机制，那就是写一个__getattr__()方法，动态返回一个属性。修改如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.name = <span class="string">&#x27;Michael&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, attr</span>):</span></span><br><span class="line">        <span class="keyword">if</span> attr==<span class="string">&#x27;score&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">99</span></span><br></pre></td></tr></table></figure>
+
+<p>当调用不存在的属性时，比如score，Python解释器会试图调用__getattr__(self, ‘score’)来尝试获得属性，这样，我们就有机会返回score的值</p>
+<p><strong>call</strong><br>一个对象实例可以有自己的属性和方法，当我们调用实例方法时，我们用instance.method()来调用。能不能直接在实例本身上调用呢？在Python中，答案是肯定的。<br>任何类，只需要定义一个__call__()方法，就可以直接对实例进行调用。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;My name is %s.&#x27;</span> % self.name)</span><br></pre></td></tr></table></figure>
+
+<p>调用方式如下：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>s = Student(‘Michael’)<br>s() # self参数不要传入<br>My name is Michael.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>通过callable()函数，我们就可以判断一个对象是否是“可调用”对象。</p>
+<p>更多方法参考：<a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">https://docs.python.org/3/reference/datamodel.html#special-method-names</a></p>
+<p>枚举类：</p>
+<p>为这样的枚举类型定义一个class类型，然后，每个常量都是class的一个唯一实例。Python提供了Enum类来实现这个功能：</p>
+<p>from enum import Enum<br>Month = Enum(‘Month’, (‘Jan’, ‘Feb’, ‘Mar’, ‘Apr’, ‘May’, ‘Jun’, ‘Jul’, ‘Aug’, ‘Sep’, ‘Oct’, ‘Nov’, ‘Dec’))</p>
+<p>如果需要更精确地控制枚举类型，可以从Enum派生出自定义类：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum, unique</span><br><span class="line"></span><br><span class="line"><span class="meta">@unique</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Weekday</span>(<span class="params">Enum</span>):</span></span><br><span class="line">    Sun = <span class="number">0</span> <span class="comment"># Sun的value被设定为0</span></span><br><span class="line">    Mon = <span class="number">1</span></span><br><span class="line">    Tue = <span class="number">2</span></span><br><span class="line">    Wed = <span class="number">3</span></span><br><span class="line">    Thu = <span class="number">4</span></span><br><span class="line">    Fri = <span class="number">5</span></span><br><span class="line">    Sat = <span class="number">6</span></span><br></pre></td></tr></table></figure>
+<p>@unique装饰器可以帮助我们检查保证没有重复值。</p>
+<p>使用元类：<br>type()<br>动态语言和静态语言最大的不同，就是函数和类的定义，不是编译时定义的，而是运行时动态创建的。</p>
+<p>比方说我们要定义一个Hello的class，就写一个hello.py模块：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hello</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hello</span>(<span class="params">self, name=<span class="string">&#x27;world&#x27;</span></span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, %s.&#x27;</span> % name)</span><br></pre></td></tr></table></figure>
+
+<p>当Python解释器载入hello模块时，就会依次执行该模块的所有语句，执行结果就是动态创建出一个Hello的class对象，测试如下：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>from hello import Hello<br>h = Hello()<br>h.hello()<br>Hello, world.<br>print(type(Hello))<br>&lt;class ‘type’&gt;<br>print(type(h))<br>&lt;class ‘hello.Hello’&gt;<br>type()函数可以查看一个类型或变量的类型，Hello是一个class，它的类型就是type，而h是一个实例，它的类型就是class Hello。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>我们说class的定义是运行时动态创建的，而创建class的方法就是使用type()函数。</p>
+<p>type()函数既可以返回一个对象的类型，又可以创建出新的类型，比如，我们可以通过type()函数创建出Hello类，而无需通过class Hello(object)…的定义：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>def fn(self, name=’world’): # 先定义函数<br>…     print(‘Hello, %s.’ % name)<br>…<br>Hello = type(‘Hello’, (object,), dict(hello=fn)) # 创建Hello class<br>h = Hello()<br>h.hello()<br>Hello, world.<br>print(type(Hello))<br>&lt;class ‘type’&gt;<br>print(type(h))<br>&lt;class ‘__main__.Hello’&gt;<br>要创建一个class对象，type()函数依次传入3个参数：</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>class的名称；<br>继承的父类集合，注意Python支持多重继承，如果只有一个父类，别忘了tuple的单元素写法；<br>class的方法名称与函数绑定，这里我们把函数fn绑定到方法名hello上。<br>通过type()函数创建的类和直接写class是完全一样的，因为Python解释器遇到class定义时，仅仅是扫描一下class定义的语法，然后调用type()函数创建出class。</p>
+<p>正常情况下，我们都用class Xxx…来定义类，但是，type()函数也允许我们动态创建出类来，也就是说，动态语言本身支持运行期动态创建类，这和静态语言有非常大的不同，要在静态语言运行期创建类，必须构造源代码字符串再调用编译器，或者借助一些工具生成字节码实现，本质上都是动态编译，会非常复杂。</p>
+<p>metaclass（了解即可，较为复杂，不常用。可用于ORM）：<br>除了使用type()动态创建类以外，要控制类的创建行为，还可以使用metaclass。<br>metaclass，直译为元类，简单的解释就是：<br>当我们定义了类以后，就可以根据这个类创建出实例，所以：先定义类，然后创建实例。<br>但是如果我们想创建出类呢？那就必须根据metaclass创建出类，所以：先定义metaclass，然后创建类。<br>连接起来就是：先定义metaclass，就可以创建类，最后创建实例。<br>所以，metaclass允许你创建类或者修改类。换句话说，你可以把类看成是metaclass创建出来的“实例”。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>测试开发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python教程学习笔记003</title>
     <url>/2023/01/26/python%E6%95%99%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0003/</url>
     <content><![CDATA[<ol>
@@ -2486,117 +2597,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python教程学习笔记002</title>
-    <url>/2023/01/25/python%E6%95%99%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0002/</url>
-    <content><![CDATA[<ol>
-<li>模块</li>
-</ol>
-<p>每一个包目录下面都会有一个__init__.py的文件，这个文件是必须存在的，否则，Python就把这个目录当成普通目录，而不是一个包。<strong>init</strong>.py可以是空文件，也可以有Python代码，因为__init__.py本身就是一个模块<br>自己创建模块时要注意命名，不能和Python自带的模块名称冲突。例如，系统自带了sys模块，自己的模块就不可命名为sys.py，否则将无法导入系统自带的sys模块。<br>我们以内建的sys模块为例，编写一个hello的模块：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; a test module &#x27;</span></span><br><span class="line"></span><br><span class="line">__author__ = <span class="string">&#x27;Michael Liao&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>():</span></span><br><span class="line">    args = sys.argv</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(args)==<span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, world!&#x27;</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">len</span>(args)==<span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, %s!&#x27;</span> % args[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Too many arguments!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    test()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>当我们在命令行运行hello模块文件时，Python解释器把一个特殊变量__name__置为__main__，而如果在其他地方导入该hello模块时，if判断将失败，因此，这种if测试可以让一个模块通过命令行运行时执行一些额外的代码，最常见的就是运行测试。</p>
-<p>我们可以用命令行运行hello.py看看效果：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">$ python3 hello.py</span><br><span class="line">Hello, world!</span><br><span class="line">$ python hello.py Michael</span><br><span class="line">Hello, Michael!</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>作用域</li>
-</ol>
-<p>在Python中，是通过_前缀来实现的。</p>
-<p>正常的函数和变量名是公开的（public），可以被直接引用，比如：abc，x123，PI等；</p>
-<p>类似__xxx__这样的变量是特殊变量，可以被直接引用，但是有特殊用途，比如上面的__author__，__name__就是特殊变量，hello模块定义的文档注释也可以用特殊变量__doc__访问，我们自己的变量一般不要用这种变量名；</p>
-<p>类似_xxx和__xxx这样的函数或变量就是非公开的（private），不应该被直接引用，比如_abc，__abc等；</p>
-<p>之所以我们说，private函数和变量“不应该”被直接引用，而不是“不能”被直接引用，是因为Python并没有一种方法可以完全限制访问private函数或变量，但是，从编程习惯上不应该引用private函数或变量。</p>
-<ol start="3">
-<li>面向对象编程</li>
-</ol>
-<p>类（Class）和实例（Instance）的概念是很自然的。Class是一种抽象概念，比如我们定义的Class——Student，是指学生这个概念，而实例（Instance）则是一个个具体的Student，比如，Bart Simpson和Lisa Simpson是两个具体的Student。<br>所以，面向对象的设计思想是抽象出Class，根据Class创建Instance。<br>面向对象的抽象程度又比函数要高，因为一个Class既包含数据，又包含操作数据的方法。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, score</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br></pre></td></tr></table></figure>
-
-<p>注意：特殊方法“__init__”前后分别有两个下划线！！！<br>注意到__init__方法的第一个参数永远是self，表示创建的实例本身，因此，在__init__方法内部，就可以把各种属性绑定到self，因为self就指向创建的实例本身。</p>
-<p>有了__init__方法，在创建实例的时候，就不能传入空的参数了，必须传入与__init__方法匹配的参数，但self不需要传，Python解释器自己会把实例变量传进去<br>和普通的函数相比，在类中定义的函数只有一点不同，就是第一个参数永远是实例变量self，并且，调用时，不用传递该参数。除此之外，类的方法和普通函数没有什么区别，所以，你仍然可以用默认参数、可变参数、关键字参数和命名关键字参数。</p>
-<p>原先那种直接通过bart.score = 99也可以修改啊，为什么要定义一个方法大费周折？因为在方法中，可以对参数做检查，避免传入无效的参数：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span>(<span class="params">self, score</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span> &lt;= score &lt;= <span class="number">100</span>:</span><br><span class="line">            self.__score = score</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;bad score&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是，在Python中，变量名类似__xxx__的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是private变量，所以，不能用__name__、__score__这样的变量名。</p>
-<p>继承与多态：<br>继承可以把父类的所有功能都直接拿过来，这样就不必重零做起，子类只需要新增自己特有的方法，也可以把父类不适合的方法覆盖重写。<br>动态语言的鸭子类型特点决定了继承不像静态语言那样是必须的。</p>
-<p>获取对象信息：<br>当我们拿到一个对象的引用时，如何知道这个对象是什么类型、有哪些方法呢？<br>使用type()<br>首先，我们来判断对象类型，使用type()函数<br>基本类型都可以用type()判断<br>如果一个变量指向函数或者类，也可以用type()判断<br>判断基本数据类型可以直接写int，str等，但如果要判断一个对象是否是函数怎么办？可以使用types模块中定义的常量<br>对于class的继承关系来说，使用type()就很不方便。我们要判断class的类型，可以使用isinstance()函数。<br>如果要获得一个对象的所有属性和方法，可以使用dir()函数，它返回一个包含字符串的list</p>
-<ol start="4">
-<li>面向对象高级编程</li>
-</ol>
-<p>使用__slots__ ：<br>如果我们想要限制实例的属性怎么办？比如，只允许对Student实例添加name和age属性。<br>为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的__slots__变量，来限制该class实例能添加的属性：<br>class Student(object):<br>    <strong>slots</strong> = (‘name’, ‘age’) # 用tuple定义允许绑定的属性名称<br>然后，我们试试：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>s = Student() # 创建新的实例<br>s.name = ‘Michael’ # 绑定属性’name’<br>s.age = 25 # 绑定属性’age’<br>s.score = 99 # 绑定属性’score’<br>Traceback (most recent call last):<br>  File “<stdin>“, line 1, in <module><br>AttributeError: ‘Student’ object has no attribute ‘score’<br>由于’score’没有被放到__slots__中，所以不能绑定score属性，试图绑定score将得到AttributeError的错误。<br>使用__slots__要注意，__slots__定义的属性仅对当前类实例起作用，对继承的子类是不起作用的</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>使用@property ：</p>
-<p>在绑定属性时，如果我们直接把属性暴露出去，虽然写起来很简单，但是，没办法检查参数，导致可以把成绩随便改：</p>
-<p>s = Student()<br>s.score = 9999<br>这显然不合逻辑。为了限制score的范围，可以通过一个set_score()方法来设置成绩，再通过一个get_score()来获取成绩，这样，在set_score()方法里，就可以检查参数：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_score</span>(<span class="params">self</span>):</span></span><br><span class="line">         <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must be an integer!&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must between 0 ~ 100!&#x27;</span>)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure>
-
-<p>对于类的方法，装饰器一样起作用。Python内置的@property装饰器就是负责把一个方法变成属性调用的：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line"><span class="meta">    @score.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(value, <span class="built_in">int</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must be an integer!&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&#x27;score must between 0 ~ 100!&#x27;</span>)</span><br><span class="line">        self._score = value</span><br><span class="line">```		</span><br><span class="line"></span><br><span class="line"><span class="meta">@property的实现比较复杂，我们先考察如何使用。把一个getter方法变成属性，只需要加上@property就可以了，此时，@property本身又创建了另一个装饰器@score.setter，负责把一个setter方法变成属性赋值，于是，我们就拥有一个可控的属性操作：</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = Student()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">60</span> <span class="comment"># OK，实际转化为s.set_score(60)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score <span class="comment"># OK，实际转化为s.get_score()</span></span><br><span class="line"><span class="number">60</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">9999</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between <span class="number">0</span> ~ <span class="number">100</span>!</span><br><span class="line">注意到这个神奇的@<span class="built_in">property</span>，我们在对实例属性操作的时候，就知道该属性很可能不是直接暴露的，而是通过getter和setter方法来实现的。</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">多重继承：</span><br><span class="line">对于需要Runnable功能的动物，就多继承一个Runnable，例如Dog：</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>(<span class="params">Mammal, Runnable</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">对于需要Flyable功能的动物，就多继承一个Flyable，例如Bat：</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bat</span>(<span class="params">Mammal, Flyable</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">通过多重继承，一个子类就可以同时获得多个父类的所有功能。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MixIn：</span><br><span class="line">在设计类的继承关系时，通常，主线都是单一继承下来的，例如，Ostrich继承自Bird。但是，如果需要“混入”额外的功能，通过多重继承就可以实现，比如，让Ostrich除了继承自Bird外，再同时继承Runnable。这种设计通常称之为MixIn。</span><br><span class="line">为了更好地看出继承关系，我们把Runnable和Flyable改为RunnableMixIn和FlyableMixIn。类似的，你还可以定义出肉食动物CarnivorousMixIn和植食动物HerbivoresMixIn，让某个动物同时拥有好几个MixIn：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span>(<span class="params">Mammal, RunnableMixIn, CarnivorousMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">MixIn的目的就是给一个类增加多个功能，这样，在设计类的时候，我们优先考虑通过多重继承来组合多个MixIn的功能，而不是设计多层次的复杂的继承关系。</span><br><span class="line">Python自带的很多库也使用了MixIn。举个例子，Python自带了TCPServer和UDPServer这两类网络服务，而要同时服务多个用户就必须使用多进程或多线程模型，这两种模型由ForkingMixIn和ThreadingMixIn提供。通过组合，我们就可以创造出合适的服务来。</span><br><span class="line">比如，编写一个多进程模式的TCP服务，定义如下：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTCPServer</span>(<span class="params">TCPServer, ForkingMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">编写一个多线程模式的UDP服务，定义如下：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyUDPServer</span>(<span class="params">UDPServer, ThreadingMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">如果你打算搞一个更先进的协程模型，可以编写一个CoroutineMixIn：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTCPServer</span>(<span class="params">TCPServer, CoroutineMixIn</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">这样一来，我们不需要复杂而庞大的继承链，只要选择组合不同的类的功能，就可以快速构造出所需的子类。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">定制类：</span><br><span class="line">看到类似__slots__这种形如__xxx__的变量或者函数名就要注意，这些在Python中是有特殊用途的。</span><br><span class="line">__slots__我们已经知道怎么用了，__len__()方法我们也知道是为了能让<span class="class"><span class="keyword">class</span>作用于<span class="title">len</span>()函数。</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">通常<span class="title">__str__</span>()和<span class="title">__repr__</span>()代码都是一样的，所以，有个偷懒的写法：</span></span><br><span class="line"><span class="class">```<span class="title">python</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Student object (name=%s)&#x27;</span> % self.name</span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>iter</strong><br>如果一个类想被用于for … in循环，类似list或tuple那样，就必须实现一个__iter__()方法，该方法返回一个迭代对象，然后，Python的for循环就会不断调用该迭代对象的__next__()方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环。</p>
-<p><strong>getitem</strong><br>要表现得像list那样按照下标取出元素，需要实现__getitem__()方法</p>
-<p>Python还有另一个机制，那就是写一个__getattr__()方法，动态返回一个属性。修改如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.name = <span class="string">&#x27;Michael&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, attr</span>):</span></span><br><span class="line">        <span class="keyword">if</span> attr==<span class="string">&#x27;score&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">99</span></span><br></pre></td></tr></table></figure>
-
-<p>当调用不存在的属性时，比如score，Python解释器会试图调用__getattr__(self, ‘score’)来尝试获得属性，这样，我们就有机会返回score的值</p>
-<p><strong>call</strong><br>一个对象实例可以有自己的属性和方法，当我们调用实例方法时，我们用instance.method()来调用。能不能直接在实例本身上调用呢？在Python中，答案是肯定的。<br>任何类，只需要定义一个__call__()方法，就可以直接对实例进行调用。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;My name is %s.&#x27;</span> % self.name)</span><br></pre></td></tr></table></figure>
-
-<p>调用方式如下：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>s = Student(‘Michael’)<br>s() # self参数不要传入<br>My name is Michael.</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>通过callable()函数，我们就可以判断一个对象是否是“可调用”对象。</p>
-<p>更多方法参考：<a href="https://docs.python.org/3/reference/datamodel.html#special-method-names">https://docs.python.org/3/reference/datamodel.html#special-method-names</a></p>
-<p>枚举类：</p>
-<p>为这样的枚举类型定义一个class类型，然后，每个常量都是class的一个唯一实例。Python提供了Enum类来实现这个功能：</p>
-<p>from enum import Enum<br>Month = Enum(‘Month’, (‘Jan’, ‘Feb’, ‘Mar’, ‘Apr’, ‘May’, ‘Jun’, ‘Jul’, ‘Aug’, ‘Sep’, ‘Oct’, ‘Nov’, ‘Dec’))</p>
-<p>如果需要更精确地控制枚举类型，可以从Enum派生出自定义类：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum, unique</span><br><span class="line"></span><br><span class="line"><span class="meta">@unique</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Weekday</span>(<span class="params">Enum</span>):</span></span><br><span class="line">    Sun = <span class="number">0</span> <span class="comment"># Sun的value被设定为0</span></span><br><span class="line">    Mon = <span class="number">1</span></span><br><span class="line">    Tue = <span class="number">2</span></span><br><span class="line">    Wed = <span class="number">3</span></span><br><span class="line">    Thu = <span class="number">4</span></span><br><span class="line">    Fri = <span class="number">5</span></span><br><span class="line">    Sat = <span class="number">6</span></span><br></pre></td></tr></table></figure>
-<p>@unique装饰器可以帮助我们检查保证没有重复值。</p>
-<p>使用元类：<br>type()<br>动态语言和静态语言最大的不同，就是函数和类的定义，不是编译时定义的，而是运行时动态创建的。</p>
-<p>比方说我们要定义一个Hello的class，就写一个hello.py模块：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hello</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hello</span>(<span class="params">self, name=<span class="string">&#x27;world&#x27;</span></span>):</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Hello, %s.&#x27;</span> % name)</span><br></pre></td></tr></table></figure>
-
-<p>当Python解释器载入hello模块时，就会依次执行该模块的所有语句，执行结果就是动态创建出一个Hello的class对象，测试如下：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>from hello import Hello<br>h = Hello()<br>h.hello()<br>Hello, world.<br>print(type(Hello))<br>&lt;class ‘type’&gt;<br>print(type(h))<br>&lt;class ‘hello.Hello’&gt;<br>type()函数可以查看一个类型或变量的类型，Hello是一个class，它的类型就是type，而h是一个实例，它的类型就是class Hello。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>我们说class的定义是运行时动态创建的，而创建class的方法就是使用type()函数。</p>
-<p>type()函数既可以返回一个对象的类型，又可以创建出新的类型，比如，我们可以通过type()函数创建出Hello类，而无需通过class Hello(object)…的定义：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>def fn(self, name=’world’): # 先定义函数<br>…     print(‘Hello, %s.’ % name)<br>…<br>Hello = type(‘Hello’, (object,), dict(hello=fn)) # 创建Hello class<br>h = Hello()<br>h.hello()<br>Hello, world.<br>print(type(Hello))<br>&lt;class ‘type’&gt;<br>print(type(h))<br>&lt;class ‘__main__.Hello’&gt;<br>要创建一个class对象，type()函数依次传入3个参数：</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>class的名称；<br>继承的父类集合，注意Python支持多重继承，如果只有一个父类，别忘了tuple的单元素写法；<br>class的方法名称与函数绑定，这里我们把函数fn绑定到方法名hello上。<br>通过type()函数创建的类和直接写class是完全一样的，因为Python解释器遇到class定义时，仅仅是扫描一下class定义的语法，然后调用type()函数创建出class。</p>
-<p>正常情况下，我们都用class Xxx…来定义类，但是，type()函数也允许我们动态创建出类来，也就是说，动态语言本身支持运行期动态创建类，这和静态语言有非常大的不同，要在静态语言运行期创建类，必须构造源代码字符串再调用编译器，或者借助一些工具生成字节码实现，本质上都是动态编译，会非常复杂。</p>
-<p>metaclass（了解即可，较为复杂，不常用。可用于ORM）：<br>除了使用type()动态创建类以外，要控制类的创建行为，还可以使用metaclass。<br>metaclass，直译为元类，简单的解释就是：<br>当我们定义了类以后，就可以根据这个类创建出实例，所以：先定义类，然后创建实例。<br>但是如果我们想创建出类呢？那就必须根据metaclass创建出类，所以：先定义metaclass，然后创建类。<br>连接起来就是：先定义metaclass，就可以创建类，最后创建实例。<br>所以，metaclass允许你创建类或者修改类。换句话说，你可以把类看成是metaclass创建出来的“实例”。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>测试开发</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python读写文件</title>
     <url>/2021/12/20/python%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<h4 id="OS模块的常用方法"><a href="#OS模块的常用方法" class="headerlink" title="OS模块的常用方法"></a>OS模块的常用方法</h4><ul>
@@ -2672,55 +2672,6 @@
       </tags>
   </entry>
   <entry>
-    <title>《认知觉醒》读书心得+笔记整理</title>
-    <url>/2021/12/18/%E3%80%8A%E8%AE%A4%E7%9F%A5%E8%A7%89%E9%86%92%E3%80%8B%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97-%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<h3 id="个人成长记录："><a href="#个人成长记录：" class="headerlink" title="个人成长记录："></a>个人成长记录：</h3><p>今年最幸运的事情之一，就是读到了周岭老师的《认知觉醒》。<br>从八月份知道这本书，到现在将近四个月，陆陆续续读了也有四五遍了。<br>然后改变量也确实有一点，虽然进步不大，但也可以记录一下。</p>
-<ul>
-<li><p>开始写个人博客网站<br><a href="https://shenle2019.github.io/">https://shenle2019.github.io/</a><br>这个博客将会持续记录我的个人总结内容，我的想法是写任何内容都行，每周1-2篇输出。</p>
-</li>
-<li><p>Java-web的学习笔记，终于整理一版出来了。<br>对java的基础知识、博客网站的搭建流程、操作系统相关知识、Spring框架的基本应用等有一定的理解。<br>github地址：<a href="https://github.com/shenle2019/javaonline">https://github.com/shenle2019/javaonline</a></p>
-</li>
-</ul>
-<p>后续无论是Java，还是Python，C等，都可以按照这个思路，先把基础语法过一遍，然后做成一个项目，<br>将中间的一些关键步骤、思考内容记录下来，记录自己成长的同时，增强自信心。</p>
-<ul>
-<li><p>开始搭建个人知识体系，目前用有道云笔记来持续更新自己的全量知识体系。</p>
-</li>
-<li><p>开始实行【早冥读写跑】这人生五件套。<br>  其中阅读和跑步以前就一直很喜欢，现在更加强了这两个习惯。<br>  做的不好的是早起、冥想和写作。<br>  后续计划：早起，每天早上7点起床，对我来说是合适的。<br>  冥想：中午午睡时，30min+的冥想练习。<br>  写作：坚持以目标为导向来写博客。</p>
-</li>
-</ul>
-<h3 id="关键触动点记录："><a href="#关键触动点记录：" class="headerlink" title="关键触动点记录："></a>关键触动点记录：</h3><ul>
-<li><p>自己需要养成这些基础习惯，然后驱动自己做一些真实的改变，不是为了表面上的上进或者心理安慰，<br>而是内心的真实渴望：<br>比如想以后能写任何东西，那么就需要用写作来梳理自己的思路，锻炼笔力；<br>要想身体回到健康状态，要身材变好看，就得保持运动的习惯；<br>要做成想做的事，就要运用冥想来锻炼专注力等等。<br>早冥读写跑，可以为我搭建一个进阶的框架，后续有新的认知好的习惯，可以继续往里面添加即可。</p>
-</li>
-<li><p>另一个最关键的成长，就是耐心的增强。<br>焦虑的根源是自己想做的事情太多，而又立即想看到效果。<br>特别是眼里看见别人的成就，有对比就有焦虑。<br>而忽视了自己当前的能力，这就属于是盲目的焦虑了，实属没有必要。<br>可行的方法，第一条就是时刻提醒自己保持足够的耐心。<br>先找出目前来说最想做的、最重要的事情，只做一件事，<br>然后着眼于当下的事情，一点一滴地去解决它，感受进一寸的欢喜。<br>再有急躁时，运用元认知来温和提醒自己即可保持内心的平静。</p>
-</li>
-</ul>
-<p>以上两点，就已经让我醍醐灌顶，解决了很多问题，后续会一直坚持：<br>专注当下，保持平静和耐心，一点一滴地进步，学到新知识新习惯可以往已有的框架中添加。</p>
-<h3 id="读书笔记："><a href="#读书笔记：" class="headerlink" title="读书笔记："></a>读书笔记：</h3><p>这本书里还有很多其他的触动点，按自己的理解来记录如下</p>
-<ul>
-<li>要养成运动习惯，锻炼身体作为生活的一种状态，因为这是赋予无数个0的意义前面的1。</li>
-<li>有清晰的目标和执行的方法，消除实现路径的模糊。<br>  在拉伸区练习，且每项内容让自己讲出来，消除知识逻辑的模糊。<br>  这个过程，要求自己不要浮于表面或者只做表面工作，而要直面核心问题。</li>
-<li>执行过程中，践行所有高手都拥有的优点，可能也是惟一的优点，那就是专注。<br>  保持专注，追求心流、禅定 状态。这是毕生追求。<br>  比如编程写作，都需要练习练习再练习，最后达到真正的闭环状态。</li>
-<li>日常冥想可以锻炼自己的专注力。</li>
-<li>心态平和。解决困难问题时，要有打游戏闯关升级心态。<br>  有自信，相信自己一定能学会，做得到。</li>
-<li>每日反省。用 元认知来审视自己，从更全局的眼光来发现问题。<br>  然后用内心触动磨合、扩大自己的认知系统。<br>  如此反复刻意练习，来提高能力。</li>
-<li>最后，勤阅读，来聆听与各个领域 的大神的教诲。勤思考勤输出，来缩小差距。<br>  独立思考与输出，来慢慢变强。</li>
-</ul>
-<h3 id="其他感想："><a href="#其他感想：" class="headerlink" title="其他感想："></a>其他感想：</h3><ul>
-<li>这是一本关于【个人成长】的书（当然还可以解释、解决生活中的一些其它问题）。<br>  讨论的主要是我们作为普通人，想要变得【优秀】或者【厉害】一点，中间会有哪些问题？这些问题背后的原理是什么？<br>  知道这些原理后，我们应该怎么做？<br>  所以我们得先有让自己变好的心，否则这本书确实没啥意思，推荐再多次也没有意义。<br>  这是【前提】，毕竟我们不希望五年后、十年后的自己，跟现在一样没啥变化。<br>  只有我们的能力足够强的时候，才能解决生活中的很多问题。</li>
-<li>这本书讲的内容，我是这样理解的，主要分为两块。<br>  一个是我们身上出现各种各样问题的原因，即【原理】部分。<br>  另一个就是作者通过这些原因，来找到一些解决的办法，俗称【方法论】。<br>  各种问题比如焦虑、不够耐心、情感冲动、缺乏自控力、不够专注、学习不得法、行动力不强等等。<br>  作者把这些问题都一一罗列出来，说明问题背后的原因，想搞懂的话，可看对应章节的内容。<br>  方法论就是解决实际的问题了，知道原因后对症下药，参考上述读书笔记内容。</li>
-<li>一本书也不会教会所有成长相关的内容，只是这本书给我的触动很大，解决了我以前的很多困惑，所以希望大家也有所收获。<br>  当然也没有刻意来制造焦虑，或者执意要给你喝鸡汤打鸡血。<br>  这本书的原理是有科学依据的，而不是心灵鸡汤。  绝大部分人应该都可以从中学到一些东西，所以我觉得还是有必要读一读。<br>  比如你现在要教你的娃一些学习的方法，就可以作为参考。如果自己也能做到，那就更好了，毕竟【父母是孩子最好的老师】。    比如你现在想跟别人谈恋爱，也可以学习变得优秀的方法。因为【爱一个人最好的方式，是经营好自己，给对方一个优质的爱人】。<br>  至于我的话，没有那么多想法，只是单纯地感觉我要践行下去会变强而已。</li>
-</ul>
-<pre><code>—— 乌索普大将，2021.12.18，杭州。
-</code></pre>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>《认知觉醒》</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《控方证人》影评-usopp</title>
     <url>/2021/11/24/%E3%80%8A%E6%8E%A7%E6%96%B9%E8%AF%81%E4%BA%BA%E3%80%8B%E5%BD%B1%E8%AF%84-usopp/</url>
     <content><![CDATA[<h3 id="控方证人"><a href="#控方证人" class="headerlink" title="控方证人"></a>控方证人</h3><p>电影的名称，英文名得记一下，《The Witness for the Prosecution》，以示尊重。</p>
@@ -2769,6 +2720,55 @@
       </categories>
       <tags>
         <tag>控方证人</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《认知觉醒》读书心得+笔记整理</title>
+    <url>/2021/12/18/%E3%80%8A%E8%AE%A4%E7%9F%A5%E8%A7%89%E9%86%92%E3%80%8B%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97-%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<h3 id="个人成长记录："><a href="#个人成长记录：" class="headerlink" title="个人成长记录："></a>个人成长记录：</h3><p>今年最幸运的事情之一，就是读到了周岭老师的《认知觉醒》。<br>从八月份知道这本书，到现在将近四个月，陆陆续续读了也有四五遍了。<br>然后改变量也确实有一点，虽然进步不大，但也可以记录一下。</p>
+<ul>
+<li><p>开始写个人博客网站<br><a href="https://shenle2019.github.io/">https://shenle2019.github.io/</a><br>这个博客将会持续记录我的个人总结内容，我的想法是写任何内容都行，每周1-2篇输出。</p>
+</li>
+<li><p>Java-web的学习笔记，终于整理一版出来了。<br>对java的基础知识、博客网站的搭建流程、操作系统相关知识、Spring框架的基本应用等有一定的理解。<br>github地址：<a href="https://github.com/shenle2019/javaonline">https://github.com/shenle2019/javaonline</a></p>
+</li>
+</ul>
+<p>后续无论是Java，还是Python，C等，都可以按照这个思路，先把基础语法过一遍，然后做成一个项目，<br>将中间的一些关键步骤、思考内容记录下来，记录自己成长的同时，增强自信心。</p>
+<ul>
+<li><p>开始搭建个人知识体系，目前用有道云笔记来持续更新自己的全量知识体系。</p>
+</li>
+<li><p>开始实行【早冥读写跑】这人生五件套。<br>  其中阅读和跑步以前就一直很喜欢，现在更加强了这两个习惯。<br>  做的不好的是早起、冥想和写作。<br>  后续计划：早起，每天早上7点起床，对我来说是合适的。<br>  冥想：中午午睡时，30min+的冥想练习。<br>  写作：坚持以目标为导向来写博客。</p>
+</li>
+</ul>
+<h3 id="关键触动点记录："><a href="#关键触动点记录：" class="headerlink" title="关键触动点记录："></a>关键触动点记录：</h3><ul>
+<li><p>自己需要养成这些基础习惯，然后驱动自己做一些真实的改变，不是为了表面上的上进或者心理安慰，<br>而是内心的真实渴望：<br>比如想以后能写任何东西，那么就需要用写作来梳理自己的思路，锻炼笔力；<br>要想身体回到健康状态，要身材变好看，就得保持运动的习惯；<br>要做成想做的事，就要运用冥想来锻炼专注力等等。<br>早冥读写跑，可以为我搭建一个进阶的框架，后续有新的认知好的习惯，可以继续往里面添加即可。</p>
+</li>
+<li><p>另一个最关键的成长，就是耐心的增强。<br>焦虑的根源是自己想做的事情太多，而又立即想看到效果。<br>特别是眼里看见别人的成就，有对比就有焦虑。<br>而忽视了自己当前的能力，这就属于是盲目的焦虑了，实属没有必要。<br>可行的方法，第一条就是时刻提醒自己保持足够的耐心。<br>先找出目前来说最想做的、最重要的事情，只做一件事，<br>然后着眼于当下的事情，一点一滴地去解决它，感受进一寸的欢喜。<br>再有急躁时，运用元认知来温和提醒自己即可保持内心的平静。</p>
+</li>
+</ul>
+<p>以上两点，就已经让我醍醐灌顶，解决了很多问题，后续会一直坚持：<br>专注当下，保持平静和耐心，一点一滴地进步，学到新知识新习惯可以往已有的框架中添加。</p>
+<h3 id="读书笔记："><a href="#读书笔记：" class="headerlink" title="读书笔记："></a>读书笔记：</h3><p>这本书里还有很多其他的触动点，按自己的理解来记录如下</p>
+<ul>
+<li>要养成运动习惯，锻炼身体作为生活的一种状态，因为这是赋予无数个0的意义前面的1。</li>
+<li>有清晰的目标和执行的方法，消除实现路径的模糊。<br>  在拉伸区练习，且每项内容让自己讲出来，消除知识逻辑的模糊。<br>  这个过程，要求自己不要浮于表面或者只做表面工作，而要直面核心问题。</li>
+<li>执行过程中，践行所有高手都拥有的优点，可能也是惟一的优点，那就是专注。<br>  保持专注，追求心流、禅定 状态。这是毕生追求。<br>  比如编程写作，都需要练习练习再练习，最后达到真正的闭环状态。</li>
+<li>日常冥想可以锻炼自己的专注力。</li>
+<li>心态平和。解决困难问题时，要有打游戏闯关升级心态。<br>  有自信，相信自己一定能学会，做得到。</li>
+<li>每日反省。用 元认知来审视自己，从更全局的眼光来发现问题。<br>  然后用内心触动磨合、扩大自己的认知系统。<br>  如此反复刻意练习，来提高能力。</li>
+<li>最后，勤阅读，来聆听与各个领域 的大神的教诲。勤思考勤输出，来缩小差距。<br>  独立思考与输出，来慢慢变强。</li>
+</ul>
+<h3 id="其他感想："><a href="#其他感想：" class="headerlink" title="其他感想："></a>其他感想：</h3><ul>
+<li>这是一本关于【个人成长】的书（当然还可以解释、解决生活中的一些其它问题）。<br>  讨论的主要是我们作为普通人，想要变得【优秀】或者【厉害】一点，中间会有哪些问题？这些问题背后的原理是什么？<br>  知道这些原理后，我们应该怎么做？<br>  所以我们得先有让自己变好的心，否则这本书确实没啥意思，推荐再多次也没有意义。<br>  这是【前提】，毕竟我们不希望五年后、十年后的自己，跟现在一样没啥变化。<br>  只有我们的能力足够强的时候，才能解决生活中的很多问题。</li>
+<li>这本书讲的内容，我是这样理解的，主要分为两块。<br>  一个是我们身上出现各种各样问题的原因，即【原理】部分。<br>  另一个就是作者通过这些原因，来找到一些解决的办法，俗称【方法论】。<br>  各种问题比如焦虑、不够耐心、情感冲动、缺乏自控力、不够专注、学习不得法、行动力不强等等。<br>  作者把这些问题都一一罗列出来，说明问题背后的原因，想搞懂的话，可看对应章节的内容。<br>  方法论就是解决实际的问题了，知道原因后对症下药，参考上述读书笔记内容。</li>
+<li>一本书也不会教会所有成长相关的内容，只是这本书给我的触动很大，解决了我以前的很多困惑，所以希望大家也有所收获。<br>  当然也没有刻意来制造焦虑，或者执意要给你喝鸡汤打鸡血。<br>  这本书的原理是有科学依据的，而不是心灵鸡汤。  绝大部分人应该都可以从中学到一些东西，所以我觉得还是有必要读一读。<br>  比如你现在要教你的娃一些学习的方法，就可以作为参考。如果自己也能做到，那就更好了，毕竟【父母是孩子最好的老师】。    比如你现在想跟别人谈恋爱，也可以学习变得优秀的方法。因为【爱一个人最好的方式，是经营好自己，给对方一个优质的爱人】。<br>  至于我的话，没有那么多想法，只是单纯地感觉我要践行下去会变强而已。</li>
+</ul>
+<pre><code>—— 乌索普大将，2021.12.18，杭州。
+</code></pre>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>《认知觉醒》</tag>
       </tags>
   </entry>
   <entry>
