@@ -4409,4 +4409,337 @@ if <strong>name</strong> == ‘<strong>main</strong>‘:<br> unittest.main()</li
         <tag>测试开发</tag>
       </tags>
   </entry>
+  <entry>
+    <title>接口测试及接口自动化面试模拟</title>
+    <url>/2023/09/07/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E5%8F%8A%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E9%9D%A2%E8%AF%95%E6%A8%A1%E6%8B%9F/</url>
+    <content><![CDATA[<p>1.接口测试的本质是什么？<br>2.接口测试发起请求的四个要素分别是什么？<br>3.鉴权相关的内容，token、cookie、session等分别是什么？<br>4.jsonpath的使用方法<br>5.request库的使用方法<br>6.加密接口的测试方法，base64，AES等<br>7.pytest的使用方法，启动命令，入门级的框架封装思路。<br>8.eval函数<br>9.DDT相关的内容，装饰器的原理<br>10.allure测试报告，使用方法。<br>11.测试全栈工程师做的事情？立项、提测、全自动化测试（APP/WEB/接口）、测试报告、发布、评分系统、工时可视化、故障监控与修复、域名监控。<br>12.其他接口测试基础内容补充…</p>
+<p>Q：接口测试的本质是什么？<br>A: 接口测试是软件测试中的一种重要测试方法，其本质是验证和评估不同软件组件之间的交互和通信。在软件开发过程中，通常会将系统划分为多个模块或组件，这些模块之间通过接口进行数据传递和交互。接口测试的目的是确保这些接口能够正确地传递数据、执行操作，并且能够处理各种异常情况。<br>接口测试的本质可以从以下几个方面来说明：<br>1.1 验证数据传递：接口测试的一个主要目标是验证数据在不同组件之间的正确传递。这包括验证数据的格式、类型、边界条件等是否符合预期。通过测试数据的传递，可以确保系统各个组件之间的数据交互是准确可靠的。<br>1.2 确保接口操作正确：接口测试还需要验证接口的操作是否按照预期执行。这包括测试接口的输入和输出是否符合预期，接口是否能够正确地处理各种请求和响应。通过测试接口的操作，可以确保系统各个组件之间的交互行为是正确的。<br>1.3 处理异常情况：接口测试还需要验证接口在异常情况下的行为。这包括测试接口在接收到无效数据、错误请求或其他异常情况时的处理方式。通过测试接口的异常情况，可以确保系统能够正确地处理各种异常情况，保证系统的稳定性和可靠性。<br>1.4 确保接口的兼容性：接口测试还需要验证接口在不同环境、不同平台或不同版本之间的兼容性。<br>这包括测试接口在不同操作系统、不同浏览器或不同设备上的表现是否一致。通过测试接口的兼容性，可以确保系统在不同环境下的稳定性和可用性。<br>总之，接口测试的本质是验证和评估软件系统中不同组件之间的交互和通信。通过测试数据传递、接口操作、异常情况和兼容性，可以确保系统的功能正确性、稳定性和可靠性。接口测试在软件开发过程中起着重要的作用，帮助开发团队发现和解决潜在的问题，提高系统的质量和性能。</p>
+<p>Q：接口测试发起请求的四个要素<br>A:接口测试中，发起请求的四个要素是URL、Headers、Params和Data。下面我将详细解释每个要素的含义和作用：<br>URL（Uniform Resource Locator）：URL是用于标识和定位资源的地址。在接口测试中，URL指定了要访问的接口的地址。它包含了协议（如HTTP或HTTPS）、主机名、端口号和路径等信息。通过指定正确的URL，可以确保请求发送到正确的接口。<br>Headers（请求头）：Headers是包含在HTTP请求中的元数据信息。它包含了一系列键值对，用于描述请求的属性和要求。常见的Headers包括Content-Type（指定请求的数据类型）、Authorization（身份验证信息）、User-Agent（用户代理信息）等。通过设置正确的Headers，可以提供必要的信息和要求，确保请求的正确处理。<br>Params（请求参数）：Params是作为查询字符串的一部分发送到服务器的键值对。它们用于传递请求的参数和数据。Params通常用于GET请求，将参数附加在URL的末尾，以便服务器根据参数执行相应的操作。通过设置正确的Params，可以传递必要的参数，确保请求的准确性和完整性。<br>Data（请求体）：Data是作为请求体发送到服务器的数据。它通常用于POST、PUT或PATCH请求，用于传递更大量或更复杂的数据。Data可以是JSON、XML、表单数据等格式。通过设置正确的Data，可以传递请求所需的数据，确保请求的完整性和准确性。</p>
+<p>Q：鉴权相关的内容，token、cookie、session等详解。<br>A:鉴权（Authentication）是指在接口请求中验证用户身份和权限的过程。在接口测试中，常见的鉴权方式包括使用Token、Cookie和Session。下面我将详细解释每种鉴权方式的含义和作用：<br>Token（令牌）：Token是一种用于验证用户身份的令牌。在接口请求中，用户在登录成功后会获得一个Token，然后将该Token作为请求的一部分发送到服务器。<br>服务器会验证Token的有效性，并根据Token中的信息判断用户的身份和权限。Token通常是一串加密的字符串，可以包含用户ID、过期时间等信息。通过使用Token进行鉴权，可以实现无状态的身份验证，提高系统的可扩展性和安全性。<br>Cookie（Cookie）：Cookie是一种在客户端存储用户信息的机制。在接口请求中，服务器会在响应中设置一个Cookie，然后客户端会将该Cookie保存，并在后续的请求中将Cookie作为请求的一部分发送到服务器。服务器会验证Cookie的有效性，并根据Cookie中的信息判断用户的身份和权限。<br>Cookie通常是一个键值对，包含用户ID、过期时间等信息。通过使用Cookie进行鉴权，<br>可以实现在客户端存储用户信息，方便后续的请求和身份验证。<br>Session（会话）：Session是一种在服务器端存储用户信息的机制。<br>在接口请求中，服务器会在用户登录成功后创建一个Session，并将Session的ID返回给客户端。<br>客户端在后续的请求中将Session的ID作为请求的一部分发送到服务器。<br>服务器会根据Session的ID查找对应的Session，并根据Session中的信息判断用户的身份和权限。<br>Session通常是存储在服务器的内存或数据库中，可以包含用户ID、过期时间等信息。<br>通过使用Session进行鉴权，可以实现在服务器端存储用户信息，提高系统的安全性和可控性。<br>在Python中，获取和使用鉴权信息（如Token、Cookie或Session）通常涉及使用HTTP库（如requests）发送HTTP请求，<br>并在请求中设置相应的鉴权头部或参数。下面是一些示例代码，展示了如何获取和使用鉴权信息：<br>使用Token进行鉴权：<br>import requests</p>
+<h1 id="设置请求头部，包含Token信息"><a href="#设置请求头部，包含Token信息" class="headerlink" title="设置请求头部，包含Token信息"></a>设置请求头部，包含Token信息</h1><p>headers = {<br>    ‘Authorization’: ‘Bearer your_token_here’<br>}</p>
+<h1 id="发送带有鉴权头部的GET请求"><a href="#发送带有鉴权头部的GET请求" class="headerlink" title="发送带有鉴权头部的GET请求"></a>发送带有鉴权头部的GET请求</h1><p>response = requests.get(‘<a href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>, headers=headers)</p>
+<h1 id="处理响应"><a href="#处理响应" class="headerlink" title="处理响应"></a>处理响应</h1><p>print(response.json())</p>
+<p>使用Cookie进行鉴权：<br>import requests</p>
+<h1 id="设置Cookie"><a href="#设置Cookie" class="headerlink" title="设置Cookie"></a>设置Cookie</h1><p>cookies = {<br>    ‘session_id’: ‘your_session_id_here’<br>}</p>
+<h1 id="发送带有鉴权Cookie的GET请求"><a href="#发送带有鉴权Cookie的GET请求" class="headerlink" title="发送带有鉴权Cookie的GET请求"></a>发送带有鉴权Cookie的GET请求</h1><p>response = requests.get(‘<a href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>, cookies=cookies)</p>
+<h1 id="处理响应-1"><a href="#处理响应-1" class="headerlink" title="处理响应"></a>处理响应</h1><p>print(response.json())</p>
+<p>使用Session进行鉴权：<br>import requests</p>
+<h1 id="创建一个Session对象"><a href="#创建一个Session对象" class="headerlink" title="创建一个Session对象"></a>创建一个Session对象</h1><p>session = requests.Session()</p>
+<h1 id="登录并获取Session的ID"><a href="#登录并获取Session的ID" class="headerlink" title="登录并获取Session的ID"></a>登录并获取Session的ID</h1><p>login_data = {<br>    ‘username’: ‘your_username’,<br>    ‘password’: ‘your_password’<br>}<br>response = session.post(‘<a href="https://api.example.com/login&#39;">https://api.example.com/login&#39;</a>, data=login_data)<br>session_id = response.cookies.get(‘session_id’)</p>
+<h1 id="使用Session的ID发送GET请求"><a href="#使用Session的ID发送GET请求" class="headerlink" title="使用Session的ID发送GET请求"></a>使用Session的ID发送GET请求</h1><p>response = session.get(‘<a href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>)</p>
+<h1 id="处理响应-2"><a href="#处理响应-2" class="headerlink" title="处理响应"></a>处理响应</h1><p>print(response.json())</p>
+<p>Q：jsonpath的使用方法<br>A:在Python中，可以使用jsonpath库来解析和提取JSON数据中的特定字段或值。<br>jsonpath是一种类似于XPath的语法，用于在JSON结构中定位和选择特定的元素。下面是jsonpath库的使用方法和示例：<br>安装jsonpath库：<br>在终端或命令提示符中执行以下命令来安装jsonpath库：<br>pip install jsonpath<br>导入jsonpath库：<br>在Python脚本中导入jsonpath库：<br>import jsonpath<br>使用jsonpath解析JSON数据：<br>假设有以下JSON数据：<br>data = {<br>    “store”: {<br>        “book”: [<br>            {<br>                “category”: “fiction”,<br>                “author”: “John Doe”,<br>                “title”: “Book 1”<br>            },<br>            {<br>                “category”: “nonfiction”,<br>                “author”: “Jane Smith”,<br>                “title”: “Book 2”<br>            }<br>        ]<br>    }<br>}</p>
+<p>使用jsonpath提取字段或值：<br>使用jsonpath库的jsonpath()函数来提取字段或值。该函数接受两个参数：JSON数据和jsonpath表达式。</p>
+<h1 id="提取所有书的标题"><a href="#提取所有书的标题" class="headerlink" title="提取所有书的标题"></a>提取所有书的标题</h1><p>titles = jsonpath.jsonpath(data, “$.store.book[*].title”)<br>print(titles)</p>
+<h1 id="输出-‘Book-1’-‘Book-2’"><a href="#输出-‘Book-1’-‘Book-2’" class="headerlink" title="输出: [‘Book 1’, ‘Book 2’]"></a>输出: [‘Book 1’, ‘Book 2’]</h1><h1 id="提取第一本书的作者"><a href="#提取第一本书的作者" class="headerlink" title="提取第一本书的作者"></a>提取第一本书的作者</h1><p>author = jsonpath.jsonpath(data, “$.store.book[0].author”)<br>print(author)</p>
+<h1 id="输出-‘John-Doe’"><a href="#输出-‘John-Doe’" class="headerlink" title="输出: [‘John Doe’]"></a>输出: [‘John Doe’]</h1><p>在jsonpath表达式中，$表示根节点，[*]表示通配符，[0]表示索引。<br>可以根据需要使用不同的表达式来定位和选择JSON数据中的特定元素。</p>
+<p>Q：request库的使用方法<br>A:<br>在Python中，可以使用requests库来发送HTTP请求并与Web服务进行交互。requests库提供了简单且易于使用的API，可以处理各种HTTP请求和响应。下面是requests库的使用方法和示例：<br>安装requests库：<br>在终端或命令提示符中执行以下命令来安装requests库：<br>pip install requests<br>导入requests库：<br>在Python脚本中导入requests库：<br>import requests<br>发送HTTP请求：<br>使用requests库的各种方法来发送不同类型的HTTP请求，如GET、POST、PUT、DELETE等。</p>
+<h1 id="发送GET请求"><a href="#发送GET请求" class="headerlink" title="发送GET请求"></a>发送GET请求</h1><p>response = requests.get(‘<a href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>)</p>
+<h1 id="发送POST请求"><a href="#发送POST请求" class="headerlink" title="发送POST请求"></a>发送POST请求</h1><p>data = {‘key’: ‘value’}<br>response = requests.post(‘<a href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>, data=data)</p>
+<h1 id="发送PUT请求"><a href="#发送PUT请求" class="headerlink" title="发送PUT请求"></a>发送PUT请求</h1><p>data = {‘key’: ‘new_value’}<br>response = requests.put(‘<a href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>, data=data)</p>
+<h1 id="发送DELETE请求"><a href="#发送DELETE请求" class="headerlink" title="发送DELETE请求"></a>发送DELETE请求</h1><p>response = requests.delete(‘<a href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>)</p>
+<p>处理响应：<br>通过访问响应对象的属性和方法来处理HTTP响应。</p>
+<h1 id="获取响应内容"><a href="#获取响应内容" class="headerlink" title="获取响应内容"></a>获取响应内容</h1><p>content = response.text</p>
+<h1 id="获取响应状态码"><a href="#获取响应状态码" class="headerlink" title="获取响应状态码"></a>获取响应状态码</h1><p>status_code = response.status_code</p>
+<h1 id="获取响应头部信息"><a href="#获取响应头部信息" class="headerlink" title="获取响应头部信息"></a>获取响应头部信息</h1><p>headers = response.headers</p>
+<h1 id="将响应内容解析为JSON"><a href="#将响应内容解析为JSON" class="headerlink" title="将响应内容解析为JSON"></a>将响应内容解析为JSON</h1><p>json_data = response.json()<br>以上示例展示了requests库的基本用法。你可以根据具体的需求，使用requests库提供的其他方法和参数来定制请求，如设置请求头部、传递查询参数、发送文件等。<br>此外，还可以使用requests库的会话（Session）对象来处理多个相关请求，以提高效率和性能。<br>请注意，在实际使用中，需要根据具体的API文档和要求来设置请求参数、处理响应和错误处理，以确保与Web服务的正确交互。</p>
+<p>Q：加密接口的测试方法，base64，AES等<br>A:在Python接口测试中，当涉及到加密接口时，可以使用一些常见的加密算法，如Base64和AES。下面我将详细描述这两种加密算法的使用方法及示例：<br>Base64加密：<br>Base64是一种常见的编码方式，可以将二进制数据转换为可打印的ASCII字符。<br>在接口测试中，可以使用Base64对敏感数据进行编码和解码，以保护数据的安全性。<br>编码示例：<br>import base64</p>
+<h1 id="待加密的数据"><a href="#待加密的数据" class="headerlink" title="待加密的数据"></a>待加密的数据</h1><p>data = “Hello, World!”</p>
+<h1 id="使用Base64进行编码"><a href="#使用Base64进行编码" class="headerlink" title="使用Base64进行编码"></a>使用Base64进行编码</h1><p>encoded_data = base64.b64encode(data.encode(‘utf-8’)).decode(‘utf-8’)<br>print(encoded_data)</p>
+<h1 id="输出-SGVsbG8sIFdvcmxkIQ"><a href="#输出-SGVsbG8sIFdvcmxkIQ" class="headerlink" title="输出: SGVsbG8sIFdvcmxkIQ=="></a>输出: SGVsbG8sIFdvcmxkIQ==</h1><p>解码示例：<br>import base64</p>
+<h1 id="待解码的数据"><a href="#待解码的数据" class="headerlink" title="待解码的数据"></a>待解码的数据</h1><p>encoded_data = “SGVsbG8sIFdvcmxkIQ==”</p>
+<h1 id="使用Base64进行解码"><a href="#使用Base64进行解码" class="headerlink" title="使用Base64进行解码"></a>使用Base64进行解码</h1><p>decoded_data = base64.b64decode(encoded_data).decode(‘utf-8’)<br>print(decoded_data)</p>
+<h1 id="输出-Hello-World"><a href="#输出-Hello-World" class="headerlink" title="输出: Hello, World!"></a>输出: Hello, World!</h1><p>AES加密：<br>AES（Advanced Encryption Standard）是一种对称加密算法，常用于保护敏感数据的安全性。<br>在接口测试中，可以使用AES对数据进行加密和解密。<br>加密示例：<br>from Crypto.Cipher import AES<br>import base64</p>
+<h1 id="加密密钥（16字节）"><a href="#加密密钥（16字节）" class="headerlink" title="加密密钥（16字节）"></a>加密密钥（16字节）</h1><p>key = b’mysecretpassword1’</p>
+<h1 id="待加密的数据（长度必须是16的倍数）"><a href="#待加密的数据（长度必须是16的倍数）" class="headerlink" title="待加密的数据（长度必须是16的倍数）"></a>待加密的数据（长度必须是16的倍数）</h1><p>data = b’Hello, World!123’</p>
+<h1 id="创建AES加密器"><a href="#创建AES加密器" class="headerlink" title="创建AES加密器"></a>创建AES加密器</h1><p>cipher = AES.new(key, AES.MODE_ECB)</p>
+<h1 id="使用AES加密数据"><a href="#使用AES加密数据" class="headerlink" title="使用AES加密数据"></a>使用AES加密数据</h1><p>encrypted_data = cipher.encrypt(data)</p>
+<h1 id="将加密后的数据进行Base64编码"><a href="#将加密后的数据进行Base64编码" class="headerlink" title="将加密后的数据进行Base64编码"></a>将加密后的数据进行Base64编码</h1><p>encoded_data = base64.b64encode(encrypted_data).decode(‘utf-8’)<br>print(encoded_data)</p>
+<h1 id="输出-0z3z3z3z3z3z3z3z…"><a href="#输出-0z3z3z3z3z3z3z3z…" class="headerlink" title="输出: 0z3z3z3z3z3z3z3z…"></a>输出: 0z3z3z3z3z3z3z3z…</h1><p>Q：pytest的使用方法，启动命令，入门级的框架封装思路。<br>A:<br>pytest是一个功能强大且易于使用的Python测试框架，它提供了丰富的功能和灵活的扩展性，可以帮助您编写清晰、简洁和可维护的测试代码。<br>下面是pytest的使用方法：</p>
+<ol>
+<li>安装pytest：在终端中运行以下命令来安装pytest：<br>pip install pytest</li>
+<li>编写测试用例：创建一个以<code>test_</code>开头的Python文件，并在其中定义测试函数。例如，创建一个名为<code>test_example.py</code>的文件，并在其中编写以下代码：</li>
+</ol>
+<pre><code class="python">def test_addition():
+    assert 2 + 2 == 4
+
+def test_subtraction():
+    assert 5 - 3 == 2
+
+运行测试：在终端中进入包含测试文件的目录，并运行以下命令来执行测试：
+pytest
+pytest会自动查找以test_开头的函数，并执行它们。
+查看测试结果：pytest会输出测试结果的详细信息，包括通过的测试用例、失败的测试用例以及跳过的测试用例。
+启动命令是在终端中运行pytest命令，它会自动查找并执行当前目录下的所有测试文件。
+对于入门级的框架封装思路，您可以考虑以下步骤：
+创建一个测试框架的基本结构：可以使用pytest提供的
+pytest.fixture装饰器来定义测试用例的前置条件和后置操作。
+封装常用的测试功能：例如，可以创建一个
+BaseTest类，其中包含一些常用的测试方法，如登录、退出登录等。
+创建测试用例：在测试用例中，可以继承
+BaseTest类，并使用
+pytest.fixture装饰器来定义测试用例的前置条件和后置操作。
+运行测试：使用pytest的命令行工具来运行测试，并查看测试结果。
+下面是一个简单的示例，演示了如何使用pytest进行框架封装：
+import pytest
+
+class BaseTest:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        # 执行测试用例前的准备工作
+        print(&quot;Setup&quot;)
+
+    @pytest.fixture(autouse=True)
+    def teardown(self):
+        # 执行测试用例后的清理工作
+        print(&quot;Teardown&quot;)
+
+class TestExample(BaseTest):
+    def test_addition(self):
+        assert 2 + 2 == 4
+
+    def test_subtraction(self):
+        assert 5 - 3 == 2
+
+在这个示例中，BaseTest类定义了setup和teardown方法作为测试用例的前置条件和后置操作。
+TestExample类继承了BaseTest类，并定义了两个测试用例。
+
+Q：eval函数
+A:
+在Python中，eval()函数用于执行一个字符串表达式，并返回表达式的结果。它可以将字符串作为Python代码进行求值，并返回结果。
+eval()函数的基本语法如下：
+eval(expression, globals=None, locals=None)
+
+参数说明：
+expression：要执行的字符串表达式。
+globals（可选）：一个字典，用于指定全局命名空间。如果未提供，则使用当前全局命名空间。
+locals（可选）：一个字典，用于指定局部命名空间。如果未提供，则使用当前局部命名空间。
+下面是一些使用eval()函数的示例：
+求解数学表达式：
+result = eval(&quot;2 + 3 * 4&quot;)
+print(result)  # 输出：14
+
+执行简单的Python代码：
+x = 5
+eval(&quot;x += 1&quot;)
+print(x)  # 输出：6
+
+使用
+globals和
+locals参数指定命名空间：
+x = 10
+y = 20
+result = eval(&quot;x + y&quot;, globals(), &#123;&quot;x&quot;: 5, &quot;y&quot;: 15&#125;)
+print(result)  # 输出：20
+
+需要注意的是，eval()函数执行的是字符串中的代码，因此请确保只执行可信任的代码，以避免安全风险。
+不建议从不受信任的来源接收并执行字符串表达式。
+
+Q：DDT相关的内容，装饰器的原理
+A:
+在Python中，DDT（Data-Driven Testing）是一种测试方法，它允许您使用不同的测试数据来运行相同的测试用例。
+DDT可以帮助您更全面地测试代码，覆盖不同的边界条件和输入组合。
+在DDT中，通常使用装饰器来标记测试函数，并使用装饰器参数来指定测试数据。
+装饰器会将测试函数转换为多个独立的测试用例，并使用不同的测试数据来运行它们。
+下面是一个详细说明和实例，演示了如何使用DDT进行数据驱动测试：
+安装DDT库：在终端中运行以下命令来安装DDT库：
+pip install ddt
+导入DDT和unittest模块：
+import unittest
+from ddt import ddt, data, unpack
+使用装饰器标记测试类和测试方法：
+@ddt
+class MyTestCase(unittest.TestCase):
+    @data((1, 2), (3, 4), (5, 6))
+    @unpack
+    def test_addition(self, a, b):
+        result = a + b
+        self.assertEqual(result, a + b)
+在上面的示例中，@ddt装饰器标记了测试类MyTestCase，表示该类使用DDT进行数据驱动测试。
+@data装饰器标记了测试方法test_addition，并指定了多组测试数据(1, 2)、(3, 4)和(5, 6)。
+@unpack装饰器用于解包测试数据，将每组数据的元素分别传递给测试方法的参数。
+运行测试：使用unittest的命令行工具来运行测试。例如，可以在终端中运行以下命令来执行测试：
+python -m unittest test_example.py
+其中，test_example.py是包含测试类的Python文件。
+在上面的示例中，test_addition方法将被转换为三个独立的测试用例，并使用不同的测试数据(1, 2)、(3, 4)和(5, 6)来运行它们。
+每个测试用例都会执行相同的断言，以验证结果是否符合预期。
+DDT的装饰器原理是通过装饰器将测试函数转换为多个独立的测试用例，并使用不同的测试数据来运行它们。
+装饰器参数用于指定测试数据，可以是单个值、元组、列表或其他可迭代对象。
+装饰器会根据提供的测试数据生成相应数量的测试用例，并将测试数据传递给测试函数的参数。
+
+Q：allure测试报告，使用方法。
+A:
+在Python接口测试中，Allure是一个流行的测试报告框架，它提供了丰富的功能和可视化效果，可以帮助您生成漂亮、易于理解的测试报告。
+下面是详细说明和示例，演示了如何在Python接口测试中使用Allure测试报告：
+安装Allure-pytest库：在终端中运行以下命令来安装Allure-pytest库：
+pip install allure-pytest
+
+导入pytest和allure模块：
+import pytest
+import allure
+
+使用Allure装饰器标记测试函数：
+@allure.feature(&quot;接口测试&quot;)
+class TestAPI:
+    @allure.story(&quot;登录接口&quot;)
+    def test_login(self):
+        # 测试代码
+        pass
+
+    @allure.story(&quot;注册接口&quot;)
+    def test_register(self):
+        # 测试代码
+        pass
+
+在上面的示例中，@allure.feature装饰器用于标记测试类的功能（feature），
+@allure.story装饰器用于标记测试方法的故事（story）。
+添加Allure步骤和断言：
+@allure.step(&quot;输入用户名和密码&quot;)
+def input_credentials(username, password):
+    # 输入用户名和密码的步骤
+
+@allure.step(&quot;验证登录结果&quot;)
+def verify_login_result(result):
+    # 验证登录结果的步骤
+
+@allure.story(&quot;登录接口&quot;)
+def test_login(self):
+    input_credentials(&quot;admin&quot;, &quot;password&quot;)
+    verify_login_result(True)
+
+在上面的示例中，@allure.step装饰器用于标记测试中的每个步骤，以提供更详细的报告信息。
+运行测试并生成Allure报告：在终端中运行以下命令来运行测试并生成Allure报告：
+pytest --alluredir=./allure-report
+
+这将运行所有的测试，并将测试结果保存在./allure-report目录中。
+查看Allure报告：在终端中运行以下命令来打开Allure报告：
+allure serve ./allure-report
+
+这将在浏览器中打开Allure报告，您可以查看测试结果、步骤、断言和其他详细信息。
+Allure测试报告提供了丰富的功能，包括测试结果的统计信息、测试用例的历史记录、附件的添加等。
+您可以根据实际需求，使用Allure提供的其他功能来定制和美化测试报告。
+
+Q：jenkins使用+ allure + 全自动化流程。
+A:
+安装Jenkins：按照Jenkins官方文档的指引，在您的服务器上安装和配置Jenkins。
+创建Jenkins任务：在Jenkins中创建一个新的任务，选择自由风格的软件项目。
+配置代码仓库：在任务配置中，将您的代码仓库链接添加到源代码管理部分。这可以是Git、SVN或其他版本控制系统。
+配置构建触发器：在任务配置中，选择适当的构建触发器，例如定时构建或代码提交触发构建。
+配置构建步骤：
+安装Python环境：在构建步骤中，添加一个Shell脚本步骤，用于安装Python环境和依赖项。
+安装pytest和Allure：在Shell脚本步骤中，使用pip命令安装pytest和Allure。
+运行测试：在Shell脚本步骤中，使用pytest命令运行测试。例如：
+pytest --alluredir=./allure-results。
+生成Allure报告：在Shell脚本步骤中，使用allure命令生成Allure报告。例如：
+allure generate ./allure-results --clean -o ./allure-report。
+配置构建后操作：在任务配置中，添加一个Allure报告的后操作步骤。选择Allure Report，并指定Allure报告的路径（例如：
+./allure-report）。
+保存并构建：保存任务配置，并手动触发构建，或等待自动触发构建。
+查看测试报告：在Jenkins任务的构建历史中，找到最新的构建，并点击Allure报告链接来查看生成的测试报告。
+通过以上步骤，您可以在Jenkins中实现使用pytest、Allure和全自动化流程。您可以根据实际需求进行定制和扩展，例如添加更多的构建步骤、集成其他工具等。
+
+Q：测试全栈工程师做的事情？立项、提测、全自动化测试（APP/WEB/接口）、测试报告、发布、评分系统、工时可视化、故障监控与修复、域名监控。
+A:
+作为一个全栈工程师，测试工作涵盖了项目的不同阶段和多个方面。下面是对您提到的各个方面的详细说明和示例：
+立项阶段：
+参与需求评审和讨论，确保需求的可测试性和完整性。
+提供测试方案和测试策略，包括测试范围、测试目标、测试计划等。
+提测阶段：
+编写测试用例，覆盖功能、性能、安全等方面的测试。
+执行测试用例，发现和报告缺陷。
+参与缺陷修复和验证，确保问题得到解决。
+全自动化测试（APP/WEB/接口）：
+使用适当的自动化测试框架和工具，编写自动化测试脚本。
+集成自动化测试脚本到持续集成/持续交付（CI/CD）流程中。
+定期执行自动化测试，确保系统的稳定性和可靠性。
+测试报告：
+生成详细的测试报告，包括测试结果、缺陷统计、测试覆盖率等。
+提供可视化的测试报告，以便项目团队和利益相关者了解测试进展和质量状况。
+发布：
+参与发布计划和发布过程，确保发布的稳定性和可用性。
+进行回归测试，验证发布后的系统功能和性能。
+评分系统：
+设计和实现评分系统，用于评估和监控系统的质量和性能。
+收集和分析评分数据，提供有关系统质量的反馈和改进建议。
+工时可视化：
+设计和实现工时可视化系统，用于跟踪和管理测试工作的工时。
+提供可视化的工时报表和统计信息，帮助项目团队进行资源规划和优化。
+故障监控与修复：
+设计和实现故障监控系统，用于实时监测系统的运行状态和性能。
+参与故障排查和修复，确保系统的稳定性和可用性。
+域名监控：
+设计和实现域名监控系统，用于监测域名的可用性和性能。
+发现和报告域名相关的问题，确保域名的正常运行。
+
+Q:其他测试基础内容补充
+接口测试的定义
+接口测试是测试系统组件间接口的一种测试。重点是检查数据交换、传递和控制管理过程，以及系统间相互逻辑依赖关系等。
+一般分为两种：程序内部的接口，系统对外的接口。
+接口测试的目的
+检查UI系统无法发下的bug
+检查系统的安全性和稳定性
+相对于UI自动化测试，接口测试比较稳定，容易实现自动化持续集成
+尽早发现系统的底层缺陷
+缩短测试周期，支持后端快速发版本的需求
+支持前端的随意变化，后端不用变。
+接口测试原理
+可以理解为http请求的流程，通过测试程序或者测试工具模拟客户端向服务器发送请求报文。
+服务器接受请求报文后对其做处理，然后将响应结果报文返回发给客户端。
+接口测试流程
+黑盒测试范畴，
+接口需求分析
+对接口文档进行充分研读。
+接口文档一般包括：接口说明、请求地址、请求方式如get和post等、
+请求参数、参数类型、参数约束、正常响应报文、异常响应报文等。
+接口测试用例编写
+等价类、边界值测试分析：
+输入参数是否合法、是否为空、参数是否可包含特殊字符、数值范围及大小等。
+参数组合验证：参数排列组合。
+接口安全验证：是否有验证，是否有加密等
+业务逻辑验证：存在上下游的逻辑关系等。
+测试工具选择。
+如postman、Jmeter、SoupUI、LoadRunner、
+Robot Framework + RequestsLibrary、Java + HttpClient 和Python + Requests等。
+构造请求并执行测试。
+根据测试用例来设计测试用例、执行测试、检查接口返回的数据是否达到预期。
+接口测试用例的设计
+包括用例名称、前置条件、请求地址、请求header、请求参数、响应检查点。
+http基础
+http请求，常见包括get、post等报文，主要包括请求行、请求头信息、空行、请求体等。
+http响应，可以抓包看看，主要包括响应状态行、响应头信息、空行、响应体等。
+http状态码：
+1xx 服务端接受到请求，需要进一步处理，客户端请等待。
+2xx 请求处理成功，常见200 ok
+3xx 重定向操作，需要进一步操作完成请求，如301、302等。
+4xx 客户端请求错误，有语法错误或者无法实现，如400语法错误、401未经授权、403服务器理解客户端的请求，但拒绝服务。404 请求资源不存在
+5xx 服务器内部错误，不能正确处理请求，如500内部错误，无法完成请求。
+除了post、get其他还有如put 传送数据取代指定文档内容等。delete 删除服务器的资源等。
+cookie 和 session
+主要用于确定用户身份，cookie在客户端记录信息确认身份，发送给服务器后，（cookie主要包含id、密码、浏览过的网站、停留时间、过期时间等内容）
+服务器在cookie基础上添加session id 返回给客户端确认存储。（session包含cookie + session id）
+下次客户端发送cookie就会带上session id再次请求与session就关联上了。
+
+postman做接口测试，几个关键步骤：
+1. 熟悉postman app或者插件的界面，几个关键功能，主要是工作台，创建get 、post 等请求，极少数用到restful接口。
+2. 集合一类测试内容，到一个test collection中去，提高执行效率。这里注意可以设置集合collection级别的环境变量，也可以设置global级别的环境变量，看需要来配置。   也可以设置测试环境、开发环境的环境变量。 也可以在前置测试脚本中来设置一些环境变量。
+3. 断言，在测试完成后选择断言信息，比如常用的 返回内容包含什么字符串、返回码是否正确、返回json value = 特定值，等等。
+4. postman参数化，可以将对应的参数写入一个file文件中来循环读取，从而提高效率。 还可以设置随机数，来提高覆盖率。
+5. 最后，postman配置的接口测试用例内容，可以直接用code 功能来导出对应的编程语言源码，直接在对应IDE中可以使用。
+
+postman补充：
+接口测试的必要条件：
+.请求地址(url)
+.请求协议：http，https，webservice
+.请求方式：get/post，resful
+.请求头
+.参数：表单提交，请求体提交
+</code></pre>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试开发</tag>
+      </tags>
+  </entry>
 </search>

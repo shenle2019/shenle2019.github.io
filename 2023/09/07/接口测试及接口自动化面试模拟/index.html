@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="测试开发," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.接口测试的本质是什么？2.接口测试发起请求的四个要素分别是什么？3.鉴权相关的内容，token、cookie、session等分别是什么？4.jsonpath的使用方法5.request库的使用方法6.加密接口的测试方法，base64，AES等7.pytest的使用方法，启动命令，入门级的框架封装思路。8.eval函数9.DDT相关的内容，装饰器的原理10.allure测试报告，使用方法。11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="接口测试及接口自动化面试模拟">
+<meta property="og:url" content="https://shenle2019.github.io/2023/09/07/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E5%8F%8A%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E9%9D%A2%E8%AF%95%E6%A8%A1%E6%8B%9F/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="1.接口测试的本质是什么？2.接口测试发起请求的四个要素分别是什么？3.鉴权相关的内容，token、cookie、session等分别是什么？4.jsonpath的使用方法5.request库的使用方法6.加密接口的测试方法，base64，AES等7.pytest的使用方法，启动命令，入门级的框架封装思路。8.eval函数9.DDT相关的内容，装饰器的原理10.allure测试报告，使用方法。11">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-09-06T23:29:36.000Z">
+<meta property="article:modified_time" content="2023-09-06T15:33:02.256Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="测试开发">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2023/09/07/接口测试及接口自动化面试模拟/"/>
+
+
+
+
+
+  <title>接口测试及接口自动化面试模拟 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2023/09/07/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E5%8F%8A%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E9%9D%A2%E8%AF%95%E6%A8%A1%E6%8B%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">接口测试及接口自动化面试模拟</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-09-07T07:29:36+08:00">
+                2023-09-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-09-06T23:33:02+08:00">
+                2023-09-06
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2023/09/07/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E5%8F%8A%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E9%9D%A2%E8%AF%95%E6%A8%A1%E6%8B%9F/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2023/09/07/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E5%8F%8A%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E9%9D%A2%E8%AF%95%E6%A8%A1%E6%8B%9F/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1.接口测试的本质是什么？<br>2.接口测试发起请求的四个要素分别是什么？<br>3.鉴权相关的内容，token、cookie、session等分别是什么？<br>4.jsonpath的使用方法<br>5.request库的使用方法<br>6.加密接口的测试方法，base64，AES等<br>7.pytest的使用方法，启动命令，入门级的框架封装思路。<br>8.eval函数<br>9.DDT相关的内容，装饰器的原理<br>10.allure测试报告，使用方法。<br>11.测试全栈工程师做的事情？立项、提测、全自动化测试（APP/WEB/接口）、测试报告、发布、评分系统、工时可视化、故障监控与修复、域名监控。<br>12.其他接口测试基础内容补充…</p>
+<p>Q：接口测试的本质是什么？<br>A: 接口测试是软件测试中的一种重要测试方法，其本质是验证和评估不同软件组件之间的交互和通信。在软件开发过程中，通常会将系统划分为多个模块或组件，这些模块之间通过接口进行数据传递和交互。接口测试的目的是确保这些接口能够正确地传递数据、执行操作，并且能够处理各种异常情况。<br>接口测试的本质可以从以下几个方面来说明：<br>1.1 验证数据传递：接口测试的一个主要目标是验证数据在不同组件之间的正确传递。这包括验证数据的格式、类型、边界条件等是否符合预期。通过测试数据的传递，可以确保系统各个组件之间的数据交互是准确可靠的。<br>1.2 确保接口操作正确：接口测试还需要验证接口的操作是否按照预期执行。这包括测试接口的输入和输出是否符合预期，接口是否能够正确地处理各种请求和响应。通过测试接口的操作，可以确保系统各个组件之间的交互行为是正确的。<br>1.3 处理异常情况：接口测试还需要验证接口在异常情况下的行为。这包括测试接口在接收到无效数据、错误请求或其他异常情况时的处理方式。通过测试接口的异常情况，可以确保系统能够正确地处理各种异常情况，保证系统的稳定性和可靠性。<br>1.4 确保接口的兼容性：接口测试还需要验证接口在不同环境、不同平台或不同版本之间的兼容性。<br>这包括测试接口在不同操作系统、不同浏览器或不同设备上的表现是否一致。通过测试接口的兼容性，可以确保系统在不同环境下的稳定性和可用性。<br>总之，接口测试的本质是验证和评估软件系统中不同组件之间的交互和通信。通过测试数据传递、接口操作、异常情况和兼容性，可以确保系统的功能正确性、稳定性和可靠性。接口测试在软件开发过程中起着重要的作用，帮助开发团队发现和解决潜在的问题，提高系统的质量和性能。</p>
+<p>Q：接口测试发起请求的四个要素<br>A:接口测试中，发起请求的四个要素是URL、Headers、Params和Data。下面我将详细解释每个要素的含义和作用：<br>URL（Uniform Resource Locator）：URL是用于标识和定位资源的地址。在接口测试中，URL指定了要访问的接口的地址。它包含了协议（如HTTP或HTTPS）、主机名、端口号和路径等信息。通过指定正确的URL，可以确保请求发送到正确的接口。<br>Headers（请求头）：Headers是包含在HTTP请求中的元数据信息。它包含了一系列键值对，用于描述请求的属性和要求。常见的Headers包括Content-Type（指定请求的数据类型）、Authorization（身份验证信息）、User-Agent（用户代理信息）等。通过设置正确的Headers，可以提供必要的信息和要求，确保请求的正确处理。<br>Params（请求参数）：Params是作为查询字符串的一部分发送到服务器的键值对。它们用于传递请求的参数和数据。Params通常用于GET请求，将参数附加在URL的末尾，以便服务器根据参数执行相应的操作。通过设置正确的Params，可以传递必要的参数，确保请求的准确性和完整性。<br>Data（请求体）：Data是作为请求体发送到服务器的数据。它通常用于POST、PUT或PATCH请求，用于传递更大量或更复杂的数据。Data可以是JSON、XML、表单数据等格式。通过设置正确的Data，可以传递请求所需的数据，确保请求的完整性和准确性。</p>
+<p>Q：鉴权相关的内容，token、cookie、session等详解。<br>A:鉴权（Authentication）是指在接口请求中验证用户身份和权限的过程。在接口测试中，常见的鉴权方式包括使用Token、Cookie和Session。下面我将详细解释每种鉴权方式的含义和作用：<br>Token（令牌）：Token是一种用于验证用户身份的令牌。在接口请求中，用户在登录成功后会获得一个Token，然后将该Token作为请求的一部分发送到服务器。<br>服务器会验证Token的有效性，并根据Token中的信息判断用户的身份和权限。Token通常是一串加密的字符串，可以包含用户ID、过期时间等信息。通过使用Token进行鉴权，可以实现无状态的身份验证，提高系统的可扩展性和安全性。<br>Cookie（Cookie）：Cookie是一种在客户端存储用户信息的机制。在接口请求中，服务器会在响应中设置一个Cookie，然后客户端会将该Cookie保存，并在后续的请求中将Cookie作为请求的一部分发送到服务器。服务器会验证Cookie的有效性，并根据Cookie中的信息判断用户的身份和权限。<br>Cookie通常是一个键值对，包含用户ID、过期时间等信息。通过使用Cookie进行鉴权，<br>可以实现在客户端存储用户信息，方便后续的请求和身份验证。<br>Session（会话）：Session是一种在服务器端存储用户信息的机制。<br>在接口请求中，服务器会在用户登录成功后创建一个Session，并将Session的ID返回给客户端。<br>客户端在后续的请求中将Session的ID作为请求的一部分发送到服务器。<br>服务器会根据Session的ID查找对应的Session，并根据Session中的信息判断用户的身份和权限。<br>Session通常是存储在服务器的内存或数据库中，可以包含用户ID、过期时间等信息。<br>通过使用Session进行鉴权，可以实现在服务器端存储用户信息，提高系统的安全性和可控性。<br>在Python中，获取和使用鉴权信息（如Token、Cookie或Session）通常涉及使用HTTP库（如requests）发送HTTP请求，<br>并在请求中设置相应的鉴权头部或参数。下面是一些示例代码，展示了如何获取和使用鉴权信息：<br>使用Token进行鉴权：<br>import requests</p>
+<h1 id="设置请求头部，包含Token信息"><a href="#设置请求头部，包含Token信息" class="headerlink" title="设置请求头部，包含Token信息"></a>设置请求头部，包含Token信息</h1><p>headers = {<br>    ‘Authorization’: ‘Bearer your_token_here’<br>}</p>
+<h1 id="发送带有鉴权头部的GET请求"><a href="#发送带有鉴权头部的GET请求" class="headerlink" title="发送带有鉴权头部的GET请求"></a>发送带有鉴权头部的GET请求</h1><p>response = requests.get(‘<a target="_blank" rel="noopener" href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>, headers=headers)</p>
+<h1 id="处理响应"><a href="#处理响应" class="headerlink" title="处理响应"></a>处理响应</h1><p>print(response.json())</p>
+<p>使用Cookie进行鉴权：<br>import requests</p>
+<h1 id="设置Cookie"><a href="#设置Cookie" class="headerlink" title="设置Cookie"></a>设置Cookie</h1><p>cookies = {<br>    ‘session_id’: ‘your_session_id_here’<br>}</p>
+<h1 id="发送带有鉴权Cookie的GET请求"><a href="#发送带有鉴权Cookie的GET请求" class="headerlink" title="发送带有鉴权Cookie的GET请求"></a>发送带有鉴权Cookie的GET请求</h1><p>response = requests.get(‘<a target="_blank" rel="noopener" href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>, cookies=cookies)</p>
+<h1 id="处理响应-1"><a href="#处理响应-1" class="headerlink" title="处理响应"></a>处理响应</h1><p>print(response.json())</p>
+<p>使用Session进行鉴权：<br>import requests</p>
+<h1 id="创建一个Session对象"><a href="#创建一个Session对象" class="headerlink" title="创建一个Session对象"></a>创建一个Session对象</h1><p>session = requests.Session()</p>
+<h1 id="登录并获取Session的ID"><a href="#登录并获取Session的ID" class="headerlink" title="登录并获取Session的ID"></a>登录并获取Session的ID</h1><p>login_data = {<br>    ‘username’: ‘your_username’,<br>    ‘password’: ‘your_password’<br>}<br>response = session.post(‘<a target="_blank" rel="noopener" href="https://api.example.com/login&#39;">https://api.example.com/login&#39;</a>, data=login_data)<br>session_id = response.cookies.get(‘session_id’)</p>
+<h1 id="使用Session的ID发送GET请求"><a href="#使用Session的ID发送GET请求" class="headerlink" title="使用Session的ID发送GET请求"></a>使用Session的ID发送GET请求</h1><p>response = session.get(‘<a target="_blank" rel="noopener" href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>)</p>
+<h1 id="处理响应-2"><a href="#处理响应-2" class="headerlink" title="处理响应"></a>处理响应</h1><p>print(response.json())</p>
+<p>Q：jsonpath的使用方法<br>A:在Python中，可以使用jsonpath库来解析和提取JSON数据中的特定字段或值。<br>jsonpath是一种类似于XPath的语法，用于在JSON结构中定位和选择特定的元素。下面是jsonpath库的使用方法和示例：<br>安装jsonpath库：<br>在终端或命令提示符中执行以下命令来安装jsonpath库：<br>pip install jsonpath<br>导入jsonpath库：<br>在Python脚本中导入jsonpath库：<br>import jsonpath<br>使用jsonpath解析JSON数据：<br>假设有以下JSON数据：<br>data = {<br>    “store”: {<br>        “book”: [<br>            {<br>                “category”: “fiction”,<br>                “author”: “John Doe”,<br>                “title”: “Book 1”<br>            },<br>            {<br>                “category”: “nonfiction”,<br>                “author”: “Jane Smith”,<br>                “title”: “Book 2”<br>            }<br>        ]<br>    }<br>}</p>
+<p>使用jsonpath提取字段或值：<br>使用jsonpath库的jsonpath()函数来提取字段或值。该函数接受两个参数：JSON数据和jsonpath表达式。</p>
+<h1 id="提取所有书的标题"><a href="#提取所有书的标题" class="headerlink" title="提取所有书的标题"></a>提取所有书的标题</h1><p>titles = jsonpath.jsonpath(data, “$.store.book[*].title”)<br>print(titles)</p>
+<h1 id="输出-‘Book-1’-‘Book-2’"><a href="#输出-‘Book-1’-‘Book-2’" class="headerlink" title="输出: [‘Book 1’, ‘Book 2’]"></a>输出: [‘Book 1’, ‘Book 2’]</h1><h1 id="提取第一本书的作者"><a href="#提取第一本书的作者" class="headerlink" title="提取第一本书的作者"></a>提取第一本书的作者</h1><p>author = jsonpath.jsonpath(data, “$.store.book[0].author”)<br>print(author)</p>
+<h1 id="输出-‘John-Doe’"><a href="#输出-‘John-Doe’" class="headerlink" title="输出: [‘John Doe’]"></a>输出: [‘John Doe’]</h1><p>在jsonpath表达式中，$表示根节点，[*]表示通配符，[0]表示索引。<br>可以根据需要使用不同的表达式来定位和选择JSON数据中的特定元素。</p>
+<p>Q：request库的使用方法<br>A:<br>在Python中，可以使用requests库来发送HTTP请求并与Web服务进行交互。requests库提供了简单且易于使用的API，可以处理各种HTTP请求和响应。下面是requests库的使用方法和示例：<br>安装requests库：<br>在终端或命令提示符中执行以下命令来安装requests库：<br>pip install requests<br>导入requests库：<br>在Python脚本中导入requests库：<br>import requests<br>发送HTTP请求：<br>使用requests库的各种方法来发送不同类型的HTTP请求，如GET、POST、PUT、DELETE等。</p>
+<h1 id="发送GET请求"><a href="#发送GET请求" class="headerlink" title="发送GET请求"></a>发送GET请求</h1><p>response = requests.get(‘<a target="_blank" rel="noopener" href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>)</p>
+<h1 id="发送POST请求"><a href="#发送POST请求" class="headerlink" title="发送POST请求"></a>发送POST请求</h1><p>data = {‘key’: ‘value’}<br>response = requests.post(‘<a target="_blank" rel="noopener" href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>, data=data)</p>
+<h1 id="发送PUT请求"><a href="#发送PUT请求" class="headerlink" title="发送PUT请求"></a>发送PUT请求</h1><p>data = {‘key’: ‘new_value’}<br>response = requests.put(‘<a target="_blank" rel="noopener" href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>, data=data)</p>
+<h1 id="发送DELETE请求"><a href="#发送DELETE请求" class="headerlink" title="发送DELETE请求"></a>发送DELETE请求</h1><p>response = requests.delete(‘<a target="_blank" rel="noopener" href="https://api.example.com/endpoint&#39;">https://api.example.com/endpoint&#39;</a>)</p>
+<p>处理响应：<br>通过访问响应对象的属性和方法来处理HTTP响应。</p>
+<h1 id="获取响应内容"><a href="#获取响应内容" class="headerlink" title="获取响应内容"></a>获取响应内容</h1><p>content = response.text</p>
+<h1 id="获取响应状态码"><a href="#获取响应状态码" class="headerlink" title="获取响应状态码"></a>获取响应状态码</h1><p>status_code = response.status_code</p>
+<h1 id="获取响应头部信息"><a href="#获取响应头部信息" class="headerlink" title="获取响应头部信息"></a>获取响应头部信息</h1><p>headers = response.headers</p>
+<h1 id="将响应内容解析为JSON"><a href="#将响应内容解析为JSON" class="headerlink" title="将响应内容解析为JSON"></a>将响应内容解析为JSON</h1><p>json_data = response.json()<br>以上示例展示了requests库的基本用法。你可以根据具体的需求，使用requests库提供的其他方法和参数来定制请求，如设置请求头部、传递查询参数、发送文件等。<br>此外，还可以使用requests库的会话（Session）对象来处理多个相关请求，以提高效率和性能。<br>请注意，在实际使用中，需要根据具体的API文档和要求来设置请求参数、处理响应和错误处理，以确保与Web服务的正确交互。</p>
+<p>Q：加密接口的测试方法，base64，AES等<br>A:在Python接口测试中，当涉及到加密接口时，可以使用一些常见的加密算法，如Base64和AES。下面我将详细描述这两种加密算法的使用方法及示例：<br>Base64加密：<br>Base64是一种常见的编码方式，可以将二进制数据转换为可打印的ASCII字符。<br>在接口测试中，可以使用Base64对敏感数据进行编码和解码，以保护数据的安全性。<br>编码示例：<br>import base64</p>
+<h1 id="待加密的数据"><a href="#待加密的数据" class="headerlink" title="待加密的数据"></a>待加密的数据</h1><p>data = “Hello, World!”</p>
+<h1 id="使用Base64进行编码"><a href="#使用Base64进行编码" class="headerlink" title="使用Base64进行编码"></a>使用Base64进行编码</h1><p>encoded_data = base64.b64encode(data.encode(‘utf-8’)).decode(‘utf-8’)<br>print(encoded_data)</p>
+<h1 id="输出-SGVsbG8sIFdvcmxkIQ"><a href="#输出-SGVsbG8sIFdvcmxkIQ" class="headerlink" title="输出: SGVsbG8sIFdvcmxkIQ=="></a>输出: SGVsbG8sIFdvcmxkIQ==</h1><p>解码示例：<br>import base64</p>
+<h1 id="待解码的数据"><a href="#待解码的数据" class="headerlink" title="待解码的数据"></a>待解码的数据</h1><p>encoded_data = “SGVsbG8sIFdvcmxkIQ==”</p>
+<h1 id="使用Base64进行解码"><a href="#使用Base64进行解码" class="headerlink" title="使用Base64进行解码"></a>使用Base64进行解码</h1><p>decoded_data = base64.b64decode(encoded_data).decode(‘utf-8’)<br>print(decoded_data)</p>
+<h1 id="输出-Hello-World"><a href="#输出-Hello-World" class="headerlink" title="输出: Hello, World!"></a>输出: Hello, World!</h1><p>AES加密：<br>AES（Advanced Encryption Standard）是一种对称加密算法，常用于保护敏感数据的安全性。<br>在接口测试中，可以使用AES对数据进行加密和解密。<br>加密示例：<br>from Crypto.Cipher import AES<br>import base64</p>
+<h1 id="加密密钥（16字节）"><a href="#加密密钥（16字节）" class="headerlink" title="加密密钥（16字节）"></a>加密密钥（16字节）</h1><p>key = b’mysecretpassword1’</p>
+<h1 id="待加密的数据（长度必须是16的倍数）"><a href="#待加密的数据（长度必须是16的倍数）" class="headerlink" title="待加密的数据（长度必须是16的倍数）"></a>待加密的数据（长度必须是16的倍数）</h1><p>data = b’Hello, World!123’</p>
+<h1 id="创建AES加密器"><a href="#创建AES加密器" class="headerlink" title="创建AES加密器"></a>创建AES加密器</h1><p>cipher = AES.new(key, AES.MODE_ECB)</p>
+<h1 id="使用AES加密数据"><a href="#使用AES加密数据" class="headerlink" title="使用AES加密数据"></a>使用AES加密数据</h1><p>encrypted_data = cipher.encrypt(data)</p>
+<h1 id="将加密后的数据进行Base64编码"><a href="#将加密后的数据进行Base64编码" class="headerlink" title="将加密后的数据进行Base64编码"></a>将加密后的数据进行Base64编码</h1><p>encoded_data = base64.b64encode(encrypted_data).decode(‘utf-8’)<br>print(encoded_data)</p>
+<h1 id="输出-0z3z3z3z3z3z3z3z…"><a href="#输出-0z3z3z3z3z3z3z3z…" class="headerlink" title="输出: 0z3z3z3z3z3z3z3z…"></a>输出: 0z3z3z3z3z3z3z3z…</h1><p>Q：pytest的使用方法，启动命令，入门级的框架封装思路。<br>A:<br>pytest是一个功能强大且易于使用的Python测试框架，它提供了丰富的功能和灵活的扩展性，可以帮助您编写清晰、简洁和可维护的测试代码。<br>下面是pytest的使用方法：</p>
+<ol>
+<li>安装pytest：在终端中运行以下命令来安装pytest：<br>pip install pytest</li>
+<li>编写测试用例：创建一个以<code>test_</code>开头的Python文件，并在其中定义测试函数。例如，创建一个名为<code>test_example.py</code>的文件，并在其中编写以下代码：</li>
+</ol>
+<pre><code class="python">def test_addition():
+    assert 2 + 2 == 4
+
+def test_subtraction():
+    assert 5 - 3 == 2
+
+运行测试：在终端中进入包含测试文件的目录，并运行以下命令来执行测试：
+pytest
+pytest会自动查找以test_开头的函数，并执行它们。
+查看测试结果：pytest会输出测试结果的详细信息，包括通过的测试用例、失败的测试用例以及跳过的测试用例。
+启动命令是在终端中运行pytest命令，它会自动查找并执行当前目录下的所有测试文件。
+对于入门级的框架封装思路，您可以考虑以下步骤：
+创建一个测试框架的基本结构：可以使用pytest提供的
+pytest.fixture装饰器来定义测试用例的前置条件和后置操作。
+封装常用的测试功能：例如，可以创建一个
+BaseTest类，其中包含一些常用的测试方法，如登录、退出登录等。
+创建测试用例：在测试用例中，可以继承
+BaseTest类，并使用
+pytest.fixture装饰器来定义测试用例的前置条件和后置操作。
+运行测试：使用pytest的命令行工具来运行测试，并查看测试结果。
+下面是一个简单的示例，演示了如何使用pytest进行框架封装：
+import pytest
+
+class BaseTest:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        # 执行测试用例前的准备工作
+        print(&quot;Setup&quot;)
+
+    @pytest.fixture(autouse=True)
+    def teardown(self):
+        # 执行测试用例后的清理工作
+        print(&quot;Teardown&quot;)
+
+class TestExample(BaseTest):
+    def test_addition(self):
+        assert 2 + 2 == 4
+
+    def test_subtraction(self):
+        assert 5 - 3 == 2
+
+在这个示例中，BaseTest类定义了setup和teardown方法作为测试用例的前置条件和后置操作。
+TestExample类继承了BaseTest类，并定义了两个测试用例。
+
+Q：eval函数
+A:
+在Python中，eval()函数用于执行一个字符串表达式，并返回表达式的结果。它可以将字符串作为Python代码进行求值，并返回结果。
+eval()函数的基本语法如下：
+eval(expression, globals=None, locals=None)
+
+参数说明：
+expression：要执行的字符串表达式。
+globals（可选）：一个字典，用于指定全局命名空间。如果未提供，则使用当前全局命名空间。
+locals（可选）：一个字典，用于指定局部命名空间。如果未提供，则使用当前局部命名空间。
+下面是一些使用eval()函数的示例：
+求解数学表达式：
+result = eval(&quot;2 + 3 * 4&quot;)
+print(result)  # 输出：14
+
+执行简单的Python代码：
+x = 5
+eval(&quot;x += 1&quot;)
+print(x)  # 输出：6
+
+使用
+globals和
+locals参数指定命名空间：
+x = 10
+y = 20
+result = eval(&quot;x + y&quot;, globals(), &#123;&quot;x&quot;: 5, &quot;y&quot;: 15&#125;)
+print(result)  # 输出：20
+
+需要注意的是，eval()函数执行的是字符串中的代码，因此请确保只执行可信任的代码，以避免安全风险。
+不建议从不受信任的来源接收并执行字符串表达式。
+
+Q：DDT相关的内容，装饰器的原理
+A:
+在Python中，DDT（Data-Driven Testing）是一种测试方法，它允许您使用不同的测试数据来运行相同的测试用例。
+DDT可以帮助您更全面地测试代码，覆盖不同的边界条件和输入组合。
+在DDT中，通常使用装饰器来标记测试函数，并使用装饰器参数来指定测试数据。
+装饰器会将测试函数转换为多个独立的测试用例，并使用不同的测试数据来运行它们。
+下面是一个详细说明和实例，演示了如何使用DDT进行数据驱动测试：
+安装DDT库：在终端中运行以下命令来安装DDT库：
+pip install ddt
+导入DDT和unittest模块：
+import unittest
+from ddt import ddt, data, unpack
+使用装饰器标记测试类和测试方法：
+@ddt
+class MyTestCase(unittest.TestCase):
+    @data((1, 2), (3, 4), (5, 6))
+    @unpack
+    def test_addition(self, a, b):
+        result = a + b
+        self.assertEqual(result, a + b)
+在上面的示例中，@ddt装饰器标记了测试类MyTestCase，表示该类使用DDT进行数据驱动测试。
+@data装饰器标记了测试方法test_addition，并指定了多组测试数据(1, 2)、(3, 4)和(5, 6)。
+@unpack装饰器用于解包测试数据，将每组数据的元素分别传递给测试方法的参数。
+运行测试：使用unittest的命令行工具来运行测试。例如，可以在终端中运行以下命令来执行测试：
+python -m unittest test_example.py
+其中，test_example.py是包含测试类的Python文件。
+在上面的示例中，test_addition方法将被转换为三个独立的测试用例，并使用不同的测试数据(1, 2)、(3, 4)和(5, 6)来运行它们。
+每个测试用例都会执行相同的断言，以验证结果是否符合预期。
+DDT的装饰器原理是通过装饰器将测试函数转换为多个独立的测试用例，并使用不同的测试数据来运行它们。
+装饰器参数用于指定测试数据，可以是单个值、元组、列表或其他可迭代对象。
+装饰器会根据提供的测试数据生成相应数量的测试用例，并将测试数据传递给测试函数的参数。
+
+Q：allure测试报告，使用方法。
+A:
+在Python接口测试中，Allure是一个流行的测试报告框架，它提供了丰富的功能和可视化效果，可以帮助您生成漂亮、易于理解的测试报告。
+下面是详细说明和示例，演示了如何在Python接口测试中使用Allure测试报告：
+安装Allure-pytest库：在终端中运行以下命令来安装Allure-pytest库：
+pip install allure-pytest
+
+导入pytest和allure模块：
+import pytest
+import allure
+
+使用Allure装饰器标记测试函数：
+@allure.feature(&quot;接口测试&quot;)
+class TestAPI:
+    @allure.story(&quot;登录接口&quot;)
+    def test_login(self):
+        # 测试代码
+        pass
+
+    @allure.story(&quot;注册接口&quot;)
+    def test_register(self):
+        # 测试代码
+        pass
+
+在上面的示例中，@allure.feature装饰器用于标记测试类的功能（feature），
+@allure.story装饰器用于标记测试方法的故事（story）。
+添加Allure步骤和断言：
+@allure.step(&quot;输入用户名和密码&quot;)
+def input_credentials(username, password):
+    # 输入用户名和密码的步骤
+
+@allure.step(&quot;验证登录结果&quot;)
+def verify_login_result(result):
+    # 验证登录结果的步骤
+
+@allure.story(&quot;登录接口&quot;)
+def test_login(self):
+    input_credentials(&quot;admin&quot;, &quot;password&quot;)
+    verify_login_result(True)
+
+在上面的示例中，@allure.step装饰器用于标记测试中的每个步骤，以提供更详细的报告信息。
+运行测试并生成Allure报告：在终端中运行以下命令来运行测试并生成Allure报告：
+pytest --alluredir=./allure-report
+
+这将运行所有的测试，并将测试结果保存在./allure-report目录中。
+查看Allure报告：在终端中运行以下命令来打开Allure报告：
+allure serve ./allure-report
+
+这将在浏览器中打开Allure报告，您可以查看测试结果、步骤、断言和其他详细信息。
+Allure测试报告提供了丰富的功能，包括测试结果的统计信息、测试用例的历史记录、附件的添加等。
+您可以根据实际需求，使用Allure提供的其他功能来定制和美化测试报告。
+
+Q：jenkins使用+ allure + 全自动化流程。
+A:
+安装Jenkins：按照Jenkins官方文档的指引，在您的服务器上安装和配置Jenkins。
+创建Jenkins任务：在Jenkins中创建一个新的任务，选择自由风格的软件项目。
+配置代码仓库：在任务配置中，将您的代码仓库链接添加到源代码管理部分。这可以是Git、SVN或其他版本控制系统。
+配置构建触发器：在任务配置中，选择适当的构建触发器，例如定时构建或代码提交触发构建。
+配置构建步骤：
+安装Python环境：在构建步骤中，添加一个Shell脚本步骤，用于安装Python环境和依赖项。
+安装pytest和Allure：在Shell脚本步骤中，使用pip命令安装pytest和Allure。
+运行测试：在Shell脚本步骤中，使用pytest命令运行测试。例如：
+pytest --alluredir=./allure-results。
+生成Allure报告：在Shell脚本步骤中，使用allure命令生成Allure报告。例如：
+allure generate ./allure-results --clean -o ./allure-report。
+配置构建后操作：在任务配置中，添加一个Allure报告的后操作步骤。选择Allure Report，并指定Allure报告的路径（例如：
+./allure-report）。
+保存并构建：保存任务配置，并手动触发构建，或等待自动触发构建。
+查看测试报告：在Jenkins任务的构建历史中，找到最新的构建，并点击Allure报告链接来查看生成的测试报告。
+通过以上步骤，您可以在Jenkins中实现使用pytest、Allure和全自动化流程。您可以根据实际需求进行定制和扩展，例如添加更多的构建步骤、集成其他工具等。
+
+Q：测试全栈工程师做的事情？立项、提测、全自动化测试（APP/WEB/接口）、测试报告、发布、评分系统、工时可视化、故障监控与修复、域名监控。
+A:
+作为一个全栈工程师，测试工作涵盖了项目的不同阶段和多个方面。下面是对您提到的各个方面的详细说明和示例：
+立项阶段：
+参与需求评审和讨论，确保需求的可测试性和完整性。
+提供测试方案和测试策略，包括测试范围、测试目标、测试计划等。
+提测阶段：
+编写测试用例，覆盖功能、性能、安全等方面的测试。
+执行测试用例，发现和报告缺陷。
+参与缺陷修复和验证，确保问题得到解决。
+全自动化测试（APP/WEB/接口）：
+使用适当的自动化测试框架和工具，编写自动化测试脚本。
+集成自动化测试脚本到持续集成/持续交付（CI/CD）流程中。
+定期执行自动化测试，确保系统的稳定性和可靠性。
+测试报告：
+生成详细的测试报告，包括测试结果、缺陷统计、测试覆盖率等。
+提供可视化的测试报告，以便项目团队和利益相关者了解测试进展和质量状况。
+发布：
+参与发布计划和发布过程，确保发布的稳定性和可用性。
+进行回归测试，验证发布后的系统功能和性能。
+评分系统：
+设计和实现评分系统，用于评估和监控系统的质量和性能。
+收集和分析评分数据，提供有关系统质量的反馈和改进建议。
+工时可视化：
+设计和实现工时可视化系统，用于跟踪和管理测试工作的工时。
+提供可视化的工时报表和统计信息，帮助项目团队进行资源规划和优化。
+故障监控与修复：
+设计和实现故障监控系统，用于实时监测系统的运行状态和性能。
+参与故障排查和修复，确保系统的稳定性和可用性。
+域名监控：
+设计和实现域名监控系统，用于监测域名的可用性和性能。
+发现和报告域名相关的问题，确保域名的正常运行。
+
+Q:其他测试基础内容补充
+接口测试的定义
+接口测试是测试系统组件间接口的一种测试。重点是检查数据交换、传递和控制管理过程，以及系统间相互逻辑依赖关系等。
+一般分为两种：程序内部的接口，系统对外的接口。
+接口测试的目的
+检查UI系统无法发下的bug
+检查系统的安全性和稳定性
+相对于UI自动化测试，接口测试比较稳定，容易实现自动化持续集成
+尽早发现系统的底层缺陷
+缩短测试周期，支持后端快速发版本的需求
+支持前端的随意变化，后端不用变。
+接口测试原理
+可以理解为http请求的流程，通过测试程序或者测试工具模拟客户端向服务器发送请求报文。
+服务器接受请求报文后对其做处理，然后将响应结果报文返回发给客户端。
+接口测试流程
+黑盒测试范畴，
+接口需求分析
+对接口文档进行充分研读。
+接口文档一般包括：接口说明、请求地址、请求方式如get和post等、
+请求参数、参数类型、参数约束、正常响应报文、异常响应报文等。
+接口测试用例编写
+等价类、边界值测试分析：
+输入参数是否合法、是否为空、参数是否可包含特殊字符、数值范围及大小等。
+参数组合验证：参数排列组合。
+接口安全验证：是否有验证，是否有加密等
+业务逻辑验证：存在上下游的逻辑关系等。
+测试工具选择。
+如postman、Jmeter、SoupUI、LoadRunner、
+Robot Framework + RequestsLibrary、Java + HttpClient 和Python + Requests等。
+构造请求并执行测试。
+根据测试用例来设计测试用例、执行测试、检查接口返回的数据是否达到预期。
+接口测试用例的设计
+包括用例名称、前置条件、请求地址、请求header、请求参数、响应检查点。
+http基础
+http请求，常见包括get、post等报文，主要包括请求行、请求头信息、空行、请求体等。
+http响应，可以抓包看看，主要包括响应状态行、响应头信息、空行、响应体等。
+http状态码：
+1xx 服务端接受到请求，需要进一步处理，客户端请等待。
+2xx 请求处理成功，常见200 ok
+3xx 重定向操作，需要进一步操作完成请求，如301、302等。
+4xx 客户端请求错误，有语法错误或者无法实现，如400语法错误、401未经授权、403服务器理解客户端的请求，但拒绝服务。404 请求资源不存在
+5xx 服务器内部错误，不能正确处理请求，如500内部错误，无法完成请求。
+除了post、get其他还有如put 传送数据取代指定文档内容等。delete 删除服务器的资源等。
+cookie 和 session
+主要用于确定用户身份，cookie在客户端记录信息确认身份，发送给服务器后，（cookie主要包含id、密码、浏览过的网站、停留时间、过期时间等内容）
+服务器在cookie基础上添加session id 返回给客户端确认存储。（session包含cookie + session id）
+下次客户端发送cookie就会带上session id再次请求与session就关联上了。
+
+postman做接口测试，几个关键步骤：
+1. 熟悉postman app或者插件的界面，几个关键功能，主要是工作台，创建get 、post 等请求，极少数用到restful接口。
+2. 集合一类测试内容，到一个test collection中去，提高执行效率。这里注意可以设置集合collection级别的环境变量，也可以设置global级别的环境变量，看需要来配置。   也可以设置测试环境、开发环境的环境变量。 也可以在前置测试脚本中来设置一些环境变量。
+3. 断言，在测试完成后选择断言信息，比如常用的 返回内容包含什么字符串、返回码是否正确、返回json value = 特定值，等等。
+4. postman参数化，可以将对应的参数写入一个file文件中来循环读取，从而提高效率。 还可以设置随机数，来提高覆盖率。
+5. 最后，postman配置的接口测试用例内容，可以直接用code 功能来导出对应的编程语言源码，直接在对应IDE中可以使用。
+
+postman补充：
+接口测试的必要条件：
+.请求地址(url)
+.请求协议：http，https，webservice
+.请求方式：get/post，resful
+.请求头
+.参数：表单提交，请求体提交
+</code></pre>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2023/09/07/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E5%8F%8A%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E9%9D%A2%E8%AF%95%E6%A8%A1%E6%8B%9F/" title="接口测试及接口自动化面试模拟">https://shenle2019.github.io/2023/09/07/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E5%8F%8A%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E9%9D%A2%E8%AF%95%E6%A8%A1%E6%8B%9F/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" rel="tag"># 测试开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/08/31/web%E6%B5%8B%E8%AF%95%E5%8F%8AUI%E8%87%AA%E5%8A%A8%E5%8C%96%E9%9D%A2%E8%AF%95%E6%A8%A1%E6%8B%9F%E9%A2%98/" rel="next" title="web测试及UI自动化面试模拟题">
+                <i class="fa fa-chevron-left"></i> web测试及UI自动化面试模拟题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%AF%B7%E6%B1%82%E5%A4%B4%E9%83%A8%EF%BC%8C%E5%8C%85%E5%90%ABToken%E4%BF%A1%E6%81%AF"><span class="nav-number">1.</span> <span class="nav-text">设置请求头部，包含Token信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E5%B8%A6%E6%9C%89%E9%89%B4%E6%9D%83%E5%A4%B4%E9%83%A8%E7%9A%84GET%E8%AF%B7%E6%B1%82"><span class="nav-number">2.</span> <span class="nav-text">发送带有鉴权头部的GET请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%93%8D%E5%BA%94"><span class="nav-number">3.</span> <span class="nav-text">处理响应</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AECookie"><span class="nav-number">4.</span> <span class="nav-text">设置Cookie</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E5%B8%A6%E6%9C%89%E9%89%B4%E6%9D%83Cookie%E7%9A%84GET%E8%AF%B7%E6%B1%82"><span class="nav-number">5.</span> <span class="nav-text">发送带有鉴权Cookie的GET请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%93%8D%E5%BA%94-1"><span class="nav-number">6.</span> <span class="nav-text">处理响应</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AASession%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.</span> <span class="nav-text">创建一个Session对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E5%B9%B6%E8%8E%B7%E5%8F%96Session%E7%9A%84ID"><span class="nav-number">8.</span> <span class="nav-text">登录并获取Session的ID</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Session%E7%9A%84ID%E5%8F%91%E9%80%81GET%E8%AF%B7%E6%B1%82"><span class="nav-number">9.</span> <span class="nav-text">使用Session的ID发送GET请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%93%8D%E5%BA%94-2"><span class="nav-number">10.</span> <span class="nav-text">处理响应</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E6%89%80%E6%9C%89%E4%B9%A6%E7%9A%84%E6%A0%87%E9%A2%98"><span class="nav-number">11.</span> <span class="nav-text">提取所有书的标题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BE%93%E5%87%BA-%E2%80%98Book-1%E2%80%99-%E2%80%98Book-2%E2%80%99"><span class="nav-number">12.</span> <span class="nav-text">输出: [‘Book 1’, ‘Book 2’]</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E7%AC%AC%E4%B8%80%E6%9C%AC%E4%B9%A6%E7%9A%84%E4%BD%9C%E8%80%85"><span class="nav-number">13.</span> <span class="nav-text">提取第一本书的作者</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BE%93%E5%87%BA-%E2%80%98John-Doe%E2%80%99"><span class="nav-number">14.</span> <span class="nav-text">输出: [‘John Doe’]</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E9%80%81GET%E8%AF%B7%E6%B1%82"><span class="nav-number">15.</span> <span class="nav-text">发送GET请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E9%80%81POST%E8%AF%B7%E6%B1%82"><span class="nav-number">16.</span> <span class="nav-text">发送POST请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E9%80%81PUT%E8%AF%B7%E6%B1%82"><span class="nav-number">17.</span> <span class="nav-text">发送PUT请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E9%80%81DELETE%E8%AF%B7%E6%B1%82"><span class="nav-number">18.</span> <span class="nav-text">发送DELETE请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%93%8D%E5%BA%94%E5%86%85%E5%AE%B9"><span class="nav-number">19.</span> <span class="nav-text">获取响应内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">20.</span> <span class="nav-text">获取响应状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%93%8D%E5%BA%94%E5%A4%B4%E9%83%A8%E4%BF%A1%E6%81%AF"><span class="nav-number">21.</span> <span class="nav-text">获取响应头部信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%86%E5%93%8D%E5%BA%94%E5%86%85%E5%AE%B9%E8%A7%A3%E6%9E%90%E4%B8%BAJSON"><span class="nav-number">22.</span> <span class="nav-text">将响应内容解析为JSON</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%85%E5%8A%A0%E5%AF%86%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">23.</span> <span class="nav-text">待加密的数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Base64%E8%BF%9B%E8%A1%8C%E7%BC%96%E7%A0%81"><span class="nav-number">24.</span> <span class="nav-text">使用Base64进行编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BE%93%E5%87%BA-SGVsbG8sIFdvcmxkIQ"><span class="nav-number">25.</span> <span class="nav-text">输出: SGVsbG8sIFdvcmxkIQ&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%85%E8%A7%A3%E7%A0%81%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">26.</span> <span class="nav-text">待解码的数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Base64%E8%BF%9B%E8%A1%8C%E8%A7%A3%E7%A0%81"><span class="nav-number">27.</span> <span class="nav-text">使用Base64进行解码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BE%93%E5%87%BA-Hello-World"><span class="nav-number">28.</span> <span class="nav-text">输出: Hello, World!</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86%E5%AF%86%E9%92%A5%EF%BC%8816%E5%AD%97%E8%8A%82%EF%BC%89"><span class="nav-number">29.</span> <span class="nav-text">加密密钥（16字节）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%85%E5%8A%A0%E5%AF%86%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%88%E9%95%BF%E5%BA%A6%E5%BF%85%E9%A1%BB%E6%98%AF16%E7%9A%84%E5%80%8D%E6%95%B0%EF%BC%89"><span class="nav-number">30.</span> <span class="nav-text">待加密的数据（长度必须是16的倍数）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAAES%E5%8A%A0%E5%AF%86%E5%99%A8"><span class="nav-number">31.</span> <span class="nav-text">创建AES加密器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8AES%E5%8A%A0%E5%AF%86%E6%95%B0%E6%8D%AE"><span class="nav-number">32.</span> <span class="nav-text">使用AES加密数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%86%E5%8A%A0%E5%AF%86%E5%90%8E%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8CBase64%E7%BC%96%E7%A0%81"><span class="nav-number">33.</span> <span class="nav-text">将加密后的数据进行Base64编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BE%93%E5%87%BA-0z3z3z3z3z3z3z3z%E2%80%A6"><span class="nav-number">34.</span> <span class="nav-text">输出: 0z3z3z3z3z3z3z3z…</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'pDMnuCn44ZQITVEtQAfiiXr5-gzGzoHsz',
+        appKey: 'y43DvreFS6iyfhy7ScRCF8Cy',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
