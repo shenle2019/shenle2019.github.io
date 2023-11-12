@@ -4927,4 +4927,1188 @@ def test_register(self):
         <tag>测试开发</tag>
       </tags>
   </entry>
+  <entry>
+    <title>linux 命令</title>
+    <url>/2023/11/13/linux-%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>一、 测试人员掌握Linux的理由<br>1.拓宽你的技能栈<br>对于软件测试人员来说，测试的任何产品都基于操作系统，如常见的Windows、Android、Ios、Linux系统等。熟练使用操作系统本身就是测试人员的基本功。而随着对操作系统内核的深入理解和掌握，对提高测试能力大有帮助，也有利于测试得更加深入。<br>Linux系统是与windows系统截然不同的操作系统，它们的设计理念、内核原理有着巨大的差异。一种内核原理对应着它独有的一片天地，掌握一种操作系统，就掌握了该操作系统下的那片天地：处理器管理、存储器管理、文件管理、设备管理、安全性、内核结构、系统特性等。掌握这些内容，不仅增长学识，也是你测试能力向深层次提高的关键一步。<br>unix和Linux的家族足够庞大，就连移动端操作系统IOS和Android，也分别是基于Unix和Linux而衍生出来的作品。掌握了Linux，也就自然而然地熟知Android、Ios、Mac OS X等系统。熟悉了Linux系统的命令行操作，对Android的shell，adb shell命令、Mac OS X的shell的熟悉自然不在话下。Linux还是最佳的也是应用最多的服务器端操作系统。<br>所以，掌握了它，相当于get了一堆技能。</p>
+<p>2.改变你的操作和思维习惯<br>windows的图形化操作深深地影响了测试人员，尤其是功能测试人员。从我们第一次接触电脑开始，一直到现在，windows的图形化操作已经变成我们潜意识中的思维习惯。<br>习惯甚至安逸于图形化的操作，长远看，对于测试人员自身素质的培养是有阻力的。<br>Linux的命令行操作会改变你的操作习惯和思维习惯。它使你的双手能够更加密切地配合和协作，更好更快地完成各项工作。<br>图形化界面虽然好看易用，但解决问题还得靠命令行。</p>
+<p>3.编程捷径<br>想要成为一个有“钱途”的测试人员，不会编程是硬伤。熟悉了Linux的命令行操作，你将会对所有的命令行操作有着天然的喜欢和自通，哪怕是windows的dos命令。<br>Linux的几乎每个命令（工具）都很好用，有些甚至很强大，如awk、sed、vim、sar等等，就拿awk来说，它在许多场合下被称作是编程语言——处理文本数据的编程语言。<br>尤其是功能测试人员，掌握了Linux命令，可谓是以最便捷、最低成本的方式打开了编程的大门，因为会使用Linux命令离会shell编程仅半步之遥。</p>
+<p>二、 Linux常用命令的实际使用</p>
+<p>一般运维同学会对Linux操作系统比较熟悉，面试中问到测试同学，很多只会基本目录操作的一些命令和看打印日志的命令等，没有更深入的理解和使用。<br>现在我们来介绍一下Linux常用命令在日常中的使用，帮助大家巩固下基础。</p>
+<p>1.怎么使一个命令在后台运行?</p>
+<p>一般都是使用 &amp; 在命令结尾来让程序自动运行。(命令后可以不追加空格)<br>经常应用于后台执行脚本，不需要一直在前台打印或者等待的任务。<br>sleep 100&amp;</p>
+<p>2.哪个命令专门用来查看后台任务?<br>jobs [-lrs]<br>-l：除了列出job number与命令串之外，同时列出PID的号码<br>-r：仅列出正在后台run的工作<br>-s：仅列出正在后台当中暂停（stop）的工作</p>
+<p>3.终止进程用什么命令? 带什么参数?</p>
+<p>kill [-s &lt;信息名称或编号&gt;][程序] 或 kill [-l &lt;信息编号&gt;]<br>kill-9 pid<br>其中pid可以根据ps -ef|grep 进程名得到</p>
+<p>4.搜索文件用什么命令? 格式是怎么样的?</p>
+<p>find &lt;指定目录&gt; &lt;指定条件&gt; &lt;指定动作&gt;<br>whereis 加参数与文件名<br>locate 只加文件名</p>
+<p>find 直接搜索磁盘，较慢。<br>find ./ -name “string*”</p>
+<p>5.查看当前谁在使用该主机用什么命令? 查找自己所在的终端信息用什么命令?</p>
+<p>查找自己所在的终端信息：who am i</p>
+<p>查看当前谁在使用该主机：who</p>
+<p>6.使用什么命令查看用过的命令列表?<br>history # 查看历史命令 保留1000个历史命令，超出会将最老的删除<br>！951 # 可以根据查得命名编号直接在其前个感叹号执行这个编号对应的命令</p>
+<p>7.使用什么命令查看磁盘使用空间？ 空闲空间呢?<br>df -hl<br>文件系统 容量 已用 可用 已用% 挂载点<br>Filesystem Size Used Avail Use% Mounted on /dev/hda2 45G 19G 24G 44% /<br>/dev/hda1 494M 19M 450M 4% /boot</p>
+<p>8.使用什么命令查看网络是否连通?</p>
+<p>netstat，常用查看端口是否被占用 netstat -anp|grep 端口号<br>显示详细的网络状况：# netstat -a<br>详解：<a href="https://www.runoob.com/linux/linux-comm-netstat.html">https://www.runoob.com/linux/linux-comm-netstat.html</a></p>
+<p>使用什么命令查看 ip 地址及接口信息？<br>ifconfig   详解：<a href="https://www.runoob.com/linux/linux-comm-ifconfig.html">https://www.runoob.com/linux/linux-comm-ifconfig.html</a></p>
+<p>9.怎么对命令进行取别名？<br>alias la=’ls -a’</p>
+<p>10.du 和 df 的定义，以及区别？<br>du 显示目录或文件的大小</p>
+<p>df 显示每个&lt;文件&gt;所在的文件系统的信息，默认是显示所有文件系统。<br>（文件系统分配其中的一些磁盘块用来记录它自身的一些数据，如 i 节点，磁盘分布图，间接块，超级块等。这些数据对大多数用户级的程序来说是不可见的，通常称为 Meta Data。） du 命令是用户级的程序，它不考虑 Meta Data，而 df 命令则查看文件系统的磁盘分配图并考虑 Meta Data。<br>df 命令获得真正的文件系统数据，而 du 命令只查看文件系统的部分情况。</p>
+<p>常用du -sh *|sort -nr，du -sh * 2&gt;/dev/null|sort -nr,du -sh * 2&gt;/dev/null|grep M|sort -nr</p>
+<p>11.如果一个linux新手想要知道当前系统支持的所有命令的列表，他需要怎么做？<br>使用命令compgen -c，可以打印出所有支持的命令列表。</p>
+<p>12.远程登录linux主机：ssh</p>
+<p>ssh [-l login_name] [-p port] [user@]hostname<br>ssh 192.168.0.11<br>ssh -l root 192.168.0.11 或 ssh <a href="mailto:&#114;&#x6f;&#111;&#x74;&#64;&#49;&#57;&#50;&#x2e;&#x31;&#x36;&#56;&#46;&#48;&#46;&#49;&#49;">&#114;&#x6f;&#111;&#x74;&#64;&#49;&#57;&#50;&#x2e;&#x31;&#x36;&#56;&#46;&#48;&#46;&#49;&#49;</a> //指定用户<br>ssh -l root -p 12333 216.230.230.114</p>
+<p>13.远程拷贝：scp<br>scp -r /home/administrator/test/ <a href="mailto:&#x72;&#x6f;&#111;&#116;&#x40;&#x31;&#x39;&#50;&#x2e;&#x31;&#54;&#x38;&#46;&#49;&#x2e;&#49;&#48;&#48;">&#x72;&#x6f;&#111;&#116;&#x40;&#x31;&#x39;&#50;&#x2e;&#x31;&#54;&#x38;&#46;&#49;&#x2e;&#49;&#48;&#48;</a>:/root/ //拷贝本机/home/administrator/test整个目录至远程主机192.168.1.100的/root目录下<br>scp /home/administrator/Desktop/old/driver/test/test.txt <a href="mailto:&#x72;&#111;&#111;&#116;&#64;&#49;&#x39;&#x32;&#x2e;&#49;&#54;&#56;&#46;&#x31;&#x2e;&#x31;&#48;&#48;">&#x72;&#111;&#111;&#116;&#64;&#49;&#x39;&#x32;&#x2e;&#49;&#54;&#56;&#46;&#x31;&#x2e;&#x31;&#48;&#48;</a>:/root/ //拷贝单个文件至远程主机<br>scp -r <a href="mailto:&#114;&#111;&#x6f;&#x74;&#x40;&#x31;&#x39;&#50;&#x2e;&#x31;&#x36;&#56;&#46;&#x36;&#50;&#x2e;&#49;&#x30;">&#114;&#111;&#x6f;&#x74;&#x40;&#x31;&#x39;&#50;&#x2e;&#x31;&#x36;&#56;&#46;&#x36;&#50;&#x2e;&#49;&#x30;</a>:/root/ /home/administrator/Desktop/new/ //远程文件/文件夹下载</p>
+<p>14.查看系统与内核相关信息：uname<br>uname [-asrmpi]<br>-a：所有系统相关的信息</p>
+<p>15.查看内存使用情况：free<br>free [-b|-k|-m|-g] [-t]<br>-b：直接输入free时，显示的是KB ，我们可以使用b（bytes）、m（MB），k（KB）及g（GB）来显示单位<br>-t：在输出的最终结果中显示物理内存与swap的总量</p>
+<p>16.文件比较工具：diff</p>
+<p>diff [-bBi] from-filr to-file</p>
+<p>17.sed<br><a href="https://www.runoob.com/linux/linux-comm-sed.html">https://www.runoob.com/linux/linux-comm-sed.html</a><br>Linux sed 命令是利用脚本来处理文本文件。<br>sed 可依照脚本的指令来处理、编辑文本文件。<br>Sed 主要用来自动编辑一个或多个文件、简化对文件的反复操作、编写转换程序等。</p>
+<p>常用：sed  -i ‘s/要被取代的字串/新的字串/g’</p>
+<p>18.awk<br><a href="https://www.runoob.com/linux/linux-comm-awk.html">https://www.runoob.com/linux/linux-comm-awk.html</a><br>常用：awk ‘{[pattern] action}’ {filenames}   # 行匹配语句 awk ‘’ 只能用单引号<br>awk ‘{print $1,$4}’ log.txt</p>
+<p>19.source<br>source命令是一个内置的shell命令，用于从当前shell会话中的文件读取和执行命令。source命令通常用于保留、更改当前shell中的环境变量。简而言之，source一个脚本，将会在当前shell中运行execute命令。<br>source FILENAME [ARGUMENTS]<br>. FILENAME [ARGUMENTS]<br>常用：source /etc/profile</p>
+<p>系统性能的常用命令，单独列出：<br>1.如何看当前Linux系统有几颗物理CPU和每颗CPU的核数？<br>[root@centos6 ~ 10:55 #35]# cat /proc/cpuinfo|grep -c ‘physical id’<br>4<br>[root@centos6 ~ 10:56 #36]# cat /proc/cpuinfo|grep -c ‘processor’<br>4<br>2.查看系统负载有两个常用的命令，是哪两个？这三个数值表示什么含义呢？<br>[root@centos6 ~ 10:56 #37]# w<br>10:57:38 up 14 min,  1 user,  load average: 0.00, 0.00, 0.00<br>USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT<br>root     pts/0    192.168.147.1    18:44    0.00s  0.10s  0.00s w<br>[root@centos6 ~ 10:57 #38]# uptime<br>10:57:47 up 14 min,  1 user,  load average: 0.00, 0.00, 0.00<br>其中load average即系统负载，三个数值分别表示一分钟、五分钟、十五分钟内系统的平均负载，即平均任务数。</p>
+<p>3.vmstat r, b, si, so, bi, bo 这几列表示什么含义呢？<br>[root@centos6 ~ 10:57 #39]# vmstat<br>procs ———–memory———- —swap– —–io—- –system– —–cpu—–<br>r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st<br>0  0      0 1783964  13172 106056    0    0    29     7   15   11  0  0 99  0  0</p>
+<p>r即running，表示正在跑的任务数<br>b即blocked，表示被阻塞的任务数<br>si表示有多少数据从交换分区读入内存<br>so表示有多少数据从内存写入交换分区<br>bi表示有多少数据从磁盘读入内存<br>bo表示有多少数据从内存写入磁盘</p>
+<p>简记：<br>i –input，进入内存<br>o –output，从内存出去<br>s –swap，交换分区<br>b –block，块设备，磁盘<br>单位都是KB</p>
+<p>补充：yum install sysstat<br>iostat<br>iostat -d -x -k 1 1   #  【-d 显示磁盘使用情况，-x 显示详细信息】</p>
+<p>补充知识：<br>1.计算机系统中的数据采用二进制存储的，8位构成1字节。</p>
+<p>即 1byte(简写B) = 8bit<br>1kB = 1024B = 2^10B<br>1MB = 1024KB = 2^20B<br>1GB = 1024MB = 2^30B<br>1TB = 1024GB = 2^40B<br>1PB = 1024TB = 2^50B<br>1EB = 1024PB = 2^60B<br>1ZB = 1024EB = 2^70B<br>1YB = 1024ZB = 2^80B<br>1BB = 1024YB = 2^90B<br>1NB = 1024BB = 2^100B<br>1DB = 1024NB = 2^110B</p>
+<p>2.而我们使用的硬盘的是采用十进制计算磁盘空间，<br>    1TB=1000GB<br>    1GB=1000MB<br>    1MB=1000KB<br>     所以我们所购买的硬盘格式化后会有空间会变小，因为采用两种不同的计量方法，例如硬盘厂商标注1TB硬盘，格式化后实际容量只有1000*1000^3/1024^3=931GB.</p>
+<p>4.linux系统里，您知道buffer和cache如何区分吗？</p>
+<p>buffer和cache都是内存中的一块区域，当CPU需要写数据到磁盘时，由于磁盘速度比较慢，所以CPU先把数据存进buffer，然后CPU去执行其他任务，buffer中的数据会定期写入磁盘；当CPU需要从磁盘读入数据时，由于磁盘速度比较慢，可以把即将用到的数据提前存入cache，CPU直接从Cache中拿数据要快的多。</p>
+<p>5.使用top查看系统资源占用情况时，哪一列表示内存占用呢？<br>PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND<br>301 root      20   0     0    0    0 S  0.3  0.0   0:00.08 jbd2/sda3-8<br>1 root      20   0  2900 1428 1216 S  0.0  0.1   0:01.28 init<br>2 root      20   0     0    0    0 S  0.0  0.0   0:00.00 kthreadd<br>3 root      RT   0     0    0    0 S  0.0  0.0   0:00.00 migration/0</p>
+<p>VIRT虚拟内存用量<br>RES物理内存用量<br>SHR共享内存用量<br>%MEM内存用量</p>
+<p>6.如何实时查看网卡流量为多少？如何查看历史网卡流量？<br>安装sysstat包，使用sar命令查看。<br>yum install -y sysstat#安装sysstat包，获得sar命令<br>sar -n DEV#查看网卡流量，默认10分钟更新一次<br>sar -n DEV 1 10#一秒显示一次，一共显示10次<br>sar -n DEV -f /var/log/sa/sa22#查看指定日期的流量日志</p>
+<p>7.如何查看当前系统都有哪些进程？</p>
+<p>ps -aux 或者ps -elf</p>
+<p>[root@centos6 ~ 13:20 #56]# ps -aux<br>Warning: bad syntax, perhaps a bogus ‘-‘? See /usr/share/doc/procps-3.2.8/FAQ<br>USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND<br>root         1  0.0  0.0   2900  1428 ?        Ss   10:43   0:01 /sbin/init<br>root         2  0.0  0.0      0     0 ?        S    10:43   0:00 [kthreadd]<br>root         3  0.0  0.0      0     0 ?        S    10:43   0:00 [migration/0]<br>root         4  0.0  0.0      0     0 ?        S    10:43   0:00 [ksoftirqd/0]<br>……<br>[root@centos6 ~ 13:21 #57]# ps -elf<br>F S UID        PID  PPID  C PRI  NI ADDR SZ WCHAN  STIME TTY          TIME CMD<br>4 S root         1     0  0  80   0 -   725 -      10:43 ?        00:00:01 /sbin/init<br>1 S root         2     0  0  80   0 -     0 -      10:43 ?        00:00:00 [kthreadd]<br>1 S root         3     2  0 -40   - -     0 -      10:43 ?        00:00:00 [migration/0]<br>1 S root         4     2  0  80   0 -     0 -      10:43 ?        00:00:00 [ksoftirqd/0]<br>1 S root         5     2  0 -40   - -     0 -      10:43 ?        00:00:00 [migration/0]</p>
+<p>8.ps 查看系统进程时，有一列为STAT， 如果当前进程的stat为Ss 表示什么含义？如果为Z表示什么含义？<br>S表示正在休眠；s表示主进程；Z表示僵尸进程。</p>
+<p>9.如何查看系统都开启了哪些端口？<br>[root@centos6 ~ 13:20 #55]# netstat -lnp<br>Active Internet connections (only servers)<br>Proto Recv-Q Send-Q Local Address               Foreign Address             State       PID/Program name<br>tcp        0      0 0.0.0.0:22                  0.0.0.0:*                   LISTEN      1035/sshd<br>tcp        0      0 :::22                       :::*                        LISTEN      1035/sshd<br>udp        0      0 0.0.0.0:68                  0.0.0.0:*                               931/dhclient<br>Active UNIX domain sockets (only servers)<br>Proto RefCnt Flags       Type       State         I-Node PID/Program name    Path<br>unix  2      [ ACC ]     STREAM     LISTENING     6825   1/init              @/com/ubuntu/upstart<br>unix  2      [ ACC ]     STREAM     LISTENING     8429   1003/dbus-daemon    /var/run/dbus/system_bus_socket</p>
+<p>10.如何查看网络连接状况？<br>[root@centos6 ~ 13:22 #58]# netstat -an<br>Active Internet connections (servers and established)<br>Proto Recv-Q Send-Q Local Address               Foreign Address             State<br>tcp        0      0 0.0.0.0:22                  0.0.0.0:*                   LISTEN<br>tcp        0      0 192.168.147.130:22          192.168.147.1:23893         ESTABLISHED<br>tcp        0      0 :::22                       :::*                        LISTEN<br>udp        0      0 0.0.0.0:68                  0.0.0.0:*<br>……</p>
+<p>11.想修改ip，需要编辑哪个配置文件，修改完配置文件后，如何重启网卡，使配置生效？<br>使用vi或者vim编辑器编辑网卡配置文件/etc/sysconfig/network-scripts/ifcft-eth0（如果是eth1文件名为ifcft-eth1），内容如下：<br>DEVICE=eth0<br>HWADDR=00:0C:29:06:37:BA<br>TYPE=Ethernet<br>UUID=0eea1820-1fe8-4a80-a6f0-39b3d314f8da<br>ONBOOT=yes<br>NM_CONTROLLED=yes<br>BOOTPROTO=static<br>IPADDR=192.168.147.130<br>NETMASK=255.255.255.0<br>GATEWAY=192.168.147.2<br>DNS1=192.168.147.2<br>DNS2=8.8.8.8</p>
+<p>修改网卡后，可以使用命令重启网卡：<br>ifdown eth0<br>ifup eth0</p>
+<p>也可以重启网络服务：<br>service network restart</p>
+<p>12.用户的任务计划  <a href="https://www.runoob.com/linux/linux-comm-crontab.html">https://www.runoob.com/linux/linux-comm-crontab.html</a></p>
+<p>Linux crontab是用来定期执行程序的命令。</p>
+<p>当安装完成操作系统之后，默认便会启动此任务调度命令。</p>
+<p>crond 命令每分锺会定期检查是否有要执行的工作，如果有要执行的工作便会自动执行该工作。</p>
+<p>注意：新创建的 cron 任务，不会马上执行，至少要过 2 分钟后才可以，当然你可以重启 cron 来马上执行。</p>
+<p>而 linux 任务调度的工作主要分为以下两类：</p>
+<p>1、系统执行的工作：系统周期性所要执行的工作，如备份系统数据、清理缓存<br>2、个人执行的工作：某个用户定期要做的工作，例如每隔10分钟检查邮件服务器是否有新信，这些工作可由每个用户自行设置</p>
+<p>crontab [ -u user ] { -l | -r | -e }</p>
+<ul>
+<li><ul>
+<li><ul>
+<li><ul>
+<li><ul>
+<li> program</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>|    |    |    |    |<br>|    |    |    |    +—– 星期中星期几 (0 - 6) (星期天 为0)<br>|    |    |    +———- 月份 (1 - 12)<br>|    |    +————— 一个月中的第几天 (1 - 31)<br>|    +——————– 小时 (0 - 23)<br>+————————- 分钟 (0 - 59)</p>
+<p>13.某个账号登陆linux后，系统会在哪些日志文件中记录相关信息？<br>用户身份验证过程记录在/var/log/secure中，登录成功的信息记录在/var/log/wtmp。</p>
+<p>14.网卡或者硬盘有问题时，我们可以通过使用哪个命令查看相关信息？<br>使用命令dmesg</p>
+<p>15.分别使用xargs和exec实现这样的需求，把当前目录下所有后缀名为.txt的文件的权限修改为777<br>（1）find ./ -type f -name “<em>.txt” |xargs chmod 777<br>（2）find ./ -type f -name “</em>.txt” -exec chmod 777 {} ;</p>
+<p>16.在Linux系统下如何按照下面要求抓包：只过滤出访问http服务的，目标ip为192.168.0.111，一共抓1000个包，并且保存到1.cap文件中？<br>tcpdump -nn -s0 host 192.168.0.111 and port 80 -c 1000 -w 1.cap</p>
+<p>17.想在Linux命令行下访问某个网站，并且该网站域名还没有解析，如何做？<br>在/etc/hosts文件中增加一条从该网站域名到其IP的解析记录即可，或者使用curl -x</p>
+<p>18.自定义解析域名的时候，我们可以编辑哪个文件？是否可以一个ip对应多个域名？是否一个域名对应多个ip？<br>编辑 /etc/hosts ,可以一个ip对应多个域名，不可以一个域名对多个ip</p>
+<p>19.有一天你突然发现公司网站访问速度变的很慢很慢，你该怎么办呢？<br>（服务器可以登陆，提示：你可以从系统负载和网卡流量入手）<br>可以从两个方面入手分析：分析系统负载，使用w命令或者uptime命令查看系统负载，如果负载很高，则使用top命令查看CPU，MEM等占用情况，要么是CPU繁忙，要么是内存不够，如果这二者都正常，再去使用sar命令分析网卡流量，分析是不是遭到了攻击。一旦分析出问题的原因，采取对应的措施解决，如决定要不要杀死一些进程，或者禁止一些访问等。</p>
+<p>附录1：补充一些Linux操作系统的基础知识Linux是一类Unix计算机操作系统的统称。Linux操作系统是自由软件和开放源代码发展中最著名的例子。严格来讲，Linux这个词本身只表示Linux内核，但在实际上人们已经习惯了用Linux来形容整个基于Linux内核，并且使用GNU 工程各种工具和数据库的操作系统。当前最常用的linux操作系统就是redhat linux。特定用途的Linux发行版，CenterOS（基于Red Hat）和Ubuntu较为常见</p>
+<p>Linux的组成及内核</p>
+<p>1.Linux的组成<br>  Linux内核<br>  GNU实用程序<br>  图形桌面环境<br>  应用软件<br>2.Linux内核<br>  内核主要功能：系统内存管理；软件程序管理；硬件管理；文件系统管理</p>
+<p>Linux文件系统<br>Linux继承了Unix操作系统结构清晰的特点。在linux下的文件结构非常有条理。但是，上述的优点只有在对linux相当熟悉时，才能体会到。<br>　　linux下一些主要目录的功用:</p>
+<p>/bin 二进制可执行命令/dev 设备特殊文件/etc 系统管理和配置文件/etc/rc.d 启动的配置文件和脚本/home 用户主目录的基点，比如用户user的主目录就是/home/user，可以用~user表示/lib 标准程序设计库，又叫动态链接共享库，作用类似windows里的.dll文件/sbin 系统管理命令，这里存放的是系统管理员使用的管理程序<br>/tmp 公用的临时文件存储点/root 系统管理员的主目录（呵呵，特权阶级）/mnt 系统提供这个目录是让用户临时挂载其他的文件系统。/lost+found 这个目录平时是空的，系统非正常关机而留下“无家可归”的文件（windows下叫什么.chk）就在这里/proc 虚拟的目录，是系统内存的映射。可直接访问这个目录来获取系统信息。<br>/var 某些大文件的溢出区，比方说各种服务的日志文件<br>/usr 最庞大的目录，要用到的应用程序和文件几乎都在这个目录。其中包含：/usr/X11R6 存放X window的目录/usr/bin 众多的应用程序/usr/sbin 超级用户的一些管理程序/usr/doc linux文档/usr/include linux下开发和编译应用程序所需要的头文件/usr/lib 常用的动态链接库和软件包的配置文件/usr/man 帮助文档/usr/src 源代码，linux内核的源代码就放在/usr/src/linux里/usr/local/bin 本地增加的命令/usr/local/lib 本地增加的库</p>
+<p>下面列举的一些常用命令，如果不会的，请自行练习熟悉。参考<a href="https://www.runoob.com/linux/linux-command-manual.html">https://www.runoob.com/linux/linux-command-manual.html</a></p>
+<h1 id="关机-重启-注销"><a href="#关机-重启-注销" class="headerlink" title="关机/重启/注销"></a>关机/重启/注销</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>shutdown -h now</td>
+<td>即刻关机</td>
+</tr>
+<tr>
+<td>shutdown -h 10</td>
+<td>10分钟后关机</td>
+</tr>
+<tr>
+<td>shutdown -h 11:00</td>
+<td>11：00关机</td>
+</tr>
+<tr>
+<td>shutdown -h +10</td>
+<td>预定时间关机（10分钟后）</td>
+</tr>
+<tr>
+<td>shutdown -c</td>
+<td>取消指定时间关机</td>
+</tr>
+<tr>
+<td>shutdown -r now</td>
+<td>重启</td>
+</tr>
+<tr>
+<td>shutdown -r 10</td>
+<td>10分钟之后重启</td>
+</tr>
+<tr>
+<td>shutdown -r 11:00</td>
+<td>定时重启</td>
+</tr>
+<tr>
+<td>reboot</td>
+<td>重启</td>
+</tr>
+<tr>
+<td>init 6</td>
+<td>重启</td>
+</tr>
+<tr>
+<td>init 0</td>
+<td>⽴刻关机</td>
+</tr>
+<tr>
+<td>telinit 0</td>
+<td>关机</td>
+</tr>
+<tr>
+<td>poweroff</td>
+<td>⽴刻关机</td>
+</tr>
+<tr>
+<td>halt</td>
+<td>关机</td>
+</tr>
+<tr>
+<td>sync</td>
+<td>buff数据同步到磁盘</td>
+</tr>
+<tr>
+<td>logout</td>
+<td>退出登录Shell</td>
+</tr>
+</tbody></table>
+<h1 id="系统信息和性能查看"><a href="#系统信息和性能查看" class="headerlink" title="系统信息和性能查看"></a>系统信息和性能查看</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>uname -a</td>
+<td>查看内核/OS/CPU信息</td>
+</tr>
+<tr>
+<td>uname -r</td>
+<td>查看内核版本</td>
+</tr>
+<tr>
+<td>uname -m</td>
+<td>查看处理器架构</td>
+</tr>
+<tr>
+<td>arch</td>
+<td>查看处理器架构</td>
+</tr>
+<tr>
+<td>hostname</td>
+<td>查看计算机名</td>
+</tr>
+<tr>
+<td>who</td>
+<td>显示当前登录系统的⽤户</td>
+</tr>
+<tr>
+<td>who am i</td>
+<td>显示登录时的⽤户名</td>
+</tr>
+<tr>
+<td>whoami</td>
+<td>显示当前⽤户名</td>
+</tr>
+<tr>
+<td>cat /proc/version</td>
+<td>查看linux版本信息</td>
+</tr>
+<tr>
+<td>cat /proc/cpuinfo</td>
+<td>查看CPU信息</td>
+</tr>
+<tr>
+<td>cat /proc/interrupts</td>
+<td>查看中断</td>
+</tr>
+<tr>
+<td>cat /proc/loadavg</td>
+<td>查看系统负载</td>
+</tr>
+<tr>
+<td>uptime</td>
+<td>查看系统运⾏时间、⽤户数、负载</td>
+</tr>
+<tr>
+<td>env</td>
+<td>查看系统的环境变量</td>
+</tr>
+<tr>
+<td>lsusb -tv</td>
+<td>查看系统USB设备信息</td>
+</tr>
+<tr>
+<td>lspci -tv</td>
+<td>查看系统PCI设备信息</td>
+</tr>
+<tr>
+<td>lsmod</td>
+<td>查看已加载的系统模块</td>
+</tr>
+<tr>
+<td>grep MemTotal /proc/meminfo</td>
+<td>查看内存总量</td>
+</tr>
+<tr>
+<td>grep MemFree /proc/meminfo</td>
+<td>查看空闲内存量</td>
+</tr>
+<tr>
+<td>free -m</td>
+<td>查看内存⽤量和交换区⽤量</td>
+</tr>
+<tr>
+<td>date</td>
+<td>显示系统⽇期时间</td>
+</tr>
+<tr>
+<td>cal 2021</td>
+<td>显示2021⽇历表</td>
+</tr>
+<tr>
+<td>top</td>
+<td>动态显示cpu/内存/进程等情况</td>
+</tr>
+<tr>
+<td>vmstat 1 20</td>
+<td>每1秒采⼀次系统状态，采20次</td>
+</tr>
+<tr>
+<td>iostat</td>
+<td>查看io读写/cpu使⽤情况</td>
+</tr>
+<tr>
+<td>查看io读写/cpu使⽤情况</td>
+<td>查询cpu使⽤情况（1秒⼀次，共10次）</td>
+</tr>
+<tr>
+<td>sar -d 1 10</td>
+<td>查询磁盘性能</td>
+</tr>
+</tbody></table>
+<h1 id="磁盘和分区"><a href="#磁盘和分区" class="headerlink" title="磁盘和分区"></a>磁盘和分区</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fdisk -l</td>
+<td>查看所有磁盘分区</td>
+</tr>
+<tr>
+<td>swapon -s</td>
+<td>查看所有交换分区</td>
+</tr>
+<tr>
+<td>df -h</td>
+<td>查看磁盘使⽤情况及挂载点</td>
+</tr>
+<tr>
+<td>df -hl</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>du -sh /dir</td>
+<td>查看指定某个⽬录的⼤⼩</td>
+</tr>
+<tr>
+<td>du -sk * | sort -rn</td>
+<td>从⾼到低依次显示⽂件和⽬录⼤⼩</td>
+</tr>
+<tr>
+<td>mount /dev/hda2 /mnt/hda2</td>
+<td>挂载hda2盘</td>
+</tr>
+<tr>
+<td>mount -t ntfs /dev/sdc1 /mnt/usbhd1</td>
+<td>指定⽂件系统类型挂载（如ntfs）</td>
+</tr>
+<tr>
+<td>mount -o loop xxx.iso /mnt/cdrom</td>
+<td>挂 载 iso ⽂ 件</td>
+</tr>
+<tr>
+<td>umount -v /dev/sda1</td>
+<td>通过设备名卸载</td>
+</tr>
+<tr>
+<td>umount -v /mnt/mymnt</td>
+<td>通过挂载点卸载</td>
+</tr>
+<tr>
+<td>fuser -km /mnt/hda1</td>
+<td>强制卸载(慎⽤)</td>
+</tr>
+</tbody></table>
+<h1 id="⽤户和⽤户组"><a href="#⽤户和⽤户组" class="headerlink" title="⽤户和⽤户组"></a>⽤户和⽤户组</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>useradd codesheep</td>
+<td>创建⽤户</td>
+</tr>
+<tr>
+<td>userdel -r codesheep</td>
+<td>删除⽤户</td>
+</tr>
+<tr>
+<td>usermod -g group_name user_name</td>
+<td>修改⽤户的组</td>
+</tr>
+<tr>
+<td>usermod -aG group_name user_name</td>
+<td>将⽤户添加到组</td>
+</tr>
+<tr>
+<td>usermod -s /bin/ksh -d /home/codepig –g dev codesheep</td>
+<td>修改⽤户codesheep的登录Shell、主⽬录以及⽤户组</td>
+</tr>
+<tr>
+<td>groups test</td>
+<td>查看test⽤户所在的组</td>
+</tr>
+<tr>
+<td>groupadd group_name</td>
+<td>创建⽤户组</td>
+</tr>
+<tr>
+<td>groupdel group_name</td>
+<td>删除⽤户组</td>
+</tr>
+<tr>
+<td>groupmod -n new_name old_name</td>
+<td>重命名⽤户组</td>
+</tr>
+<tr>
+<td>su - user_name</td>
+<td>su - user_name</td>
+</tr>
+<tr>
+<td>passwd</td>
+<td>修改⼝令</td>
+</tr>
+<tr>
+<td>passwd codesheep</td>
+<td>修改某⽤户的⼝令</td>
+</tr>
+<tr>
+<td>w</td>
+<td>查看活动⽤户</td>
+</tr>
+<tr>
+<td>id codesheep</td>
+<td>查看指定⽤户codesheep信息</td>
+</tr>
+<tr>
+<td>last</td>
+<td>查看⽤户登录⽇志</td>
+</tr>
+<tr>
+<td>crontab -l</td>
+<td>查看当前⽤户的计划任务</td>
+</tr>
+<tr>
+<td>cut -d: -f1 /etc/passwd</td>
+<td>查看系统所有⽤户</td>
+</tr>
+<tr>
+<td>cut -d: -f1 /etc/group</td>
+<td>查看系统所有组</td>
+</tr>
+</tbody></table>
+<h1 id="⽹络和进程管理"><a href="#⽹络和进程管理" class="headerlink" title="⽹络和进程管理"></a>⽹络和进程管理</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ifconfig</td>
+<td>查看⽹络接⼝属性</td>
+</tr>
+<tr>
+<td>ifconfig eth0</td>
+<td>查看某⽹卡的配置</td>
+</tr>
+<tr>
+<td>route -n</td>
+<td>查看路由表</td>
+</tr>
+<tr>
+<td>netstat -lntp</td>
+<td>查看所有监听端⼝</td>
+</tr>
+<tr>
+<td>netstat -antp</td>
+<td>查看已经建⽴的TCP连接</td>
+</tr>
+<tr>
+<td>netstat -lutp</td>
+<td>查看TCP/UDP的状态信息</td>
+</tr>
+<tr>
+<td>ifup eth0</td>
+<td>启⽤eth0⽹络设备</td>
+</tr>
+<tr>
+<td>ifdown eth0</td>
+<td>禁⽤eth0⽹络设备</td>
+</tr>
+<tr>
+<td>iptables -L</td>
+<td>查看iptables规则</td>
+</tr>
+<tr>
+<td>ifconfig eth0 192.168.1.1 netmask 255.255.255.0</td>
+<td>配置ip地址</td>
+</tr>
+<tr>
+<td>dhclient eth0</td>
+<td>以dhcp模式启⽤eth0</td>
+</tr>
+<tr>
+<td>route add -net 0/0 gw Gateway_IP</td>
+<td>配置默认⽹关</td>
+</tr>
+<tr>
+<td>route add -net 192.168.0.0 netmask 255.255.0.0 gw 192.168.1.1</td>
+<td>配置静态路由到达⽹络’192.168.0.0/16’</td>
+</tr>
+<tr>
+<td>route del 0/0 gw Gateway_IP</td>
+<td>删除静态路由</td>
+</tr>
+<tr>
+<td>hostname</td>
+<td>查看主机名</td>
+</tr>
+<tr>
+<td>host <a href="http://www.baidu.com/">www.baidu.com</a></td>
+<td>解析主机名</td>
+</tr>
+<tr>
+<td>nslookup <a href="http://www.baidu.com/">www.baidu.com</a></td>
+<td>查询DNS记录，查看域名解析是否正常</td>
+</tr>
+<tr>
+<td>ps -ef</td>
+<td>查看所有进程</td>
+</tr>
+<tr>
+<td>ps -ef | grep codesheep</td>
+<td>过滤出你需要的进程</td>
+</tr>
+<tr>
+<td>kill -s name</td>
+<td>kill指定名称的进程</td>
+</tr>
+<tr>
+<td>kill -s pid</td>
+<td>kill指定pid的进程</td>
+</tr>
+<tr>
+<td>top</td>
+<td>实时显示进程状态</td>
+</tr>
+<tr>
+<td>vmstat 1 20</td>
+<td>每1秒采⼀次系统状态，采20次</td>
+</tr>
+<tr>
+<td>iostat</td>
+<td>iostat</td>
+</tr>
+<tr>
+<td>sar -u 1 10</td>
+<td>查询cpu使⽤情况（1秒⼀次，共10次）</td>
+</tr>
+<tr>
+<td>sar -d 1 10</td>
+<td>查询磁盘性能</td>
+</tr>
+</tbody></table>
+<h1 id="常⻅系统服务命令"><a href="#常⻅系统服务命令" class="headerlink" title="常⻅系统服务命令"></a>常⻅系统服务命令</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>chkconfig –list</td>
+<td>列出系统服务</td>
+</tr>
+<tr>
+<td>service &lt;服务名&gt; status</td>
+<td>查看某个服务</td>
+</tr>
+<tr>
+<td>service &lt;服务名&gt; start</td>
+<td>启动某个服务</td>
+</tr>
+<tr>
+<td>service &lt;服务名&gt; stop</td>
+<td>终⽌某个服务</td>
+</tr>
+<tr>
+<td>service &lt;服务名&gt; restart</td>
+<td>重启某个服务</td>
+</tr>
+<tr>
+<td>systemctl status &lt;服务名&gt;</td>
+<td>查看某个服务</td>
+</tr>
+<tr>
+<td>systemctl start &lt;服务名&gt;</td>
+<td>启动某个服务</td>
+</tr>
+<tr>
+<td>systemctl stop &lt;服务名&gt;</td>
+<td>终⽌某个服务</td>
+</tr>
+<tr>
+<td>systemctl restart &lt;服务名&gt;</td>
+<td>重启某个服务</td>
+</tr>
+<tr>
+<td>systemctl enable &lt;服务名&gt;</td>
+<td>关闭⾃启动</td>
+</tr>
+<tr>
+<td>systemctl disable &lt;服务名&gt;</td>
+<td>关闭⾃启动</td>
+</tr>
+</tbody></table>
+<h1 id="⽂件和⽬录操作"><a href="#⽂件和⽬录操作" class="headerlink" title="⽂件和⽬录操作"></a>⽂件和⽬录操作</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cd &lt;⽬录名&gt;</td>
+<td>进⼊某个⽬录</td>
+</tr>
+<tr>
+<td>cd ..</td>
+<td>回上级⽬录</td>
+</tr>
+<tr>
+<td>cd ../..</td>
+<td>回上两级⽬录</td>
+</tr>
+<tr>
+<td>cd</td>
+<td>进个⼈主⽬录</td>
+</tr>
+<tr>
+<td>cd -</td>
+<td>回上⼀步所在⽬录</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>显示当前路径</td>
+</tr>
+<tr>
+<td>ls</td>
+<td>查看⽂件⽬录列表</td>
+</tr>
+<tr>
+<td>ls -F</td>
+<td>查看⽬录中内容（显示是⽂件还是⽬录）</td>
+</tr>
+<tr>
+<td>ls -l</td>
+<td>查看⽂件和⽬录的详情列表</td>
+</tr>
+<tr>
+<td>ls -a</td>
+<td>查看隐藏⽂件</td>
+</tr>
+<tr>
+<td>ls -lh</td>
+<td>查看⽂件和⽬录的详情列表（增强⽂件⼤⼩易读性）</td>
+</tr>
+<tr>
+<td>ls -lSr</td>
+<td>查看⽂件和⽬录列表（以⽂件⼤⼩升序查看）</td>
+</tr>
+<tr>
+<td>tree</td>
+<td>查看⽂件和⽬录的树形结构</td>
+</tr>
+<tr>
+<td>mkdir &lt;⽬录名&gt;</td>
+<td>创建⽬录</td>
+</tr>
+<tr>
+<td>mkdir dir1 dir2</td>
+<td>同时创建两个⽬录</td>
+</tr>
+<tr>
+<td>mkdir -p /tmp/dir1/dir2</td>
+<td>创建⽬录树</td>
+</tr>
+<tr>
+<td>rm -f file1</td>
+<td>删除’file1’⽂件</td>
+</tr>
+<tr>
+<td>rmdir dir1</td>
+<td>删除’dir1’⽬录</td>
+</tr>
+<tr>
+<td>rm -rf dir1</td>
+<td>删除’dir1’⽬录和其内容</td>
+</tr>
+<tr>
+<td>rm -rf dir1 dir2</td>
+<td>同时删除两个⽬录及其内容</td>
+</tr>
+<tr>
+<td>mv old_dir new_dir</td>
+<td>重命名/移动⽬录</td>
+</tr>
+<tr>
+<td>cp file1 file2</td>
+<td>复制⽂件</td>
+</tr>
+<tr>
+<td>cp dir/* .</td>
+<td>复制某⽬录下的所有⽂件⾄当前⽬录</td>
+</tr>
+<tr>
+<td>cp -a dir1 dir2</td>
+<td>复制⽬录</td>
+</tr>
+<tr>
+<td>cp -a /tmp/dir1 .</td>
+<td>复制⼀个⽬录⾄当前⽬录</td>
+</tr>
+<tr>
+<td>ln -s file1 link1</td>
+<td>创建指向⽂件/⽬录的软链接</td>
+</tr>
+<tr>
+<td>ln file1 lnk1</td>
+<td>创建指向⽂件/⽬录的物理链接</td>
+</tr>
+<tr>
+<td>find / -name file1</td>
+<td>从跟⽬录开始搜索⽂件/⽬录</td>
+</tr>
+<tr>
+<td>find / -user user1</td>
+<td>搜索⽤户user1的⽂件/⽬录</td>
+</tr>
+<tr>
+<td>find /dir -name *.bin</td>
+<td>在⽬录/dir中搜带有.bin后缀的⽂件</td>
+</tr>
+<tr>
+<td>locate &lt;关键词&gt;</td>
+<td>快速定位⽂件</td>
+</tr>
+<tr>
+<td>locate *.mp4</td>
+<td>寻找.mp4结尾的⽂件</td>
+</tr>
+<tr>
+<td>whereis &lt;关键词&gt;</td>
+<td>显示某⼆进制⽂件/可执⾏⽂件的路径</td>
+</tr>
+<tr>
+<td>which &lt;关键词&gt;</td>
+<td>查找系统⽬录下某的⼆进制⽂件</td>
+</tr>
+<tr>
+<td>chmod ugo+rwx dir1</td>
+<td>设置⽬录所有者(u)、群组(g)及其他⼈(o)的读（r）写(w)执⾏(x)权限</td>
+</tr>
+<tr>
+<td>chmod go-rwx dir1</td>
+<td>移除群组(g)与其他⼈(o)对⽬录的读写执⾏权限</td>
+</tr>
+<tr>
+<td>chown user1 file1</td>
+<td>改变⽂件的所有者属性</td>
+</tr>
+<tr>
+<td>chown -R user1 dir1</td>
+<td>改变⽬录的所有者属性</td>
+</tr>
+<tr>
+<td>chgrp group1 file1</td>
+<td>改变⽂件群组</td>
+</tr>
+<tr>
+<td>chown user1:group1 file1</td>
+<td>改变⽂件的所有⼈和群组</td>
+</tr>
+</tbody></table>
+<h1 id="⽂件查看和处理"><a href="#⽂件查看和处理" class="headerlink" title="⽂件查看和处理"></a>⽂件查看和处理</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cat file1</td>
+<td>查看⽂件内容</td>
+</tr>
+<tr>
+<td>cat -n file1</td>
+<td>查看内容并标示⾏数</td>
+</tr>
+<tr>
+<td>tac file1</td>
+<td>从最后⼀⾏开始反看⽂件内容</td>
+</tr>
+<tr>
+<td>more file1</td>
+<td>more file1</td>
+</tr>
+<tr>
+<td>less file1</td>
+<td>类似more命令，但允许反向操作</td>
+</tr>
+<tr>
+<td>head -2 file1</td>
+<td>查看⽂件前两⾏</td>
+</tr>
+<tr>
+<td>tail -2 file1</td>
+<td>查看⽂件后两⾏</td>
+</tr>
+<tr>
+<td>tail -f /log/msg</td>
+<td>实时查看添加到⽂件中的内容</td>
+</tr>
+<tr>
+<td>grep codesheep hello.txt</td>
+<td>在⽂件hello.txt中查找关键词codesheep</td>
+</tr>
+<tr>
+<td>grep ^sheep hello.txt</td>
+<td>在⽂件hello.txt中查找以sheep开头的内容</td>
+</tr>
+<tr>
+<td>grep [0-9] hello.txt</td>
+<td>选择hello.txt⽂件中所有包含数字的⾏</td>
+</tr>
+<tr>
+<td>sed ‘s/s1/s2/g’ hello.txt</td>
+<td>将hello.txt⽂件中的s1替换成s2</td>
+</tr>
+<tr>
+<td>sed ‘/^$/d’ hello.txt</td>
+<td>从hello.txt⽂件中删除所有空⽩⾏</td>
+</tr>
+<tr>
+<td>sed ‘/ *#/d; /^$/d’ hello.txt</td>
+<td>从hello.txt⽂件中删除所有注释和空⽩⾏</td>
+</tr>
+<tr>
+<td>sed -e ‘1d’ hello.txt</td>
+<td>从⽂件hello.txt 中排除第⼀⾏</td>
+</tr>
+<tr>
+<td>sed -n ‘/s1/p’ hello.txt</td>
+<td>查看只包含关键词”s1”的⾏</td>
+</tr>
+<tr>
+<td>sed -e ‘s/ *$//‘ hello.txt</td>
+<td>删除每⼀⾏最后的空⽩字符</td>
+</tr>
+<tr>
+<td>sed -e ‘s/s1//g’ hello.txt</td>
+<td>从⽂档中只删除词汇s1并保留剩余全部</td>
+</tr>
+<tr>
+<td>sed -n ‘1,5p;5q’ hello.txt</td>
+<td>查看从第⼀⾏到第5⾏内容</td>
+</tr>
+<tr>
+<td>sed -n ‘5p;5q’ hello.txt</td>
+<td>查看第5⾏</td>
+</tr>
+<tr>
+<td>paste file1 file2</td>
+<td>合并两个⽂件或两栏的内容</td>
+</tr>
+<tr>
+<td>paste -d ‘+’ file1 file2</td>
+<td>合并两个⽂件或两栏的内容，中间⽤”+”区分</td>
+</tr>
+<tr>
+<td>sort file1 file2</td>
+<td>排序两个⽂件的内容</td>
+</tr>
+<tr>
+<td>comm -1 file1 file2</td>
+<td>⽐较两个⽂件的内容(去除’file1’所含内容)</td>
+</tr>
+<tr>
+<td>comm -2 file1 file2</td>
+<td>⽐较两个⽂件的内容(去除’file2’所含内容</td>
+</tr>
+<tr>
+<td>comm -3 file1 file2</td>
+<td>⽐较两个⽂件的内容(去除两⽂件共有部分)</td>
+</tr>
+</tbody></table>
+<h1 id="打包和解压"><a href="#打包和解压" class="headerlink" title="打包和解压"></a>打包和解压</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>zip xxx.zip file</td>
+<td>压缩⾄zip包</td>
+</tr>
+<tr>
+<td>zip -r xxx.zip file1 file2 dir1</td>
+<td>将多个⽂件+⽬录压成zip包</td>
+</tr>
+<tr>
+<td>unzip xxx.zip</td>
+<td>解压zip包</td>
+</tr>
+<tr>
+<td>tar -cvf xxx.tar file</td>
+<td>创建⾮压缩tar包</td>
+</tr>
+<tr>
+<td>tar -cvf xxx.tar file1 file2 dir1</td>
+<td>将多个⽂件+⽬录打tar包</td>
+</tr>
+<tr>
+<td>tar -tf xxx.tar</td>
+<td>查看tar包的内容</td>
+</tr>
+<tr>
+<td>tar -xvf xxx.tar</td>
+<td>解压tar包</td>
+</tr>
+<tr>
+<td>tar -xvf xxx.tar -C /dir</td>
+<td>将tar包解压⾄指定⽬录</td>
+</tr>
+<tr>
+<td>tar -cvfj xxx.tar.bz2 dir</td>
+<td>创建bz2压缩包</td>
+</tr>
+<tr>
+<td>tar -jxvf xxx.tar.bz2</td>
+<td>解压bz2压缩包</td>
+</tr>
+<tr>
+<td>tar -cvfz xxx.tar.gz dir</td>
+<td>创建gzip压缩包</td>
+</tr>
+<tr>
+<td>tar -zxvf xxx.tar.gz</td>
+<td>解压gzip压缩包</td>
+</tr>
+<tr>
+<td>bunzip2 xxx.bz2</td>
+<td>解压bz2压缩包</td>
+</tr>
+<tr>
+<td>bzip2 filename</td>
+<td>压缩⽂件</td>
+</tr>
+<tr>
+<td>gunzip xxx.gz</td>
+<td>解压gzip压缩包</td>
+</tr>
+<tr>
+<td>gzip filename</td>
+<td>压缩⽂件</td>
+</tr>
+<tr>
+<td>gzip -9 filename</td>
+<td>最⼤程度压缩</td>
+</tr>
+</tbody></table>
+<h1 id="RPM包管理命令"><a href="#RPM包管理命令" class="headerlink" title="RPM包管理命令"></a>RPM包管理命令</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rpm -qa</td>
+<td>查看已安装的rpm包</td>
+</tr>
+<tr>
+<td>rpm -q pkg_name</td>
+<td>查询某个rpm包</td>
+</tr>
+<tr>
+<td>rpm -q –whatprovides xxx</td>
+<td>显示xxx功能是由哪个包提供的</td>
+</tr>
+<tr>
+<td>rpm -q –whatrequires xxx</td>
+<td>显示xxx功能被哪个程序包依赖的</td>
+</tr>
+<tr>
+<td>rpm -q –changelog xxx</td>
+<td>显示xxx包的更改记录</td>
+</tr>
+<tr>
+<td>rpm -qi pkg_name</td>
+<td>查看⼀个包的详细信息</td>
+</tr>
+<tr>
+<td>rpm -qd pkg_name</td>
+<td>查询⼀个包所提供的⽂档</td>
+</tr>
+<tr>
+<td>rpm -qc pkg_name</td>
+<td>查看已安装rpm包提供的配置⽂件</td>
+</tr>
+<tr>
+<td>rpm -ql pkg_name</td>
+<td>查看⼀个包安装了哪些⽂件</td>
+</tr>
+<tr>
+<td>rpm -qf filename</td>
+<td>查看某个⽂件属于哪个包</td>
+</tr>
+<tr>
+<td>rpm -qR pkg_name</td>
+<td>查询包的依赖关系</td>
+</tr>
+<tr>
+<td>rpm -ivh xxx.rpm</td>
+<td>安装rpm包</td>
+</tr>
+<tr>
+<td>rpm -ivh –test xxx.rpm</td>
+<td>测试安装rpm包</td>
+</tr>
+<tr>
+<td>rpm -ivh –nodeps xxx.rpm</td>
+<td>安装rpm包时忽略依赖关系</td>
+</tr>
+<tr>
+<td>rpm -e xxx</td>
+<td>卸载程序包</td>
+</tr>
+<tr>
+<td>rpm -Fvh pkg_name</td>
+<td>升级确定已安装的rpm包</td>
+</tr>
+<tr>
+<td>rpm -Uvh pkg_name</td>
+<td>升级rpm包(若未安装则会安装)</td>
+</tr>
+<tr>
+<td>rpm -V pkg_name</td>
+<td>RPM包详细信息校验</td>
+</tr>
+</tbody></table>
+<h1 id="YUM包管理命令"><a href="#YUM包管理命令" class="headerlink" title="YUM包管理命令"></a>YUM包管理命令</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>yum repolist enabled</td>
+<td>显示可⽤的源仓库</td>
+</tr>
+<tr>
+<td>yum search pkg_name</td>
+<td>搜索软件包</td>
+</tr>
+<tr>
+<td>yum install pkg_name</td>
+<td>下载并安装软件包</td>
+</tr>
+<tr>
+<td>yum install –downloadonly pkg_name</td>
+<td>只 下 载 不 安 装</td>
+</tr>
+<tr>
+<td>yum list</td>
+<td>显示所有程序包</td>
+</tr>
+<tr>
+<td>yum list installed</td>
+<td>查看当前系统已安装包</td>
+</tr>
+<tr>
+<td>yum list updates</td>
+<td>查看可以更新的包列表</td>
+</tr>
+<tr>
+<td>yum check-update</td>
+<td>查看可升级的软件包</td>
+</tr>
+<tr>
+<td>yum update</td>
+<td>更新所有软件包</td>
+</tr>
+<tr>
+<td>yum update pkg_name</td>
+<td>升级指定软件包</td>
+</tr>
+<tr>
+<td>yum deplist pkg_name</td>
+<td>列出软件包依赖关系</td>
+</tr>
+<tr>
+<td>yum remove pkg_name</td>
+<td>删除软件包</td>
+</tr>
+<tr>
+<td>yum clean all</td>
+<td>清除缓存</td>
+</tr>
+<tr>
+<td>yum clean packages</td>
+<td>清除缓存的软件包</td>
+</tr>
+<tr>
+<td>yum clean headers</td>
+<td>清除缓存的header</td>
+</tr>
+</tbody></table>
+<h1 id="DPKG包管理命令"><a href="#DPKG包管理命令" class="headerlink" title="DPKG包管理命令"></a>DPKG包管理命令</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dpkg -c xxx.deb</td>
+<td>列出deb包的内容</td>
+</tr>
+<tr>
+<td>dpkg -i xxx.deb</td>
+<td>安装/更新deb包</td>
+</tr>
+<tr>
+<td>dpkg -r pkg_name</td>
+<td>移除deb包</td>
+</tr>
+<tr>
+<td>dpkg -P pkg_name</td>
+<td>移除deb包(不保留配置)</td>
+</tr>
+<tr>
+<td>dpkg -l</td>
+<td>查看系统中已安装deb包</td>
+</tr>
+<tr>
+<td>dpkg -l pkg_name</td>
+<td>显示包的⼤致信息</td>
+</tr>
+<tr>
+<td>dpkg -L pkg_name</td>
+<td>查看deb包安装的⽂件</td>
+</tr>
+<tr>
+<td>dpkg -s pkg_name</td>
+<td>查看包的详细信息</td>
+</tr>
+<tr>
+<td>dpkg –unpack xxx.deb</td>
+<td>解开deb包的内容</td>
+</tr>
+</tbody></table>
+<h1 id="APT软件⼯具"><a href="#APT软件⼯具" class="headerlink" title="APT软件⼯具"></a>APT软件⼯具</h1><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>apt-cache search pkg_name</td>
+<td>搜索程序包</td>
+</tr>
+<tr>
+<td>apt-cache show pkg_name</td>
+<td>获取包的概览信息</td>
+</tr>
+<tr>
+<td>apt-get install pkg_name</td>
+<td>安装/升级软件包</td>
+</tr>
+<tr>
+<td>apt-get purge pkg_name</td>
+<td>卸载软件（包括配置）</td>
+</tr>
+<tr>
+<td>apt-get remove pkg_name</td>
+<td>卸载软件（不包括配置）</td>
+</tr>
+<tr>
+<td>apt-get update</td>
+<td>更新包索引信息</td>
+</tr>
+<tr>
+<td>apt-get upgrade</td>
+<td>更新已安装软件包</td>
+</tr>
+<tr>
+<td>apt-get clean</td>
+<td>清理缓存</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试开发</tag>
+      </tags>
+  </entry>
 </search>
