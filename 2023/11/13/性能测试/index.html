@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="测试开发," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="性能测试面试常见问题：  请解释什么是性能测试，以及其在软件开发生命周期中的重要性。 性能测试中常用的负载模型有哪些？请描述它们的特点和适用场景。 你在性能测试中使用过哪些工具和技术？请分享你使用它们的经验。 请解释什么是负载测试和压力测试，它们之间有什么区别？ 如何确定性能测试的目标和指标？请列举几个常用的性能指标，并解释其含义。 你在性能测试中遇到过哪些常见的性能问题？如何分析和解决这些问题？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="性能测试">
+<meta property="og:url" content="https://shenle2019.github.io/2023/11/13/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="性能测试面试常见问题：  请解释什么是性能测试，以及其在软件开发生命周期中的重要性。 性能测试中常用的负载模型有哪些？请描述它们的特点和适用场景。 你在性能测试中使用过哪些工具和技术？请分享你使用它们的经验。 请解释什么是负载测试和压力测试，它们之间有什么区别？ 如何确定性能测试的目标和指标？请列举几个常用的性能指标，并解释其含义。 你在性能测试中遇到过哪些常见的性能问题？如何分析和解决这些问题？">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-11-12T23:58:35.000Z">
+<meta property="article:modified_time" content="2023-11-12T16:09:13.322Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="测试开发">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2023/11/13/性能测试/"/>
+
+
+
+
+
+  <title>性能测试 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2023/11/13/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">性能测试</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-11-13T07:58:35+08:00">
+                2023-11-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-11-13T00:09:13+08:00">
+                2023-11-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2023/11/13/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2023/11/13/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p>面试常见问题：</p>
+<ol>
+<li>请解释什么是性能测试，以及其在软件开发生命周期中的重要性。</li>
+<li>性能测试中常用的负载模型有哪些？请描述它们的特点和适用场景。</li>
+<li>你在性能测试中使用过哪些工具和技术？请分享你使用它们的经验。</li>
+<li>请解释什么是负载测试和压力测试，它们之间有什么区别？</li>
+<li>如何确定性能测试的目标和指标？请列举几个常用的性能指标，并解释其含义。</li>
+<li>你在性能测试中遇到过哪些常见的性能问题？如何分析和解决这些问题？</li>
+<li>在进行性能测试时，你如何设计和执行有效的测试用例和测试计划？</li>
+<li>请解释什么是性能剖析和性能调优，以及它们在性能测试中的作用。</li>
+<li>你如何评估和报告性能测试结果？你通常如何与团队分享测试结果和建议？</li>
+<li>请描述你在过去项目中处理高并发和大数据量的性能测试挑战的经验。<br>这些问题可以帮助评估面试者在性能测试领域的知识水平、经验和解决问题的能力。当然，具体的问题选择还应根据您所在的组织和项目的需求来进行调整。</li>
+</ol>
+<p>请解释什么是性能测试，以及其在软件开发生命周期中的重要性。<br>性能测试是在软件开发过程中对系统、应用程序或组件进行测试，以评估它们在不同负载条件下的性能和响应能力。它旨在检测系统在现实使用场景下的性能瓶颈、资源利用率、稳定性和可靠性。<br>性能测试在软件开发生命周期中非常重要。以下是其重要性的一些方面：</p>
+<ol>
+<li>用户体验改善：性能测试可以确保系统在预期的负载下以可接受的速度响应用户请求。通过检测和解决性能问题，可以提高用户的满意度和体验，避免用户因为系统响应慢而流失。</li>
+<li>可扩展性评估：性能测试可以评估系统在面对持续增长的用户和数据负载时的可扩展性。它帮助确定系统是否能够有效地处理大规模的并发请求，支持业务的发展和扩展。</li>
+<li>资源规划和优化：性能测试可以帮助识别系统的瓶颈和性能瓶颈，例如内存、CPU、网络带宽等资源的使用情况。通过分析测试结果，可以优化资源分配和利用，提高系统的效率和性能。</li>
+<li>容量规划：性能测试可以帮助预测系统在不同负载条件下的性能表现，并识别系统在达到容量极限时的行为。这有助于规划系统的容量需求，以确保系统在未来的增长中保持高性能。</li>
+<li>可靠性和稳定性验证：性能测试可以验证系统在长时间运行和高负载条件下的可靠性和稳定性。它可以帮助发现潜在的性能问题、内存泄漏、死锁等，以提高系统的稳定性和可靠性。<br>总之，性能测试在软件开发生命周期中的重要性在于确保系统能够在真实的使用环境中满足用户的需求，并提供高性能、可靠性和良好的用户体验。它为开发团队提供了有关系统性能的关键信息，帮助他们做出改进和优化的决策。</li>
+</ol>
+<p>性能测试中常用的负载模型有哪些？请描述它们的特点和适用场景。<br>在性能测试中，常用的负载模型包括以下几种：</p>
+<ol>
+<li>均衡负载模型：均衡负载模型是将负载均匀地分布在系统的各个组件或节点上。它的特点是每个组件或节点处理相同数量的请求。适用于评估系统在正常负载下的性能，以及验证系统的可扩展性和平衡性。</li>
+<li>逐渐增加负载模型：逐渐增加负载模型是从低负载开始逐步增加负载压力，测试系统在不同负载水平下的性能表现。它的特点是逐步增加负载，以观察系统在负载逐渐增加时的性能瓶颈和响应能力。适用于确定系统的最大负载能力和资源利用率。</li>
+<li>峰值负载模型：峰值负载模型模拟系统在特定时间段内承受高负载的情况，例如促销活动或特定事件引起的突发访问量增加。它的特点是在短时间内模拟系统的峰值负载，以评估系统在高压力下的性能和可靠性。适用于测试系统在高访问压力下的稳定性和弹性。</li>
+<li>持续负载模型：持续负载模型模拟系统在长时间内持续接收一定负载的请求，以评估系统在持续高负载条件下的稳定性和资源利用率。它的特点是保持负载持续稳定，以观察系统在长时间运行时的性能表现。适用于验证系统的可靠性、内存泄漏和资源管理。</li>
+<li>压力负载模型：压力负载模型通过增加并发用户数或事务量，对系统施加高压力负载，以评估系统的压力容量和性能极限。它的特点是测试系统在极限负载下的性能瓶颈、响应时间和资源利用率。适用于确定系统的容量需求和瓶颈。<br>在选择负载模型时，需要根据具体的测试目标和应用场景来选择合适的模型。有时候也会使用组合模型，结合多种负载模型来模拟真实的使用情况。对于复杂的系统，可以根据不同的功能模块或业务流程，使用不同的负载模型进行测试。</li>
+</ol>
+<p>你在性能测试中使用过哪些工具和技术？请分享你使用它们的经验。<br>作为一个软件测试专家，我在性能测试中使用过多种工具和技术。以下是我使用的一些常见工具和技术，并分享了我的经验：</p>
+<ol>
+<li>负载测试工具：我使用过Apache JMeter和LoadRunner等负载测试工具。这些工具可以模拟多个并发用户，并记录系统的性能指标。我使用这些工具来创建测试脚本、设置负载场景、执行测试并分析结果。通过调整并发用户数、请求频率和负载模式，我能够评估系统在不同负载条件下的性能表现。</li>
+<li>性能监控工具：在性能测试过程中，我使用过诸如Grafana、New Relic和AppDynamics等性能监控工具。这些工具可以实时监测系统的资源利用率、响应时间、吞吐量等性能指标，并提供可视化的报告和图表。通过监控这些指标，我能够识别系统的瓶颈和性能问题，并进行性能调优和优化。</li>
+<li>代码分析工具：为了深入分析系统性能问题，我使用过代码分析工具，如VisualVM和Java Mission Control等。这些工具可以监视系统的内存使用情况、线程活动、垃圾回收等，并提供详细的性能分析和诊断。通过分析代码执行路径和性能瓶颈，我能够提供针对性能优化的建议和解决方案。</li>
+<li>云平台和虚拟化技术：我利用云平台（如AWS、Azure）和虚拟化技术来模拟真实的生产环境和大规模负载。通过在虚拟环境中动态调整资源配置和扩展容量，我能够评估系统的弹性和可扩展性。此外，云平台还提供了弹性负载均衡、自动扩展和容错机制，进一步增强了性能测试的能力。</li>
+<li>持续集成和自动化测试：为了实现持续性能测试，我使用了持续集成工具（如Jenkins、Travis CI），结合自动化测试框架和脚本。通过自动化测试，我能够在每次代码提交或构建后自动执行性能测试，并集成到软件开发流程中。这样可以确保在不断迭代和部署中对系统的性能进行监控和验证。<br>综上所述，我在性能测试中使用了各种工具和技术，以评估系统的性能和可靠性。通过使用这些工具，我能够更全面地了解系统的行为和性能瓶颈，并提供相应的优化建议和解决方案。不同的工具和技术在不同的场景下发挥作用，选择正确的工具和技术对于有效的性能测试非常重要。</li>
+</ol>
+<p>请解释什么是负载测试和压力测试，它们之间有什么区别？<br>负载测试和压力测试是性能测试中常用的两种测试类型，它们有一些区别，下面我将详细解释：</p>
+<ol>
+<li>负载测试：负载测试是在模拟实际使用条件下对系统或应用程序进行测试，以评估其在不同负载条件下的性能表现。它的目的是确定系统在正常负载下的性能瓶颈、资源利用率和响应能力。负载测试通常涉及模拟用户数量、事务量和数据量等因素的变化。通过逐渐增加负载，负载测试可以确定系统的承载能力、稳定性和可靠性。</li>
+<li>压力测试：压力测试是对系统施加高压力负载的测试，以评估系统在极限负载下的性能表现。它的目的是验证系统的弹性、稳定性和极限容量。压力测试模拟系统在高负载条件下的行为，可以是突发访问量增加、高并发请求或持续高负载等情况。压力测试的目标是找出系统的性能极限、瓶颈和潜在问题。<br>区别：<br>● 目的：负载测试的目的是评估系统在正常负载下的性能和响应能力，而压力测试的目的是验证系统在高压力负载下的弹性和稳定性。<br>● 负载水平：负载测试涉及不同负载水平的模拟，以覆盖实际使用场景。而压力测试施加高压力负载，以达到系统的极限容量。<br>● 测试时间：负载测试通常是长时间运行的，以模拟真实的使用情况。而压力测试通常是短时间内对系统施加高负载，以验证系统的极限容量。<br>● 结果分析：负载测试的结果主要用于确定系统的性能瓶颈和优化机会。而压力测试的结果主要用于验证系统是否能够在高压力负载下保持稳定和可靠。<br>综上所述，负载测试和压力测试是两种不同的性能测试类型。负载测试旨在评估系统在正常负载下的性能表现，而压力测试旨在验证系统在高压力负载下的弹性和稳定性。它们的选择取决于测试目标和所需的性能指标。</li>
+</ol>
+<p>如何确定性能测试的目标和指标？请列举几个常用的性能指标，并解释其含义。<br>确定性能测试的目标和指标是性能测试过程中非常重要的一步，它们可以根据系统需求和用户期望来确定。以下是几个常用的性能指标，并解释其含义：</p>
+<ol>
+<li>响应时间：响应时间是从用户发起请求到系统返回响应的时间间隔。它衡量了系统对用户请求的快速响应能力。较低的响应时间表示系统性能较好，用户能够快速获得结果。</li>
+<li>吞吐量：吞吐量是指在特定时间内系统能够处理的请求数量。它衡量了系统的处理能力和效率。较高的吞吐量表示系统可以处理更多的并发请求。</li>
+<li>并发用户数：并发用户数指同时访问系统的用户数量。它衡量了系统在同一时间段内能够处理的并发请求。测试中通过增加并发用户数来逼近或达到系统的承载极限。</li>
+<li>资源利用率：资源利用率是指系统在处理请求时所使用的硬件资源的利用情况。它可以包括CPU利用率、内存利用率、网络带宽利用率等。通过监测资源利用率，可以评估系统在不同负载条件下的资源消耗情况，确定系统的性能瓶颈。</li>
+<li>错误率：错误率是指在测试过程中发生的错误或失败的请求的比例。它可以衡量系统在高负载或极限负载下的稳定性和可靠性。较低的错误率表示系统能够在负载压力下正常运行。</li>
+<li>并发性能：并发性能是指系统在处理大量并发请求时的稳定性和响应能力。它衡量了系统在高负载条件下的性能表现和承载能力。<br>以上是常用的性能指标，根据具体的系统和应用，还可以根据需求确定其他相关指标。在确定性能测试的目标和指标时，需要与利益相关者（如开发团队、产品经理等）进行充分沟通，了解他们的期望和需求，以确保测试的准确性和有效性。</li>
+</ol>
+<p>你在性能测试中遇到过哪些常见的性能问题？如何分析和解决这些问题？<br>作为一个软件测试专家，在性能测试中我遇到了一些常见的性能问题。以下是一些常见的性能问题以及我分析和解决这些问题的方法：</p>
+<ol>
+<li>高响应时间：如果系统的响应时间过高，用户可能会感到不满意。对于这个问题，我会首先分析系统的各个组件，确定是否存在性能瓶颈，例如数据库查询、网络延迟等。我会使用性能监控工具来识别具体的瓶颈点，并分析性能日志来找出导致高响应时间的原因。解决方法可能包括优化查询语句、增加服务器资源、改进系统架构或使用缓存等。</li>
+<li>低吞吐量：如果系统的吞吐量较低，则表示系统在给定时间内无法处理大量的请求。在这种情况下，我会检查系统的处理能力并确定瓶颈。我会使用负载测试工具以不同的负载压力测试系统，观察系统的资源利用率和响应时间。通过分析性能监控数据和日志，我可以确定系统的瓶颈，例如网络带宽、数据库连接池或系统配置。解决方法可能包括增加服务器资源、优化算法或增加并发处理能力。</li>
+<li>内存泄漏：内存泄漏是一种常见的性能问题，它会导致系统的内存消耗不断增加，最终导致系统崩溃或变慢。为了分析和解决内存泄漏问题，我会使用内存分析工具来检查系统的内存使用情况和对象的生命周期。通过分析内存快照和堆转储文件，我可以确定哪些对象占用了过多的内存并找出造成内存泄漏的原因。解决方法可能包括修复代码中的内存泄漏bug、合理管理对象的生命周期或增加内存资源。</li>
+<li>并发竞争：在高并发情况下，系统可能会出现竞争条件，导致数据不一致或系统错误。为了解决并发竞争问题，我会使用并发测试工具模拟多个并发用户，并检查系统中的临界区和共享资源。通过分析日志和调试信息，我可以确定竞争条件并实施相应的解决方案，例如使用锁、同步或事务。</li>
+<li>数据库性能问题：数据库通常是系统性能的关键因素之一。在性能测试中，我经常遇到数据库方面的问题，如慢查询、缺乏索引、数据库连接问题等。为了解决这些问题，我会使用数据库性能监控工具来分析数据库的查询性能、索引使用情况和连接池利用率。然后，我会优化查询语句、添加适当的索引、调整数据库配置或增加数据库服务器容量。<br>在解决这些常见的性能问题时，我通常会使用性能测试工具和监控工具来获取性能指标和问题的关键信息。同时，我会与开发团队和系统管理员紧密合作，共同分析和解决问题。此外，我会根据实际情况建议性能调优和优化的最佳实践，以确保系统在高负载下的稳定性和性能。</li>
+</ol>
+<p>在进行性能测试时，你如何设计和执行有效的测试用例和测试计划？<br>在进行性能测试时，设计和执行有效的测试用例和测试计划是确保测试的准确性和有效性的关键。以下是我设计和执行性能测试的一般步骤和策略：</p>
+<ol>
+<li>明确测试目标：首先，我会与利益相关者（如开发团队、产品经理等）进行充分沟通，了解他们的期望和需求。然后，我会明确性能测试的目标，例如确定系统的性能瓶颈、验证系统在高负载下的弹性和稳定性等。</li>
+<li>确定测试场景：根据系统的需求和用户行为，我会选择合适的测试场景来模拟真实的使用情况。测试场景应包括用户数量、事务类型、数据量等因素的变化。我会考虑不同的使用情况和负载模型，以确保测试覆盖全面。</li>
+<li>定义测试用例：根据测试场景，我会设计测试用例来模拟不同的负载情况和用户行为。测试用例应包括具体的测试步骤、输入数据和预期结果。我会考虑到边界值、异常情况和特殊条件，以确保测试的全面性。</li>
+<li>设置性能指标：为了评估系统的性能，我会确定一些关键的性能指标，如响应时间、吞吐量、并发用户数等。这些指标应与系统的目标和实际需求相匹配。我会设置阈值来判断性能是否达到预期要求。</li>
+<li>选择性能测试工具：根据测试需求和目标，我会选择适合的性能测试工具。常见的性能测试工具包括JMeter、LoadRunner、Gatling等。这些工具可以帮助模拟大量的用户并生成负载，同时收集性能监控数据和日志。</li>
+<li>执行性能测试：在执行性能测试之前，我会准备测试环境，包括服务器配置、网络设置和测试数据。然后，我会按照测试计划和测试用例执行性能测试。我会监控系统的性能指标，并记录测试过程中的关键信息和问题。</li>
+<li>分析和报告：在测试完成后，我会分析性能监控数据、日志和测试结果。我会比较实际性能指标与预期阈值，并找出性能瓶颈和问题的原因。然后，我会生成详细的测试报告，包括测试概述、测试结果、问题分析和建议的解决方案。</li>
+<li>优化和再测试：根据测试结果和建议的解决方案，我会与开发团队和系统管理员合作，进行性能优化和调整。然后，我会再次执行性能测试，以验证优化的效果和确认性能问题是否解决。<br>通过以上步骤和策略，我可以设计和执行有效的性能测试，以确保系统在不同负载条件下的性能和稳定性。同时，我会与相关团队合作，及时解决测试中发现的问题，以提高系统的性能和用户体验。</li>
+</ol>
+<p>请解释什么是性能剖析和性能调优，以及它们在性能测试中的作用。<br>性能剖析（Profiling）和性能调优（Performance Tuning）是性能测试中重要的概念，它们都与改进系统的性能和效率有关。</p>
+<ol>
+<li>性能剖析：性能剖析是一种通过监测和分析系统的运行时行为来识别性能瓶颈和优化机会的方法。它可以帮助开发人员和测试人员深入了解系统在不同负载条件下的性能特征和资源利用情况。性能剖析通常包括以下方面：<br>○ 代码剖析：通过检查代码的执行路径、函数调用和运行时间等信息，来确定哪些代码部分消耗了较多的时间和资源。<br>○ 内存剖析：通过分析系统的内存使用情况，确定内存泄漏、非优化的对象创建和销毁等问题。<br>○ CPU剖析：通过监控CPU使用率、函数调用和线程活动，确定CPU密集型操作和性能瓶颈。<br>○ I/O剖析：通过监控I/O操作（如磁盘读写、网络传输等）的时间和频率，确定I/O瓶颈和资源利用不足。<br>性能剖析可以帮助定位系统的性能瓶颈和瓶颈点，并为性能调优提供有价值的信息和指导。</li>
+<li>性能调优：性能调优是一种通过优化系统的设计、代码和配置等方面来提高系统的性能和效率的过程。性能调优的目标是减少响应时间、提高吞吐量、降低资源消耗等，以满足用户的需求和提升用户体验。性能调优通常包括以下方面：<br>○ 代码优化：通过改进算法、减少不必要的计算和优化关键代码，来提高代码的执行效率和性能。<br>○ 数据库优化：通过优化查询语句、增加索引、调整数据库配置等手段，提升数据库的读写性能和响应速度。<br>○ 系统配置优化：通过调整系统的资源分配、缓存设置和线程池等配置，来优化系统的性能和承载能力。<br>○ 缓存和负载均衡：通过使用缓存和负载均衡技术，减轻服务器的负载压力，提高系统的吞吐量和并发处理能力。<br>性能调优需要结合性能剖析的结果和实际的性能测试数据，针对性地优化系统的关键部分，以达到性能目标。<br>性能剖析和性能调优在性能测试中起着关键的作用。通过性能剖析，我们可以识别系统中的性能瓶颈和优化机会，并确定优化的重点。然后，通过性能调优，我们可以针对性地优化系统的设计、代码和配置等方面，以提高系统的性能和效率。通过这两个步骤的结合，我们可以持续改进系统的性能，满足用户的需求并提供更好的用户体验。</li>
+</ol>
+<p>你如何评估和报告性能测试结果？你通常如何与团队分享测试结果和建议？<br>评估和报告性能测试结果是软件测试专家的重要职责之一。以下是我评估和报告性能测试结果的一般步骤和策略，以及与团队分享测试结果和建议的方法：</p>
+<ol>
+<li>评估性能指标：首先，我会根据性能测试的目标和测试计划，评估性能指标的结果。我会比较实际性能指标与预期阈值，判断系统是否达到了性能要求。我还会分析系统在不同负载条件下的性能变化和趋势，以识别性能瓶颈和问题。</li>
+<li>分析性能监控数据和日志：为了更深入地了解性能问题的原因，我会分析性能监控数据和日志。这些数据可以包括响应时间、吞吐量、资源利用率、错误日志等。通过分析数据，我可以确定性能瓶颈的具体原因，例如数据库查询慢、网络延迟等。</li>
+<li>总结测试结果：基于对性能指标和监控数据的评估和分析，我会总结性能测试的结果。我会说明系统的整体性能表现，例如响应时间是否满足要求、吞吐量是否达到预期等。我还会列出性能问题的详细描述，包括问题的类型、严重程度和影响范围。</li>
+<li>提供问题分析和建议的解决方案：在报告中，我会提供详细的问题分析和建议的解决方案。我会解释性能问题的原因和影响，并提供解决问题的具体方法和技术。解决方案可能包括代码优化、数据库调优、系统配置改进等。</li>
+<li>生成详细的测试报告：我会撰写详细的测试报告，将评估和分析的结果、总结和建议整理成结构化的报告。报告应包括测试概览、测试结果、问题分析、解决方案和下一步的建议。报告应具备清晰、准确、易于理解和可操作性。</li>
+<li>与团队分享测试结果：为了与团队分享测试结果和建议，我会制定一个有效的沟通计划。我会组织会议或工作坊，与开发团队、产品经理和系统管理员共享测试结果和建议。我会使用图表、图形和示例来说明问题和解决方案。我还会提供足够的时间和机会，让团队成员提问、讨论和提供反馈。<br>通过以上步骤和策略，我可以评估和报告性能测试结果，为团队提供详细的问题分析和建议的解决方案。这有助于团队了解系统的性能状况和存在的问题，并采取相应的措施来优化系统的性能和效率。</li>
+</ol>
+<p>请描述你在过去项目中处理高并发和大数据量的性能测试挑战的经验。<br>在过去的项目中，我曾处理过高并发和大数据量的性能测试挑战。以下是我在处理这些挑战时的经验和方法：</p>
+<ol>
+<li>制定测试策略：在面对高并发和大数据量的性能测试时，我首先制定测试策略。这包括确定测试场景、负载模型和测试数据的规模。我会根据实际应用场景，模拟并发用户数的增长和数据量的增加，以确保测试覆盖全面。</li>
+<li>确定合适的测试工具：针对高并发和大数据量的性能测试，我会选择适合的性能测试工具。常见的工具如JMeter、LoadRunner、Gatling等。这些工具可以模拟大量的并发用户和生成高负载，以评估系统的性能和稳定性。</li>
+<li>优化测试环境：为了模拟真实的高并发和大数据量场景，我会优化测试环境。这包括增加服务器的计算和存储能力，优化网络设置和调整数据库性能参数等。我会确保测试环境与真实生产环境尽可能接近。</li>
+<li>设计合理的测试用例：我会设计合理的测试用例，以覆盖高并发和大数据量的不同情况。测试用例应模拟真实的用户行为和业务场景，包括登录、搜索、浏览、交易等。我会考虑到边界值、异常情况和特殊条件，以确保测试的全面性。</li>
+<li>监控系统性能指标：在执行性能测试过程中，我会监控系统的性能指标，如响应时间、吞吐量、CPU和内存利用率等。这些指标可以帮助我了解系统的性能状况和资源消耗情况。我会记录和分析这些指标，以识别性能瓶颈和优化机会。</li>
+<li>分析性能测试结果：在性能测试完成后，我会分析性能测试的结果。我会比较实际性能指标与预期阈值，评估系统的性能和稳定性。我还会分析性能监控数据和日志，找出可能的性能瓶颈和问题原因。</li>
+<li>提出优化建议：基于性能测试结果和分析，我会提出优化建议。这些建议可能包括代码优化、数据库调优、系统配置改进等。我会提供具体的解决方案和操作步骤，以优化系统的性能和效率。</li>
+<li>持续监测和优化：性能测试仅是性能优化的第一步。我会与开发团队和系统管理员合作，持续监测系统的性能，并根据需求和反馈进行优化。我会迭代性能测试和优化的过程，以确保系统在高并发和大数据量条件下的稳定性和性能。<br>通过以上经验和方法，我能够应对高并发和大数据量的性能测试挑战，并提供有效的性能优化建议。这有助于确保系统在实际应用中能够处理大量的用户和数据，并提供良好的性能和用户体验。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2023/11/13/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" title="性能测试">https://shenle2019.github.io/2023/11/13/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" rel="tag"># 测试开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/11/13/mysql-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="next" title="mysql 基础知识">
+                <i class="fa fa-chevron-left"></i> mysql 基础知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/11/13/Jmeter/" rel="prev" title="Jmeter">
+                Jmeter <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">性能测试</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'pDMnuCn44ZQITVEtQAfiiXr5-gzGzoHsz',
+        appKey: 'y43DvreFS6iyfhy7ScRCF8Cy',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
