@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="测试开发," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="爬虫基础阶段：​    请求与响应​    http协议相关​    数据解析​    代理、验证码、cookie等​    相关的反爬技能​    数据库​    Playwright高阶操作​    三方抓包工具 目标：讲出来。 重要数据类型列表数据类型 在实际开发中，经常需要将一组（不只一个）数据存储起来，以便后边的代码使用。列表就是这样的一个数据结构。且列表是Python中最基本也是最常用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫001-Pyhton重点操作">
+<meta property="og:url" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB001-Pyhton%E9%87%8D%E7%82%B9%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="爬虫基础阶段：​    请求与响应​    http协议相关​    数据解析​    代理、验证码、cookie等​    相关的反爬技能​    数据库​    Playwright高阶操作​    三方抓包工具 目标：讲出来。 重要数据类型列表数据类型 在实际开发中，经常需要将一组（不只一个）数据存储起来，以便后边的代码使用。列表就是这样的一个数据结构。且列表是Python中最基本也是最常用">
+<meta property="og:locale">
+<meta property="og:image" content="https://shenle2019.github.io/Users/zhangxiaobo/Desktop/%E7%88%AC%E8%99%AB/5%E6%9C%9F/day01%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E7%82%B9/imgs/45.png">
+<meta property="article:published_time" content="2024-03-13T23:34:29.000Z">
+<meta property="article:modified_time" content="2024-03-13T15:39:53.557Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="测试开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shenle2019.github.io/Users/zhangxiaobo/Desktop/%E7%88%AC%E8%99%AB/5%E6%9C%9F/day01%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E7%82%B9/imgs/45.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2024/03/14/爬虫001-Pyhton重点操作/"/>
+
+
+
+
+
+  <title>爬虫001-Pyhton重点操作 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB001-Pyhton%E9%87%8D%E7%82%B9%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">爬虫001-Pyhton重点操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-14T07:34:29+08:00">
+                2024-03-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2024-03-13T23:39:53+08:00">
+                2024-03-13
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2024/03/14/%E7%88%AC%E8%99%AB001-Pyhton%E9%87%8D%E7%82%B9%E6%93%8D%E4%BD%9C/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2024/03/14/%E7%88%AC%E8%99%AB001-Pyhton%E9%87%8D%E7%82%B9%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>爬虫基础阶段：<br>​    请求与响应<br>​    http协议相关<br>​    数据解析<br>​    代理、验证码、cookie等<br>​    相关的反爬技能<br>​    数据库<br>​    Playwright高阶操作<br>​    三方抓包工具</p>
+<p>目标：讲出来。</p>
+<h3 id="重要数据类型"><a href="#重要数据类型" class="headerlink" title="重要数据类型"></a>重要数据类型</h3><h4 id="列表数据类型"><a href="#列表数据类型" class="headerlink" title="列表数据类型"></a>列表数据类型</h4><ul>
+<li><p>在实际开发中，经常需要将一组（不只一个）数据存储起来，以便后边的代码使用。列表就是这样的一个数据结构。且列表是Python中最基本也是最常用的数据结构之一。</p>
+</li>
+<li><p>什么是数据结构呢？</p>
+<ul>
+<li>通俗来讲，可以将数据结构当做是某种容器，该容器是用来装载或者存储数据的。不同的数据结构决定了对数据不同的组织方式。</li>
+<li>那么当数据被装载或者存储到了某个数据结构中后，那么就可以基于该数据结构的特性对数据进行不同形式的处理和运算。</li>
+</ul>
+</li>
+<li><p>列表的创建方式</p>
+<ul>
+<li><p>创建一个列表，只要把逗号分隔的不同的数据元素使用方括号括起来即可。列表内的元素，可以是其它任意类型的数据，可多层嵌套列表，元素个数无限制。</p>
+</li>
+<li><p>```python<br>alist = [1,2,3,4,5]<br>items = [1,’bobo’,12.34]<br>#列表中可以存储任意类型的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 列表元素：</span><br><span class="line"></span><br><span class="line">  - 存储在列表数据结构中的每一个数据被称为列表元素，简称元素。</span><br><span class="line"></span><br><span class="line">- 列表索引：</span><br><span class="line"></span><br><span class="line">  - 列表中的每个元素都被分配一个数字作为索引，用来表示该元素在列表内所排在的位置。第一个元素的索引是0，第二个索引是1，依此类推。</span><br><span class="line"></span><br><span class="line">  ![Snip20231227_34](imgs/Snip20231227_34.png)</span><br><span class="line"></span><br><span class="line">- 访问列表内的元素</span><br><span class="line">  - 列表从0开始为它的每一个元素顺序创建下标索引，直到总长度减一。要访问它的某个元素，以方括号加下标值的方式即可。注意要确保索引不越界，一旦访问的 索引超过范围，会抛出异常。所以，一定要记得最后一个元素的索引是len(list)-1。</span><br><span class="line"></span><br><span class="line">  - ```python</span><br><span class="line">    alist = [1,12.3,&#x27;bobo&#x27;]</span><br><span class="line">    print(alist[2])  #&#x27;bobo&#x27;</span><br><span class="line">    print(alist[0:2]) #[1, 12]</span><br><span class="line">    print(alist[6]) #使用索引和切片的时候，不可以访问超出索引范围的元素</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>修改元素的值</p>
+<ul>
+<li><p>直接对元素进行重新赋值</p>
+</li>
+<li><p>```python<br>alist = [1,12.3,’bobo’]<br>alist[1] = 100.123<br>print(alist)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 删除元素</span><br><span class="line"></span><br><span class="line">  - 使用del语句或者remove(),pop()方法删除指定的元素。</span><br><span class="line"></span><br><span class="line">  - ```python</span><br><span class="line">    alist = [1,12.3,&#x27;bobo&#x27;]</span><br><span class="line">    # del alist[0] #删除下标为0的列表元素</span><br><span class="line">    # alist.remove(&#x27;bobo&#x27;) #删除列表中bobo这个列表元素</span><br><span class="line">    # alist.pop() #默认情况下pop会把列表中最后一个元素删除</span><br><span class="line">    alist.pop(2) #将列表中下标为2的元素进行删除</span><br><span class="line">    print(alist)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>切片</p>
+<ul>
+<li><p>切片指的是对序列进行截取，选取序列中的某一段。</p>
+<ul>
+<li><p>切片的语法是： list[start:end]</p>
+</li>
+<li><p>```python<br>#同字符串的切片机制一样<br>alist = [1,12.3,’bobo’,’jay’,’hello’]<br>print(alist[:-1])</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 以冒号分割索引，start代表起点索引，end代表结束点索引。省略start表示以0开始，省略end表示到列表的结尾。注意，区间是左闭右开的！也就是说[1:4]会截取列表的索引为1/2/3的3个元素，不会截取索引为4的元素。分片不会修改原有的列表，可以将结果保存到新的变量，因此切片也是一种安全操作，常被用来复制一个列表，例如newlist = lis[:]。</span><br><span class="line"></span><br><span class="line">  - 切片过程中还可以设置步长，以第二个冒号分割，例如list[3:9:2]，表示每隔多少距离取一个元素。</span><br><span class="line"></span><br><span class="line">- 列表的内置方法</span><br><span class="line"></span><br><span class="line">  - 上文中我们说过，数据存储到不同的数据结构中，可以基于该数据结构的特性对数据进行指定形式的操作和处理。下图中的方法是列表专有的内置方法，请熟记于心。</span><br><span class="line">  - ![33](imgs/33.png)</span><br><span class="line"></span><br><span class="line">- ```python</span><br><span class="line">  alist = [&#x27;bobo&#x27;,&quot;18&quot;,&quot;99.5&quot;,&#x27;北京&#x27;]</span><br><span class="line">  #将列表转换成字符串</span><br><span class="line">  ret = &#x27;-&#x27;.join(alist) #将列表中的每一个列表元素根据-为间隔进行拼接，返回字符串结果</span><br><span class="line">  print(ret)</span><br><span class="line">  </span><br><span class="line">  #如何将字符串转换成列表</span><br><span class="line">  s = &#x27;hello-name-bobo-age&#x27;</span><br><span class="line">  ret = s.split(&#x27;-&#x27;)</span><br><span class="line">  print(ret)</span><br><span class="line">  </span><br><span class="line">  alist = [3,8,5,7,6,2,1]</span><br><span class="line">  alist.sort() #对列表元素进行排序</span><br><span class="line">  print(alist)</span><br><span class="line">  </span><br><span class="line">  a = [1,2,3]</span><br><span class="line">  a.append(&#x27;bobo&#x27;) #向列表尾部添加一个元素</span><br><span class="line">  print(a)</span><br><span class="line">  </span><br><span class="line">  a1 = [1,2,3]</span><br><span class="line">  a1.insert(1,999) #向列表下标为1的位置添加一个元素</span><br><span class="line">  print(a1)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="字典数据类型"><a href="#字典数据类型" class="headerlink" title="字典数据类型"></a>字典数据类型</h4><ul>
+<li><p>字典的实现机制：</p>
+<ul>
+<li>Python的字典数据类型是基于hash散列算法实现的，采用键值对(key:value)的形式，根据key的值计算value的地址，具有非常快的查取和插入速度。</li>
+</ul>
+</li>
+<li><p>字典特性：</p>
+<ul>
+<li>字典包含的元素个数不限，值的类型可以是任何数据类型！但是字典的key必须是不可变的对象，例如整数、字符串、bytes和元组，最常见的还是将字符串作为key。列表、字典、集合等就不可以作为key。同时，同一个字典内的key必须是唯一的，但值则不必。</li>
+<li>注意：从Python3.6开始，字典是有序的！它将保持元素插入时的先后顺序！请务必清楚！</li>
+</ul>
+</li>
+<li><p>创建字典</p>
+<ul>
+<li><p>字典的每个键值对用冒号(:)分割，每个对之间用逗号(,)分割，整个字典包括在花括号({})中 ，例如：</p>
+<ul>
+<li>d = {key1 : value1, key2 : value2 }</li>
+</ul>
+</li>
+<li><p>```python<br>#键值对：key : value<br>#key：只能使用不可变类型的数据充当，通常使用字符串<br>#value：任意数据类型的值充当<br>#字典中无法存储重复的键值对<br>dict_1 = {‘name’:’bobo’,’age’:18,’score’:100,’age’:18}<br>#注意：不要在字段中存储相同的key，value可以相同<br>dict_2 = {‘name’:’bobo’,’age’:18,’age’:20}<br>print(dict_2)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 访问字典</span><br><span class="line"></span><br><span class="line">  - 虽然现在的字典在访问时有序了，但字典依然是集合类型，不是序列类型，因此没有索引下标的概念，更没有切片的说法。但与list类似的地方是，字典采用把相应的键放入方括号内获取对应值的方式取值。</span><br><span class="line"></span><br><span class="line">  - ```python</span><br><span class="line">    d = &#123;&#x27;name&#x27;:&#x27;bobo&#x27;,&#x27;age&#x27;:20,&quot;scores&quot;:[100,120,99]&#125;</span><br><span class="line">    #根据key访问对应的value值</span><br><span class="line">    print(d[&#x27;name&#x27;],d[&#x27;scores&#x27;]) #依次访问name和scores对应的value值</span><br><span class="line">    print(d.get(&#x27;name&#x27;)) #通过get使用对应的key访问对应的value值</span><br><span class="line">    </span><br><span class="line">    #注意：使用[]访问不存在的key对应的value值程序会报错</span><br><span class="line">    # print(d[&#x27;adress&#x27;]) #程序报错</span><br><span class="line">    </span><br><span class="line">    #注意：使用get访问不存在的key程序不会报错，但是会返回None这个空值</span><br><span class="line">    print(d.get(&#x27;address&#x27;))</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>添加和修改</p>
+<ul>
+<li>增加就是往字典插入新的键值对，修改就是给原有的键赋予新的值。由于一个key只能对应一个值，所以，多次对一个key赋值，后面的值会把前面的值冲掉。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;bobo&#x27;</span>,<span class="string">&#x27;age&#x27;</span>:<span class="number">20</span>,<span class="string">&quot;scores&quot;</span>:[<span class="number">100</span>,<span class="number">120</span>,<span class="number">99</span>]&#125;</span><br><span class="line">d[<span class="string">&#x27;name&#x27;</span>] = <span class="string">&#x27;jay&#x27;</span> <span class="comment">#给存在的key修改对应的value值</span></span><br><span class="line">d[<span class="string">&#x27;address&#x27;</span>] = <span class="string">&#x27;Beijing&#x27;</span> <span class="comment">#给一个不存在的key赋值表示新增键值对</span></span><br><span class="line"><span class="keyword">del</span> d[<span class="string">&#x27;age&#x27;</span>] <span class="comment">#删除age键值对</span></span><br><span class="line"><span class="built_in">print</span>(d)</span><br></pre></td></tr></table></figure></li>
+<li><p>删除字典元素、清空字典和删除字典</p>
+<ul>
+<li>使用del关键字删除字典元素或者字典本身，使用字典的clear()方法清空字典。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;bobo&#x27;</span>,<span class="string">&#x27;age&#x27;</span>:<span class="number">20</span>,<span class="string">&quot;scores&quot;</span>:[<span class="number">100</span>,<span class="number">120</span>,<span class="number">99</span>],<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;bobo&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">del</span> d[<span class="string">&#x27;name&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>(d)</span><br><span class="line"></span><br><span class="line">d = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;bobo&#x27;</span>,<span class="string">&#x27;age&#x27;</span>:<span class="number">20</span>,<span class="string">&quot;scores&quot;</span>:[<span class="number">100</span>,<span class="number">120</span>,<span class="number">99</span>],<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;bobo&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">del</span> d</span><br><span class="line"><span class="built_in">print</span>(d)</span><br><span class="line"></span><br><span class="line">d = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;bobo&#x27;</span>,<span class="string">&#x27;age&#x27;</span>:<span class="number">20</span>,<span class="string">&quot;scores&quot;</span>:[<span class="number">100</span>,<span class="number">120</span>,<span class="number">99</span>],<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;bobo&#x27;</span>&#125;</span><br><span class="line">d.clear()</span><br><span class="line"><span class="built_in">print</span>(d)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>字典的重要方法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;bobo&#x27;</span>,<span class="string">&#x27;age&#x27;</span>:<span class="number">20</span>,<span class="string">&quot;scores&quot;</span>:[<span class="number">100</span>,<span class="number">120</span>,<span class="number">99</span>]&#125;</span><br><span class="line"><span class="built_in">print</span>(d.keys()) <span class="comment">#返回字典中所有的key</span></span><br><span class="line"><span class="built_in">print</span>(d.values()) <span class="comment">#返回字典中所有的value</span></span><br><span class="line"><span class="built_in">print</span>(d.items()) <span class="comment">#返回字典中所有的键值对</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><ul>
+<li>写一个程序，输出100以内的所有偶数，直到累加和大于1000停止程序。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#写一个程序，输出100以内的所有偶数，直到累加和大于1000停止程序。</span></span><br><span class="line"><span class="built_in">sum</span> = <span class="number">0</span> <span class="comment">#用来存储累加后的结果</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">101</span>): <span class="comment">#range(101)返回就是0-100之间的一个序列</span></span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span> &gt;= <span class="number">1000</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="built_in">sum</span> = <span class="built_in">sum</span> + i</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sum</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>已知a+b+c=1000且a^2+b^2=c^2(a,b,c都是自然数)，求出符合条件的a,b,c的所有组合。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#已知a+b+c=1000且a^2+b^2=c^2(a,b,c都是自然数)，求出符合条件的a,b,c的所有组合</span></span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">1001</span>):<span class="comment">#确定a的取值范围</span></span><br><span class="line">    <span class="keyword">for</span> b <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">1001</span>):<span class="comment">#确定b的取值范围</span></span><br><span class="line">        c = <span class="number">1000</span> - a - b</span><br><span class="line">        <span class="keyword">if</span> a + b + c == <span class="number">1000</span> <span class="keyword">and</span> a**<span class="number">2</span> + b**<span class="number">2</span> == c**<span class="number">2</span>:</span><br><span class="line">            <span class="built_in">print</span>(a,b,c)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>给定一个字符串string = “Hello, World!”，请统计字符串中每个字符的出现次数，并将结果存储在一个字典中。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#给定一个字符串string = &quot;Hello&quot;，请统计字符串中每个字符的出现次数，并将结果存储在一个字典中。</span></span><br><span class="line">string = <span class="string">&quot;Hello&quot;</span></span><br><span class="line">char_count = &#123;&#125; <span class="comment">#字典，用于保存每一个字符串的次数</span></span><br><span class="line"><span class="keyword">for</span> char <span class="keyword">in</span> string:</span><br><span class="line">    <span class="keyword">if</span> char <span class="keyword">not</span> <span class="keyword">in</span> char_count:</span><br><span class="line">        char_count[char] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        char_count[char] += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(char_count)</span><br><span class="line"><span class="comment">#&#123;&quot;H&quot;:1,&#x27;e&#x27;:1,&#x27;l&#x27;:2,&#x27;o&#x27;:1&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>猜数字游戏设计：可以不间断的进行猜数字游戏环节，找到猜对了，结束程序，猜不对，可以不断的进行游戏，并且需要提示用户猜打了还是猜小了。<ul>
+<li>最后需要统计出，用户猜了多少次才猜对。</li>
+<li>每一个用户的初始分数为100，每猜错一次扣5分，最后程序结束，统计用户的得分</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#电脑随机生成一个随机数</span></span><br><span class="line"><span class="keyword">import</span> random <span class="comment">#工具箱</span></span><br><span class="line">guess_num = random.randint(<span class="number">0</span>,<span class="number">10</span>) <span class="comment">#使用random工具箱中的randint工具生成一个0-10之间的随机数</span></span><br><span class="line">count = <span class="number">0</span> <span class="comment">#用于保存用户猜的次数（就是循环的次数）</span></span><br><span class="line">score = <span class="number">100</span> <span class="comment">#初始分值</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:<span class="comment">#死循环</span></span><br><span class="line">    count += <span class="number">1</span></span><br><span class="line">    <span class="comment">#让用户从键盘上录入一个数字</span></span><br><span class="line">    num = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;enter a num:&#x27;</span>))</span><br><span class="line">    <span class="comment">#判断num和guess_num是否一样</span></span><br><span class="line">    <span class="keyword">if</span> num == guess_num:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;猜对了&#x27;</span>)</span><br><span class="line">        <span class="keyword">break</span> <span class="comment">#只有猜对了，循环才会结束</span></span><br><span class="line">    <span class="keyword">elif</span> num &lt; guess_num:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;猜小了&#x27;</span>)</span><br><span class="line">        score -= <span class="number">5</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;猜大了&#x27;</span>)</span><br><span class="line">        score -= <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;一共猜的次数:&#x27;</span>,count)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;总计得分:&#x27;</span>,score)</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><ul>
+<li>到目前为止，我们做的一切操作，都是在内存里进行的，这样会有什么问题吗？如果一旦断电或发生意外关机了，那么你辛勤的工作成果将瞬间消失。是不是感觉事还挺大的呢？现在你是否感觉你的编程技巧还缺了点什么呢？是的，我们还缺少将数据在本地文件系统进行持久化的能力，白话讲就是文件的读写能力。</li>
+</ul>
+<h4 id="文件打开"><a href="#文件打开" class="headerlink" title="文件打开"></a>文件打开</h4><ul>
+<li><p>Python内置了一个open()方法，用于对文件进行读写操作。使用open()方法操作文件就像把大象塞进冰箱一样，可以分三步走，一是打开文件，二是操作文件，三是关闭文件。</p>
+</li>
+<li><p>文件句柄/文件描述符</p>
+<ul>
+<li>open()方法的返回值是一个file对象，可以将它赋值给一个变量，这个变量就是所谓的文件句柄。</li>
+<li>file对象：<ul>
+<li>可以调用read()和write()方法，对打开的文件进行读写操作。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>open方法的语法</p>
+<ul>
+<li>f = open(filename, mode)<ul>
+<li>filename：<ul>
+<li>一个包含了你要访问的文件名称的字符串值，通常是一个文件路径。</li>
+<li>文件路径作用：定位到指定文件</li>
+</ul>
+</li>
+<li>mode：<ul>
+<li>打开文件的模式，有很多种，默认是只读方式r。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>文件打开的模式：</p>
+</li>
+<li><p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/Users/zhangxiaobo/Desktop/%E7%88%AC%E8%99%AB/5%E6%9C%9F/day01%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E7%82%B9/imgs/45.png" alt="45"></p>
+</li>
+<li><p>常规文件打开模式操作演示</p>
+<ul>
+<li>b模式：<ul>
+<li>二进制模式，通常用来读取图片、视频等二进制文件。注意，它在读写的时候是以bytes类型读写的，因此获得的是一个bytes对象而不是字符串。在这个读写过程中，需要自己指定编码格式。在使用带b的模式时一定要注意传入的数据类型，确保为bytes类型。</li>
+</ul>
+</li>
+<li>+模式：<ul>
+<li>对于w+模式，在读写之前都会清空文件的内容。</li>
+<li>对于a+模式，永远只能在文件的末尾写入。</li>
+<li>对于r+模式，也就是读写模式。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>编码问题</p>
+<ul>
+<li>要读取非UTF-8编码的文件，需要给open()函数传入encoding参数，例如，读取GBK编码的文件</li>
+<li>遇到有些编码不规范的文件，可能会抛出UnicodeDecodeError异常，这表示在文件中可能夹杂了一些非法编码的字符。遇到这种情况，可以提供errors=’ignore‘参数，表示如果遇到编码错误后如何处理。</li>
+</ul>
+</li>
+</ul>
+<h4 id="文件对象操作"><a href="#文件对象操作" class="headerlink" title="文件对象操作"></a>文件对象操作</h4><ul>
+<li><p>每当我们用open方法打开一个文件时，将返回一个文件对象。这个对象内置了很多操作方法。</p>
+</li>
+<li><p>f.read(size) #size读取数据的个数</p>
+<ul>
+<li>读取一定大小的数据, 然后作为字符串或字节对象返回。size是一个可选的数字类型的参数，用于指定读取的数据量。当size被忽略了或者为负值，那么该文件的所有内容都将被读取并且返回。</li>
+<li>注意：<ul>
+<li>如果文件体积较大，请不要使用read()方法一次性读入内存，而是read(512)这种一点一点的读。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>f.readline()</p>
+<ul>
+<li>从文件中读取一行n内容。换行符为’\n’。如果返回一个空字符串，说明已经已经读取到最后一行。这种方法，通常是读一行，处理一行，并且不能回头，只能前进，读过的行不能再读了。</li>
+</ul>
+</li>
+<li><p>f.readlines()</p>
+<ul>
+<li>将文件中所有的行，一行一行全部读入一个列表内，按顺序一个一个作为列表的元素，并返回这个列表。readlines方法会一次性将文件全部读入内存，所以也存在一定的风险。但是它有个好处，每行都保存在列表里，可以随意存取。</li>
+</ul>
+</li>
+<li><p>```python<br>#需求：读取文件中的数据<br>fp = open(‘./test.txt’,’r’)<br>text = fp.read(10) #读取指定字节的数据<br>text_line = fp.readline() #一次读取一行数据<br>text_lines = fp.readlines() #读取多行数据，返回一个列表<br>print(text_lines)<br>fp.close()</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 总结：</span><br><span class="line"></span><br><span class="line">  - 几种不同的读取和遍历文件的方法比较：如果文件很小，read()一次性读取最方便；如果不能确定文件大小，反复调用read(size)比较保险；如果是配置文件，调用readlines()最方便。普通情况，使用for循环更好，速度更快。</span><br><span class="line"></span><br><span class="line">- f.write()</span><br><span class="line"></span><br><span class="line">  - 将字符串或bytes类型的数据写入文件内。write()动作可以多次重复进行，其实都是在内存中的操作，并不会立刻写回硬盘，直到执行close()方法后，才会将所有的写入操作反映到硬盘上。在这过程中，如果想将内存中的修改，立刻保存到硬盘上，可以使用f.flush()方法。</span><br><span class="line"></span><br><span class="line">  - ```python</span><br><span class="line">    fp = open(&#x27;./test123.txt&#x27;,&#x27;w&#x27;)</span><br><span class="line">    fp.write(&#x27;hello bobo&#x27;)</span><br><span class="line">    fp.close() #将文件内容清空，在写入新数据</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>```python<br>fp = open(‘./test123.txt’,’a’)<br>fp.write(‘hello bobo’)<br>fp.close() #在文件数据末尾追加数据<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- f.close()</span><br><span class="line"></span><br><span class="line">  - 关闭文件对象。当处理完一个文件后，调用f.close()来关闭文件并释放系统的资源。文件关闭后，如果尝试再次调用该文件对象，则会抛出异常。忘记调用close()的后果是数据可能只写了一部分到磁盘，剩下的丢失了，或者更糟糕的结果。也就是说大象塞进冰箱后，一定不要忘记关上冰箱的门。</span><br><span class="line"></span><br><span class="line">#### with关键字</span><br><span class="line"></span><br><span class="line">with关键字用于Python的上下文管理器机制。为了防止诸如open这一类文件打开方法在操作过程出现异常或错误，或者最后忘了执行close方法，文件非正常关闭等可能导致文件泄露、破坏的问题。Python提供了with这个上下文管理器机制，保证文件会被正常关闭。在它的管理下，不需要再写close语句。注意缩进。</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">with open(&#x27;./test123.txt&#x27;,&#x27;r&#x27;) as fp: #fp = open()</span><br><span class="line">    text = fp.read(5)</span><br><span class="line">print(text)</span><br><span class="line"></span><br><span class="line">#上下两组代码功效一样</span><br><span class="line">fp = open(&#x27;./test123.txt&#x27;,&#x27;r&#x27;)</span><br><span class="line">text = fp.read(5)</span><br><span class="line">print(text)</span><br><span class="line">fp.close()</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>对图片，音频，视频，压缩包等二进制的数据进行文件读写操作</p>
+<ul>
+<li><p>实现一个图片文件的拷贝</p>
+<ul>
+<li><p>1.打开一个图片文件，读取其二进制的数据</p>
+</li>
+<li><p>2.将读取到的数据写入到另一个路径下</p>
+</li>
+<li><p>```python<br>#实现一个图片的复制粘贴功能</p>
+<pre><code>#原理：将图片文件打开，读取图片文件中二进制的数据，将二进制数据写入到另一个文件即可
+</code></pre>
+<p>def cvImg(imgPath,targetPath):</p>
+<pre><code>#imgPath是原图文件路径
+#targetPath粘贴路径
+fp = open(imgPath,&#39;rb&#39;) #打开原图
+img_data = fp.read() #读取图片数据
+new_fp = open(targetPath,&#39;wb&#39;)
+new_fp.write(img_data)
+
+fp.close()
+new_fp.close()
+</code></pre>
+<p>cvImg(‘./girl.jpg’,’./girls/meinv.jpg’)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 序列化模块(重点)   </span><br><span class="line"></span><br><span class="line">&gt; 序列化： 将python中的字典，列表对象转换成指定形式字符串</span><br><span class="line">&gt;</span><br><span class="line">&gt; 反序列化：将指定格式的字符串转换成字典，列表对象</span><br><span class="line"></span><br><span class="line">- 基本使用</span><br><span class="line"></span><br><span class="line">- ```python</span><br><span class="line">  import json</span><br><span class="line">  dic = &#123;</span><br><span class="line">      &#x27;hobby&#x27;:[&#x27;football&#x27;,&#x27;pingpang&#x27;,&#x27;smoke&#x27;],</span><br><span class="line">      &#x27;age&#x27;:20,</span><br><span class="line">      &#x27;score&#x27;:97.6,</span><br><span class="line">      &#x27;name&#x27;:&#x27;zhangsan&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">  #序列化：将字典对象转换成了json格式的字符串</span><br><span class="line">  r = json.dumps(dic)</span><br><span class="line">  print(r)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&#x27;&#123;&quot;hobby&quot;: [&quot;football&quot;, &quot;pingpang&quot;, &quot;smoke&quot;], &quot;age&quot;: 20, &quot;score&quot;: 97.6, &quot;name&quot;: &quot;zhangsan&quot;&#125;&#x27;</span></span><br><span class="line"><span class="comment">#反序列化：将字符串转换成了字典对象</span></span><br><span class="line">dic = json.loads(<span class="built_in">str</span>)</span><br><span class="line"><span class="built_in">print</span>(dic)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#持久化存储字典</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line">dic = &#123;</span><br><span class="line">    <span class="string">&#x27;hobby&#x27;</span>:[<span class="string">&#x27;football&#x27;</span>,<span class="string">&#x27;pingpang&#x27;</span>,<span class="string">&#x27;smoke&#x27;</span>],</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span>:<span class="number">20</span>,</span><br><span class="line">    <span class="string">&#x27;score&#x27;</span>:<span class="number">97.6</span>,</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;zhangsan&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">fp = <span class="built_in">open</span>(<span class="string">&#x27;./dic.json&#x27;</span>,<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"><span class="comment">#dump首先将dic字典进行序列化，然后将序列化后的结果写入到了fp表示的文件中</span></span><br><span class="line">json.dump(dic,fp)</span><br><span class="line">fp.close()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line">fp = <span class="built_in">open</span>(<span class="string">&#x27;./dic.json&#x27;</span>,<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"><span class="comment">#load将文件中的字符串数据进行读取，且将其转换成字典类型</span></span><br><span class="line">dic = json.load(fp)</span><br><span class="line"><span class="built_in">print</span>(dic)</span><br><span class="line">fp.close()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="正则模块-一般-不重要-http协议"><a href="#正则模块-一般-不重要-http协议" class="headerlink" title="正则模块(一般/不重要)  http协议"></a>正则模块(一般/不重要)  http协议</h3><ul>
+<li><p>什么是正则表达式？</p>
+<ul>
+<li>正则表达式(Regular Expression)是一种文本模式，包括普通字符（例如，a 到 z 之间的字母）和特殊字符（例如，*，+，？等）。</li>
+<li>正则表达式使用单个字符串来描述、匹配一系列匹配某个句法规则的字符串。</li>
+</ul>
+</li>
+<li><p>常用的正则标识</p>
+</li>
+<li><p>```<br>单字符：</p>
+<pre><code>. : 除换行以外所有字符
+[] ：[aoe] [a-w] 匹配集合中任意一个字符
+\d ：数字  [0-9]
+</code></pre>
+<p>数量修饰：</p>
+<pre><code>* : 任意多次  &gt;=0
++ : 至少1次   &gt;=1
+? : 可有可无  0次或者1次
+&#123;m&#125; ：固定m次 hello&#123;3,&#125;
+&#123;m,&#125; ：至少m次
+&#123;m,n&#125; ：m-n次
+</code></pre>
+<p>边界：</p>
+<pre><code>$ : 以某某结尾 
+^ : 以某某开头
+</code></pre>
+<p>分组：</p>
+<pre><code>    (ab)  
+</code></pre>
+<p>贪婪模式： .*<br>非贪婪（惰性）模式： .*?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 正则在python中的使用</span><br><span class="line"></span><br><span class="line">  - 基于re模块进行正则匹配操作</span><br><span class="line"></span><br><span class="line">  - 主要使用re模块中的findall进行指定规则的匹配</span><br><span class="line"></span><br><span class="line">    - findall(str,rule)</span><br><span class="line">      - str表示即将进行匹配的原始字符串数据</span><br><span class="line">      - rule表示指定规则的正则表达式</span><br><span class="line">      - findall返回的是列表，列表中存储匹配到的指定内容</span><br><span class="line"></span><br><span class="line">  - 练习</span><br><span class="line"></span><br><span class="line">  - ```python</span><br><span class="line">    import re</span><br><span class="line">    </span><br><span class="line">    #提取170</span><br><span class="line">    string = &#x27;我喜欢身高为170的女孩&#x27;</span><br><span class="line">    ex = &#x27;\d+&#x27;</span><br><span class="line">    result = re.findall(ex,string)</span><br><span class="line">    print(result[0])</span><br><span class="line">    #####################################################################</span><br><span class="line">    #提取出http://和https://</span><br><span class="line">    key=&#x27;http://www.baidu.com and https://boob.com&#x27;</span><br><span class="line">    ex = &#x27;https?://&#x27;</span><br><span class="line">    result = re.findall(ex,key)</span><br><span class="line">    print(result)</span><br><span class="line">    #####################################################################</span><br><span class="line">    import re</span><br><span class="line">    #提取出hello</span><br><span class="line">    key=&#x27;lalala&lt;hTml&gt;hello&lt;/HtMl&gt;hahah&#x27; #输出&lt;hTml&gt;hello&lt;/HtMl&gt;</span><br><span class="line">    ex = &#x27;&lt;hTml&gt;.*&lt;/HtMl&gt;&#x27;</span><br><span class="line">    result = re.findall(ex,key)</span><br><span class="line">    print(result)</span><br><span class="line">    </span><br><span class="line">    #####################################################################</span><br><span class="line">    #提取出hit.</span><br><span class="line">    key=&#x27;bobo@hit.edu.com&#x27;#想要匹配到hit.</span><br><span class="line">    # ex = &#x27;h.*\.&#x27; #贪婪模式</span><br><span class="line">    ex = &#x27;h.*?\.&#x27; #？将正则的贪婪模式调整为非贪婪模式。默认下为贪婪模式</span><br><span class="line">    result = re.findall(ex,key)</span><br><span class="line">    print(result)</span><br><span class="line">    #####################################################################</span><br><span class="line">    #匹配sas和saas</span><br><span class="line">    key=&#x27;saas and sas and saaas&#x27;</span><br><span class="line">    ex = &#x27;sa&#123;1,2&#125;s&#x27;</span><br><span class="line">    result = re.findall(ex,key)</span><br><span class="line">    print(result)</span><br><span class="line">    #####################################################################</span><br><span class="line">    key = &#x27;你好我的手机号是13222222222你记住了吗&#x27;</span><br><span class="line">    ex = &#x27;1[3,5,7,8,9]\d&#123;9&#125;&#x27;</span><br><span class="line">    result = re.findall(ex,key)</span><br><span class="line">    print(result)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB001-Pyhton%E9%87%8D%E7%82%B9%E6%93%8D%E4%BD%9C/" title="爬虫001-Pyhton重点操作">https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB001-Pyhton%E9%87%8D%E7%82%B9%E6%93%8D%E4%BD%9C/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" rel="tag"># 测试开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/11/13/Jenkins/" rel="next" title="Jenkins">
+                <i class="fa fa-chevron-left"></i> Jenkins
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/03/14/%E7%88%AC%E8%99%AB002-%E5%89%8D%E7%AB%AF/" rel="prev" title="爬虫002-前端">
+                爬虫002-前端 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">重要数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">列表数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">字典数据类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">2.</span> <span class="nav-text">练习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">3.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%89%93%E5%BC%80"><span class="nav-number">3.2.</span> <span class="nav-text">文件打开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1%E6%93%8D%E4%BD%9C"><span class="nav-number">3.3.</span> <span class="nav-text">文件对象操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E6%A8%A1%E5%9D%97-%E4%B8%80%E8%88%AC-%E4%B8%8D%E9%87%8D%E8%A6%81-http%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.</span> <span class="nav-text">正则模块(一般&#x2F;不重要)  http协议</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'pDMnuCn44ZQITVEtQAfiiXr5-gzGzoHsz',
+        appKey: 'y43DvreFS6iyfhy7ScRCF8Cy',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

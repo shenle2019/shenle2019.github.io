@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="测试开发," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Playwright介绍Playwright 是一个用于自动化浏览器操作的开源工具，由 Microsoft 开发和维护。它支持多种浏览器（包括 Chromium、Firefox 和 WebKit）和多种编程语言（如 Python、JavaScript 和 C#），可以用于测试、爬虫、自动化任务等场景。  与 Selenium 和 pyppeteer 相比，Playwright 具有以下几个区别和优">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫012-playwright相关">
+<meta property="og:url" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="Playwright介绍Playwright 是一个用于自动化浏览器操作的开源工具，由 Microsoft 开发和维护。它支持多种浏览器（包括 Chromium、Firefox 和 WebKit）和多种编程语言（如 Python、JavaScript 和 C#），可以用于测试、爬虫、自动化任务等场景。  与 Selenium 和 pyppeteer 相比，Playwright 具有以下几个区别和优">
+<meta property="og:locale">
+<meta property="og:image" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231221_22.png">
+<meta property="og:image" content="https://shenle2019.github.io/Users/zhangxiaobo/Desktop/playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231225_23.png">
+<meta property="og:image" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231226_25.png">
+<meta property="og:image" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231226_26.png">
+<meta property="og:image" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231226_27.png">
+<meta property="og:image" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231226_28.png">
+<meta property="og:image" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231227_35.png">
+<meta property="og:image" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231227_36.png">
+<meta property="og:image" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231227_38.png">
+<meta property="og:image" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231227_39.png">
+<meta property="og:image" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231227_40.png">
+<meta property="og:image" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231227_41.png">
+<meta property="article:published_time" content="2024-03-13T23:37:00.000Z">
+<meta property="article:modified_time" content="2024-03-13T15:53:07.376Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="测试开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231221_22.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2024/03/14/爬虫012-playwright相关/"/>
+
+
+
+
+
+  <title>爬虫012-playwright相关 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">爬虫012-playwright相关</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-14T07:37:00+08:00">
+                2024-03-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2024-03-13T23:53:07+08:00">
+                2024-03-13
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Playwright"><a href="#Playwright" class="headerlink" title="Playwright"></a>Playwright</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Playwright 是一个用于自动化浏览器操作的开源工具，由 Microsoft 开发和维护。它支持多种浏览器（包括 Chromium、Firefox 和 WebKit）和多种编程语言（如 Python、JavaScript 和 C#），可以用于测试、爬虫、自动化任务等场景。 </p>
+<p><strong>与 Selenium 和 pyppeteer 相比，Playwright 具有以下几个区别和优势：</strong></p>
+<ol>
+<li>多浏览器支持：支持所有主流浏览器。这使得开发人员可以根据需求选择最适合的浏览器进行自动化操作。（Playwright不支持旧版Microsoft Edge或IE11）</li>
+<li>更快的执行速度：Playwright 通过使用浏览器的底层调试协议来进行操作，相比于 Selenium 和 pyppeteer，它具有更快的执行速度和更低的资源消耗。</li>
+<li>可靠性和稳定性：Playwright 提供了更可靠和稳定的浏览器自动化操作，通过使用浏览器的原生 API 来模拟用户行为，避免了一些传统自动化工具的一些限制和不稳定性。</li>
+<li>支持跨浏览器和跨平台：Playwright 可以在不同浏览器和不同操作系统上运行，这使得开发人员可以更方便地进行跨浏览器和跨平台的测试和自动化操作。</li>
+<li>selenium是基于http协议，而Playwright是基于websocket协议。由于使用 HTTP 协议，Selenium 的性能相对较低。每次与浏览器进行通信时，都需要发送 HTTP 请求和等待响应。而Playwright使用 WebSocket 协议，Playwright 的性能会更高。WebSocket 的双向通信使得数据交换更高效，可以更快地获取页面内容和执行操作。</li>
+<li>支持屏幕录制功能：根据屏幕录制指定生成相关操作代码。</li>
+</ol>
+<p><strong>在爬虫中使用 Playwright 的好处包括：</strong></p>
+<ol>
+<li>动态网页爬取：Playwright 可以模拟用户在浏览器中的操作，包括渲染 JavaScript、点击按钮、填写表单等，从而可以爬取包含动态内容的网页。</li>
+<li>多浏览器支持：Playwright 支持多种浏览器，可以根据需求选择最适合的浏览器进行爬取，以确保爬取结果的准确性和一致性。</li>
+<li>更高的稳定性和可靠性：Playwright 使用浏览器的原生 API 进行操作，避免了一些传统爬虫工具的一些限制和不稳定性，提供了更可靠和稳定的爬取能力。</li>
+</ol>
+<p>总之，Playwright 是一个功能强大、跨浏览器、跨平台的浏览器自动化工具，相比于 Selenium 和 pyppeteer，它具有更快的执行速度、更高的稳定性和更广泛的浏览器支持，适用于多种自动化操作和爬虫场景。</p>
+<p><strong>python版本的Playwright官网文档：</strong><a target="_blank" rel="noopener" href="https://playwright.dev/python/docs/intro">https://playwright.dev/python/docs/intro</a></p>
+<h3 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h3><ul>
+<li><p>系统要求：</p>
+<ul>
+<li>Python 3.8 或更高版本。</li>
+<li>Windows 10+、Windows Server 2016+ 或适用于 Linux 的 Windows 子系统 （WSL）。</li>
+<li>MacOS 12 Monterey 或 MacOS 13 Ventura。</li>
+<li>Debian 11、Debian 12、Ubuntu 20.04 或 Ubuntu 22.04。</li>
+</ul>
+</li>
+<li><p>安装playwright的python版本</p>
+<ul>
+<li>pip install playwright</li>
+</ul>
+</li>
+<li><p>安装Playwright所需的所有工具插件和所支持的浏览器</p>
+<ul>
+<li>playwright install</li>
+<li>该步骤耗时较长</li>
+</ul>
+</li>
+</ul>
+<h4 id="屏幕录制"><a href="#屏幕录制" class="headerlink" title="屏幕录制"></a>屏幕录制</h4><ul>
+<li><p>创建一个py文件，比如：main.py</p>
+</li>
+<li><p>在终端中，执行如下指令：</p>
+<ul>
+<li><p>**playwright codegen -o main.py  **</p>
+<ul>
+<li>将屏幕录制生成的代码保存到main.py文件中</li>
+<li>可以通过如下设置，生成同步还是异步的代码：</li>
+</ul>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="imgs/Snip20231221_22.png" alt="Snip20231221_22"></p>
+</li>
+<li><p>  **playwright codegen –viewport-size=800,600  <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a> -o main.py **</p>
+</li>
+<li><p>访问指定网址，并且设置浏览器窗口大小</p>
+</li>
+<li><p><strong>playwright codegen –device=”iPhone 13” -o main.py</strong></p>
+<ul>
+<li>模拟手机设备进行网络请求（只支持手机模拟器，无需单独安装）</li>
+<li>支持的移动端设备如下：目前对安卓设备的覆盖率不高</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;Blackberry PlayBook&quot;,  &quot;Blackberry PlayBook landscape&quot;,  &quot;BlackBerry Z30&quot;,  &quot;BlackBerry Z30 landscape&quot;,  &quot;Galaxy Note 3&quot;,  &quot;Galaxy Note 3 landscape&quot;,  &quot;Galaxy Note II&quot;,  &quot;Galaxy Note II landscape&quot;,  &quot;Galaxy S III&quot;,  &quot;Galaxy S III landscape&quot;,  &quot;Galaxy S5&quot;,  &quot;Galaxy S5 landscape&quot;,  &quot;Galaxy S8&quot;,  &quot;Galaxy S8 landscape&quot;,  &quot;Galaxy S9+&quot;,  &quot;Galaxy S9+ landscape&quot;,  &quot;Galaxy Tab S4&quot;,  &quot;Galaxy Tab S4 landscape&quot;,  &quot;iPad (gen 5)&quot;,  &quot;iPad (gen 5) landscape&quot;,  &quot;iPad (gen 6)&quot;,  &quot;iPad (gen 6) landscape&quot;,  &quot;iPad (gen 7)&quot;,  &quot;iPad (gen 7) landscape&quot;,  &quot;iPad Mini&quot;,  &quot;iPad Mini landscape&quot;,  &quot;iPad Pro 11&quot;,  &quot;iPad Pro 11 landscape&quot;,  &quot;iPhone 6&quot;,  &quot;iPhone 6 landscape&quot;,  &quot;iPhone 6 Plus&quot;,  &quot;iPhone 6 Plus landscape&quot;,  &quot;iPhone 7&quot;,  &quot;iPhone 7 landscape&quot;,  &quot;iPhone 7 Plus&quot;,  &quot;iPhone 7 Plus landscape&quot;,  &quot;iPhone 8&quot;,  &quot;iPhone 8 landscape&quot;,  &quot;iPhone 8 Plus&quot;,  &quot;iPhone 8 Plus landscape&quot;,  &quot;iPhone SE&quot;,  &quot;iPhone SE landscape&quot;,  &quot;iPhone X&quot;,  &quot;iPhone X landscape&quot;,  &quot;iPhone XR&quot;,  &quot;iPhone XR landscape&quot;,  &quot;iPhone 11&quot;,  &quot;iPhone 11 landscape&quot;,  &quot;iPhone 11 Pro&quot;,  &quot;iPhone 11 Pro landscape&quot;,  &quot;iPhone 11 Pro Max&quot;,  &quot;iPhone 11 Pro Max landscape&quot;,  &quot;iPhone 12&quot;,  &quot;iPhone 12 landscape&quot;,  &quot;iPhone 12 Pro&quot;,  &quot;iPhone 12 Pro landscape&quot;,  &quot;iPhone 12 Pro Max&quot;,  &quot;iPhone 12 Pro Max landscape&quot;,  &quot;iPhone 12 Mini&quot;,  &quot;iPhone 12 Mini landscape&quot;,  &quot;iPhone 13&quot;,  &quot;iPhone 13 landscape&quot;,  &quot;iPhone 13 Pro&quot;,  &quot;iPhone 13 Pro landscape&quot;,  &quot;iPhone 13 Pro Max&quot;,  &quot;iPhone 13 Pro Max landscape&quot;,  &quot;iPhone 13 Mini&quot;,  &quot;iPhone 13 Mini landscape&quot;,  &quot;iPhone 14&quot;,  &quot;iPhone 14 landscape&quot;,  &quot;iPhone 14 Plus&quot;,  &quot;iPhone 14 Plus landscape&quot;,  &quot;iPhone 14 Pro&quot;,  &quot;iPhone 14 Pro landscape&quot;,  &quot;iPhone 14 Pro Max&quot;,  &quot;iPhone 14 Pro Max landscape&quot;,  &quot;Kindle Fire HDX&quot;,  &quot;Kindle Fire HDX landscape&quot;,  &quot;LG Optimus L70&quot;,  &quot;LG Optimus L70 landscape&quot;,  &quot;Microsoft Lumia 550&quot;,  &quot;Microsoft Lumia 550 landscape&quot;,  &quot;Microsoft Lumia 950&quot;,  &quot;Microsoft Lumia 950 landscape&quot;,  &quot;Nexus 10&quot;,  &quot;Nexus 10 landscape&quot;,  &quot;Nexus 4&quot;,  &quot;Nexus 4 landscape&quot;,  &quot;Nexus 5&quot;,  &quot;Nexus 5 landscape&quot;,  &quot;Nexus 5X&quot;,  &quot;Nexus 5X landscape&quot;,  &quot;Nexus 6&quot;,  &quot;Nexus 6 landscape&quot;,  &quot;Nexus 6P&quot;,  &quot;Nexus 6P landscape&quot;,  &quot;Nexus 7&quot;,  &quot;Nexus 7 landscape&quot;,  &quot;Nokia Lumia 520&quot;,  &quot;Nokia Lumia 520 landscape&quot;,  &quot;Nokia N9&quot;,  &quot;Nokia N9 landscape&quot;,  &quot;Pixel 2&quot;,  &quot;Pixel 2 landscape&quot;,  &quot;Pixel 2 XL&quot;,  &quot;Pixel 2 XL landscape&quot;,  &quot;Pixel 3&quot;,  &quot;Pixel 3 landscape&quot;,  &quot;Pixel 4&quot;,  &quot;Pixel 4 landscape&quot;,  &quot;Pixel 4a (5G)&quot;,  &quot;Pixel 4a (5G) landscape&quot;,  &quot;Pixel 5&quot;,  &quot;Pixel 5 landscape&quot;,  &quot;Pixel 7&quot;,  &quot;Pixel 7 landscape&quot;,  &quot;Moto G4&quot;,  &quot;Moto G4 landscape&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="保留记录cookie信息"><a href="#保留记录cookie信息" class="headerlink" title="保留记录cookie信息"></a>保留记录cookie信息</h3><ul>
+<li> **playwright codegen –save-storage=auth.json <a target="_blank" rel="noopener" href="https://www.17k.com/">https://www.17k.com</a> **</li>
+<li>在屏幕录制时，进行登录操作，登录后，cookie信息会被保存到auth.json文件中</li>
+<li>**playwright codegen –load-storage=auth.json <a target="_blank" rel="noopener" href="https://www.17k.com/">https://www.17k.com</a> -o main.py **<ul>
+<li>基于auth.json进行屏幕录制，会自动进入到登录成功后的页面中</li>
+</ul>
+</li>
+</ul>
+<h3 id="第一个Playwright脚本"><a href="#第一个Playwright脚本" class="headerlink" title="第一个Playwright脚本"></a>第一个Playwright脚本</h3><ul>
+<li>同步模式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:<span class="comment">#创建Playwright管理器</span></span><br><span class="line">    bro = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    page = bro.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://www.baidu.com&#x27;</span>)</span><br><span class="line">    <span class="comment">#自行设置等待时长，注意：不可使用time.sleep</span></span><br><span class="line">    page.wait_for_timeout(<span class="number">1000</span>)</span><br><span class="line">    title = page.title()</span><br><span class="line">    content = page.content()</span><br><span class="line">    <span class="built_in">print</span>(title,content)</span><br><span class="line">    page.close()</span><br><span class="line">    bro.close()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>异步模式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> playwright.async_api <span class="keyword">import</span> async_playwright</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">with</span> async_playwright() <span class="keyword">as</span> p:</span><br><span class="line">        bro = <span class="keyword">await</span> p.chromium.launch(headless=<span class="literal">False</span>,slow_mo=<span class="number">2000</span>)</span><br><span class="line">        page = <span class="keyword">await</span> bro.new_page()</span><br><span class="line">        <span class="keyword">await</span> page.goto(<span class="string">&#x27;https://www.baidu.com&#x27;</span>)</span><br><span class="line">        title = <span class="keyword">await</span> page.title()</span><br><span class="line">        content = <span class="keyword">await</span> page.content()</span><br><span class="line">        <span class="built_in">print</span>(title,content)</span><br><span class="line">        <span class="keyword">await</span> page.close()</span><br><span class="line">        <span class="keyword">await</span> bro.close()</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br></pre></td></tr></table></figure>
+
+<h3 id="元素定位"><a href="#元素定位" class="headerlink" title="元素定位"></a>元素定位</h3><h4 id="CSS选择器定位"><a href="#CSS选择器定位" class="headerlink" title="CSS选择器定位"></a>CSS选择器定位</h4><ul>
+<li>语法结构：page.locator()<ul>
+<li>参数：标签/id/层级/class 选择器</li>
+</ul>
+</li>
+<li>交互操作：<ul>
+<li>点击元素， <code>click()</code> 方法</li>
+<li>元素内输入文本， <code>fill()</code> 方法</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    bro = p.chromium.launch(headless=<span class="literal">False</span>,slow_mo=<span class="number">2000</span>)</span><br><span class="line">    page = bro.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://www.baidu.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#定位到输入框，进行文本录入</span></span><br><span class="line">    page.locator(<span class="string">&#x27;#kw&#x27;</span>).fill(<span class="string">&#x27;Python教程&#x27;</span>) <span class="comment">#id定位</span></span><br><span class="line">    <span class="comment"># 定位搜索按钮，进行点击操作</span></span><br><span class="line">    page.locator(<span class="string">&#x27;#su&#x27;</span>).click()</span><br><span class="line">    <span class="comment">#后退操作</span></span><br><span class="line">    page.go_back()</span><br><span class="line"></span><br><span class="line">    page.locator(<span class="string">&#x27;.s_ipt&#x27;</span>).fill(<span class="string">&#x27;爬虫&#x27;</span>)  <span class="comment"># class定位</span></span><br><span class="line">    page.locator(<span class="string">&#x27;#su&#x27;</span>).click()</span><br><span class="line">    page.go_back()</span><br><span class="line"></span><br><span class="line">    page.locator(<span class="string">&#x27;input#kw&#x27;</span>).fill(<span class="string">&#x27;人工智能&#x27;</span>)  <span class="comment"># 标签+属性定位</span></span><br><span class="line">    page.locator(<span class="string">&#x27;#su&#x27;</span>).click()</span><br><span class="line">    page.go_back()</span><br><span class="line"></span><br><span class="line">    page.locator(<span class="string">&#x27;#form &gt; span &gt; input#kw&#x27;</span>).fill(<span class="string">&#x27;数据分析&#x27;</span>) <span class="comment">#层级定位</span></span><br><span class="line">    page.locator(<span class="string">&#x27;#su&#x27;</span>).click()</span><br><span class="line"></span><br><span class="line">    page.close()</span><br><span class="line">    bro.close()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置内容输入的时间间隔</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    bro = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    page = bro.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://www.baidu.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#定位到输入框，进行文本录入</span></span><br><span class="line">    tag = page.locator(<span class="string">&#x27;#kw&#x27;</span>) <span class="comment">#id定位</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#设置内容的输入的时间间隔</span></span><br><span class="line">    tag.focus() <span class="comment">#聚焦于当前标签</span></span><br><span class="line">    input_text = <span class="string">&#x27;Hello, World!&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> input_text:</span><br><span class="line">        page.keyboard.<span class="built_in">type</span>(char, delay=<span class="number">500</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定位搜索按钮，进行点击操作</span></span><br><span class="line">    page.locator(<span class="string">&#x27;#su&#x27;</span>).click()</span><br><span class="line"></span><br><span class="line">    page.close()</span><br><span class="line">    bro.close()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更多操作<ul>
+<li>locator.all()</li>
+<li>locator.count()</li>
+<li>locator.nth(index)</li>
+<li>inner_text()</li>
+<li>get_by_text(xxx)</li>
+<li>get_attribute(attrName)</li>
+</ul>
+</li>
+<li>taobao在不登录情况下无法进行商品搜索，因此需要手动登录，保留Cookie信息<ul>
+<li> playwright codegen –save-storage=taobao.json <a target="_blank" rel="noopener" href="https://www.taobao.com/">https://www.taobao.com</a></li>
+</ul>
+</li>
+<li>携带Cookie信息进行操作：<ul>
+<li>context = browser.new_context(storage_state=”taobao.json”)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> Playwright, sync_playwright, expect</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">False</span>,slow_mo=<span class="number">2000</span>)</span><br><span class="line">    context = browser.new_context(storage_state=<span class="string">&quot;taobao.json&quot;</span>)</span><br><span class="line">    page = context.new_page()</span><br><span class="line">    page.goto(<span class="string">&quot;https://www.taobao.com/&quot;</span>)</span><br><span class="line"></span><br><span class="line">    page.locator(<span class="string">&#x27;#q&#x27;</span>).fill(<span class="string">&#x27;mac pro&#x27;</span>)</span><br><span class="line">    <span class="comment"># class属性值为btn-search tb-bg，在定位的时候选择空格左右两侧任意一个属性值即可</span></span><br><span class="line">    page.locator(<span class="string">&#x27;.btn-search&#x27;</span>).click()</span><br><span class="line">    page.wait_for_timeout(<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 根据文本定位</span></span><br><span class="line">    page.get_by_text(<span class="string">&#x27;发货地&#x27;</span>).click()</span><br><span class="line">    page.wait_for_timeout(<span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定位到满足要求所有的标签(商品列表最外层的a标签)</span></span><br><span class="line">    locator = page.locator(<span class="string">&#x27;.Content--contentInner--QVTcU0M &gt; div &gt; a&#x27;</span>)</span><br><span class="line">    all_eles = locator.<span class="built_in">all</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 查看定位到满足要求标签的数量</span></span><br><span class="line">    count = locator.count()</span><br><span class="line">		<span class="built_in">print</span>(count)</span><br><span class="line">    <span class="comment"># 定位到第10个a标签,nth下标从0开始</span></span><br><span class="line">    a_10 = locator.nth(<span class="number">9</span>)</span><br><span class="line">    <span class="built_in">print</span>(a_10.get_attribute(<span class="string">&#x27;href&#x27;</span>), a_10.inner_text())</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;---------------------------------------------------------------------------&#x27;</span>)</span><br><span class="line">    <span class="comment"># 获得每一个a标签中的文本内容和href属性值</span></span><br><span class="line">    <span class="keyword">for</span> index <span class="keyword">in</span> <span class="built_in">range</span>(count):</span><br><span class="line">        ele = locator.nth(index)</span><br><span class="line">        text = ele.inner_text()</span><br><span class="line">        href = ele.get_attribute(<span class="string">&#x27;href&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(text, href)</span><br><span class="line"></span><br><span class="line">    page.close()</span><br><span class="line">    context.close()</span><br><span class="line">    browser.close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="xpath定位"><a href="#xpath定位" class="headerlink" title="xpath定位"></a>xpath定位</h4><p>page.locator(xpath表达式)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    bro = p.chromium.launch(headless=<span class="literal">False</span>,slow_mo=<span class="number">2000</span>)</span><br><span class="line">    page = bro.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://www.bilibili.com/&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#xpath定位</span></span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;nav-searchform&quot;]/div[1]/input&#x27;</span>).fill(<span class="string">&#x27;Python教程&#x27;</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;nav-searchform&quot;]/div[2]&#x27;</span>).click()</span><br><span class="line"></span><br><span class="line">    page.close()</span><br><span class="line">    bro.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="Context上下文"><a href="#Context上下文" class="headerlink" title="Context上下文"></a>Context上下文</h3><p>浏览器的上下文管理对象Context可以用于管理Context打开/创建的多个page页面。并且可以创建多个Context对象，那么不同的Context对象打开/创建的page之间是相互隔离的（每个Context上下文都有自己的Cookie、浏览器存储和浏览历史记录）。</p>
+<ul>
+<li>打开百度的多个链接对应的page页面</li>
+</ul>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="/Users/zhangxiaobo/Desktop/playwright%E7%9B%B8%E5%85%B3/imgs/Snip20231225_23.png" alt="Snip20231225_23"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="comment">#点击百度首页中左上角的全部链接，以打开多个不同的page页面</span></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    bro = p.chromium.launch(headless=<span class="literal">False</span>,slow_mo=<span class="number">1000</span>)</span><br><span class="line">    <span class="comment">#创建上下文管理对象</span></span><br><span class="line">    context = bro.new_context()</span><br><span class="line">    <span class="comment">#基于上下文管理对象打开一个page页面</span></span><br><span class="line">    page = context.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://www.baidu.com&#x27;</span>)</span><br><span class="line">    <span class="comment">#点击百度首页中左上角的全部链接，以打开多个不同的page页面</span></span><br><span class="line">    a_list = page.locator(<span class="string">&#x27;//*[@id=&quot;s-top-left&quot;]/a&#x27;</span>).<span class="built_in">all</span>()</span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> a_list:</span><br><span class="line">        a.click()</span><br><span class="line">    <span class="comment">#使用上下文管理对象获取浏览器打开的所有page页面</span></span><br><span class="line">    pages = context.pages</span><br><span class="line">    <span class="keyword">for</span> sub_page <span class="keyword">in</span> pages:</span><br><span class="line">        <span class="comment">#遍历每一个page，打印起page标题</span></span><br><span class="line">        <span class="built_in">print</span>(sub_page.title())</span><br><span class="line">		</span><br><span class="line">    page.close()</span><br><span class="line">    bro.close()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过sub_page的title判断进行sub_page页面的切换和管理</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"><span class="comment">#封装页面切换的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">switch_to_page</span>(<span class="params">context,title</span>):</span></span><br><span class="line">    <span class="keyword">for</span> page <span class="keyword">in</span> context.pages:</span><br><span class="line">        <span class="keyword">if</span> title == page.title():</span><br><span class="line">            <span class="comment">#浏览器停留在此page页面</span></span><br><span class="line">            page.bring_to_front()</span><br><span class="line">            <span class="keyword">return</span> page</span><br><span class="line"></span><br><span class="line"><span class="comment">#点击百度首页中左上角的全部链接，以打开多个不同的page页面</span></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    bro = p.chromium.launch(headless=<span class="literal">False</span>,slow_mo=<span class="number">1000</span>)</span><br><span class="line">    <span class="comment">#创建上下文管理对象</span></span><br><span class="line">    context = bro.new_context()</span><br><span class="line">    <span class="comment">#基于上下文管理对象打开一个page页面</span></span><br><span class="line">    page = context.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://www.baidu.com&#x27;</span>)</span><br><span class="line">    <span class="comment">#点击百度首页中左上角的全部链接，以打开多个不同的page页面</span></span><br><span class="line">    a_list = page.locator(<span class="string">&#x27;//*[@id=&quot;s-top-left&quot;]/a&#x27;</span>).<span class="built_in">all</span>()</span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> a_list:</span><br><span class="line">        a.click()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#page页面的切换</span></span><br><span class="line">    select_page = switch_to_page(context,<span class="string">&#x27;hao123_上网从这里开始&#x27;</span>)</span><br><span class="line">    <span class="comment">#在指定的page中进行相关操作</span></span><br><span class="line">    select_page.locator(<span class="string">&#x27;//*[@id=&quot;search&quot;]/form/div[2]/input&#x27;</span>).fill(<span class="string">&#x27;测试测试&#x27;</span>)</span><br><span class="line">    select_page.locator(<span class="string">&#x27;//*[@id=&quot;search&quot;]/form/div[3]/input&#x27;</span>).click()</span><br><span class="line">    </span><br><span class="line">    page.close()</span><br><span class="line">    bro.close()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实战案例：<ul>
+<li>抓取bili中指定关键字搜索页面中视频的标题和作者名称</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"><span class="comment">#封装页面切换的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">switch_to_page</span>(<span class="params">context,title</span>):</span></span><br><span class="line">    <span class="keyword">for</span> page <span class="keyword">in</span> context.pages:</span><br><span class="line">        <span class="keyword">if</span> title == page.title():</span><br><span class="line">            <span class="comment">#浏览器停留在此page页面</span></span><br><span class="line">            page.bring_to_front()</span><br><span class="line">            <span class="keyword">return</span> page</span><br><span class="line">          </span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    bro = p.chromium.launch(headless=<span class="literal">False</span>,slow_mo=<span class="number">1000</span>)</span><br><span class="line">    context = bro.new_context()</span><br><span class="line">    page = context.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://www.bilibili.com/&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#xpath定位</span></span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;nav-searchform&quot;]/div[1]/input&#x27;</span>).fill(<span class="string">&#x27;Python教程&#x27;</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;nav-searchform&quot;]/div[2]&#x27;</span>).click()</span><br><span class="line"></span><br><span class="line">    <span class="comment">#切换到新打开的page中</span></span><br><span class="line">    select_page = switch_to_page(context,<span class="string">&#x27;Python教程-哔哩哔哩_Bilibili&#x27;</span>)</span><br><span class="line">    page_text = select_page.content()</span><br><span class="line">    tree = etree.HTML(page_text)</span><br><span class="line">    div_list = tree.xpath(<span class="string">&#x27;//*[@id=&quot;i_cecream&quot;]/div/div[2]/div[2]/div/div/div/div[3]/div/div&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> div <span class="keyword">in</span> div_list:</span><br><span class="line">        title = div.xpath(<span class="string">&#x27;.//h3[@class=&quot;bili-video-card__info--tit&quot;]/@title&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">        author = div.xpath(<span class="string">&#x27;.//span[@class=&quot;bili-video-card__info--author&quot;]/text()&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">        <span class="built_in">print</span>(title,author)</span><br><span class="line">    page.close()</span><br><span class="line">    bro.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="滑动验证"><a href="#滑动验证" class="headerlink" title="滑动验证"></a>滑动验证</h3><ul>
+<li>基于opencv实现的免费操作:<ul>
+<li>pip install opencv-python</li>
+<li>可能会存在滑动误差，需要手动调整</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取要滑动的距离</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_distance</span>():</span></span><br><span class="line">    <span class="comment">#滑动验证码的整体背景图片</span></span><br><span class="line">    background = cv2.imread(<span class="string">&quot;background.png&quot;</span>, <span class="number">0</span>)</span><br><span class="line">    <span class="comment">#缺口图片</span></span><br><span class="line">    gap = cv2.imread(<span class="string">&quot;gap.png&quot;</span>, <span class="number">0</span>)</span><br><span class="line">    res = cv2.matchTemplate(background, gap, cv2.TM_CCOEFF_NORMED)</span><br><span class="line">    value = cv2.minMaxLoc(res)[<span class="number">2</span>][<span class="number">0</span>]</span><br><span class="line">    <span class="built_in">print</span>(value)</span><br><span class="line">    <span class="comment">#单位换算</span></span><br><span class="line">    <span class="keyword">return</span> value * <span class="number">278</span> / <span class="number">360</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#有的检测移动速度的 如果匀速移动会被识别出来，来个简单点的渐进</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_track</span>(<span class="params">distance</span>):</span>  <span class="comment"># distance为传入的总距离</span></span><br><span class="line">    <span class="comment"># 移动轨迹</span></span><br><span class="line">    track = []</span><br><span class="line">    <span class="comment"># 当前位移</span></span><br><span class="line">    current = <span class="number">0</span></span><br><span class="line">    <span class="comment"># 减速阈值</span></span><br><span class="line">    mid = distance * <span class="number">4</span> / <span class="number">5</span></span><br><span class="line">    <span class="comment"># 计算间隔</span></span><br><span class="line">    t = <span class="number">0.2</span></span><br><span class="line">    <span class="comment"># 初速度</span></span><br><span class="line">    v = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> current &lt; distance:</span><br><span class="line">        <span class="keyword">if</span> current &lt; mid:</span><br><span class="line">            <span class="comment"># 加速度为2</span></span><br><span class="line">            a = <span class="number">4</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 加速度为-2</span></span><br><span class="line">            a = -<span class="number">3</span></span><br><span class="line">        v0 = v</span><br><span class="line">        <span class="comment"># 当前速度</span></span><br><span class="line">        v = v0 + a * t</span><br><span class="line">        <span class="comment"># 移动距离</span></span><br><span class="line">        move = v0 * t + <span class="number">1</span> / <span class="number">2</span> * a * t * t</span><br><span class="line">        <span class="comment"># 当前位移</span></span><br><span class="line">        current += move</span><br><span class="line">        <span class="comment"># 加入轨迹</span></span><br><span class="line">        track.append(<span class="built_in">round</span>(move))</span><br><span class="line">    <span class="keyword">return</span> track</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    bro = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    page = bro.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://passport.jd.com/new/login.aspx?&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;loginname&quot;]&#x27;</span>).fill(<span class="string">&#x27;123456@qq.com&#x27;</span>)</span><br><span class="line">    page.wait_for_timeout(<span class="number">1000</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;nloginpwd&quot;]&#x27;</span>).fill(<span class="string">&#x27;123456@qq.com&#x27;</span>)</span><br><span class="line">    page.wait_for_timeout(<span class="number">1000</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;loginsubmit&quot;]&#x27;</span>).click()</span><br><span class="line"></span><br><span class="line">    page.wait_for_timeout(<span class="number">2000</span>)</span><br><span class="line"></span><br><span class="line">    bg_img_src = page.locator(<span class="string">&#x27;.JDJRV-bigimg &gt; img&#x27;</span>).get_attribute(<span class="string">&#x27;src&#x27;</span>)</span><br><span class="line">    small_img_src = page.locator(<span class="string">&#x27;.JDJRV-smallimg &gt; img&#x27;</span>).get_attribute(<span class="string">&#x27;src&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 两张图片保存起来</span></span><br><span class="line">    request.urlretrieve(bg_img_src, <span class="string">&quot;background.png&quot;</span>)</span><br><span class="line">    request.urlretrieve(small_img_src, <span class="string">&quot;gap.png&quot;</span>)</span><br><span class="line"></span><br><span class="line">    distance = <span class="built_in">int</span>(get_distance())</span><br><span class="line"></span><br><span class="line">    <span class="comment">#定位到滑块标签</span></span><br><span class="line">    slide = page.locator(<span class="string">&#x27;//*[@id=&quot;JDJRV-wrap-loginsubmit&quot;]/div/div/div/div[2]/div[3]&#x27;</span>)</span><br><span class="line">    <span class="comment"># 找到滑块在当前页面的坐标（这个会返回一个字典里边四个数字）</span></span><br><span class="line">    <span class="comment">#&#123;&#x27;x&#x27;: 858, &#x27;y&#x27;: 339.9921875, &#x27;width&#x27;: 55, &#x27;height&#x27;: 55&#125;</span></span><br><span class="line">    box = slide.bounding_box()</span><br><span class="line"></span><br><span class="line">    <span class="comment">#让鼠标移动到滑块标签的中间上</span></span><br><span class="line">    page.mouse.move(box[<span class="string">&quot;x&quot;</span>] + box[<span class="string">&quot;width&quot;</span>] / <span class="number">2</span>, box[<span class="string">&quot;y&quot;</span>] + box[<span class="string">&quot;height&quot;</span>] / <span class="number">2</span>)</span><br><span class="line">    <span class="comment"># 按下鼠标</span></span><br><span class="line">    page.mouse.down()</span><br><span class="line">    <span class="comment"># 这里获取到滑块x坐标中心点位置</span></span><br><span class="line">    x = box[<span class="string">&quot;x&quot;</span>] + <span class="number">12</span> <span class="comment">#加上一个数值调整滑动误差</span></span><br><span class="line">    <span class="comment"># 滑动的长度放到轨迹加工一下得到一个轨迹</span></span><br><span class="line">    tracks = get_track(distance)</span><br><span class="line">    <span class="keyword">for</span> track <span class="keyword">in</span> tracks:</span><br><span class="line">        <span class="comment"># 循环鼠标按照轨迹移动</span></span><br><span class="line">        page.mouse.move(x + track, <span class="number">0</span>)</span><br><span class="line">        x += track</span><br><span class="line">    <span class="comment"># 移动结束鼠标释放</span></span><br><span class="line">    page.mouse.up()</span><br><span class="line"></span><br><span class="line">    page.wait_for_timeout(<span class="number">5000</span>)</span><br><span class="line">    page.close()</span><br><span class="line">    bro.close()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>付费操作<ul>
+<li>相对精度高</li>
+<li>图鉴平台：<a target="_blank" rel="noopener" href="http://www.ttshitu.com/">http://www.ttshitu.com/</a> </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#tujian.py</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 一、图片文字类型(默认 3 数英混合)：</span></span><br><span class="line"><span class="comment"># 1 : 纯数字</span></span><br><span class="line"><span class="comment"># 1001：纯数字2</span></span><br><span class="line"><span class="comment"># 2 : 纯英文</span></span><br><span class="line"><span class="comment"># 1002：纯英文2</span></span><br><span class="line"><span class="comment"># 3 : 数英混合</span></span><br><span class="line"><span class="comment"># 1003：数英混合2</span></span><br><span class="line"><span class="comment">#  4 : 闪动GIF</span></span><br><span class="line"><span class="comment"># 7 : 无感学习(独家)</span></span><br><span class="line"><span class="comment"># 11 : 计算题</span></span><br><span class="line"><span class="comment"># 1005:  快速计算题</span></span><br><span class="line"><span class="comment"># 16 : 汉字</span></span><br><span class="line"><span class="comment"># 32 : 通用文字识别(证件、单据)</span></span><br><span class="line"><span class="comment"># 66:  问答题</span></span><br><span class="line"><span class="comment"># 49 :recaptcha图片识别</span></span><br><span class="line"><span class="comment"># 二、图片旋转角度类型：</span></span><br><span class="line"><span class="comment"># 29 :  旋转类型</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 三、图片坐标点选类型：</span></span><br><span class="line"><span class="comment"># 19 :  1个坐标</span></span><br><span class="line"><span class="comment"># 20 :  3个坐标</span></span><br><span class="line"><span class="comment"># 21 :  3 ~ 5个坐标</span></span><br><span class="line"><span class="comment"># 22 :  5 ~ 8个坐标</span></span><br><span class="line"><span class="comment"># 27 :  1 ~ 4个坐标</span></span><br><span class="line"><span class="comment"># 48 : 轨迹类型</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 四、缺口识别</span></span><br><span class="line"><span class="comment"># 18 : 缺口识别（需要2张图 一张目标图一张缺口图）</span></span><br><span class="line"><span class="comment"># 33 : 单缺口识别（返回X轴坐标 只需要1张图）</span></span><br><span class="line"><span class="comment"># 五、拼图识别</span></span><br><span class="line"><span class="comment"># 53：拼图识别</span></span><br><span class="line"><span class="comment">#函数实现忽略</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">base64_api</span>(<span class="params">uname, pwd, img, typeid</span>):</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(img, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        base64_data = base64.b64encode(f.read())</span><br><span class="line">        b64 = base64_data.decode()</span><br><span class="line">    data = &#123;<span class="string">&quot;username&quot;</span>: uname, <span class="string">&quot;password&quot;</span>: pwd, <span class="string">&quot;typeid&quot;</span>: typeid, <span class="string">&quot;image&quot;</span>: b64&#125;</span><br><span class="line">    result = json.loads(requests.post(<span class="string">&quot;http://api.ttshitu.com/predict&quot;</span>, json=data).text)</span><br><span class="line">    <span class="keyword">if</span> result[<span class="string">&#x27;success&#x27;</span>]:</span><br><span class="line">        <span class="keyword">return</span> result[<span class="string">&quot;data&quot;</span>][<span class="string">&quot;result&quot;</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> result[<span class="string">&quot;message&quot;</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getImgCodeText</span>(<span class="params">imgPath,imgType</span>):</span><span class="comment">#直接返回验证码内容</span></span><br><span class="line">    <span class="comment">#imgPath：验证码图片地址</span></span><br><span class="line">    <span class="comment">#imgType：验证码图片类型</span></span><br><span class="line">    result = base64_api(uname=<span class="string">&#x27;15027900535&#x27;</span>, pwd=<span class="string">&#x27;15027900535&#x27;</span>, img=imgPath, typeid=imgType)</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"><span class="keyword">import</span> tujian</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line"><span class="comment">#有的检测移动速度的 如果匀速移动会被识别出来，来个简单点的渐进</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_track</span>(<span class="params">distance</span>):</span>  <span class="comment"># distance为传入的总距离</span></span><br><span class="line">    <span class="comment"># 移动轨迹</span></span><br><span class="line">    track = []</span><br><span class="line">    <span class="comment"># 当前位移</span></span><br><span class="line">    current = <span class="number">0</span></span><br><span class="line">    <span class="comment"># 减速阈值</span></span><br><span class="line">    mid = distance * <span class="number">4</span> / <span class="number">5</span></span><br><span class="line">    <span class="comment"># 计算间隔</span></span><br><span class="line">    t = <span class="number">0.2</span></span><br><span class="line">    <span class="comment"># 初速度</span></span><br><span class="line">    v = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> current &lt; distance:</span><br><span class="line">        <span class="keyword">if</span> current &lt; mid:</span><br><span class="line">            <span class="comment"># 加速度为2</span></span><br><span class="line">            a = <span class="number">4</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 加速度为-2</span></span><br><span class="line">            a = -<span class="number">3</span></span><br><span class="line">        v0 = v</span><br><span class="line">        <span class="comment"># 当前速度</span></span><br><span class="line">        v = v0 + a * t</span><br><span class="line">        <span class="comment"># 移动距离</span></span><br><span class="line">        move = v0 * t + <span class="number">1</span> / <span class="number">2</span> * a * t * t</span><br><span class="line">        <span class="comment"># 当前位移</span></span><br><span class="line">        current += move</span><br><span class="line">        <span class="comment"># 加入轨迹</span></span><br><span class="line">        track.append(<span class="built_in">round</span>(move))</span><br><span class="line">    <span class="keyword">return</span> track</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    bro = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    page = bro.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://passport.jd.com/new/login.aspx?&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;loginname&quot;]&#x27;</span>).fill(<span class="string">&#x27;123456@qq.com&#x27;</span>)</span><br><span class="line">    page.wait_for_timeout(<span class="number">1000</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;nloginpwd&quot;]&#x27;</span>).fill(<span class="string">&#x27;123456@qq.com&#x27;</span>)</span><br><span class="line">    page.wait_for_timeout(<span class="number">1000</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;loginsubmit&quot;]&#x27;</span>).click()</span><br><span class="line"></span><br><span class="line">    page.wait_for_timeout(<span class="number">2000</span>)</span><br><span class="line"></span><br><span class="line">    bg_img_src = page.locator(<span class="string">&#x27;.JDJRV-bigimg &gt; img&#x27;</span>).get_attribute(<span class="string">&#x27;src&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 两张图片保存起来</span></span><br><span class="line">    request.urlretrieve(bg_img_src, <span class="string">&quot;background.png&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#基于图鉴平台实现计算滑动距离</span></span><br><span class="line">    distance = tujian.getImgCodeText(<span class="string">&#x27;background.png&#x27;</span>,<span class="number">33</span>)</span><br><span class="line">    distance = <span class="built_in">int</span>(distance)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#定位到滑块标签</span></span><br><span class="line">    slide = page.locator(<span class="string">&#x27;//*[@id=&quot;JDJRV-wrap-loginsubmit&quot;]/div/div/div/div[2]/div[3]&#x27;</span>)</span><br><span class="line">    <span class="comment"># 找到滑块在当前页面的坐标（这个会返回一个字典里边四个数字）</span></span><br><span class="line">    <span class="comment">#&#123;&#x27;x&#x27;: 858, &#x27;y&#x27;: 339.9921875, &#x27;width&#x27;: 55, &#x27;height&#x27;: 55&#125;</span></span><br><span class="line">    box = slide.bounding_box()</span><br><span class="line"></span><br><span class="line">    <span class="comment">#让鼠标移动到滑块标签的中间上</span></span><br><span class="line">    page.mouse.move(box[<span class="string">&quot;x&quot;</span>] + box[<span class="string">&quot;width&quot;</span>] / <span class="number">2</span>, box[<span class="string">&quot;y&quot;</span>] + box[<span class="string">&quot;height&quot;</span>] / <span class="number">2</span>)</span><br><span class="line">    <span class="comment"># 按下鼠标</span></span><br><span class="line">    page.mouse.down()</span><br><span class="line">    <span class="comment"># 这里获取到滑块x坐标中心点位置</span></span><br><span class="line">    x = box[<span class="string">&quot;x&quot;</span>]</span><br><span class="line">    <span class="comment"># 滑动的长度放到轨迹加工一下得到一个轨迹</span></span><br><span class="line">    tracks = get_track(distance)</span><br><span class="line">    <span class="keyword">for</span> track <span class="keyword">in</span> tracks:</span><br><span class="line">        <span class="comment"># 循环鼠标按照轨迹移动</span></span><br><span class="line">        page.mouse.move(x + track, <span class="number">0</span>)</span><br><span class="line">        x += track</span><br><span class="line">    <span class="comment"># 移动结束鼠标释放</span></span><br><span class="line">    page.mouse.up()</span><br><span class="line"></span><br><span class="line">    page.wait_for_timeout(<span class="number">5000</span>)</span><br><span class="line">    page.close()</span><br><span class="line">    bro.close()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="文字点击验证码处理"><a href="#文字点击验证码处理" class="headerlink" title="文字点击验证码处理"></a>文字点击验证码处理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"><span class="keyword">import</span> tujian</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    bro = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    page = bro.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://passport.bilibili.com/login?from_spm_id=333.851.top_bar.login_window&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;app&quot;]/div[2]/div[2]/div[3]/div[2]/div[1]/div[1]/input&#x27;</span>).fill(<span class="string">&#x27;15027900535&#x27;</span>)</span><br><span class="line">    page.wait_for_timeout(<span class="number">1</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;app&quot;]/div[2]/div[2]/div[3]/div[2]/div[1]/div[3]/input&#x27;</span>).fill(<span class="string">&#x27;bobo@123.com&#x27;</span>)</span><br><span class="line">    page.wait_for_timeout(<span class="number">1</span>)</span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;app&quot;]/div[2]/div[2]/div[3]/div[2]/div[2]/div[2]&#x27;</span>).click()</span><br><span class="line">    page.wait_for_timeout(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#此处找到验证码图片将其截图保存</span></span><br><span class="line">    ele = page.locator(<span class="string">&#x27;//div[@class=&quot;geetest_widget&quot;]&#x27;</span>)</span><br><span class="line">    ele.screenshot(path=<span class="string">&#x27;./code.png&#x27;</span>)</span><br><span class="line">    <span class="comment">#找到ele在当前页面的坐标&#123;&#x27;x&#x27;: 858, &#x27;y&#x27;: 335, &#x27;width&#x27;: 55, &#x27;height&#x27;: 55&#125;</span></span><br><span class="line">    box = ele.bounding_box()</span><br><span class="line"></span><br><span class="line">    <span class="comment">#提交给打码平台</span></span><br><span class="line">    result = tujian.getImgCodeText(<span class="string">&#x27;code.png&#x27;</span>,<span class="number">27</span>)</span><br><span class="line">    <span class="comment"># result = &#x27;154,251|145,167&#x27;</span></span><br><span class="line">    result_list = result.split(<span class="string">&#x27;|&#x27;</span>)</span><br><span class="line">    <span class="comment"># result_list ==&gt; [&#x27;154,251&#x27;,&#x27;145,167&#x27;]</span></span><br><span class="line">    <span class="comment"># 6.根据识别出验证码的结果进行处理</span></span><br><span class="line">    <span class="keyword">for</span> pos <span class="keyword">in</span> result_list:</span><br><span class="line">        x = <span class="built_in">int</span>(pos.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">0</span>])</span><br><span class="line">        y = <span class="built_in">int</span>(pos.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">1</span>])</span><br><span class="line">        <span class="comment"># page.mouse.move(box[&#x27;x&#x27;]+x,box[&#x27;y&#x27;]+y)</span></span><br><span class="line">        <span class="comment"># page.mouse.down()</span></span><br><span class="line">        <span class="comment"># page.mouse.up()  #或者直接使用click方式</span></span><br><span class="line">        page.mouse.click(box[<span class="string">&#x27;x&#x27;</span>]+x,box[<span class="string">&#x27;y&#x27;</span>]+y)</span><br><span class="line">        page.wait_for_timeout(<span class="number">500</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 找到确认按钮</span></span><br><span class="line">    submit = page.locator(<span class="string">&#x27;//div[@class=&quot;geetest_commit_tip&quot;]&#x27;</span>)</span><br><span class="line">    submit.click()</span><br><span class="line">    </span><br><span class="line">    page.wait_for_timeout(<span class="number">5000</span>)</span><br><span class="line">    page.close()</span><br><span class="line">    bro.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="规避检测"><a href="#规避检测" class="headerlink" title="规避检测"></a>规避检测</h3><p>如果网站有对Playwright采取监测机制的话，比如正常情况下我们用浏览器访问淘宝等网站的 window.navigator.webdriver的值为 undefined或者为false。而使用Playwright访问则该值为true。那么如何解决这个问题呢？</p>
+<ul>
+<li>查看taobao是否检测Playwright</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    bro = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    page = bro.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://www.taobao.com/&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    ret = page.evaluate(<span class="string">&#x27;window.navigator.webdriver&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(ret)</span><br><span class="line"></span><br><span class="line">    page.wait_for_timeout(<span class="number">3000</span>)</span><br><span class="line">    page.close()</span><br><span class="line">    bro.close()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实现js注入，绕过检测</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    bro = p.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">    context = bro.new_context()</span><br><span class="line">    context.add_init_script(path=<span class="string">&#x27;./stealth.min.js&#x27;</span>)</span><br><span class="line">    page = context.new_page()</span><br><span class="line">    page.goto(<span class="string">&#x27;https://www.taobao.com/&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    ret = page.evaluate(<span class="string">&#x27;window.navigator.webdriver&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(ret)</span><br><span class="line"></span><br><span class="line">    page.wait_for_timeout(<span class="number">3000</span>)</span><br><span class="line">    page.close()</span><br><span class="line">    bro.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="浏览器接管"><a href="#浏览器接管" class="headerlink" title="浏览器接管"></a>浏览器接管</h3><h4 id="window版本"><a href="#window版本" class="headerlink" title="window版本"></a>window版本</h4><ul>
+<li>首先右键 Chrome 浏览器桌面图标，找到 chrome.exe 的安装路径，然后将其添加到环境变量Path中</li>
+</ul>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="imgs/Snip20231226_25.png" alt="Snip20231226_25"></p>
+<ul>
+<li>添加环境变量</li>
+</ul>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="imgs/Snip20231226_26.png" alt="Snip20231226_26"></p>
+<ul>
+<li><p>在任意目录下新建一个空白文件夹(playwright_chrome_data)：用于保存接管的浏览器的运行数据。</p>
+</li>
+<li><p>打开cmd输入命令启动chrome浏览器:</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chrome.exe --remote-debugging-port=8899 --user-data-dir=&quot;E:\playwright_chrome_data&quot;</span><br></pre></td></tr></table></figure>
+
+<p>–remote-debugging-port 是指定浏览器运行端口，只要没被占用就行<br>–user-data-dir 指定运行浏览器的运行数据，新建一个干净目录，不影响系统原来的数据</p>
+<ul>
+<li>执行后会启动chrome浏览器<ul>
+<li>可以在浏览器中手动访问百度。</li>
+</ul>
+</li>
+<li>在你已经打开的浏览器页面，手工操作登录，登录成功后，让playwright 继续操作。</li>
+<li>Playwright接管浏览器</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.connect_over_cdp(<span class="string">&#x27;http://localhost:8899/&#x27;</span>)</span><br><span class="line">    <span class="comment"># 获取page对象</span></span><br><span class="line">    page = browser.contexts[<span class="number">0</span>].pages[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">#该操作会直接作用在接管的浏览器中</span></span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;kw&quot;]&#x27;</span>).fill(<span class="string">&#x27;haha&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(page.url)</span><br><span class="line">    <span class="built_in">print</span>(page.title())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="mac版本"><a href="#mac版本" class="headerlink" title="mac版本"></a>mac版本</h4><ul>
+<li>找到谷歌可执行程序的完整路径</li>
+</ul>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="imgs/Snip20231226_27.png" alt="Snip20231226_27"></p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="imgs/Snip20231226_28.png" alt="Snip20231226_28"></p>
+<ul>
+<li>完整路径为：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Applications/Google Chrome.app/Contents/MacOS/Google Chrome</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>打开终端，cd进入到该目录中，执行Google Chrome可执行程序,此时会打开一个Google浏览器</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./Google Chrome</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>新建一个空白文件夹，用于保存浏览器数据</li>
+<li>打开cmd输入命令启动chrome浏览器</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./Google Chrome --remote-debugging-port=8899 --incognito --start-maximized --user-data-dir=&quot;空白文件夹路径&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Playwright接管浏览器</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.connect_over_cdp(<span class="string">&#x27;http://localhost:8899/&#x27;</span>)</span><br><span class="line">    <span class="comment"># 获取page对象</span></span><br><span class="line">    page = browser.contexts[<span class="number">0</span>].pages[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">#该操作会直接作用在接管的浏览器中</span></span><br><span class="line">    page.locator(<span class="string">&#x27;//*[@id=&quot;kw&quot;]&#x27;</span>).fill(<span class="string">&#x27;haha&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(page.url)</span><br><span class="line">    <span class="built_in">print</span>(page.title())</span><br></pre></td></tr></table></figure>
+
+<h3 id="小红书数据爬取"><a href="#小红书数据爬取" class="headerlink" title="小红书数据爬取"></a>小红书数据爬取</h3><ul>
+<li>需求：将小红书首页的推荐内容进行抓取<ul>
+<li>url：<a target="_blank" rel="noopener" href="https://www.xiaohongshu.com/">https://www.xiaohongshu.com/</a></li>
+</ul>
+</li>
+</ul>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="imgs/Snip20231227_35.png" alt="Snip20231227_35"></p>
+<ul>
+<li><p>分析：</p>
+<ul>
+<li><p>在首页滑动滚轮会有新数据加载出来，因此分析出，我们要爬取的数据是通过ajax请求返回的。因此在抓包工具中重点监测XHR中的ajax请求数据包，最终定位到：</p>
+<ul>
+<li>homefeed数据包<ul>
+<li>响应数据就是我们想要抓取的数据。</li>
+<li>请求参数不是常规的key:value形式，而是一个json串<ul>
+<li>后期在使用requests发起请求的时候，需要将json串的请求参数进行dumps操作</li>
+</ul>
+</li>
+<li>请求头信息：<ul>
+<li>包含了几个特殊的请求头X-S、X-S-Commom和X-B3等，需要具体分析是否需要处理该头信息。</li>
+</ul>
+</li>
+<li>请求方式：POST</li>
+<li>url ： <a target="_blank" rel="noopener" href="https://edith.xiaohongshu.com/api/sns/web/v1/homefeed">https://edith.xiaohongshu.com/api/sns/web/v1/homefeed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>使用postman验证homefeed数据包的请求头和cookie</p>
+<ul>
+<li>复制homefeed的cURL(完整的请求信息)到postman中</li>
+</ul>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="imgs/Snip20231227_36.png" alt="Snip20231227_36"></p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="imgs/Snip20231227_38.png" alt="Snip20231227_38"></p>
+<ul>
+<li>在postman中经过测试，homefeed数据包只需要包含如下内容即可请求成功：<ul>
+<li>请求头：content-type、cookie、user-agent和x-s<ul>
+<li>x-s是动态变化加密的数据，需要重点处理该请求头数据！</li>
+</ul>
+</li>
+<li>cookie：a1和web_session<ul>
+<li>cookie的这两个值直接从抓包工具中提取即可。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>断点调试找寻x-s的生成方式：</p>
+<ul>
+<li>选举搜索x-s，定位到指定的数据包：</li>
+</ul>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="imgs/Snip20231227_39.png" alt="Snip20231227_39"></p>
+<ul>
+<li>此处打下断点，然后向下滑动滚轮，发起ajax请求，就会停留在该断点位置：</li>
+</ul>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="imgs/Snip20231227_40.png" alt="Snip20231227_40"></p>
+<ul>
+<li>断点处代码分析：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = getRealUrl(r, n, o),</span><br><span class="line"><span class="comment">//此处为三目运算符，最终执行window._webmsxyw函数，并且传入s和i两个参数</span></span><br><span class="line"><span class="comment">//参数s为固定字符串：&quot;/api/sns/web/v1/homefeed&quot;</span></span><br><span class="line"><span class="comment">//参数i为一个固定字典：直接复制即可获取</span></span><br><span class="line">l = (a &amp;&amp; <span class="keyword">void</span> <span class="number">0</span> !== <span class="built_in">window</span>._webmsxyw ? <span class="built_in">window</span>._webmsxyw : encrypt_sign)(s, i) || &#123;&#125;;</span><br><span class="line">e.headers[<span class="string">&quot;X-t&quot;</span>] = l[<span class="string">&quot;X-t&quot;</span>],</span><br><span class="line">e.headers[<span class="string">&quot;X-s&quot;</span>] = l[<span class="string">&quot;X-s&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="imgs/Snip20231227_41.png" alt="Snip20231227_41"></p>
+<p><strong>结论：只需要执行window._webmsxyw函数并且传入s（固定字符串）和i（数据包的请求参数）两个参数，就可得到x-s的值</strong></p>
+</li>
+<li><p>使用Playwright创建浏览器环境，然后进行js注入，执行window._webmsxyw获取x-s的值，然后使用requests对homefeed包进行请求发送即可获取目标数据。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">    browser = p.chromium.launch(headless=<span class="literal">True</span>)</span><br><span class="line">    context = browser.new_context()</span><br><span class="line">    <span class="comment">#规避检测，伪造真实浏览器环境</span></span><br><span class="line">    context.add_init_script(path=<span class="string">&#x27;stealth.min.js&#x27;</span>)</span><br><span class="line">    page = context.new_page()</span><br><span class="line">    page.goto(<span class="string">&quot;https://www.xiaohongshu.com&quot;</span>)</span><br><span class="line">    <span class="comment">#设置playwright的cookie环境：经过postman测试cookie只需要保留web_session和a1两个值即可</span></span><br><span class="line">    <span class="comment">#cookies必须是一个数组对象，必须包含最主要的四个值：domain ，name，path，value</span></span><br><span class="line">    context.add_cookies(</span><br><span class="line">        [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;name&quot;</span>: <span class="string">&quot;web_session&quot;</span>,</span><br><span class="line">                <span class="string">&quot;value&quot;</span>: <span class="string">&quot;030037a2b8f42aec75ab13e6f3224a2a8683e1&quot;</span>,</span><br><span class="line">                <span class="string">&quot;domain&quot;</span>: <span class="string">&quot;.xiaohongshu.com&quot;</span>,</span><br><span class="line">                <span class="string">&quot;path&quot;</span>: <span class="string">&quot;/&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;name&quot;</span>: <span class="string">&quot;a1&quot;</span>,</span><br><span class="line">                <span class="string">&quot;value&quot;</span>: <span class="string">&#x27;18ca96a6f38939kidvzjak0exvrf00zbflw95v3uc30000903431&#x27;</span>,</span><br><span class="line">                <span class="string">&quot;domain&quot;</span>: <span class="string">&quot;.xiaohongshu.com&quot;</span>,</span><br><span class="line">                <span class="string">&quot;path&quot;</span>: <span class="string">&quot;/&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    )</span><br><span class="line">    page.reload() <span class="comment">#添加cookie后，务必要重载page页面</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#json_data就是参数i</span></span><br><span class="line">    json_data = &#123;</span><br><span class="line">        <span class="string">&quot;cursor_score&quot;</span>: <span class="string">&quot;1.7036686839800014E9&quot;</span>,</span><br><span class="line">        <span class="string">&quot;num&quot;</span>: <span class="number">20</span>,</span><br><span class="line">        <span class="string">&quot;refresh_type&quot;</span>: <span class="number">3</span>,</span><br><span class="line">        <span class="string">&quot;note_index&quot;</span>: <span class="number">55</span>,</span><br><span class="line">        <span class="string">&quot;unread_begin_note_id&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="string">&quot;unread_end_note_id&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="string">&quot;unread_note_count&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;category&quot;</span>: <span class="string">&quot;homefeed_recommend&quot;</span>,</span><br><span class="line">        <span class="string">&quot;search_key&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="string">&quot;need_num&quot;</span>: <span class="number">10</span>,</span><br><span class="line">        <span class="string">&quot;image_formats&quot;</span>: [</span><br><span class="line">            <span class="string">&quot;jpg&quot;</span>,</span><br><span class="line">            <span class="string">&quot;webp&quot;</span>,</span><br><span class="line">            <span class="string">&quot;avif&quot;</span></span><br><span class="line">        ]  </span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">#进行js注入，执行window._webmsxyw函数获取x-s的值</span></span><br><span class="line">    encrypt_params = page.evaluate(<span class="string">&quot;([s,i]) =&gt; window._webmsxyw(s,i)&quot;</span>,</span><br><span class="line">                                   [<span class="string">&quot;/api/sns/web/v1/homefeed&quot;</span>,json_data])</span><br><span class="line">    <span class="comment">#将返回值转换成python字典</span></span><br><span class="line">    x_s = <span class="built_in">dict</span>(encrypt_params)[<span class="string">&#x27;X-s&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&#x27;User-Agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;X-S&#x27;</span>:x_s,</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>:<span class="string">&#x27;application/json;charset=UTF-8&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    cookies = &#123;</span><br><span class="line">        <span class="string">&#x27;a1&#x27;</span>:<span class="string">&#x27;18ca96a6f38939kidvzjak0exvrf00zbflw95v3uc30000903431&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;web_session&#x27;</span>:<span class="string">&#x27;030037a2b8f42aec75ab13e6f3224a2a8683e1&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    url = <span class="string">&#x27;https://edith.xiaohongshu.com/api/sns/web/v1/homefeed&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#处理json串的请求参数</span></span><br><span class="line">    <span class="comment">#separators将逗号（,）作为键值对之间的分隔符，将冒号（:）作为键和值之间的分隔符。</span></span><br><span class="line">    json_str = json.dumps(json_data,separators=(<span class="string">&quot;,&quot;</span>,<span class="string">&quot;:&quot;</span>),ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">    ret = requests.post(url=url,headers=headers,data=json_str,cookies=cookies).json()</span><br><span class="line">    <span class="built_in">print</span>(ret)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/" title="爬虫012-playwright相关">https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB012-playwright%E7%9B%B8%E5%85%B3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" rel="tag"># 测试开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/03/14/%E7%88%AC%E8%99%AB011-pyqt/" rel="next" title="爬虫011-pyqt">
+                <i class="fa fa-chevron-left"></i> 爬虫011-pyqt
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/03/14/%E7%88%AC%E8%99%AB013-Charles%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/" rel="prev" title="爬虫013-Charles安装和使用">
+                爬虫013-Charles安装和使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Playwright"><span class="nav-number">1.</span> <span class="nav-text">Playwright</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">环境安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">屏幕录制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E7%95%99%E8%AE%B0%E5%BD%95cookie%E4%BF%A1%E6%81%AF"><span class="nav-number">1.3.</span> <span class="nav-text">保留记录cookie信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AAPlaywright%E8%84%9A%E6%9C%AC"><span class="nav-number">1.4.</span> <span class="nav-text">第一个Playwright脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.5.</span> <span class="nav-text">元素定位</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS%E9%80%89%E6%8B%A9%E5%99%A8%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.5.1.</span> <span class="nav-text">CSS选择器定位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xpath%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.5.2.</span> <span class="nav-text">xpath定位</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Context%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">1.6.</span> <span class="nav-text">Context上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E9%AA%8C%E8%AF%81"><span class="nav-number">1.7.</span> <span class="nav-text">滑动验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E7%82%B9%E5%87%BB%E9%AA%8C%E8%AF%81%E7%A0%81%E5%A4%84%E7%90%86"><span class="nav-number">1.8.</span> <span class="nav-text">文字点击验证码处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E9%81%BF%E6%A3%80%E6%B5%8B"><span class="nav-number">1.9.</span> <span class="nav-text">规避检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8E%A5%E7%AE%A1"><span class="nav-number">1.10.</span> <span class="nav-text">浏览器接管</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#window%E7%89%88%E6%9C%AC"><span class="nav-number">1.10.1.</span> <span class="nav-text">window版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mac%E7%89%88%E6%9C%AC"><span class="nav-number">1.10.2.</span> <span class="nav-text">mac版本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%BA%A2%E4%B9%A6%E6%95%B0%E6%8D%AE%E7%88%AC%E5%8F%96"><span class="nav-number">1.11.</span> <span class="nav-text">小红书数据爬取</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'pDMnuCn44ZQITVEtQAfiiXr5-gzGzoHsz',
+        appKey: 'y43DvreFS6iyfhy7ScRCF8Cy',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

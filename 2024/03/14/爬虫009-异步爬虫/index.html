@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="测试开发," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="回顾 并行和并发  并行表示计算机可以在同一时刻处理多个任务 并发就是伪并行，基于时间片轮转法在多个任务之间快速切换执行。  并行和并发都是在强调计算机是具有处理多个任务的能力。  同步和异步  基于并行或者并发的模式处理任务的时候，任务中如果出现了阻塞操作，就可以选择使用同步或者异步的方式进行阻塞操作的处理。 同步处理：一个任务的不同执行步骤一定是一步一步进行。 异步处理：在执行任务的过程中，遇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫009-异步爬虫">
+<meta property="og:url" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB009-%E5%BC%82%E6%AD%A5%E7%88%AC%E8%99%AB/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="回顾 并行和并发  并行表示计算机可以在同一时刻处理多个任务 并发就是伪并行，基于时间片轮转法在多个任务之间快速切换执行。  并行和并发都是在强调计算机是具有处理多个任务的能力。  同步和异步  基于并行或者并发的模式处理任务的时候，任务中如果出现了阻塞操作，就可以选择使用同步或者异步的方式进行阻塞操作的处理。 同步处理：一个任务的不同执行步骤一定是一步一步进行。 异步处理：在执行任务的过程中，遇">
+<meta property="og:locale">
+<meta property="article:published_time" content="2024-03-13T23:36:20.000Z">
+<meta property="article:modified_time" content="2024-03-13T15:50:33.248Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="测试开发">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2024/03/14/爬虫009-异步爬虫/"/>
+
+
+
+
+
+  <title>爬虫009-异步爬虫 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB009-%E5%BC%82%E6%AD%A5%E7%88%AC%E8%99%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">爬虫009-异步爬虫</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-14T07:36:20+08:00">
+                2024-03-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2024-03-13T23:50:33+08:00">
+                2024-03-13
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2024/03/14/%E7%88%AC%E8%99%AB009-%E5%BC%82%E6%AD%A5%E7%88%AC%E8%99%AB/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2024/03/14/%E7%88%AC%E8%99%AB009-%E5%BC%82%E6%AD%A5%E7%88%AC%E8%99%AB/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><ul>
+<li><p>并行和并发</p>
+<ul>
+<li>并行表示计算机可以在同一时刻处理多个任务</li>
+<li>并发就是伪并行，基于时间片轮转法在多个任务之间快速切换执行。</li>
+</ul>
+<p>并行和并发都是在强调计算机是具有处理多个任务的能力。</p>
+</li>
+<li><p>同步和异步</p>
+<ul>
+<li>基于并行或者并发的模式处理任务的时候，任务中如果出现了阻塞操作，就可以选择使用同步或者异步的方式进行阻塞操作的处理。</li>
+<li>同步处理：一个任务的不同执行步骤一定是一步一步进行。</li>
+<li>异步处理：在执行任务的过程中，遇到了阻塞操作可以适当交出cpu的使用权，然后让其去执行其他的执行步骤。</li>
+</ul>
+</li>
+<li><p>进程和线程，就是实现异步的实现手段。</p>
+</li>
+</ul>
+<p><strong>最重要最核心的一点：异步机制可以增加程序的执行效率。多进程、多线程和协程就是用来实现异步机制。</strong></p>
+<h4 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h4><p>线程预先被创建并放入线程池中，同时处理完当前任务之后并不销毁而是被安排处理下一个任务，因此能够避免多次创建线程，从而节省线程创建和销毁的开销，能带来更好的性能和系统稳定性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing.dummy <span class="keyword">import</span> Pool <span class="comment">#导入了线程池模块</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">urls = [<span class="string">&#x27;www.1.com&#x27;</span>,<span class="string">&#x27;www.2.com&#x27;</span>,<span class="string">&#x27;www.3.com&#x27;</span>,<span class="string">&#x27;www.4.com&#x27;</span>,<span class="string">&#x27;www.5.com&#x27;</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_reqeust</span>(<span class="params">url</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;正在请求数据：&#x27;</span>,url)</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;请求结束:&#x27;</span>,url)</span><br><span class="line">start = time.time()</span><br><span class="line"><span class="comment">#创建一个线程池,开启了5个线程</span></span><br><span class="line">pool = Pool(<span class="number">5</span>)</span><br><span class="line"><span class="comment">#可以利用线程池中三个线程不断的去处理5个任务</span></span><br><span class="line">pool.<span class="built_in">map</span>(get_reqeust,urls)</span><br><span class="line"><span class="comment">#get_reqeust函数调用的次数取决urls列表元素的个数</span></span><br><span class="line"><span class="comment">#get_requests每次执行都会接收urls列表中的一个元素作为参数</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;总耗时：&#x27;</span>,time.time()-start)</span><br><span class="line">pool.close() <span class="comment">#释放线程池</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="协程（重要！）"><a href="#协程（重要！）" class="headerlink" title="协程（重要！）"></a>协程（重要！）</h3><p><strong>协程（微线程）可以实现在单进程或者单线程的模式下，大幅度提升程序的运行效率！</strong></p>
+<ul>
+<li>假设我们有一个需求：从一个URL列表中下载多个网页内容，假设下载一个网页内容需要耗时2秒。<ul>
+<li>在传统的多线程或多进程模型中，我们会为每个URL创建一个线程或进程来进行异步的下载操作。但是这样做会有一个问题：<ul>
+<li>计算机中肯定不会只有下载URL的这几个进程/线程，还会有其他的进程/线程（Pycharm、音乐播放器、微信、网盘等）。</li>
+<li>将每一个下载网页的操作封装成一个进程/线程的目的就是为了实现异步的网页数据下载，也就是当一个下载网页的操作出现阻塞后，可以不必等待阻塞操作结束后就可以让计算机去下载其他网页内容（CPU切换到其他网页下载的进程/线程中）。</li>
+<li>但是，计算机中启动的进程/线程那么多，你确定每次CPU进行进程/线程切换，都会切换到网页下载的进程/线程中吗？答案是不一定，因为这个进程/线程切换是由操作系统实现的，无法人为干涉。那么，这些网页下载任务的执行的效率就降低下来了。因此，可以使用协程来解决该问题！</li>
+</ul>
+</li>
+<li>协程处理多个网页内容下载任务：<ul>
+<li>具体来说，当使用协程时，程序员可以手动控制任务的切换和调度，而不是依赖于操作系统的线程或进程调度器。在协程中，任务的切换是通过挂起（暂停）当前任务，并将控制权交给下一个任务来实现的。这种任务切换是在用户空间中进行的，不需要向操作系统发出系统调用。</li>
+<li>因此使用协程后可以实现让计算机尽可能多的分配CPU给我们，这样也就达到了提升程序执行效率的目的。</li>
+</ul>
+</li>
+<li>协程的优点：<ul>
+<li>轻量级：协程是轻量级的，占用的系统资源少，创建和销毁的开销小。相比于线程和进程，协程的切换更加高效。</li>
+<li>可控性：协程的调度和切换是由程序员自己控制的，不需要依赖操作系统进行调度，这使得编程模型更加灵活。可以根据实际需求自定义任务的调度逻辑，实现更加精细的任务切换。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>因此，有了协程后，在单进程或者单线程的模式下，就可以大幅度提升程序的运行效率了！总而言之，就是想尽一切办法留住CPU在我们自己的程序中，从而提升整个程序的执行效率！</strong></p>
+<h4 id="asyncio模块"><a href="#asyncio模块" class="headerlink" title="asyncio模块"></a>asyncio模块</h4><ul>
+<li><p>在python3.6之后新增了asyncio模块，可以帮我们检测阻塞（只能是网络阻塞），实现应用程序级别的切换。</p>
+</li>
+<li><p>接下来让我们来了解下协程的实现，从 Python 3.6 开始，Python 中加入了协程的概念，但这个版本的协程还是以生成器对象为基础的，在 Python 3.6 则增加了 asyncio，使得协程的实现更加方便。首先我们需要了解下面几个概念：</p>
+<ul>
+<li><p>特殊函数：</p>
+<ul>
+<li>在函数定义前添加一个async关键字，则该函数就变为了一个特殊的函数！</li>
+<li>特殊函数的特殊之处是什么？<ul>
+<li>1.特殊函数被调用后，函数内部的程序语句（函数体）没有被立即执行</li>
+<li>2.特殊函数被调用后，会返回一个协程对象</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>协程：</p>
+<ul>
+<li>协程对象，特殊函数调用后就可以返回/创建了一个协程对象。</li>
+<li>协程对象 == 特殊的函数 == 一组指定形式的操作<ul>
+<li>协程对象  == 一组指定形式的操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>任务：</p>
+<ul>
+<li>任务对象就是一个高级的协程对象。高级之处，后面讲，不着急！</li>
+<li>任务对象 == 协程对象  == 一组指定形式的操作<ul>
+<li>任务对象 == 一组指定形式的操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>事件循环：</p>
+<ul>
+<li>事件循环对象（Event Loop）,可以将其当做是一个容器，该容器是用来装载任务对象的。所以说，让创建好了一个或多个任务对象后，下一步就需要将任务对象全部装载在事件循环对象中。</li>
+<li>思考：为什么需要将任务对象装载在事件循环对象？<ul>
+<li>当将任务对象装载在事件循环中后，启动事件循环对象，则其内部装载的任务对象对应的相关操作就会被立即执行。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>```python<br>import asyncio<br>import time<br>#特殊的函数<br>async def get_request(url):</p>
+<pre><code>print(&#39;正在请求的网址是:&#39;,url)
+time.sleep(2)
+print(&#39;请求网址结束！&#39;)
+return 123
+</code></pre>
+<p>#创建了一个协程对象<br>c = get_request(‘<a target="_blank" rel="noopener" href="http://www.1.com&/#39;">www.1.com&#39;</a>)<br>#创建任务对象<br>task = asyncio.ensure_future(c)<br>#创建事件循环对象<br>loop = asyncio.get_event_loop()<br>#将任务对象装载在loop对象中且启动事件循环对象<br>loop.run_until_complete(task)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 任务对象对比协程对象的高级之处重点在于：</span><br><span class="line"></span><br><span class="line">  - 可以给任务对象绑定一个回调函数！</span><br><span class="line"></span><br><span class="line">  - 回调函数有什么作用？</span><br><span class="line"></span><br><span class="line">    - 回调函数就是回头调用的函数，因此要这么理解，当任务对象被执行结束后，会立即调用给任务对象绑定的这个回调函数！</span><br><span class="line"></span><br><span class="line">  - ```python</span><br><span class="line">    # 特殊的函数：</span><br><span class="line">    #     在函数定义前添加一个async关键字，该函数就变成了一个特殊的函数。</span><br><span class="line">    #     特殊函数的特殊之处：</span><br><span class="line">    #         1. 特殊函数被调用后，函数内部的程序语句不会被立即执行.</span><br><span class="line">    #         2. 特殊函数被调用后，会返回一个协程对象</span><br><span class="line">    # 协程：</span><br><span class="line">    #     特殊函数调用后，返回一个协程对象（协程对象是由特殊函数创建）</span><br><span class="line">    #     协程 == 特殊的函数 == 函数 == 一组指定形式的操作</span><br><span class="line">    #     协程 == 一组指定形式的操作</span><br><span class="line">    # 任务对象：</span><br><span class="line">    #     任务对象本质上是一个高级的协程。高级之处是什么？后面讲！</span><br><span class="line">    #     任务对象 == 高级协程 == 协程 == 一组指定形式的操作</span><br><span class="line">    #     任务对象 == 一组指定形式的操作</span><br><span class="line">    #</span><br><span class="line">    # 事件循环loop：</span><br><span class="line">    #     当做是一种容器。该容器是用来装载多个任务对象。</span><br><span class="line">    #     loop就可以将其内部装载的任务对象进行异步的执行。</span><br><span class="line">    </span><br><span class="line">    import asyncio</span><br><span class="line">    import time</span><br><span class="line">    </span><br><span class="line">    async def get_request(url):</span><br><span class="line">        print(&#x27;正在请求的网址是:&#x27;,url)</span><br><span class="line">        time.sleep(2)</span><br><span class="line">        print(&#x27;请求网址结束！&#x27;)</span><br><span class="line">        return 123</span><br><span class="line">    </span><br><span class="line">    #如何获取特殊函数内部的返回值（任务对象回调函数来实现的）</span><br><span class="line">    c = get_request(&#x27;www.1.com&#x27;)</span><br><span class="line">    task = asyncio.ensure_future(c)</span><br><span class="line">    #给任务对象绑定一个回调函数（回头调用的函数）,该函数一定是在任务对象被执行完毕后再调用的函数</span><br><span class="line">    def task_callback(t): #必须有且仅有一个参数</span><br><span class="line">        #函数的参数t就是回调函数的调用者task任务对象本身</span><br><span class="line">        ret = t.result() #任务对象调用result()就可以返回特殊函数的内部return后的结果值</span><br><span class="line">        print(&#x27;我是回调函数，我被执行了，t.result()返回的结果是:&#x27;,ret)</span><br><span class="line">    #给task任务对象绑定了一个叫做task_callback的回调函数</span><br><span class="line">    task.add_done_callback(task_callback)</span><br><span class="line">    loop = asyncio.get_event_loop()</span><br><span class="line">    loop.run_until_complete(task)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>多任务的协程</p>
+<ul>
+<li>```python<br>import asyncio<br>import time<br>start = time.time()<br>urls = [<pre><code>&#39;www.1.com&#39;,&#39;www.2.com&#39;,&#39;www.3.com&#39;
+</code></pre>
+]<br>async def get_request(url):<pre><code>print(&#39;正在请求：&#39;,url)
+time.sleep(2)
+print(&#39;请求结束:&#39;,url)
+</code></pre>
+#有了三个任务对象和一个事件循环对象<br>if <strong>name</strong> == ‘<strong>main</strong>‘:<pre><code>tasks = []
+for url in urls:
+    c = get_request(url)
+    task = asyncio.ensure_future(c)
+    tasks.append(task)
+#将三个任务对象，添加到一个事件循环对象中
+loop = asyncio.get_event_loop()
+loop.run_until_complete(asyncio.wait(tasks))
+
+print(&#39;总耗时:&#39;,time.time()-start)
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 出现两个问题：</span><br><span class="line">    - 1.没有实现异步效果</span><br><span class="line">    - 2.wait()是什么意思？</span><br><span class="line">      </span><br><span class="line">- wait()函数：</span><br><span class="line">      </span><br><span class="line">  - 给任务列表中的每一个任务对象赋予一个可被挂起的权限！当cpu执行的任务对象遇到阻塞操作的时候，当前任务对象就会被挂起，则cup就可以执行其他任务对象，提高整体程序运行的效率！</span><br><span class="line">  - 挂起任务对象：让当前正在被执行的任务对象交出cpu的使用权，cup就可以被其他任务组抢占和使用，从而可以执行其他任务组。</span><br><span class="line">  - **注意：特殊函数内部，不可以出现不支持异步模块的代码，否则会中断整个异步效果！**</span><br><span class="line">      </span><br><span class="line">- await关键字：挂起发生阻塞操作的任务对象。在任务对象表示的操作中，凡是阻塞操作的前面都必须加上await关键字进行修饰！（人为主动检测阻塞环节）</span><br><span class="line">      </span><br><span class="line">- 完整的实现了，多任务的异步协程操作</span><br><span class="line">      </span><br><span class="line">- ```python</span><br><span class="line">  # 特殊的函数：</span><br><span class="line">  #     在函数定义前添加一个async关键字，该函数就变成了一个特殊的函数。</span><br><span class="line">  #     特殊函数的特殊之处：</span><br><span class="line">  #         1. 特殊函数被调用后，函数内部的程序语句不会被立即执行.</span><br><span class="line">  #         2. 特殊函数被调用后，会返回一个协程对象</span><br><span class="line">  # 协程：</span><br><span class="line">  #     特殊函数调用后，返回一个协程对象（协程对象是由特殊函数创建）</span><br><span class="line">  #     协程 == 特殊的函数 == 函数 == 一组指定形式的操作</span><br><span class="line">  #     协程 == 一组指定形式的操作</span><br><span class="line">  # 任务对象：</span><br><span class="line">  #     任务对象本质上是一个高级的协程。高级之处是什么？后面讲！</span><br><span class="line">  #     任务对象 == 高级协程 == 协程 == 一组指定形式的操作</span><br><span class="line">  #     任务对象 == 一组指定形式的操作</span><br><span class="line">  #</span><br><span class="line">  # 事件循环loop：</span><br><span class="line">  #     当做是一种容器。该容器是用来装载多个任务对象。</span><br><span class="line">  #     loop就可以将其内部装载的任务对象进行异步的执行。</span><br><span class="line">  </span><br><span class="line">  import asyncio</span><br><span class="line">  import time</span><br><span class="line">  </span><br><span class="line">  start = time.time()</span><br><span class="line">  </span><br><span class="line">  async def get_request(url):</span><br><span class="line">      #特殊函数内部不可以出现不支持异步模块的代码，否则会中断整个异步效果</span><br><span class="line">      print(&#x27;正在请求的网址是:&#x27;,url)</span><br><span class="line">      #没有加await关键字之前：每一个任务中的阻塞操作并没有被执行</span><br><span class="line">      #await关键字：必须要加在每一个任务的阻塞操作前，作用就是强调执行任务中的阻塞操作</span><br><span class="line">      #await是用来手动控制任务的挂起操作。</span><br><span class="line">      await asyncio.sleep(2)</span><br><span class="line">      print(&#x27;请求网址结束！&#x27;)</span><br><span class="line">      return 123</span><br><span class="line">  </span><br><span class="line">  urls = [</span><br><span class="line">      &#x27;www.1.com&#x27;,&#x27;www.2.com&#x27;,&#x27;www.3.com&#x27;</span><br><span class="line">  ]</span><br><span class="line">  </span><br><span class="line">  tasks = [] #定义一个任务列表</span><br><span class="line">  for url in urls: #循环3次</span><br><span class="line">      #创建了3个协程</span><br><span class="line">      c = get_request(url)</span><br><span class="line">      #创建3个任务对象</span><br><span class="line">      task = asyncio.ensure_future(c)</span><br><span class="line">      tasks.append(task) #将创建好的3个任务对象依次存放到了tasks这个任务列表中</span><br><span class="line">  </span><br><span class="line">  loop = asyncio.get_event_loop()</span><br><span class="line">  #将任务列表tasks添加到loop容器中</span><br><span class="line">  #wait()函数：用于接收一个任务列表，wait函数就可以给任务列表中每一个任务对象赋予一个可被挂起的权限</span><br><span class="line">  #一个任务被挂起，就表示当前任务对象交出了cpu的使用权</span><br><span class="line">  loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line">  print(&#x27;总耗时:&#x27;,time.time()-start)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>真正的将多任务的异步协程作用在爬虫中</p>
+<ul>
+<li><p>需求：爬取自己服务器中的页面数据，并将其进行数据解析操作</p>
+</li>
+<li><p>aiohttp:是一个基于网络请求的模块，功能和requests相似，但是，requests是不支持异步的，而aiohttp是支持异步的模块。</p>
+<ul>
+<li><p>环境安装：pip install aiohttp</p>
+</li>
+<li><p>具体用法：</p>
+<ul>
+<li><p>1.先写大致架构</p>
+<ul>
+<li>```python<pre><code>with aiohttp.ClientSession() as sess:
+   #基于请求对象发起请求
+   #此处的get是发起get请求，常用参数：url,headers,params,proxy
+   #post方法发起post请求，常用参数：url,headers,data,proxy
+   #发现处理代理的参数和requests不一样（注意），此处处理代理使用proxy=&#39;http://ip:port&#39;
+    with sess.get(url=url) as response:
+       page_text = response.text()
+       #text():获取字符串形式的响应数据
+       #read()：获取二进制形式的响应数据
+       return page_text
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">      </span><br><span class="line">- 2.在第一步的基础上补充细节</span><br><span class="line">      </span><br><span class="line">  - 在每一个with前加上async关键字</span><br><span class="line">      </span><br><span class="line">  - 在阻塞操作前加上await关键字</span><br><span class="line">      </span><br><span class="line">  - 完整代码：</span><br><span class="line">      </span><br><span class="line">    - ```python</span><br><span class="line">      async def get_request(url):</span><br><span class="line">          #requests是不支持异步的模块</span><br><span class="line">          # response = await requests.get(url=url)</span><br><span class="line">          # page_text = response.text</span><br><span class="line">          #创建请求对象（sess）</span><br><span class="line">          async with aiohttp.ClientSession() as sess:</span><br><span class="line">              #基于请求对象发起请求</span><br><span class="line">              #此处的get是发起get请求，常用参数：url,headers,params,proxy</span><br><span class="line">              #post方法发起post请求，常用参数：url,headers,data,proxy</span><br><span class="line">              #发现处理代理的参数和requests不一样（注意），此处处理代理使用proxy=&#x27;http://ip:port&#x27;</span><br><span class="line">              async with await sess.get(url=url) as response:</span><br><span class="line">                  page_text = await response.text()</span><br><span class="line">                  #text():获取字符串形式的响应数据</span><br><span class="line">                  #read()：获取二进制形式的响应数据</span><br><span class="line">                  return page_text</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>多任务异步爬虫的完整代码实现：</p>
+<ul>
+<li><p>实验环境搭建：</p>
+<ul>
+<li>创建一个Server.py文件，表示服务器程序：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python </span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,render_template</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"><span class="comment">#安装flask模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#1.实例化app对象</span></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/main&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;i am main&#x27;</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/bobo&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index1</span>():</span></span><br><span class="line">    sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;test.html&#x27;</span>)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/jay&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index2</span>():</span></span><br><span class="line">    sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;test.html&#x27;</span>)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/tom&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index3</span>():</span></span><br><span class="line">    sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;test.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>在pycharm工程下，创建一个templates的文件夹，将test.html放在该文件夹中。</p>
+</li>
+<li><p>爬虫程序：</p>
+</li>
+</ul>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment">#pip install aiohttp</span></span><br><span class="line"><span class="keyword">import</span> aiohttp <span class="comment">#支持异步的网络请求模块</span></span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">start = time.time()</span><br><span class="line">urls = [</span><br><span class="line">    <span class="string">&#x27;http://127.0.0.1:5000/bobo&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;http://127.0.0.1:5000/jay&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;http://127.0.0.1:5000/tom&#x27;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">#用于发起网络请求获取页面源码数据</span></span><br><span class="line"><span class="comment"># async def get_request(url):</span></span><br><span class="line"><span class="comment">#     #requests是不支持异步，使用一个可以支持异步的网络请求模块替换reqeusts就可以</span></span><br><span class="line"><span class="comment">#     response = requests.get(url=url)</span></span><br><span class="line"><span class="comment">#     page_text = response.text</span></span><br><span class="line"><span class="comment">#     return page_text</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">get_request</span>(<span class="params">url</span>):</span></span><br><span class="line">    <span class="comment">#第一步：创建一个请求对象</span></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">with</span> aiohttp.ClientSession() <span class="keyword">as</span> sess:</span><br><span class="line">        <span class="comment">#发起请求</span></span><br><span class="line">        <span class="comment"># sess.get(url=url,headers=headers,params=params,proxy=&#x27;https://ip:port&#x27;)</span></span><br><span class="line">        <span class="comment"># sess.post(url=url,headers=headers,data=data,proxy=&#x27;https://ip:port&#x27;)</span></span><br><span class="line">        <span class="keyword">async</span> <span class="keyword">with</span> <span class="keyword">await</span> sess.get(url=url) <span class="keyword">as</span> response:</span><br><span class="line">            <span class="comment">#获取响应数据:字符串的响应数据text()，二进制的响应数据read(),json()</span></span><br><span class="line">            page_text = <span class="keyword">await</span> response.text()</span><br><span class="line">            <span class="keyword">return</span> page_text</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">t</span>):</span> <span class="comment">#用于数据解析</span></span><br><span class="line">    page_text = t.result()</span><br><span class="line">    tree = etree.HTML(page_text)</span><br><span class="line">    ret = tree.xpath(<span class="string">&#x27;//img/@src&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">    <span class="built_in">print</span>(ret)</span><br><span class="line"></span><br><span class="line">tasks = []</span><br><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> urls:</span><br><span class="line">    c = get_request(url)</span><br><span class="line">    task = asyncio.ensure_future(c)</span><br><span class="line">    task.add_done_callback(parse)</span><br><span class="line">    tasks.append(task)</span><br><span class="line"></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;总耗时:&#x27;</span>,time.time()-start)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>作业：使用多线程实现简历的异步下载。注意：仅仅下载前3页。</p>
+</li>
+<li><p>作业：使用协程实现简历的异步下载。    注意：仅仅下载前3页。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://sc.chinaz.com/jianli/free_3.html">https://sc.chinaz.com/jianli/free_3.html</a></p>
+</li>
+</ul>
+<p>Playwright自动化工具、三方的抓包工具实现微信小程序（Charles）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB009-%E5%BC%82%E6%AD%A5%E7%88%AC%E8%99%AB/" title="爬虫009-异步爬虫">https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB009-%E5%BC%82%E6%AD%A5%E7%88%AC%E8%99%AB/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" rel="tag"># 测试开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/03/14/%E7%88%AC%E8%99%AB008-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="next" title="爬虫008-并发编程">
+                <i class="fa fa-chevron-left"></i> 爬虫008-并发编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/03/14/%E7%88%AC%E8%99%AB010-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0/" rel="prev" title="爬虫010-并发编程练习">
+                爬虫010-并发编程练习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="nav-number">1.1.</span> <span class="nav-text">线程池</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E7%A8%8B%EF%BC%88%E9%87%8D%E8%A6%81%EF%BC%81%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">协程（重要！）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#asyncio%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.</span> <span class="nav-text">asyncio模块</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'pDMnuCn44ZQITVEtQAfiiXr5-gzGzoHsz',
+        appKey: 'y43DvreFS6iyfhy7ScRCF8Cy',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

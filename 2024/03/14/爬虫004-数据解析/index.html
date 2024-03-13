@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="测试开发," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作业 下厨房的菜谱搜索(多个请求参数)  通过抓包工具的分析发现，搜索菜谱的数据包有两个请求参数：  keyword：搜索的关键字 cat：1001固定形式   &#96;&#96;&#96;pythonimport requests #请求头headers &#x3D; { &#39;User-Agent&#39;:&#39;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_15_7) Appl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫004-数据解析">
+<meta property="og:url" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB004-%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="作业 下厨房的菜谱搜索(多个请求参数)  通过抓包工具的分析发现，搜索菜谱的数据包有两个请求参数：  keyword：搜索的关键字 cat：1001固定形式   &#96;&#96;&#96;pythonimport requests #请求头headers &#x3D; { &#39;User-Agent&#39;:&#39;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_15_7) Appl">
+<meta property="og:locale">
+<meta property="article:published_time" content="2024-03-13T23:35:11.000Z">
+<meta property="article:modified_time" content="2024-03-13T15:44:20.287Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="测试开发">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2024/03/14/爬虫004-数据解析/"/>
+
+
+
+
+
+  <title>爬虫004-数据解析 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB004-%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">爬虫004-数据解析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-14T07:35:11+08:00">
+                2024-03-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2024-03-13T23:44:20+08:00">
+                2024-03-13
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2024/03/14/%E7%88%AC%E8%99%AB004-%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2024/03/14/%E7%88%AC%E8%99%AB004-%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h3><ul>
+<li><p>下厨房的菜谱搜索(多个请求参数)</p>
+<ul>
+<li><p>通过抓包工具的分析发现，搜索菜谱的数据包有两个请求参数：</p>
+<ul>
+<li>keyword：搜索的关键字</li>
+<li>cat：1001固定形式</li>
+</ul>
+</li>
+<li><p>```python<br>import requests</p>
+<p>#请求头<br>headers = {</p>
+<pre><code>&#39;User-Agent&#39;:&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36&#39;
+</code></pre>
+<p>}<br>title = input(‘请输入菜名：’)<br>params = {</p>
+<pre><code>&#39;keyword&#39;:title,
+&#39;cat&#39;:&#39;1001&#39;
+</code></pre>
+<p>}<br>#1.指定url<br>url = ‘<a target="_blank" rel="noopener" href="https://www.xiachufang.com/search/&#39;">https://www.xiachufang.com/search/&#39;</a></p>
+<p>#2.发起请求<br>response = requests.get(url=url,headers=headers,params=params)<br>#处理乱码<br>response.encoding = ‘utf-8’ #gbk</p>
+<p>#3.获取响应数据<br>page_text = response.text</p>
+<p>#4.持久化存储<br>fileName = title + ‘.html’<br>with open(fileName,’w’) as fp:</p>
+<pre><code>fp.write(page_text)
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 搜狗简易网页采集器</span><br><span class="line"></span><br><span class="line">  - ```python</span><br><span class="line">    import requests</span><br><span class="line">    </span><br><span class="line">    #请求参数动态化</span><br><span class="line">    keyword = input(&#x27;请输入关键字:&#x27;)</span><br><span class="line">    #稍后想要把该字典作为请求参数</span><br><span class="line">    pram = &#123;</span><br><span class="line">        &#x27;query&#x27;:keyword, #只存在一个键值对（存在一组请求参数）</span><br><span class="line">    &#125;</span><br><span class="line">    #1.指定url</span><br><span class="line">    url = &#x27;https://www.sogou.com/web&#x27; #需要将请求参数去除</span><br><span class="line">    #2.发起请求</span><br><span class="line">    #params参数就是用来在请求时携带指定的请求参数</span><br><span class="line">    response = requests.get(url=url,params=pram)</span><br><span class="line">    </span><br><span class="line">    #3.获取响应数据</span><br><span class="line">    page_text = response.text</span><br><span class="line">    </span><br><span class="line">    #4.持久化存储</span><br><span class="line">    fileName = keyword + &#x27;.html&#x27;</span><br><span class="line">    with open(fileName,&#x27;w&#x27;) as fp:</span><br><span class="line">        fp.write(page_text)</span><br><span class="line">    </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>肯德基</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="http://www.kfc.com.cn/kfccda/index.aspx">http://www.kfc.com.cn/kfccda/index.aspx</a></p>
+<ul>
+<li><p>将餐厅的位置信息进行数据爬取</p>
+</li>
+<li><p>```python<br>import requests<br>head = { #存放需要伪装的头信息</p>
+<pre><code>&#39;User-Agent&#39;:&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36&#39;
+</code></pre>
+<p>}<br>#post请求的请求参数<br>data = {</p>
+<pre><code>&quot;cname&quot;: &quot;&quot;,
+&quot;pid&quot;: &quot;&quot;,
+&quot;keyword&quot;: &quot;天津&quot;,
+&quot;pageIndex&quot;: &quot;1&quot;,
+&quot;pageSize&quot;: &quot;10&quot;,
+</code></pre>
+<p>}<br>#在抓包工具中：Form Data存放的是post请求的请求参数，而Query String中存放的是get请求的请求参数<br>url = ‘<a target="_blank" rel="noopener" href="http://www.kfc.com.cn/kfccda/ashx/GetStoreList.ashx?op=keyword&#39;">http://www.kfc.com.cn/kfccda/ashx/GetStoreList.ashx?op=keyword&#39;</a><br>#在post请求中，处理请求参数的是data这个参数不是params<br>response = requests.post(url=url,headers=head,data=data)<br>#将响应数据进行反序列化<br>page_text = response.json()<br>for dic in page_text[‘Table1’]:</p>
+<pre><code>name = dic[&#39;storeName&#39;]
+addr = dic[&#39;addressDetail&#39;]
+print(name,addr)
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">### 数据解析</span><br><span class="line"></span><br><span class="line">#### 何为数据解析</span><br><span class="line"></span><br><span class="line">- 概念：可以将爬取到的数据中指定的数据进行单独提取。</span><br><span class="line">- 作用：实现聚焦爬虫。</span><br><span class="line">- 数据解析通用原理：</span><br><span class="line">  - 在一张页面中，想要解析的数据是存在于相关的html的标签中。</span><br><span class="line">  - 可以先将指定的标签进行定位，然后可以将该标签中展示的数据进行提取。</span><br><span class="line"></span><br><span class="line">- 聚焦爬虫编码流程:</span><br><span class="line">  - 指定url</span><br><span class="line">  - 发起请求</span><br><span class="line">  - 获取页面源码数据</span><br><span class="line">  - 数据解析</span><br><span class="line">  - 持久化存储</span><br><span class="line"></span><br><span class="line">- python中可以实现数据解析的技术：</span><br><span class="line">  - 正则表达式（复杂度高）</span><br><span class="line">  - bs4（python独有，学习成本较低）</span><br><span class="line">  - xpath（通用性最强，最重要）</span><br><span class="line">  - pyquery（css语句）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 数据解析的主流策略</span><br><span class="line"></span><br><span class="line">#### bs4</span><br><span class="line"></span><br><span class="line">- 环境安装：</span><br><span class="line"></span><br><span class="line">  - pip install bs4</span><br><span class="line">  - pip install lxml</span><br><span class="line"></span><br><span class="line">- bs4数据解析的流程:</span><br><span class="line"></span><br><span class="line">  - 创建一个BeautifulSoup对象，把被解析的数据加载到该对象中。</span><br><span class="line">  - 调用BeautifulSoup对象相关的属性或者方法进行标签定位和数据提取</span><br><span class="line"></span><br><span class="line">- 具体解析的操作：</span><br><span class="line"></span><br><span class="line">  - 在当前目录下新建一个test.html文件，然后将下述内容拷贝到该文件中</span><br><span class="line"></span><br><span class="line">    - ```html</span><br><span class="line">      &lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">      &lt;head&gt;</span><br><span class="line">      	&lt;meta charset=&quot;UTF-8&quot; /&gt;</span><br><span class="line">      	&lt;title&gt;测试bs4&lt;/title&gt;</span><br><span class="line">      &lt;/head&gt;</span><br><span class="line">      &lt;body&gt;</span><br><span class="line">      	&lt;div&gt;</span><br><span class="line">      		&lt;p&gt;百里守约&lt;/p&gt;</span><br><span class="line">      	&lt;/div&gt;</span><br><span class="line">      	&lt;div class=&quot;song&quot;&gt;</span><br><span class="line">      		&lt;p&gt;李清照&lt;/p&gt;</span><br><span class="line">      		&lt;p&gt;王安石&lt;/p&gt;</span><br><span class="line">      		&lt;p&gt;苏轼&lt;/p&gt;</span><br><span class="line">      		&lt;p&gt;柳宗元&lt;/p&gt;</span><br><span class="line">      		&lt;a href=&quot;http://www.song.com/&quot; title=&quot;赵匡胤&quot; target=&quot;_self&quot;&gt;</span><br><span class="line">      			&lt;span&gt;this is span&lt;/span&gt;</span><br><span class="line">      		宋朝是最强大的王朝，不是军队的强大，而是经济很强大，国民都很有钱&lt;/a&gt;</span><br><span class="line">      		&lt;a href=&quot;&quot; class=&quot;du&quot;&gt;总为浮云能蔽日,长安不见使人愁&lt;/a&gt;</span><br><span class="line">      		&lt;img src=&quot;http://www.baidu.com/meinv.jpg&quot; alt=&quot;&quot; /&gt;</span><br><span class="line">      	&lt;/div&gt;</span><br><span class="line">      	&lt;div class=&quot;tang&quot;&gt;</span><br><span class="line">      		&lt;ul&gt;</span><br><span class="line">      			&lt;li&gt;&lt;a href=&quot;http://www.baidu.com&quot; title=&quot;qing&quot;&gt;清明时节雨纷纷,路上行人欲断魂,借问酒家何处有,牧童遥指杏花村&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">      			&lt;li&gt;&lt;a href=&quot;http://www.163.com&quot; title=&quot;qin&quot;&gt;秦时明月汉时关,万里长征人未还,但使龙城飞将在,不教胡马度阴山&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">      			&lt;li&gt;&lt;a href=&quot;http://www.126.com&quot; alt=&quot;qi&quot;&gt;岐王宅里寻常见,崔九堂前几度闻,正是江南好风景,落花时节又逢君&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">      			&lt;li&gt;&lt;a href=&quot;http://www.sina.com&quot; class=&quot;du&quot;&gt;杜甫&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">      			&lt;li&gt;&lt;a href=&quot;http://www.dudu.com&quot; class=&quot;du&quot;&gt;杜牧&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">      			&lt;li&gt;&lt;b&gt;杜小月&lt;/b&gt;&lt;/li&gt;</span><br><span class="line">      			&lt;li&gt;&lt;i&gt;度蜜月&lt;/i&gt;&lt;/li&gt;</span><br><span class="line">      			&lt;li&gt;&lt;a href=&quot;http://www.haha.com&quot; id=&quot;feng&quot;&gt;凤凰台上凤凰游,凤去台空江自流,吴宫花草埋幽径,晋代衣冠成古丘&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">      		&lt;/ul&gt;</span><br><span class="line">      	&lt;/div&gt;</span><br><span class="line">      &lt;/body&gt;</span><br><span class="line">      &lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>有了test.html文件后，在练习如下操作</p>
+<ul>
+<li>```python<br>from bs4 import BeautifulSoup<br>fp = open(‘test.html’,’r’)<br>#1.创建一个BeautifulSoup的工具对象，然后把即将被解析的页面源码数据加载到该对象中<br>#参数1：被解析的页面源码数据<br>#参数2：固定形式的lxml(一种解析器)<br>soup = BeautifulSoup(fp,’lxml’)#2.可以调用BeautifulSoup对象的相关函数和属性进行标签定位和数据提取#标签定位-方式1:soup.tagName(只可以定位到第一次出现的该标签)<br>title_tag = soup.title<br>p_tag = soup.p#标签定位-方式2（属性定位）:soup.find(tagName,attrName=’value’)<br>#注意：find只可以定位满足要求的第一个标签，如果使用class属性值的话，find参数class_<br>#定位到了class属性值为song的div标签<br>div_tag = soup.find(‘div’,class_=’song’)<br>#定位到class属性值为du的a标签<br>a_tag = soup.find(‘a’,class_=’du’)<br>#定位到了id的属性值为feng的a标签<br>a_tag = soup.find(‘a’,id=’feng’)#标签定位-方式3（属性定位）:soup.find_all(tagName,attrName=’value’)<br>#注意：find_all可以定位到满足要求的所有标签<br>tags = soup.find_all(‘a’,class_=’du’)<br>#标签定位-方式4(选择器定位):<pre><code>#常用的选择器：class选择器(.class属性值)  id选择器(#id的属性值)
+</code></pre>
+tags = soup.select(‘#feng’) #定位到id的属性值为feng对应的所有标签<br>tags = soup.select(‘.du’) #定位到class属性值为du对应的所有标签<br>#层级选择器：&gt;表示一个层级  一个空格可以表示多个层<br>tags = soup.select(‘.tang &gt; ul &gt; li &gt; a’)<br>tags = soup.select(‘.tang a’)<h1 id="print-tags"><a href="#print-tags" class="headerlink" title="print(tags)"></a>print(tags)</h1>#定位到标签内部数据的提取<br>#方式1：提取标签内的文本数据<pre><code>#tag.string:只可以将标签直系的文本内容取出
+#tag.text:可以将标签内部所有的文本内容取出
+</code></pre>
+tag = soup.find(‘a’,id=’feng’)<br>content = tag.stringdiv_tag = soup.find(‘div’,class_=’tang’)<br>content = div_tag.text#方式2：提取标签的属性值 tag[‘attrName’]<br>img_tag = soup.find(‘img’)<br>img_src = img_tag[‘src’]<br>print(img_src)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 案例应用：碧血剑文本爬取</span><br><span class="line">  - url：https://bixuejian.5000yan.com/</span><br><span class="line"></span><br><span class="line">  - 需求：将每一个章节的标题和内容进行爬取然后存储到文件中</span><br><span class="line"></span><br><span class="line">  - ```python</span><br><span class="line">    import requests</span><br><span class="line">    from bs4 import BeautifulSoup</span><br><span class="line">    </span><br><span class="line">    headers = &#123;</span><br><span class="line">        &#x27;User-Agent&#x27;:&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    url = &#x27;https://bixuejian.5000yan.com/&#x27;</span><br><span class="line">    #获取了首页对应的页面源码数据</span><br><span class="line">    response = requests.get(url=url,headers=headers)</span><br><span class="line">    response.encoding = &#x27;utf-8&#x27;</span><br><span class="line">    page_text = response.text</span><br><span class="line">    #在首页页面源码数据中进行数据解析（章节的标题）</span><br><span class="line">    soup = BeautifulSoup(page_text,&#x27;lxml&#x27;)</span><br><span class="line">    #所有的a标签定位保存到了a_list这个列表中</span><br><span class="line">    a_list = soup.select(&#x27;.paiban &gt; li &gt; a&#x27;)</span><br><span class="line">    for a in a_list:</span><br><span class="line">        #章节的标题</span><br><span class="line">        title = a.string</span><br><span class="line">        detail_url = a[&#x27;href&#x27;] #章节详情页的url</span><br><span class="line">        #对详情页的url进行请求，为了获取详情页的页面源码数据，将章节内容进行解析</span><br><span class="line">        detail_response = requests.get(url=detail_url,headers=headers)</span><br><span class="line">        detail_response.encoding = &#x27;utf-8&#x27;</span><br><span class="line">        detail_page_text = detail_response.text</span><br><span class="line">        #解析详情页，将章节内容进行提取</span><br><span class="line">        detail_soup = BeautifulSoup(detail_page_text,&#x27;lxml&#x27;)</span><br><span class="line">        div_tag = detail_soup.find(&#x27;div&#x27;,class_=&#x27;grap&#x27;)</span><br><span class="line">        #章节内容</span><br><span class="line">        content = div_tag.text</span><br><span class="line">    </span><br><span class="line">        fileName = &#x27;xiaoshuo/&#x27; + title + &#x27;.txt&#x27; #xiaoshuo/章节1.txt</span><br><span class="line">        with open(fileName,&#x27;w&#x27;) as fp:</span><br><span class="line">            fp.write(title+&#x27;\n&#x27;+content)</span><br><span class="line">        print(title,&#x27;:爬取保存成功！&#x27;)</span><br><span class="line">    </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>xpath（重点）</p>
+<ul>
+<li><p>环境安装：</p>
+<ul>
+<li>pip install lxml</li>
+</ul>
+</li>
+<li><p>xpath解析的编码流程:</p>
+<ul>
+<li>创建一个etree类型的对象，把被解析的数据加载到该对象中</li>
+<li>调用etree对象中xpath函数结合不同形式的xpath表达式进行标签定位和数据的提取</li>
+</ul>
+</li>
+<li><p>xpath表达式如何理解？</p>
+</li>
+<li><p>```python<br>from lxml import etree<br>#1.创建一个etree的工具对象，然后把即将被解析的页面源码数据加载到该对象中<br>tree = etree.parse(‘test.html’)<br>#2.调用etree对象的xpath函数然后结合着不用形式的xpath表达式进行标签定位和数据提取<br>#xpath函数返回的是列表，列表中存储的是满足定位要求的所有标签<br>#/html/head/title定位到html下面的head下面的title标签<br>title_tag = tree.xpath(‘/html/head/title’)<br>#//title在页面源码中定位到所有的title标签<br>title_tag = tree.xpath(‘//title’)<br>#属性定位</p>
+<pre><code>#定位到所有的div标签
+</code></pre>
+<p>div_tags = tree.xpath(‘//div’)</p>
+<pre><code>#定位到class属性值为song的div标签 //tagName[@attrName=&#39;value&#39;]
+</code></pre>
+<p>div_tag = tree.xpath(‘//div[@class=”song”]’)<br>#索引定位://tag[index]</p>
+<pre><code>#注意：索引是从1开始的
+</code></pre>
+<p>div_tag = tree.xpath(‘//div[1]’)<br>#层级定位</p>
+<pre><code># /表示一个层级  //表示多个层级
+</code></pre>
+<p>a_list = tree.xpath(‘//div[@class=”tang”]/ul/li/a’)<br>a_list = tree.xpath(‘//div[@class=”tang”]//a’)</p>
+<p>#数据提取</p>
+<pre><code>#1.提取标签中的文本内容:/text()取直系文本  //text()取所有文本
+</code></pre>
+<p>a_content = tree.xpath(‘//a[@id=”feng”]/text()’)[0]<br>div_content = tree.xpath(‘//div[@class=”song”]//text()’)</p>
+<pre><code>#2.提取标签的属性值：//tag/@attrName
+</code></pre>
+<p>img_src = tree.xpath(‘//img/@src’)[0]<br>print(img_src)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 图片懒加载：</span><br><span class="line"></span><br><span class="line">  - url：https://sc.chinaz.com/tupian/meinvtupian.html</span><br><span class="line">    - 爬取上述链接中所有的图片数据</span><br><span class="line">  - 主要是应用在展示图片的网页中的一种技术，该技术是指当网页刷新后，先加载局部的几张图片数据即可，随着用户滑动滚轮，当图片被显示在浏览器的可视化区域范围的话，在动态将其图片请求加载出来即可。（图片数据是动态加载出来）。</span><br><span class="line"></span><br><span class="line">  - 如何实现图片懒加载/动态加载？</span><br><span class="line">    - 使用img标签的伪属性（指的是自定义的一种属性）。在网页中，为了防止图片马上加载出来，则在img标签中可以使用一种伪属性来存储图片的链接，而不是使用真正的src属性值来存储图片链接。（图片链接一旦给了src属性，则图片会被立即加载出来）。只有当图片被滑动到浏览器可视化区域范围的时候，在通过js将img的伪属性修改为真正的src属性，则图片就会被加载出来。</span><br><span class="line"></span><br><span class="line">  - 如何爬取图片懒加载的图片数据？</span><br><span class="line">    - 只需要在解析图片的时候，定位伪属性的属性值即可</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">import requests</span><br><span class="line">from lxml import etree</span><br><span class="line">headers = &#123;</span><br><span class="line">    &#x27;User-Agent&#x27;:&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36&#x27;</span><br><span class="line">&#125;</span><br><span class="line">url = &#x27;https://sc.chinaz.com/tupian/meinvtupian.html&#x27;</span><br><span class="line">page_text = requests.get(url=url,headers=headers).text</span><br><span class="line"></span><br><span class="line">tree = etree.HTML(page_text)</span><br><span class="line">div_list = tree.xpath(&#x27;/html/body/div[3]/div[2]/div&#x27;)</span><br><span class="line">for div in div_list:</span><br><span class="line">    src = &#x27;https:&#x27;+div.xpath(&#x27;./img/@data-original&#x27;)[0]</span><br><span class="line">    print(src)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.aqistudy.cn/historydata/">https://www.aqistudy.cn/historydata/</a></p>
+<ul>
+<li><p>爬取热门城市和全部城市的名称</p>
+</li>
+<li><p>```python<br>#第一种写法<br>import requests<br>from lxml import etree</p>
+<p>headers = {</p>
+<pre><code>&#39;User-Agent&#39;:&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36&#39;
+</code></pre>
+<p>}</p>
+<p>url = ‘<a target="_blank" rel="noopener" href="https://www.aqistudy.cn/historydata/&#39;">https://www.aqistudy.cn/historydata/&#39;</a><br>page_text = requests.get(url=url,headers=headers).text</p>
+<p>tree = etree.HTML(page_text)<br>#解析热门城市<br>hot_cities = tree.xpath(‘//div[@class=”bottom”]/ul/li/a/text()’)<br>#解析全部城市<br>all_cities = tree.xpath(‘//div[@class=”bottom”]/ul/div[2]/li/a/text()’)<br>print(‘热门城市：’,hot_cities)<br>print(‘全部城市：’,all_cities)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- ```python</span><br><span class="line">  #第二种写法</span><br><span class="line">  import requests</span><br><span class="line">  from lxml import etree</span><br><span class="line">  </span><br><span class="line">  headers = &#123;</span><br><span class="line">      &#x27;User-Agent&#x27;:&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  url = &#x27;https://www.aqistudy.cn/historydata/&#x27;</span><br><span class="line">  page_text = requests.get(url=url,headers=headers).text</span><br><span class="line">  </span><br><span class="line">  tree = etree.HTML(page_text)</span><br><span class="line">  #xpath(表达式1 | 表达式2)：满足表达式1或者表达式2的所有数据都会被定位提取到</span><br><span class="line">  cities = tree.xpath(&#x27;//div[@class=&quot;bottom&quot;]/ul/li/a/text() | //div[@class=&quot;bottom&quot;]/ul/div[2]/li/a/text()&#x27;)</span><br><span class="line">  print(cities)</span><br></pre></td></tr></table></figure></li>
+<li><p>图片数据爬取：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="http://pic.netbian.com/4kmeinv/">http://pic.netbian.com/4kmeinv/</a></p>
+<ul>
+<li><p>将爬取到的图片存储到指定的文件夹中</p>
+</li>
+<li><p>爬取第一页</p>
+</li>
+<li><p>```python<br>from lxml import etree<br>import requests<br>import os<br>#新建一个文件夹<br>dirName = ‘girls’<br>if not os.path.exists(dirName):#如果文件夹不存在，则新建，否则不新建</p>
+<pre><code>os.mkdir(dirName)
+</code></pre>
+<p>headers = {</p>
+<pre><code>&#39;User-Agent&#39;:&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36&#39;
+</code></pre>
+<p>}</p>
+<p>url = ‘<a target="_blank" rel="noopener" href="https://pic.netbian.com/4kmeinv/index.html&#39;">https://pic.netbian.com/4kmeinv/index.html&#39;</a><br>response = requests.get(url=url,headers=headers)<br>response.encoding = ‘gbk’<br>page_text = response.text</p>
+<p>#数据解析：图片地址+图片名称<br>tree = etree.HTML(page_text)#HTML()专门用来解析网络请求到的页面源码数据<br>#该列表中存储的是每一个li标签<br>li_list = tree.xpath(‘//div[@class=”slist”]/ul/li’)<br>for li in li_list:</p>
+<pre><code>#局部解析：将li标签中指定的内容解析出来
+img_title = li.xpath(&#39;./a/b/text()&#39;)[0]+&#39;.jpg&#39;# 左侧./表示xpath的调用者对应的标签
+img_src = &#39;https://pic.netbian.com&#39;+li.xpath(&#39;./a/img/@src&#39;)[0]
+
+#对图片发起请求，存储图片数据
+img_data = requests.get(url=img_src,headers=headers).content
+# girls/123.jpg
+img_path = dirName + &#39;/&#39; + img_title
+with open(img_path,&#39;wb&#39;) as fp:
+    fp.write(img_data)
+print(img_title,&#39;下载保存成功！&#39;)
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 爬取多页</span><br><span class="line"></span><br><span class="line">- ```python</span><br><span class="line">  from lxml import etree</span><br><span class="line">  import requests</span><br><span class="line">  import os</span><br><span class="line">  #新建一个文件夹</span><br><span class="line">  dirName = &#x27;girls&#x27;</span><br><span class="line">  if not os.path.exists(dirName):#如果文件夹不存在，则新建，否则不新建</span><br><span class="line">      os.mkdir(dirName)</span><br><span class="line">  </span><br><span class="line">  headers = &#123;</span><br><span class="line">      &#x27;User-Agent&#x27;:&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">  #创建一个通用的url:除了第一页其他页码的通用url</span><br><span class="line">  url = &#x27;https://pic.netbian.com/4kmeinv/index_%d.html&#x27;</span><br><span class="line">  for page in range(1,6):</span><br><span class="line">      if page == 1:</span><br><span class="line">          new_url = &#x27;https://pic.netbian.com/4kmeinv/index.html&#x27;</span><br><span class="line">      else:</span><br><span class="line">          new_url = format(url%page)</span><br><span class="line">      print(&#x27;----------正在请求下载第%d页的图片数据----------&#x27;%page)</span><br><span class="line">      response = requests.get(url=new_url,headers=headers)</span><br><span class="line">      response.encoding =2 &#x27;gbk&#x27;</span><br><span class="line">      page_text = response.text</span><br><span class="line">  </span><br><span class="line">      #数据解析：图片地址+图片名称</span><br><span class="line">      tree = etree.HTML(page_text)#HTML()专门用来解析网络请求到的页面源码数据</span><br><span class="line">      #该列表中存储的是每一个li标签</span><br><span class="line">      li_list = tree.xpath(&#x27;//div[@class=&quot;slist&quot;]/ul/li&#x27;)</span><br><span class="line">      for li in li_list:</span><br><span class="line">          #局部解析：将li标签中指定的内容解析出来</span><br><span class="line">          img_title = li.xpath(&#x27;./a/b/text()&#x27;)[0]+&#x27;.jpg&#x27;# 左侧./表示xpath的调用者对应的标签</span><br><span class="line">          img_src = &#x27;https://pic.netbian.com&#x27;+li.xpath(&#x27;./a/img/@src&#x27;)[0]</span><br><span class="line">  </span><br><span class="line">          #对图片发起请求，存储图片数据</span><br><span class="line">          img_data = requests.get(url=img_src,headers=headers).content</span><br><span class="line">          # girls/123.jpg</span><br><span class="line">          img_path = dirName + &#x27;/&#x27; + img_title</span><br><span class="line">          with open(img_path,&#x27;wb&#x27;) as fp:</span><br><span class="line">              fp.write(img_data)</span><br><span class="line">          print(img_title,&#x27;下载保存成功！&#x27;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>  作业：简历模版下载：<a target="_blank" rel="noopener" href="https://sc.chinaz.com/jianli/free.html">https://sc.chinaz.com/jianli/free.html</a></p>
+<ul>
+<li><p>下载当前页所有的建立模板</p>
+<ul>
+<li>简历名称+简历的下载链接</li>
+<li>根据简历的下载链接 下载简历文件</li>
+<li>根据下载地址下载的压缩包，压缩包是二进制的数据</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB004-%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/" title="爬虫004-数据解析">https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB004-%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" rel="tag"># 测试开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/03/14/%E7%88%AC%E8%99%AB003-requests%E5%9F%BA%E7%A1%80/" rel="next" title="爬虫003-requests基础">
+                <i class="fa fa-chevron-left"></i> 爬虫003-requests基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/03/14/%E7%88%AC%E8%99%AB005-requests%E9%AB%98%E7%BA%A7/" rel="prev" title="爬虫005-requests高级">
+                爬虫005-requests高级 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E4%B8%9A"><span class="nav-number">1.</span> <span class="nav-text">作业</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#print-tags"><span class="nav-number"></span> <span class="nav-text">print(tags)</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'pDMnuCn44ZQITVEtQAfiiXr5-gzGzoHsz',
+        appKey: 'y43DvreFS6iyfhy7ScRCF8Cy',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="测试开发," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="分组查询： 简单的分组查询  注意：使用group by的查询字段必须是分组字段，否则会出错，想要获取其他字段信息,可以借助于聚合函数   &#96;&#96;&#96;sqlselect job_title from emp group by job_title 12345678910111213141516- 分组聚合- &#96;&#96;&#96;sql  #查看每一个岗位的人数  #count(1)每组的行数  select job_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫007-mysql数据库">
+<meta property="og:url" content="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB007-mysql%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="波音列岛试炼场">
+<meta property="og:description" content="分组查询： 简单的分组查询  注意：使用group by的查询字段必须是分组字段，否则会出错，想要获取其他字段信息,可以借助于聚合函数   &#96;&#96;&#96;sqlselect job_title from emp group by job_title 12345678910111213141516- 分组聚合- &#96;&#96;&#96;sql  #查看每一个岗位的人数  #count(1)每组的行数  select job_">
+<meta property="og:locale">
+<meta property="article:published_time" content="2024-03-13T23:35:54.000Z">
+<meta property="article:modified_time" content="2024-03-13T15:49:23.578Z">
+<meta property="article:author" content="General usopp">
+<meta property="article:tag" content="测试开发">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shenle2019.github.io/2024/03/14/爬虫007-mysql数据库/"/>
+
+
+
+
+
+  <title>爬虫007-mysql数据库 | 波音列岛试炼场</title>
+  
+
+
+
+
+
+
+
+
+  
+    <!--pjax：防止跳转页面音乐暂停-->
+  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">波音列岛试炼场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">General usopp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB007-mysql%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/psb.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="波音列岛试炼场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">爬虫007-mysql数据库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-14T07:35:54+08:00">
+                2024-03-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2024-03-13T23:49:23+08:00">
+                2024-03-13
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2024/03/14/%E7%88%AC%E8%99%AB007-mysql%E6%95%B0%E6%8D%AE%E5%BA%93/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2024/03/14/%E7%88%AC%E8%99%AB007-mysql%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文阅读总量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="分组查询："><a href="#分组查询：" class="headerlink" title="分组查询："></a>分组查询：</h3><ul>
+<li><p>简单的分组查询</p>
+<ul>
+<li>注意：使用group by的查询字段必须是分组字段，否则会出错，想要获取其他字段信息,可以借助于聚合函数</li>
+</ul>
+</li>
+<li><p>```sql<br>select job_title from emp group by job_title</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 分组聚合</span><br><span class="line"></span><br><span class="line">- ```sql</span><br><span class="line">  #查看每一个岗位的人数</span><br><span class="line">  #count(1)每组的行数</span><br><span class="line">  select job_title, count(1)from emp group by job_title</span><br><span class="line">  </span><br><span class="line">  #计算男女员工的平均年龄</span><br><span class="line">  select gender,avg(age) from emp group by gender</span><br><span class="line">  </span><br><span class="line">  #计算不同岗位员工的平均薪资</span><br><span class="line">  select job_title,avg(salary) from emp group by job_title</span><br><span class="line">  </span><br><span class="line">  #查看男女员工的最大,最小年级和整体年龄</span><br><span class="line">  select gender,max(age),min(age),sum(age) from emp group by gender</span><br></pre></td></tr></table></figure></li>
+<li><p>having子句</p>
+<ul>
+<li><p>where 与 having的区别：    </p>
+<ul>
+<li>where 是针对分组之前的字段内容进行过滤,而having是针对分组后的</li>
+</ul>
+</li>
+<li><p>注意：having后面的条件字段只可以是分组后结果中存在的字段名，否则会报错！</p>
+</li>
+<li><p>```sql<br>#查看销售岗位的平均薪资<br>select job_title,avg(salary) from emp GROUP BY job_title having job_title = ‘sale’</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 多表查询</span><br><span class="line"></span><br><span class="line">根据指定条件将两张表中的数据进行合并，然后在合并后的结果表中进行数据的查询</span><br><span class="line"></span><br><span class="line">- 准备数据</span><br><span class="line"></span><br><span class="line">- ```sql</span><br><span class="line">  create table dep(</span><br><span class="line">  	id int primary key,</span><br><span class="line">  	name char(20)</span><br><span class="line">  );</span><br><span class="line">  create table emp(</span><br><span class="line">  	id int primary key auto_increment,</span><br><span class="line">  	name char(20),</span><br><span class="line">  	sex enum(&quot;male&quot;,&quot;female&quot;) not null default &quot;male&quot;,</span><br><span class="line">  	age int,</span><br><span class="line">  	dep_id int</span><br><span class="line">  );</span><br><span class="line">  </span><br><span class="line">  # 插入数据</span><br><span class="line">  insert into dep values</span><br><span class="line">  (200,&#x27;技术&#x27;),</span><br><span class="line">  (201,&#x27;人力资源&#x27;),</span><br><span class="line">  (202,&#x27;销售&#x27;),</span><br><span class="line">  (203,&#x27;运营&#x27;);</span><br><span class="line">  </span><br><span class="line">  insert into emp(name,sex,age,dep_id) values</span><br><span class="line">  (&#x27;ailsa&#x27;,&#x27;male&#x27;,18,200),</span><br><span class="line">  (&#x27;lala&#x27;,&#x27;female&#x27;,48,201),</span><br><span class="line">  (&#x27;huahua&#x27;,&#x27;male&#x27;,38,201),</span><br><span class="line">  (&#x27;zhangsan&#x27;,&#x27;female&#x27;,28,202),</span><br><span class="line">  (&#x27;zhaosi&#x27;,&#x27;male&#x27;,18,200),</span><br><span class="line">  (&#x27;shenteng&#x27;,&#x27;female&#x27;,18,204)</span><br><span class="line">  ;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>内连接:（取交集）</p>
+<ul>
+<li>两张表公共的部分,必须同时有,没有就不显示</li>
+</ul>
+</li>
+<li><p>```<br>#语法；select * from 表1 inner join 表2 on 合并条件<br>select * from emp inner join dep on emp.dep_id = dep.id</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 外连接之左连接</span><br><span class="line"></span><br><span class="line">  - 以左表为主表,根据左表数据匹配右表,左表数据是全的,而右表若匹配不上则为null</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  select * from emp left join dep on emp.dep_id = dep.id</span><br></pre></td></tr></table></figure></li>
+<li><p>外连接之右连接</p>
+<ul>
+<li>以右表为主表,根据右表数据匹配左表,右表数据是全的,而左表若匹配不上则为null</li>
+</ul>
+</li>
+<li><p>```<br>select * from emp right join dep on emp.dep_id = dep.id</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![Snip20220820_54](/Users/zhangxiaobo/Desktop/mysql小课资料/课件/imgs/Snip20220820_54.png)</span><br><span class="line"></span><br><span class="line">- 符合条件的多表联查</span><br><span class="line"></span><br><span class="line">- ```sql</span><br><span class="line">  #示例1：以内连接的方式查询emp和dep表，并且emp表中的age字段值必须大于25,即找出年龄大于25岁的员工姓名以及员工所在的部门</span><br><span class="line">  select * from emp inner join dep on emp.dep_id = dep.id where age &gt; 25</span><br><span class="line">  #给表通过as起别名</span><br><span class="line">  select d.name,e.name from emp as e inner join dep as d on e.dep_id = d.id where age &gt; 25</span><br><span class="line">  </span><br><span class="line">  #示例2：以内连接的方式查询emp和dep表，并且emp表中的age字段值必须大于25，并且以age字段的升序方式显示</span><br><span class="line">  select * from emp as e inner join dep as d on d.id = e.dep_id where age &gt; 25 order by age</span><br><span class="line">  </span><br><span class="line">  #查询【所有部门】的部门名称和对应员工名字和年龄</span><br><span class="line">  select d.name,e.name,e.age from emp as e right join dep as d on</span><br><span class="line">  e.dep_id = d.id;</span><br><span class="line">  </span><br><span class="line">  #查询【所有员工】的名字和其对应的部门编号</span><br><span class="line">  select d.id,e.name from emp as e left join dep as d on</span><br><span class="line">  e.dep_id = d.id;</span><br></pre></td></tr></table></figure></li>
+<li><p>子查询:子查询是将一个查询语句嵌套在另一个查询语句中</p>
+<ul>
+<li><p>带in关键字的子查询</p>
+<ul>
+<li>查询平均年龄在25岁以上的部门名</li>
+</ul>
+</li>
+<li><p>```sql<br>#下述sql返回的就是201和202<br>select dep_id from emp group by dep_id having avg(age) &gt; 25</p>
+<p>#下述sql可以查询指定部门员工的姓名<br>select name from dep where id in (200,201)</p>
+<p>#整合后的子查询语句<br>select name from dep where id in<br>(</p>
+<pre><code>select dep_id from emp group by dep_id having avg(age) &gt; 25
+</code></pre>
+<p>)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 查看技术部员工姓名</span><br><span class="line"></span><br><span class="line">- ```sql</span><br><span class="line">  select name from emp where dep_id in (200)</span><br><span class="line">  #获取部门编号200</span><br><span class="line">  select id from dep where name = &#x27;技术&#x27;</span><br><span class="line">  </span><br><span class="line">  #子查询</span><br><span class="line">  select name from emp where dep_id in (</span><br><span class="line">  	select id from dep where name = &#x27;技术&#x27;</span><br><span class="line">  )</span><br></pre></td></tr></table></figure></li>
+<li><p>带比较运算符的子查询(比较运算符: =、!=、&gt;、&gt;=、&lt;、&lt;=、&lt;&gt;)</p>
+<ul>
+<li><p>查询大于所有人平均年龄的员工名字与年龄</p>
+</li>
+<li><p>```sql<br>select id,name from emp where age &gt; xx #xx就是所有员工的平均年龄<br>#如何获取所有员工的平均年龄<br>select avg(age) from emp</p>
+<p>#整合后的子查询<br>select id,name from emp where age &gt; (select avg(age) from emp)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 条件判断</span><br><span class="line"></span><br><span class="line">#### case when语句</span><br><span class="line"></span><br><span class="line">语法格式</span><br><span class="line"></span><br><span class="line">case when [expr] then [result1]...else [default] end</span><br><span class="line"></span><br><span class="line">如果expr条件成立则返回result1，否则返回default，并且最后以end结束条件判断。</span><br><span class="line"></span><br><span class="line">```sql</span><br><span class="line">#建表  </span><br><span class="line">CREATE TABLE t_demo (</span><br><span class="line"> id int(32) NOT NULL,</span><br><span class="line"> name varchar(255) DEFAULT NULL,</span><br><span class="line"> age int(2) DEFAULT NULL,</span><br><span class="line"> num int(3) DEFAULT NULL,</span><br><span class="line"> PRIMARY KEY (`id`)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line">INSERT INTO t_demo VALUES (&#x27;1&#x27;, &#x27;张三&#x27;, &#x27;21&#x27;, &#x27;69&#x27;);</span><br><span class="line">INSERT INTO t_demo VALUES (&#x27;2&#x27;, &#x27;李四&#x27;, &#x27;12&#x27;, &#x27;98&#x27;);</span><br><span class="line">INSERT INTO t_demo VALUES (&#x27;3&#x27;, &#x27;王五&#x27;, &#x27;20&#x27;, &#x27;54&#x27;);</span><br><span class="line">INSERT INTO t_demo VALUES (&#x27;4&#x27;, &#x27;赵甜&#x27;, &#x27;17&#x27;, &#x27;80&#x27;);</span><br><span class="line"></span><br><span class="line">#给t_demo添加一列level，表示学生的得分等级</span><br><span class="line">select * ,</span><br><span class="line">  case </span><br><span class="line">  	when t.num &gt;= 85 then &#x27;优秀&#x27;</span><br><span class="line">    when t.num &lt; 85 and t.num &gt;= 60 then &#x27;一般&#x27;</span><br><span class="line">    else &#x27;不及格&#x27;</span><br><span class="line">  end as level</span><br><span class="line">from t_demo as t;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="if判断"><a href="#if判断" class="headerlink" title="if判断"></a>if判断</h4><p>用法1：if(expr1,ret1,ret2)</p>
+<p>如果expr1条件为真，则返回ret1否则返回ret2</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#添加一列表示学生是否成年</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span>,</span><br><span class="line">if(t.age <span class="operator">&gt;=</span> <span class="number">18</span>,<span class="string">&#x27;成人&#x27;</span>,<span class="string">&#x27;未成年&#x27;</span>) <span class="keyword">as</span> 是否成年</span><br><span class="line"><span class="keyword">from</span> t_demo <span class="keyword">as</span> t;</span><br></pre></td></tr></table></figure>
+
+<h3 id="窗口函数"><a href="#窗口函数" class="headerlink" title="窗口函数"></a>窗口函数</h3><p>是MySQL8中新增的特性</p>
+<h4 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">窗口函数 over(partiton by 分组字段 order by 排序字段 asc|desc)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>窗口函数的分类</li>
+</ul>
+<ol>
+<li>rank() </li>
+<li>dense_rank()   </li>
+<li>row_number()</li>
+</ol>
+<ul>
+<li>partiton by：<ul>
+<li>将表数据根据partiton by后面的字段进行分组</li>
+<li>partiton by和 group by分组的区别<ul>
+<li>group by 会改变显示结果的行数 【相当于按照字段 折叠 把同一组的数据折叠在一起】</li>
+<li>partiton by 不会改变表显示的行数【与原表显示是一样的】 只是把相同组的数据归纳纵向相连在一起</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>order by ：<ul>
+<li>就是根据指定的字段进行排序</li>
+</ul>
+</li>
+</ul>
+<h4 id="排名开窗函数"><a href="#排名开窗函数" class="headerlink" title="排名开窗函数"></a>排名开窗函数</h4><p>数据集：student.sql</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#给每一个班级的学生成绩从高到低进行排名，然后将排名结果作为新的一列和原始数据汇总到一起</span><br><span class="line">#使用rank排名函数</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span>,<span class="built_in">rank</span>() <span class="keyword">over</span>(<span class="keyword">partition</span> <span class="keyword">by</span> caption <span class="keyword">order</span> <span class="keyword">by</span> num <span class="keyword">desc</span>) <span class="keyword">as</span> 排名</span><br><span class="line"><span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line">#使用dense_rank排名函数，查看和rank的区别</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span>,<span class="built_in">dense_rank</span>() <span class="keyword">over</span>(<span class="keyword">partition</span> <span class="keyword">by</span> caption <span class="keyword">order</span> <span class="keyword">by</span> num <span class="keyword">desc</span>) <span class="keyword">as</span> 排名</span><br><span class="line"><span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line">#使用row_number排名函数，查看和rank和dense_rank的区别</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span>,<span class="built_in">row_number</span>() <span class="keyword">over</span>(<span class="keyword">partition</span> <span class="keyword">by</span> caption <span class="keyword">order</span> <span class="keyword">by</span> num <span class="keyword">desc</span>) <span class="keyword">as</span> 排名</span><br><span class="line"><span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line">#查询每个班级的分数排名为前<span class="number">2</span>的学生信息</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span></span><br><span class="line">(<span class="keyword">select</span> <span class="operator">*</span>, <span class="built_in">dense_rank</span>() <span class="keyword">over</span>(<span class="keyword">partition</span> <span class="keyword">by</span> caption <span class="keyword">order</span> <span class="keyword">by</span> num <span class="keyword">desc</span>) 排名 <span class="keyword">from</span> student) <span class="keyword">as</span> e</span><br><span class="line"><span class="keyword">where</span> e.排名 <span class="operator">&lt;=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">#使用窗口函数查找每个班级成绩最高的所有学员信息</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> </span><br><span class="line">(<span class="keyword">select</span> <span class="operator">*</span>, <span class="built_in">dense_rank</span>() <span class="keyword">over</span>(<span class="keyword">partition</span> <span class="keyword">by</span> caption <span class="keyword">order</span> <span class="keyword">by</span> num <span class="keyword">desc</span>) 排名 <span class="keyword">from</span> student) <span class="keyword">as</span> e</span><br><span class="line"><span class="keyword">where</span> 排名 <span class="operator">&lt;=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="python连接数据库（重点）"><a href="#python连接数据库（重点）" class="headerlink" title="python连接数据库（重点）"></a>python连接数据库（重点）</h3><ul>
+<li>环境安装：pip install pymysql</li>
+<li>操作流程：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#数据的增删改</span></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="comment">#1.创建一个链接对象:决定了要去访问链接哪一个数据库服务器下的哪一个数据仓库</span></span><br><span class="line">conn = pymysql.Connect(</span><br><span class="line">    host=<span class="string">&#x27;127.0.0.1&#x27;</span>,<span class="comment">#数据库服务器的ip地址</span></span><br><span class="line">    port=<span class="number">3306</span>,<span class="comment">#mysql的端口</span></span><br><span class="line">    user=<span class="string">&#x27;root&#x27;</span>,<span class="comment">#mysql用户名</span></span><br><span class="line">    password=<span class="string">&#x27;boboadmin&#x27;</span>,<span class="comment">#mysql的密码</span></span><br><span class="line">    db=<span class="string">&#x27;new_spider&#x27;</span>,<span class="comment">#数据库的名字</span></span><br><span class="line">    charset=<span class="string">&#x27;utf8&#x27;</span><span class="comment">#中文编码</span></span><br><span class="line">)</span><br><span class="line"><span class="comment">#2.创建一个游标对象：可以让python执行sql语句</span></span><br><span class="line">cursor = conn.cursor()</span><br><span class="line"><span class="comment">#3.使用游标对象执行sql语句(增删改)</span></span><br><span class="line"><span class="comment"># sql = &#x27;delete from new_dep where id = 5&#x27;</span></span><br><span class="line"><span class="comment"># sql = &#x27;insert into new_dep values (66,&quot;haha&quot;,&quot;xxx&quot;)&#x27;</span></span><br><span class="line">sql = <span class="string">&#x27;update new_dep set dep_name=&quot;销售&quot; where id = 66&#x27;</span></span><br><span class="line">cursor.execute(sql)</span><br><span class="line"><span class="comment">#4.提交事务:让游标执行的sql语句完全的映射到数据库中</span></span><br><span class="line">conn.commit()</span><br><span class="line"><span class="comment">#5.关闭资源</span></span><br><span class="line">cursor.close()</span><br><span class="line">conn.close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#数据查询操作</span></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="comment">#1.创建一个链接对象:决定了要去访问链接哪一个数据库服务器下的哪一个数据仓库</span></span><br><span class="line">conn = pymysql.Connect(</span><br><span class="line">    host=<span class="string">&#x27;127.0.0.1&#x27;</span>,<span class="comment">#数据库服务器的ip地址</span></span><br><span class="line">    port=<span class="number">3306</span>,<span class="comment">#mysql的端口</span></span><br><span class="line">    user=<span class="string">&#x27;root&#x27;</span>,<span class="comment">#mysql用户名</span></span><br><span class="line">    password=<span class="string">&#x27;boboadmin&#x27;</span>,<span class="comment">#mysql的密码</span></span><br><span class="line">    db=<span class="string">&#x27;new_spider&#x27;</span>,<span class="comment">#数据库的名字</span></span><br><span class="line">    charset=<span class="string">&#x27;utf8&#x27;</span><span class="comment">#中文编码</span></span><br><span class="line">)</span><br><span class="line"><span class="comment">#2.创建一个游标对象：可以让python执行sql语句</span></span><br><span class="line">cursor = conn.cursor()</span><br><span class="line"><span class="comment">#3.使用游标对象执行sql语句(查询)</span></span><br><span class="line"><span class="comment"># sql = &#x27;select * from new_dep where id = 66&#x27;</span></span><br><span class="line">sql = <span class="string">&#x27;select * from new_dep&#x27;</span></span><br><span class="line">cursor.execute(sql)</span><br><span class="line"><span class="comment">#4.获取查询结果</span></span><br><span class="line">ret = cursor.fetchall()</span><br><span class="line"><span class="built_in">print</span>(ret)</span><br><span class="line"><span class="comment">#5.关闭资源</span></span><br><span class="line">cursor.close()</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>爬取豆瓣电影数据，存储到数据库中</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">head = &#123; <span class="comment">#存放需要伪装的头信息</span></span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">pram = &#123;</span><br><span class="line">    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;13&quot;</span>,</span><br><span class="line">    <span class="string">&quot;interval_id&quot;</span>: <span class="string">&quot;100:90&quot;</span>,</span><br><span class="line">    <span class="string">&quot;action&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;start&quot;</span>: <span class="string">&quot;0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;limit&quot;</span>: <span class="string">&quot;20&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line">url = <span class="string">&#x27;https://movie.douban.com/j/chart/top_list&#x27;</span></span><br><span class="line">response = requests.get(url=url,headers=head,params=pram)</span><br><span class="line"><span class="comment">#获取响应数据</span></span><br><span class="line"><span class="comment">#json()可以将获取到的json格式的字符串进行反序列化</span></span><br><span class="line">page_text = response.json()</span><br><span class="line"><span class="keyword">for</span> dic <span class="keyword">in</span> page_text:</span><br><span class="line">    title = dic[<span class="string">&#x27;title&#x27;</span>]</span><br><span class="line">    score = dic[<span class="string">&#x27;score&#x27;</span>]</span><br><span class="line">    <span class="built_in">print</span>(title,score)</span><br></pre></td></tr></table></figure>
+
+<h3 id="pandas数据表格（重点）"><a href="#pandas数据表格（重点）" class="headerlink" title="pandas数据表格（重点）"></a>pandas数据表格（重点）</h3><ul>
+<li>环境安装：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install openpyxl</span><br><span class="line">pip install pandas</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>基础操作</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="comment">#pandas会帮我们创建一个数据表格，可以对数据表格进行相关操作，最后将该数据表格同步到excel</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#1.手动的创建一个pandas的数据表格</span></span><br><span class="line">table = pd.DataFrame(columns=[<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;salary&#x27;</span>,<span class="string">&#x27;job_title&#x27;</span>])</span><br><span class="line"><span class="comment">#2.给数据表格插入数据</span></span><br><span class="line">table.loc[<span class="number">0</span>] = [<span class="string">&#x27;Jay&#x27;</span>,<span class="number">40000</span>,<span class="string">&#x27;singer&#x27;</span>]</span><br><span class="line">table.loc[<span class="number">1</span>] = [<span class="string">&#x27;Tom&#x27;</span>,<span class="number">10000</span>,<span class="string">&#x27;sale&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>(table)</span><br><span class="line"><span class="comment">#3.将数据表格转换成excel</span></span><br><span class="line">table.to_excel(<span class="string">&#x27;test.xlsx&#x27;</span>,sheet_name=<span class="string">&#x27;haha&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>爬取数据存储到excel</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">head = &#123; <span class="comment">#存放需要伪装的头信息</span></span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">pram = &#123;</span><br><span class="line">    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;13&quot;</span>,</span><br><span class="line">    <span class="string">&quot;interval_id&quot;</span>: <span class="string">&quot;100:90&quot;</span>,</span><br><span class="line">    <span class="string">&quot;action&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;start&quot;</span>: <span class="string">&quot;0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;limit&quot;</span>: <span class="string">&quot;20&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line">url = <span class="string">&#x27;https://movie.douban.com/j/chart/top_list&#x27;</span></span><br><span class="line">response = requests.get(url=url,headers=head,params=pram)</span><br><span class="line"><span class="comment">#获取响应数据</span></span><br><span class="line"><span class="comment">#json()可以将获取到的json格式的字符串进行反序列化</span></span><br><span class="line">page_text = response.json()</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建一个数据表格</span></span><br><span class="line">table = pd.DataFrame(columns=[<span class="string">&#x27;title&#x27;</span>,<span class="string">&#x27;score&#x27;</span>])</span><br><span class="line"></span><br><span class="line">index = <span class="number">0</span> <span class="comment">#初始的行索引</span></span><br><span class="line"><span class="keyword">for</span> dic <span class="keyword">in</span> page_text:</span><br><span class="line">    title = dic[<span class="string">&#x27;title&#x27;</span>]</span><br><span class="line">    score = dic[<span class="string">&#x27;score&#x27;</span>]</span><br><span class="line">    table.loc[index] = [title,score]</span><br><span class="line">    index += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">table.to_excel(<span class="string">&#x27;movie_list.xlsx&#x27;</span>,index=<span class="literal">False</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;存储成功！&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    General usopp
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB007-mysql%E6%95%B0%E6%8D%AE%E5%BA%93/" title="爬虫007-mysql数据库">https://shenle2019.github.io/2024/03/14/%E7%88%AC%E8%99%AB007-mysql%E6%95%B0%E6%8D%AE%E5%BA%93/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" rel="tag"># 测试开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/03/14/%E7%88%AC%E8%99%AB006-mysql%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="next" title="爬虫006-mysql数据库">
+                <i class="fa fa-chevron-left"></i> 爬虫006-mysql数据库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/03/14/%E7%88%AC%E8%99%AB008-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="prev" title="爬虫008-并发编程">
+                爬虫008-并发编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  <!-- 文章结束表示语-->
+   <div>
+     
+       <div>
+    
+        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
+    
+</div>
+
+     
+   </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/psb.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">分组查询：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#if%E5%88%A4%E6%96%AD"><span class="nav-number">1.1.</span> <span class="nav-text">if判断</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">窗口函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">语法格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%90%8D%E5%BC%80%E7%AA%97%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">排名开窗函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">python连接数据库（重点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pandas%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">pandas数据表格（重点）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+			<!-- require APlayer -->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+			<!-- require MetingJS-->
+			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+			<!--网易云-->   
+			<meting-js
+			server="netease"
+			id="7091778006"
+			type="playlist"
+			mini="true"
+			fixed="true"
+			list-folded="true"
+			autoplay="true"
+			volume="0.5"
+			theme="#FADFA3"
+			order="random"
+			loop="all"
+			preload="auto"
+			mutex="true">
+			</meting-js>	  
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">General usopp</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">乌索普大将的个人博客</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>本站总访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>本站访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'pDMnuCn44ZQITVEtQAfiiXr5-gzGzoHsz',
+        appKey: 'y43DvreFS6iyfhy7ScRCF8Cy',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
