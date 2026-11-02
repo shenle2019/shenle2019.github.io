@@ -1,0 +1,76 @@
+# 迁移报告
+
+- 来源：`E:\一人公司\公众号写作\Obsidian\testobsidian\AI测试开发工程师\shenle2019-pages`
+- 输出：`E:\一人公司\公众号写作\Obsidian\testobsidian\AI测试开发工程师\shenle2019-source\source\_posts`
+- 扫描页面：62
+- 新写入：61
+- 跳过（已有同名 md）：1
+- 失败：0
+
+## 跳过清单
+
+- 用-Hexo-和-GitHub-Pages-搭建博客-usopp
+
+## 新写入清单
+
+- 《控方证人》影评-usopp
+- 写个人博客的主体思路-usopp
+- markdown语法
+- nexo-Next中添加网易云音乐-切换页面自动播放
+- 问题解决：年龄的焦虑
+- 软件测试进阶-UI自动化测试框架
+- 软件测试进阶思路
+- Python自动化任务-提取电话号码和email
+- 《认知觉醒》读书心得-笔记整理
+- python读写文件
+- Python组织文件
+- Python错误调试
+- 从WEB抓取信息
+- 复盘-Python自动生成试卷和答案
+- Python处理Excel电子表格
+- 处理PDF和Word文档
+- 保持时间、计划任务和启动程序
+- 发送和接收电子邮件
+- 处理CSV文件和JSON数据
+- Python-Web-开发入门001-搭建Web开发虚拟环境、Django-Demo
+- Python面试题整理-V1-day1
+- Python面试题整理-V1-day2
+- Python面试题整理-V1-day3
+- Automatic-test-framework
+- Selenium-3
+- python-interview-4
+- python-interview-5
+- interface-testing-basic
+- Interface-auto-test
+- Mysql-note-001
+- Mysql-note-002
+- python教程学习笔记001
+- python教程学习笔记002
+- python教程学习笔记003
+- 黑盒测试
+- UI自动化测试补充内容
+- 接口自动化测试补充内容
+- 测试基础理论
+- web测试及UI自动化面试模拟题
+- 接口测试及接口自动化面试模拟
+- App测试及自动化
+- Docker
+- Git
+- Jenkins
+- Jmeter
+- linux-命令
+- mysql-基础知识
+- 性能测试
+- 爬虫001-Pyhton重点操作
+- 爬虫002-前端
+- 爬虫003-requests基础
+- 爬虫004-数据解析
+- 爬虫005-requests高级
+- 爬虫006-mysql数据库
+- 爬虫007-mysql数据库
+- 爬虫008-并发编程
+- 爬虫009-异步爬虫
+- 爬虫010-并发编程练习
+- 爬虫011-pyqt
+- 爬虫012-playwright相关
+- 爬虫013-Charles安装和使用
