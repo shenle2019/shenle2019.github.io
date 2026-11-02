@@ -1,6 +1,6 @@
 ---
 title: linux 命令
-date: '2023-11-13T00:00:00+00:00'
+date: 2023-11-12T23:53:35.000Z
 permalink: 2023/11/13/linux-命令/
 categories:
   - 测试

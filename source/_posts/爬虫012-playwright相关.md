@@ -1,6 +1,6 @@
 ---
 title: 爬虫012-playwright相关
-date: '2024-03-14T00:00:00+00:00'
+date: 2024-03-13T23:37:00.000Z
 permalink: 2024/03/14/爬虫012-playwright相关/
 categories:
   - 爬虫
@@ -14,7 +14,7 @@ tags:
 
 Playwright 是一个用于自动化浏览器操作的开源工具，由 Microsoft 开发和维护。它支持多种浏览器（包括 Chromium、Firefox 和 WebKit）和多种编程语言（如 Python、JavaScript 和 C#），可以用于测试、爬虫、自动化任务等场景。
 
-**与 Selenium 和 pyppeteer 相比，Playwright 具有以下几个区别和优势：**
+<strong>与 Selenium 和 pyppeteer 相比，Playwright 具有以下几个区别和优势：</strong>
 
 1.  多浏览器支持：支持所有主流浏览器。这使得开发人员可以根据需求选择最适合的浏览器进行自动化操作。（Playwright不支持旧版Microsoft Edge或IE11）
 2.  更快的执行速度：Playwright 通过使用浏览器的底层调试协议来进行操作，相比于 Selenium 和 pyppeteer，它具有更快的执行速度和更低的资源消耗。
@@ -23,7 +23,7 @@ Playwright 是一个用于自动化浏览器操作的开源工具，由 Microsof
 5.  selenium是基于http协议，而Playwright是基于websocket协议。由于使用 HTTP 协议，Selenium 的性能相对较低。每次与浏览器进行通信时，都需要发送 HTTP 请求和等待响应。而Playwright使用 WebSocket 协议，Playwright 的性能会更高。WebSocket 的双向通信使得数据交换更高效，可以更快地获取页面内容和执行操作。
 6.  支持屏幕录制功能：根据屏幕录制指定生成相关操作代码。
 
-**在爬虫中使用 Playwright 的好处包括：**
+<strong>在爬虫中使用 Playwright 的好处包括：</strong>
 
 1.  动态网页爬取：Playwright 可以模拟用户在浏览器中的操作，包括渲染 JavaScript、点击按钮、填写表单等，从而可以爬取包含动态内容的网页。
 2.  多浏览器支持：Playwright 支持多种浏览器，可以根据需求选择最适合的浏览器进行爬取，以确保爬取结果的准确性和一致性。
@@ -31,7 +31,7 @@ Playwright 是一个用于自动化浏览器操作的开源工具，由 Microsof
 
 总之，Playwright 是一个功能强大、跨浏览器、跨平台的浏览器自动化工具，相比于 Selenium 和 pyppeteer，它具有更快的执行速度、更高的稳定性和更广泛的浏览器支持，适用于多种自动化操作和爬虫场景。
 
-**python版本的Playwright官网文档：**[https://playwright.dev/python/docs/intro](https://playwright.dev/python/docs/intro)
+<strong>python版本的Playwright官网文档：</strong>[https://playwright.dev/python/docs/intro](https://playwright.dev/python/docs/intro)
 
 ### 环境安装
 
@@ -66,7 +66,7 @@ Playwright 是一个用于自动化浏览器操作的开源工具，由 Microsof
         
     -   访问指定网址，并且设置浏览器窗口大小
         
-    -   **playwright codegen –device=”iPhone 13” -o main.py**
+    -   <strong>playwright codegen –device=”iPhone 13” -o main.py</strong>
         
         -   模拟手机设备进行网络请求（只支持手机模拟器，无需单独安装）
         -   支持的移动端设备如下：目前对安卓设备的覆盖率不高
@@ -842,7 +842,7 @@ with sync_playwright() as p:
         
         ![Snip20231227\_41](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==)
         
-        **结论：只需要执行window.\_webmsxyw函数并且传入s（固定字符串）和i（数据包的请求参数）两个参数，就可得到x-s的值**
+        <strong>结论：只需要执行window.\_webmsxyw函数并且传入s（固定字符串）和i（数据包的请求参数）两个参数，就可得到x-s的值</strong>
         
     -   使用Playwright创建浏览器环境，然后进行js注入，执行window.\_webmsxyw获取x-s的值，然后使用requests对homefeed包进行请求发送即可获取目标数据。
         

@@ -1,6 +1,6 @@
 ---
 title: python教程学习笔记003
-date: '2023-01-26T00:00:00+00:00'
+date: 2023-01-25T17:24:42.000Z
 permalink: 2023/01/26/python教程学习笔记003/
 categories:
   - python
@@ -101,7 +101,7 @@ File “err\_throw.py”, line 11, in
 foo(‘0’)  
 File “err\_throw.py”, line 8, in foo  
 raise FooError(‘invalid value: %s’ % s)  
-**main**.FooError: invalid value: 0
+<strong>main</strong>.FooError: invalid value: 0
 
 只有在必要的时候才定义我们自己的错误类型。如果可以选择Python已有的内置的错误类型（比如ValueError，TypeError），尽量使用Python内置的错误类型。  
 raise语句如果不带参数，就会把当前错误原样抛出。此外，在except中raise一个Error，还可以把一种类型的错误转化成另一种类型：

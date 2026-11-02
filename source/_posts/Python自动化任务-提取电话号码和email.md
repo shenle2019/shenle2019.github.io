@@ -1,6 +1,6 @@
 ---
 title: Python自动化任务-提取电话号码和email
-date: '2021-12-13T00:00:00+00:00'
+date: 2021-12-12T22:09:06.000Z
 permalink: 2021/12/13/Python自动化任务-提取电话号码和email/
 categories:
   - 测试
@@ -119,11 +119,11 @@ tags:
     
 -   python赋值、浅拷贝、深拷贝
     
-    -   **直接赋值：**其实就是对象的引用（别名）。
+    -   <strong>直接赋值：</strong>其实就是对象的引用（别名）。
         
-    -   **浅拷贝(copy)：**拷贝父对象，不会拷贝对象的内部的子对象。
+    -   <strong>浅拷贝(copy)：</strong>拷贝父对象，不会拷贝对象的内部的子对象。
         
-    -   **深拷贝(deepcopy)：** copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。
+    -   <strong>深拷贝(deepcopy)：</strong> copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。
         
         ```python
         import copy

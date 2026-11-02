@@ -1,6 +1,6 @@
 ---
 title: python教程学习笔记002
-date: '2023-01-25T00:00:00+00:00'
+date: 2023-01-24T18:53:31.000Z
 permalink: 2023/01/25/python教程学习笔记002/
 categories:
   - python
@@ -10,7 +10,7 @@ tags:
 
 1.  模块
 
-每一个包目录下面都会有一个\_\_init\_\_.py的文件，这个文件是必须存在的，否则，Python就把这个目录当成普通目录，而不是一个包。**init**.py可以是空文件，也可以有Python代码，因为\_\_init\_\_.py本身就是一个模块  
+每一个包目录下面都会有一个\_\_init\_\_.py的文件，这个文件是必须存在的，否则，Python就把这个目录当成普通目录，而不是一个包。<strong>init</strong>.py可以是空文件，也可以有Python代码，因为\_\_init\_\_.py本身就是一个模块  
 自己创建模块时要注意命名，不能和Python自带的模块名称冲突。例如，系统自带了sys模块，自己的模块就不可命名为sys.py，否则将无法导入系统自带的sys模块。  
 我们以内建的sys模块为例，编写一个hello的模块：
 
@@ -117,7 +117,7 @@ class Student(object):
 如果我们想要限制实例的属性怎么办？比如，只允许对Student实例添加name和age属性。  
 为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的\_\_slots\_\_变量，来限制该class实例能添加的属性：  
 class Student(object):  
-**slots** = (‘name’, ‘age’) # 用tuple定义允许绑定的属性名称  
+<strong>slots</strong> = (‘name’, ‘age’) # 用tuple定义允许绑定的属性名称  
 然后，我们试试：
 
 > > > s = Student() # 创建新的实例  
@@ -229,10 +229,10 @@ class Student(object):
     __repr__ = __str__
 ````
 
-**iter**  
+<strong>iter</strong>  
 如果一个类想被用于for … in循环，类似list或tuple那样，就必须实现一个\_\_iter\_\_()方法，该方法返回一个迭代对象，然后，Python的for循环就会不断调用该迭代对象的\_\_next\_\_()方法拿到循环的下一个值，直到遇到StopIteration错误时退出循环。
 
-**getitem**  
+<strong>getitem</strong>  
 要表现得像list那样按照下标取出元素，需要实现\_\_getitem\_\_()方法
 
 Python还有另一个机制，那就是写一个\_\_getattr\_\_()方法，动态返回一个属性。修改如下：
@@ -250,7 +250,7 @@ class Student(object):
 
 当调用不存在的属性时，比如score，Python解释器会试图调用\_\_getattr\_\_(self, ‘score’)来尝试获得属性，这样，我们就有机会返回score的值
 
-**call**  
+<strong>call</strong>  
 一个对象实例可以有自己的属性和方法，当我们调用实例方法时，我们用instance.method()来调用。能不能直接在实例本身上调用呢？在Python中，答案是肯定的。  
 任何类，只需要定义一个\_\_call\_\_()方法，就可以直接对实例进行调用。
 

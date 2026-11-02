@@ -1,12 +1,12 @@
 ---
 title: nexo-Next中添加网易云音乐+切换页面自动播放
-date: '2021-11-29T00:00:00+00:00'
+date: 2021-11-28T22:56:33.000Z
 permalink: 2021/11/29/nexo-Next中添加网易云音乐-切换页面自动播放/
 categories:
   - 部署
 tags:
   - hexo
-  - github-pages
+  - github pages
   - next
   - 网易云
 ---
@@ -108,9 +108,9 @@ pjax: true
 
 在博客文件夹打开GitBash执行hexo clean、hexo g、hexo s，跳转页面时即可看到效果。
 
--   **本文作者：** General usopp
--   **本文链接：** [https://shenle2019.github.io/2021/11/29/nexo-Next%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90-%E5%88%87%E6%8D%A2%E9%A1%B5%E9%9D%A2%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE/](https://shenle2019.github.io/2021/11/29/nexo-Next%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90-%E5%88%87%E6%8D%A2%E9%A1%B5%E9%9D%A2%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE/ "nexo-Next中添加网易云音乐+切换页面自动播放")
--   **版权声明：** 本博客所有文章除特别声明外，均采用 [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) 许可协议。转载请注明出处！
+-   <strong>本文作者：</strong> General usopp
+-   <strong>本文链接：</strong> [https://shenle2019.github.io/2021/11/29/nexo-Next%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90-%E5%88%87%E6%8D%A2%E9%A1%B5%E9%9D%A2%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE/](https://shenle2019.github.io/2021/11/29/nexo-Next%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90-%E5%88%87%E6%8D%A2%E9%A1%B5%E9%9D%A2%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE/ "nexo-Next中添加网易云音乐+切换页面自动播放")
+-   <strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) 许可协议。转载请注明出处！
 
 [\# hexo](/tags/hexo/) [\# github pages](/tags/github-pages/) [\# next](/tags/next/) [\# 网易云](/tags/%E7%BD%91%E6%98%93%E4%BA%91/)
 

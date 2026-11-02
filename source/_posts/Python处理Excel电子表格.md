@@ -1,6 +1,6 @@
 ---
 title: Python处理Excel电子表格
-date: '2022-01-11T00:00:00+00:00'
+date: 2022-01-10T21:06:32.000Z
 permalink: 2022/01/11/Python处理Excel电子表格/
 categories:
   - 测试
@@ -37,7 +37,7 @@ tags:
 
 import openpyxl
 
-如果有报错，没有对应模块，则使用命令导入**pip install openpyxl**
+如果有报错，没有对应模块，则使用命令导入<strong>pip install openpyxl</strong>
 
 #### 读取Excel文档
 

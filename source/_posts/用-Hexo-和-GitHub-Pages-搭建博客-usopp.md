@@ -7,7 +7,7 @@ tags:
 	- next
 	- blog
 categories:
-	- 运维部署
+	- 部署github pages
 ---
 
 - 说明：本博客基于知乎回答来做的，因搭建过程遇到一些问题，所以直接转载过来，在此基础上提供自己的注意点+NEXT主题下的一些基本配置工作。
@@ -19,8 +19,8 @@ categories:
 
 # 日常常用命令
 
-- hexo new "文章名"
-- 手动编辑source的_posts下生成的md文件
+- hexo new “文章名”
+- 手动编辑source的_posts下生成的md文件,注意配置title，tags以及categories
 - hexo g -d部署即可
 
 ## 步骤
@@ -52,7 +52,7 @@ Github Pages 其实本身就是 Github 提供的博客服务。 我们在 Github
 
 **Usopp这里说明一下：**
 
-- 比如我的github路径是https://github.com/shenle2019，那么这里配置的必须是shenle2019.github.io，否则不会生成页面。
+- 比如我的github路径是https://github.com/shenle2019，那么这里配置的必须是shenle2019.github.io，即shenle2019名称必须相同，否则不会生成页面。
 
 - 默认创建的分支，以前是master，现在是main。而我需要在main下创建一个gh-pages的分支才能使用shenle2019.github.io来访问博客网页。
 
@@ -280,16 +280,16 @@ hexo n "我的第一篇文章"`       等价于        `hexo new "我的第一�
  `hexo generate -d`等价于`hexo generate --deploy
 ```
 
-**注: hexo  clean 没有 简写,  git --version 没有简写**
+**注: hexo  clean 没有 简写,  git –version 没有简写**
 
 ## 指令说明:
 
 `hexo server`        #Hexo 会监视文件变动并自动更新，除修改**站点配置文件**外,无须重启服务器,直接刷新网页即可生效。
  `hexo server -s` #以静态模式启动
- `hexo server -p 5000` #更改访问端口   (默认端口为4000，'ctrl + c'关闭server)
+ `hexo server -p 5000` #更改访问端口   (默认端口为4000，’ctrl + c’关闭server)
  `hexo server -i IP地址` #自定义 IP
  `hexo clean` #清除缓存  ,网页正常情况下可以忽略此条命令,执行该指令后,会删掉站点根目录下的public文件夹
- `hexo g` #生成静态网页  (执行 `$ hexo g`后会在站点根目录下生成public文件夹, hexo会将"/blog/source/"   下面的.md后缀的文件编译为.html后缀的文件,存放在"/blog/public/ "   路径下)
+ `hexo g` #生成静态网页  (执行 `$ hexo g`后会在站点根目录下生成public文件夹, hexo会将”/blog/source/“   下面的.md后缀的文件编译为.html后缀的文件,存放在”/blog/public/“   路径下)
  `hexo d` #将本地数据部署到远端服务器(如github)
  `hexo init 文件夹名称` #初始化XX文件夹名称
  `npm update hexo -g`#升级
@@ -301,7 +301,7 @@ hexo n "我的第一篇文章"`       等价于        `hexo new "我的第一�
 
 `hexo publish [layout] <title>`   #通过 `publish` 命令将草稿移动到 `source/_posts` 文件夹,如:`$ hexo publish [layout] <title>`,草稿默认是不会显示在页面中的，可在执行时加上 `--draft` 参数，或是把 `render_drafts` 参数设为 `true`来预览草稿。
 
-`hexo new aaa "bbb"`  # 新建一篇文章,文章名称和标题分别为bbb.md 和 bbb.   文章采用aaa布局,  此时会在站点根目录下的---->source----->_post文件夹下生成bbb.md文件,  bbb.md文件的顶部(-----分割线上方区域,也称作Front matter区),生成
+`hexo new aaa "bbb"`  # 新建一篇文章,文章名称和标题分别为bbb.md 和 bbb.   文章采用aaa布局,  此时会在站点根目录下的—->source—–>_post文件夹下生成bbb.md文件,  bbb.md文件的顶部(—–分割线上方区域,也称作Front matter区),生成
 
 ```
 layout : aaa`

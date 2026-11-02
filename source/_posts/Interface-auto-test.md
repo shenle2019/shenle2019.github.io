@@ -1,6 +1,6 @@
 ---
 title: Interface auto test
-date: '2022-09-13T00:00:00+00:00'
+date: 2022-09-12T19:53:00.000Z
 permalink: 2022/09/13/Interface-auto-test/
 categories:
   - 测试
@@ -264,17 +264,17 @@ if __name__ == '__main__':
 
 测试框架  
 Config：  
-**init**.py  
+<strong>init</strong>.py  
 config.ini  
 HTMLTestRunner.py  
 readConfig.py  
 Data：  
-**init**.py  
+<strong>init</strong>.py  
 data.xlsx  
 taskID  
 Token.md  
 Log：  
-**init**.py  
+<strong>init</strong>.py  
 log.txt  
 Reports：  
 2019-01-04 14\_05\_59result.html  
@@ -283,16 +283,16 @@ Reports：
 2019-02-12 20\_22\_39result.html  
 2019-02-15 21\_03\_33result.html  
 2019-03-07 20\_52\_13result.html  
-**init**.py  
+<strong>init</strong>.py  
 TestCases：  
-**init**.py  
+<strong>init</strong>.py  
 test\_tasks.py  
 Utils：  
-**init**.py  
+<strong>init</strong>.py  
 excles.py  
 page.py
 
-**init**.py  
+<strong>init</strong>.py  
 runMain.py
 
 config.ini:

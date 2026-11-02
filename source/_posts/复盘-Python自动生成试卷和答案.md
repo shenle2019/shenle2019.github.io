@@ -1,6 +1,6 @@
 ---
 title: 复盘 - Python自动生成试卷和答案
-date: '2022-01-09T00:00:00+00:00'
+date: 2022-01-08T16:10:01.000Z
 permalink: 2022/01/09/复盘-Python自动生成试卷和答案/
 categories:
   - 测试
@@ -22,7 +22,7 @@ tags:
 4.  创建文件和开始写入testfile = open(filepath,’w’)，file\_handle.write(‘hello word 你好 ‘)写入内容，  
     写完后记得关闭文件 exam\_file.close()
 5.  打乱capitals的次序,shuffle()是不能直接访问的，需要导入 random 模块，然后通过 random 静态对象调用该方法。  
-    random.shuffle (lst ),lst为列表，这里注意直接使用方法打乱次序即可，**shuffle不返回任何值**，所以不要用变量接收。
+    random.shuffle (lst ),lst为列表，这里注意直接使用方法打乱次序即可，<strong>shuffle不返回任何值</strong>，所以不要用变量接收。
 6.  字典.keys()，字典.values()分别获取键和值。如果不知道具体怎么获取值，直接打印出来看。
 7.  list中随机取几个数random.sample(list, k)
 

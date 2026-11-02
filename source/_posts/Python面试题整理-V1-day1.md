@@ -1,6 +1,6 @@
 ---
 title: Python面试题整理-V1 day1
-date: '2022-04-20T00:00:00+00:00'
+date: 2022-04-19T21:57:15.000Z
 permalink: 2022/04/20/Python面试题整理-V1-day1/
 categories:
   - 面试
@@ -47,7 +47,7 @@ pymysql 连接mysql数据库，类似jdbc
 应用场景，确定的不会变化的，用元组，一般来说，性能较列表更好。
 
 参考答案：  
-1.  
+1\.  
 相同点：  
 列表和元组是Python中最常用的两种数据结构，字典是第三种。
 
@@ -58,12 +58,12 @@ list和tuple都支持负索引
 list和tuple都支持切片操作  
 list和tuple都可以随意嵌套
 
-2.  
+2\.  
 写法上不同  
 列表使用list1 = \[“1”, “2”\], 元组使用()  
 t = (“[https://china-testing.github.io/"](https://china-testing.github.io/"), “[https://www.oscobo.com/"](https://www.oscobo.com/"))
 
-3.  
+3\.  
 是否可变  
 列表是可变的，而元组是不可变的，这标志着两者之间的关键差异。  
 我们可以修改列表的值，但是不修改元组的值。  
@@ -84,9 +84,9 @@ Python将低开销的较大的块分配给元组，因为它们是不可变的�
 
 > > > l = \[“[https://china-testing.github.io/"](https://china-testing.github.io/"), “[https://www.oscobo.com/"\]](https://www.oscobo.com/"])  
 > > > t = (“[https://china-testing.github.io/"](https://china-testing.github.io/"), “[https://www.oscobo.com/"](https://www.oscobo.com/"))  
-> > > print(l.**sizeof**())  
+> > > print(l.<strong>sizeof</strong>())  
 > > > 56  
-> > > print(t.**sizeof**())  
+> > > print(t.<strong>sizeof</strong>())  
 > > > 40
 
 -   深拷贝和浅拷贝的区别是什么？
@@ -339,7 +339,7 @@ Python3中对GIL的改进
 Python 3为现有的GIL带来了重大改进 -  
 GIL会对 “仅CPU限制” 和 “仅I / O绑定” 的多线程程序造成影响，但是如果一个多线程程序，其中有些线程受I / O约束和有些线程受CPU约束会怎么样呢？  
 在这样的程序中，已知Python的GIL会使I / O绑定的线程匮乏，因为它们没有机会从CPU绑定的线程中获取GIL。  
-这是因为Python内置了一种机制，强制线程在连续使用固定间隔后释放GIL **，**如果没有其他人获得GIL，则相同的线程可以继续使用它。
+这是因为Python内置了一种机制，强制线程在连续使用固定间隔后释放GIL <strong>，</strong>如果没有其他人获得GIL，则相同的线程可以继续使用它。
 
 ```python
 >>>import sys
@@ -351,7 +351,7 @@ GIL会对 “仅CPU限制” 和 “仅I / O绑定” 的多线程程序造成�
 在Python3.2中修复了这个问题，并且添加了一种机制，可以查看被删除的其他线程的GIL获取请求数，并且在其他线程有机会运行之前不允许当前线程重新获取GIL。
 
 如何处理Python的GIL  
-**多进程与多线程：**最流行的方法是使用多进程方法，使用多个进程而不是线程。每个Python进程都有自己的Python解释器和内存空间，因此GIL不会成为问题。Python有一个multiprocessing模块，可以轻松地创建进程：
+<strong>多进程与多线程：</strong>最流行的方法是使用多进程方法，使用多个进程而不是线程。每个Python进程都有自己的Python解释器和内存空间，因此GIL不会成为问题。Python有一个multiprocessing模块，可以轻松地创建进程：
 
 ```python
 from multiprocessing import Pool

@@ -1,6 +1,6 @@
 ---
 title: Python面试题整理-V1 day2
-date: '2022-04-25T00:00:00+00:00'
+date: 2022-04-24T22:20:34.000Z
 permalink: 2022/04/25/Python面试题整理-V1-day2/
 categories:
   - 面试
@@ -63,7 +63,7 @@ tags:
     
     整型int 字符串str 布尔bool 列表list 元组tuple 字典dict
     
--   简述面向对象中，**new** 和\_\_init\_\_的区别
+-   简述面向对象中，<strong>new</strong> 和\_\_init\_\_的区别
     
     -   init是初始化方法，创建后就会被默认调用，可接收参数。
         

@@ -1,6 +1,6 @@
 ---
 title: Python面试题整理-V1 day3
-date: '2022-05-05T00:00:00+00:00'
+date: 2022-05-04T22:48:33.000Z
 permalink: 2022/05/05/Python面试题整理-V1-day3/
 categories:
   - 面试
@@ -776,13 +776,13 @@ http:[www.test.com与http:www.test.com:8081](http://www.test.com与http:www.test
     
 -   列出几种魔法方法并简要介绍用途
     
-    **init**:对象初始化方法
+    <strong>init</strong>:对象初始化方法
     
-    **new**:创建对象时候执行的方法，单列模式会用到
+    <strong>new</strong>:创建对象时候执行的方法，单列模式会用到
     
-    **str**:当使用print输出对象的时候，只要自己定义了\_\_str\_\_(self)方法，那么就会打印从在这个方法中return的数据
+    <strong>str</strong>:当使用print输出对象的时候，只要自己定义了\_\_str\_\_(self)方法，那么就会打印从在这个方法中return的数据
     
-    **del**:删除对象执行的方法
+    <strong>del</strong>:删除对象执行的方法
     
 -   python 1.py 22 33命令行启动程序并传参，print(sys.argv)会输出什么数据？
     

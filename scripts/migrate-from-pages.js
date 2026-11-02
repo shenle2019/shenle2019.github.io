@@ -7,7 +7,7 @@
  *
  * 关键约束：
  * - permalink 用 URL 目录名写死，避免 Hexo 7 按本地时区重排日期导致老链接失效
- * - date 取 URL 里的日期，全天零时（UTC），只用于展示
+ * - date 取原站 time 的 datetime 原值（带原时区偏移），还原原站显示日期；缺失时用 URL 日期零时
  * - 已存在的 md 不覆盖（保留手写源文件）
  */
 
@@ -56,8 +56,12 @@ function decodeNames($, selector, section) {
   const prefix = new RegExp(`^/${section}/(.+?)/?$`);
   return $(selector)
     .toArray()
-    .map((el) => $(el).attr('href') || '')
-    .map((href) => {
+    .map((el) => {
+      // 优先用显示文本：href 会把空格连字符化（github pages → github-pages）
+      const text = $(el).text().trim().replace(/^#\s*/, '');
+      if (text) return text;
+
+      const href = $(el).attr('href') || '';
       let decoded = href;
       try {
         decoded = decodeURIComponent(href);
@@ -65,10 +69,14 @@ function decodeNames($, selector, section) {
         /* 保留原串 */
       }
       const m = decoded.match(prefix);
-      const name = m ? m[1] : decoded.replace(/^#/, '').replace(/^\/+|\/+$/g, '');
-      return name.trim();
+      return (m ? m[1] : decoded.replace(/^#/, '').replace(/^\/+|\/+$/g, '')).trim();
     })
     .filter(Boolean);
+}
+
+/** 段落内单独成行的「1.」会被 Markdown 当成空列表项，转义回字面编号 */
+function escapeLoneListMarkers(md) {
+  return md.replace(/^([ \t]*)(\d+)\.([ \t]*)$/gm, (whole, indent, num, tail) => `${indent}${num}\\.${tail}`);
 }
 
 /** 正文 HTML → Markdown；代码块先摘出再回填，避免 turndown 丢失高亮结构 */
@@ -98,9 +106,24 @@ function bodyHtmlToMarkdown(html) {
     emDelimiter: '*',
   });
   turndown.keep(['iframe', 'video', 'audio', 'source']);
+  // “**CPU：**汉字”这种闭合符前中文标点、后汉字的写法 CommonMark 不认，
+  // 保留 strong 原生标签才能稳定还原原站加粗
+  turndown.addRule('strongHtml', {
+    filter: ['strong', 'b'],
+    replacement: (content) => (content.trim() ? `<strong>${content}</strong>` : content),
+  });
 
   const md = turndown.turndown($.html() || '').replace(/\n{3,}/g, '\n\n').trim();
-  return insertBlocks(md, blocks).trim();
+  return insertBlocks(escapeLoneListMarkers(md), blocks).trim();
+}
+
+/** 原站发布时间：保留原时区偏移，交给站点 timezone 换算显示日期 */
+function createdDate($, fallback) {
+  const attr = $('.post-meta time[itemprop~="dateCreated"]').first().attr('datetime')
+    || $('.post-meta time').first().attr('datetime')
+    || '';
+  const value = String(attr).trim();
+  return value || fallback;
 }
 
 function parsePost(html, relPath) {
@@ -115,7 +138,7 @@ function parsePost(html, relPath) {
   return {
     slug,
     permalink: `${year}/${month}/${day}/${slug}/`,
-    date: `${year}-${month}-${day}T00:00:00+00:00`,
+    date: createdDate($, `${year}-${month}-${day}T00:00:00+00:00`),
     title,
     categories: decodeNames($, '.post-category a', 'categories'),
     tags: decodeNames($, '.post-tags a', 'tags'),
@@ -128,9 +151,11 @@ function writePost(postsDir, post) {
   const file = path.join(postsDir, `${post.slug}.md`);
   if (fs.existsSync(file)) return { skipped: true, file };
 
+  const date = new Date(post.date);
   const front = {
     title: post.title,
-    date: post.date,
+    // YAML 时间戳（Date 对象）才不会被 Hexo 当本地字符串再叠一次时区偏移
+    date: Number.isNaN(date.getTime()) ? post.date : date,
     permalink: post.permalink,
     categories: post.categories,
     tags: post.tags,

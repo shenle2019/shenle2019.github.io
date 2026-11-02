@@ -1,6 +1,6 @@
 ---
 title: python读写文件
-date: '2021-12-20T00:00:00+00:00'
+date: 2021-12-19T22:39:24.000Z
 permalink: 2021/12/20/python读写文件/
 categories:
   - 测试

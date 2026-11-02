@@ -1,6 +1,6 @@
 ---
 title: Python-Web 开发入门001-搭建Web开发虚拟环境、Django Demo
-date: '2022-04-06T00:00:00+00:00'
+date: 2022-04-05T22:12:07.000Z
 permalink: 2022/04/06/Python-Web-开发入门001-搭建Web开发虚拟环境、Django-Demo/
 categories:
   - 开发

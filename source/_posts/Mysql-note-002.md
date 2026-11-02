@@ -1,6 +1,6 @@
 ---
 title: Mysql note 002
-date: '2022-09-26T00:00:00+00:00'
+date: 2022-09-25T17:07:01.000Z
 permalink: 2022/09/26/Mysql-note-002/
 categories:
   - Mysql

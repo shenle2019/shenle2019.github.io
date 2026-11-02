@@ -1,6 +1,6 @@
 ---
 title: 处理PDF和Word文档
-date: '2022-01-18T00:00:00+00:00'
+date: 2022-01-17T20:17:52.000Z
 permalink: 2022/01/18/处理PDF和Word文档/
 categories:
   - 测试
@@ -218,7 +218,7 @@ tags:
 
 果按下回车，新的段落就开始了）。每个 Paragraph 对象都包含一个 Run 对象的列表。————Word文档组织方式
 
-**pip install python-docx**
+<strong>pip install python-docx</strong>
 
 -   读取 Word 文档
     
@@ -270,11 +270,11 @@ tags:
     
     注意添加缩进：
     
-    fullText.append(**‘ ‘ +** para.text)
+    fullText.append(<strong>‘ ‘ +</strong> para.text)
     
     添加空行：
     
-    return ‘\\n**\\n**‘.join(fullText)
+    return ‘\\n<strong>\\n</strong>‘.join(fullText)
     
 -   设置 Paragraph 和 Run 对象的样式
     
@@ -388,7 +388,7 @@ tags:
     add\_paragraph()和 add\_run()都接受可选的第二个参数，它是表示 Paragraph 或Run 对象样式的字符串。
     
 
-​ 如 **doc.add**\*\*\_\*\*\*\*paragraph(‘Hello world!’, ‘Title’)\*\*，样式就是Title
+​ 如 <strong>doc.add</strong>\*\*\_\*\*\*\*paragraph(‘Hello world!’, ‘Title’)\*\*，样式就是Title
 
 -   添加标题
     

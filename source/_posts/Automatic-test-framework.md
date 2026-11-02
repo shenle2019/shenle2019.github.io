@@ -1,6 +1,6 @@
 ---
 title: Automatic test framework
-date: '2022-08-22T00:00:00+00:00'
+date: 2022-08-21T19:08:29.000Z
 permalink: 2022/08/22/Automatic-test-framework/
 categories:
   - 测试

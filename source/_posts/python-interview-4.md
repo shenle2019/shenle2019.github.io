@@ -1,6 +1,6 @@
 ---
 title: python interview 4
-date: '2022-08-22T00:00:00+00:00'
+date: 2022-08-21T19:07:57.000Z
 permalink: 2022/08/22/python-interview-4/
 categories:
   - 面试
