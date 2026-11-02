@@ -8,7 +8,7 @@ subtitle: 'General usopp'
 description: '写的最好的，是下一篇'
 keywords:
 author: General usopp
-language: zh-Hans
+language: zh-CN
 timezone: 'UTC'
 
 # URL
@@ -100,3 +100,8 @@ search:
   field: post
   format: html
   limit: 10000
+
+# Markdown 渲染
+## 关闭智能标点：老站正文里的直引号、连字符保持字面
+marked:
+  smartypants: false
