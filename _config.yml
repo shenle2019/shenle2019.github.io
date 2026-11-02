@@ -50,11 +50,6 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
-prismjs:
-  enable: false
-  preprocess: true
-  line_number: true
-  tab_replace: ''
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -99,44 +94,9 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: next
 
+# Search
 search:
   path: search.xml
   field: post
   format: html
   limit: 10000
-
-# Deployment
-## Docs: https://hexo.io/docs/one-command-deployment
-## branch: main,gh-pages；https://github.com/shenle2019/shenle2019.github.io.git
-deploy:
-  type: git
-  repository: git@github.com:shenle2019/shenle2019.github.io.git
-  branch: gh-pages
-  
-#懒加载设置
-lazyload:
-  enable: true
-  onlypost: false
-  loadingImg:    # /images/loading.png
-  
-# live2D动画
-live2d:
-  enable: true
-  scriptFrom: local
-  pluginRootPath: live2dw/
-  pluginJsPath: lib/
-  pluginModelPath: assets/
-  tagMode: false
-  debug: false
-  model:
-    use: live2d-widget-model-shizuku # 指明使用哪个动画
-  display:
-    position: left
-    width: 150    #宽度
-    height: 240   #高度
-    hOffset: 100  # 调节水平位置
-    vOffset: 0    # 调节垂直位置
-  mobile:
-    show: false   #移动端是否显示
-  react:
-    opacity: 0.8   #不透明度

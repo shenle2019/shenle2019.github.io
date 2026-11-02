@@ -1,0 +1,38 @@
+# 波音列岛试炼场 — Next 主题配置
+# 完整键名以 node_modules/hexo-theme-next/_config.yml 为准
+
+# ---------------------------------------------------------------
+# Scheme Settings
+# ---------------------------------------------------------------
+scheme: Gemini
+
+# ---------------------------------------------------------------
+# Menu Settings
+# ---------------------------------------------------------------
+menu:
+  首页: / || fa fa-home
+  标签: /tags/ || fa fa-tags
+  分类: /categories/ || fa fa-folder-open
+  归档: /archives/ || fa fa-archive
+
+menu_icons:
+  enable: true
+
+# ---------------------------------------------------------------
+# Sidebar Settings
+# ---------------------------------------------------------------
+sidebar:
+  position: left
+
+avatar:
+  url: /images/psb.jpg
+  rounded: true
+  opacity: 1
+
+# ---------------------------------------------------------------
+# Post Settings
+# ---------------------------------------------------------------
+toc:
+  enable: true
+  number: true
+  wrap: false
