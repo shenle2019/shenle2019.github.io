@@ -1,38 +1,64 @@
-# 波音列岛试炼场 — Next 主题配置
-# 完整键名以 node_modules/hexo-theme-next/_config.yml 为准
+# Next 主题覆盖配置：只写与原站不同的项，其余沿用主题默认值（主题会深度合并）
 
-# ---------------------------------------------------------------
-# Scheme Settings
-# ---------------------------------------------------------------
+# 原站使用的配色方案
 scheme: Gemini
+darkmode: false
 
-# ---------------------------------------------------------------
-# Menu Settings
-# ---------------------------------------------------------------
 menu:
   首页: / || fa fa-home
   标签: /tags/ || fa fa-tags
-  分类: /categories/ || fa fa-folder-open
+  分类: /categories/ || fa fa-th
   归档: /archives/ || fa fa-archive
 
-menu_icons:
-  enable: true
+menu_settings:
+  icons: true
+  badges: false
 
-# ---------------------------------------------------------------
-# Sidebar Settings
-# ---------------------------------------------------------------
 sidebar:
   position: left
+  display: post
 
 avatar:
   url: /images/psb.jpg
   rounded: true
-  opacity: 1
 
-# ---------------------------------------------------------------
-# Post Settings
-# ---------------------------------------------------------------
+social:
+  GitHub: https://github.com/shenle2019 || fab fa-github
+  E-Mail: mailto:emptymiss99@outlook.com || fa fa-envelope
+
+social_icons:
+  enable: true
+  icons_only: false
+
 toc:
   enable: true
   number: true
-  wrap: false
+  wrap: true
+
+footer:
+  since: 2021
+  icon:
+    name: fa fa-user
+    animated: false
+    color: "#555555"
+
+# 文章底部版权声明：CC BY-NC-SA 3.0，与原站文案一致
+creative_commons:
+  license: by-nc-sa
+  size: small
+  sidebar: false
+  post: true
+
+# 站内搜索（对应 _config.yml 的 search.xml）
+local_search:
+  enable: true
+  trigger: auto
+  top_n_per_article: 1
+  unescape: false
+  preload: false
+
+# 自定义模板：评论容器、Valine、APlayer
+custom_file_path:
+  head: source/_data/head.njk
+  postBodyEnd: source/_data/post-body-end.njk
+  bodyEnd: source/_data/body-end.njk

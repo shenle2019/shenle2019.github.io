@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { collectPostUrls, compareUrlSets } = require('./verify-urls.js');
+const { collectPostUrls, compareUrlSets } = require('../scripts/verify-urls.js');
 
 function makeTree(root, urls) {
   for (const url of urls) {

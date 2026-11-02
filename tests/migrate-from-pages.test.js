@@ -3,9 +3,9 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { parsePost, writePost } = require('./migrate-from-pages.js');
+const { parsePost, writePost } = require('../scripts/migrate-from-pages.js');
 
-const FIXTURES = path.join(__dirname, '..', 'tests', 'fixtures');
+const FIXTURES = path.join(__dirname, 'fixtures');
 const fixture = (name) => fs.readFileSync(path.join(FIXTURES, name), 'utf8');
 
 const BOOK_REL = '2021/11/24/《控方证人》影评-usopp/index.html';

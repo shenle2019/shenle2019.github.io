@@ -1,0 +1,4 @@
+{# 文章底部评论挂载点；Next 8 已移除 Valine，改为在 body-end.njk 里自行初始化 #}
+{% if page.layout === 'post' and page.comments !== false %}
+<div id="comments" class="comments"></div>
+{% endif %}
