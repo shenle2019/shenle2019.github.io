@@ -1,130 +1,45 @@
 <!DOCTYPE html>
-
-
-
-
-<html class="theme-next gemini" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha256-4Lad8m4ZWW1Lgb9+sMVLYEfnIh7BjV1NQMEe79Pviks=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shenle2019.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.29.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
 
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="测试开发," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="DBMS的种类1.关系数据库关系数据库是现在应用最广泛的数据库。关系数据库在1969年诞生，可谓历史悠久。和Excel工作表一样，它也采用由行和列组成的二维表来管理数据，所以简单易懂（表1-1）。同时，它还使用专门的SQL（Structured Query Language，结构化查询语言）对数据进行操作。 比较具有代表性的RDBMS有如下5种：  OracleDatabase：甲骨文公司的RDB">
+    <meta name="description" content="DBMS的种类1.关系数据库关系数据库是现在应用最广泛的数据库。关系数据库在1969年诞生，可谓历史悠久。和Excel工作表一样，它也采用由行和列组成的二维表来管理数据，所以简单易懂（表1-1）。同时，它还使用专门的SQL（Structured Query Language，结构化查询语言）对数据进行操作。 比较具有代表性的RDBMS有如下5种：  OracleDatabase：甲骨文公司的RDB">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql 基础知识">
 <meta property="og:url" content="https://shenle2019.github.io/2023/11/13/mysql-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="波音列岛试炼场">
 <meta property="og:description" content="DBMS的种类1.关系数据库关系数据库是现在应用最广泛的数据库。关系数据库在1969年诞生，可谓历史悠久。和Excel工作表一样，它也采用由行和列组成的二维表来管理数据，所以简单易懂（表1-1）。同时，它还使用专门的SQL（Structured Query Language，结构化查询语言）对数据进行操作。 比较具有代表性的RDBMS有如下5种：  OracleDatabase：甲骨文公司的RDB">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-12T23:56:49.000Z">
-<meta property="article:modified_time" content="2023-11-12T15:57:39.597Z">
+<meta property="article:modified_time" content="2026-11-02T09:04:55.240Z">
 <meta property="article:author" content="General usopp">
 <meta property="article:tag" content="测试开发">
 <meta name="twitter:card" content="summary">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Gemini',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
+<link rel="canonical" href="https://shenle2019.github.io/2023/11/13/mysql-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
 
 
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://shenle2019.github.io/2023/11/13/mysql-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/","path":"/2023/11/13/mysql-基础知识/","title":"mysql 基础知识"}</script>
 
-  <link rel="canonical" href="https://shenle2019.github.io/2023/11/13/mysql-基础知识/"/>
-
-
-
-
-
-  <title>mysql 基础知识 | 波音列岛试炼场</title>
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>mysql 基础知识 | 波音列岛试炼场</title>
   
 
 
@@ -135,276 +50,229 @@
 
 
   
-    <!--pjax：防止跳转页面音乐暂停-->
-  <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script> 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
 
   
-  
-    
-  
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">波音列岛试炼场</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">General usopp</p>
-      
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+      <i class="fa fa-search fa-fw fa-lg"></i>
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">波音列岛试炼场</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">General usopp</p>
+  </div>
+
+  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+      <i class="fa fa-ellipsis fa-fw fa-lg"></i>
   </div>
 </div>
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  <ul class="main-menu menu"><li class="menu-item menu-item-首页"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-标签"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-分类"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-归档"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
 </nav>
 
 
 
- </div>
-    </header>
+  
+  <template id="search-popup-template"><div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div></template>
 
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
+</header>
+        
+  
+  <aside class="sidebar">
 
-  <div id="posts" class="posts-expand">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DBMS%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">DBMS的种类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.关系数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.非关系型数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL%E8%AF%AD%E8%A8%80%E7%A7%8D%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">SQL语言种类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDL-%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89"><span class="nav-number">2.0.1.</span> <span class="nav-text">DDL 数据定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DML-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="nav-number">2.0.2.</span> <span class="nav-text">DML 数据操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DQL-%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.0.3.</span> <span class="nav-text">DQL 数据查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCL-%E6%95%B0%E6%8D%AE%E6%8E%A7%E5%88%B6"><span class="nav-number">2.0.4.</span> <span class="nav-text">DCL 数据控制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#drop%E3%80%81truncate%E3%80%81delete%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">drop、truncate、delete区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SELECT-%E8%AF%AD%E5%8F%A5%E5%AE%8C%E6%95%B4%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E7%90%86%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">SELECT 语句完整的执行顺序理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2-%E8%A1%A8%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">5.</span> <span class="nav-text">多表查询(表连接查询)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">6.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1"><span class="nav-number">6.1.</span> <span class="nav-text">什么是事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8C%E4%BA%8B%E5%8A%A1%E6%9C%89%E5%85%B3%E7%9A%84%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.2.</span> <span class="nav-text">和事务有关的语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">6.3.</span> <span class="nav-text">思考题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B0%E5%BA%95%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1%E5%91%A2%EF%BC%9F"><span class="nav-number">6.4.</span> <span class="nav-text">到底什么是事务呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%844%E4%B8%AA%E7%89%B9%E6%80%A7"><span class="nav-number">6.5.</span> <span class="nav-text">事务的4个特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="nav-number">6.5.1.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">6.5.2.</span> <span class="nav-text">一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E6%80%A7"><span class="nav-number">6.5.3.</span> <span class="nav-text">隔离性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E6%80%A7"><span class="nav-number">6.5.4.</span> <span class="nav-text">持久性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E6%80%A7"><span class="nav-number">6.6.</span> <span class="nav-text">事务的隔离性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">6.6.1.</span> <span class="nav-text">隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E6%9C%AA%E6%8F%90%E4%BA%A4-read-uncommitted%EF%BC%88%E6%9C%80%E4%BD%8E%E7%BA%A7%E5%88%AB%EF%BC%89"><span class="nav-number">6.6.1.1.</span> <span class="nav-text">读未提交 read uncommitted（最低级别）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%B7%B2%E6%8F%90%E4%BA%A4-read-committed"><span class="nav-number">6.6.1.2.</span> <span class="nav-text">读已提交 read committed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB-repeatable-read"><span class="nav-number">6.6.1.3.</span> <span class="nav-text">可重复读 repeatable read</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96-%E4%B8%B2%E8%A1%8C%E5%8C%96-serializable%EF%BC%88%E6%9C%80%E9%AB%98%E7%BA%A7%E5%88%AB%EF%BC%89"><span class="nav-number">6.6.1.4.</span> <span class="nav-text">序列化&#x2F;串行化 serializable（最高级别）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">7.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%B4%A2%E5%BC%95"><span class="nav-number">7.1.</span> <span class="nav-text">什么是索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F"><span class="nav-number">7.2.</span> <span class="nav-text">MySQL查询方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">7.3.</span> <span class="nav-text">索引的实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">7.4.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="nav-number">7.5.</span> <span class="nav-text">什么时候添加索引？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE"><span class="nav-number">8.</span> <span class="nav-text">视图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E8%A7%86%E5%9B%BE%EF%BC%9F"><span class="nav-number">8.1.</span> <span class="nav-text">什么视图？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E4%BD%9C%E7%94%A8"><span class="nav-number">8.2.</span> <span class="nav-text">视图作用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E8%A1%A8%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">9.</span> <span class="nav-text">总结表的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%AF%B9%E5%A4%9A"><span class="nav-number">9.0.1.</span> <span class="nav-text">一对多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%AF%B9%E5%A4%9A"><span class="nav-number">9.0.2.</span> <span class="nav-text">多对多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%AF%B9%E4%B8%80"><span class="nav-number">9.0.3.</span> <span class="nav-text">一对一</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">10.</span> <span class="nav-text">其他相关知识点</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="General usopp"
+      src="/images/psb.jpg">
+  <p class="site-author-name" itemprop="name">General usopp</p>
+  <div class="site-description" itemprop="description">写的最好的，是下一篇</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shenle2019" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shenle2019" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:emptymiss99@outlook.com" title="E-Mail → mailto:emptymiss99@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
     
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
 
   
 
-  
+
+<div class="post-block">
   
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://shenle2019.github.io/2023/11/13/mysql-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/psb.jpg">
+      <meta itemprop="name" content="General usopp">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="波音列岛试炼场">
+      <meta itemprop="description" content="写的最好的，是下一篇">
     </span>
 
-    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="mysql 基础知识 | 波音列岛试炼场">
+      <meta itemprop="description" content="">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql 基础知识
+        </h1>
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">mysql 基础知识</h1>
-        
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-11-13T07:56:49+08:00">
-                2023-11-12
-              </time>
-            
+      <time title="创建时间：2023-11-12 23:56:49" itemprop="dateCreated datePublished" datetime="2023-11-12T23:56:49Z">2023-11-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-02 09:04:55" itemprop="dateModified" datetime="2026-11-02T09:04:55Z">2026-11-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">测试</span></a>
+        </span>
+    </span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2023-11-12T23:57:39+08:00">
-                2023-11-12
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
-                    <span itemprop="name">测试</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2023/11/13/mysql-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2023/11/13/mysql-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv">本文阅读总量
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-
-          
+  
+</div>
 
         </div>
       </header>
-    
 
     
     
     
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h1 id="DBMS的种类"><a href="#DBMS的种类" class="headerlink" title="DBMS的种类"></a>DBMS的种类</h1><h3 id="1-关系数据库"><a href="#1-关系数据库" class="headerlink" title="1.关系数据库"></a>1.关系数据库</h3><p>关系数据库是现在应用最广泛的数据库。关系数据库在1969年诞生，可谓历史悠久。和Excel工作表一样，它也采用由行和列组成的二维表来管理数据，所以简单易懂（表1-1）。同时，它还使用专门的SQL（Structured Query Language，结构化查询语言）对数据进行操作。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="DBMS的种类"><a href="#DBMS的种类" class="headerlink" title="DBMS的种类"></a>DBMS的种类</h1><h3 id="1-关系数据库"><a href="#1-关系数据库" class="headerlink" title="1.关系数据库"></a>1.关系数据库</h3><p>关系数据库是现在应用最广泛的数据库。关系数据库在1969年诞生，可谓历史悠久。和Excel工作表一样，它也采用由行和列组成的二维表来管理数据，所以简单易懂（表1-1）。同时，它还使用专门的SQL（Structured Query Language，结构化查询语言）对数据进行操作。</p>
 <p><strong>比较具有代表性的RDBMS有如下5种：</strong></p>
 <ul>
 <li><p>OracleDatabase：甲骨文公司的RDBMS</p>
@@ -462,7 +330,7 @@
 <li><p>delete可以回滚，drop和truncate不能</p>
 </li>
 </ul>
-<h1 id="SELECT-语句完整的执行顺序理解"><a href="#SELECT-语句完整的执行顺序理解" class="headerlink" title="SELECT 语句完整的执行顺序理解"></a>SELECT 语句完整的执行顺序理解</h1><p>SQL 查询处理的步骤序号：<br>(1) FROM <left_table><br>(2) <join_type> JOIN <right_table><br>(3) ON <join_condition><br>(4) WHERE <where_condition><br>(5) GROUP BY <group_by_list><br>(6) WITH {CUBE | ROLLUP}<br>(7) HAVING <having_condition><br>(8) SELECT<br>(9) DISTINCT<br>(9) ORDER BY <order_by_list><br>(10) <TOP_specification> <select_list><br>以上每个步骤都会产生一个虚拟表，该虚拟表被用作下一个步骤的输入。<br>这些虚拟表对调用者(客户端应用程序 或者外部查询)不可用。<br>只有最后一步生成的表才会会给调用者。<br>如果没有在查询中指定某一个子句，将跳过相应的 步骤。</p>
+<h1 id="SELECT-语句完整的执行顺序理解"><a href="#SELECT-语句完整的执行顺序理解" class="headerlink" title="SELECT 语句完整的执行顺序理解"></a>SELECT 语句完整的执行顺序理解</h1><p>SQL 查询处理的步骤序号：<br>(1) FROM<br>(2) JOIN<br>(3) ON<br>(4) WHERE<br>(5) GROUP BY<br>(6) WITH {CUBE | ROLLUP}<br>(7) HAVING<br>(8) SELECT<br>(9) DISTINCT<br>(9) ORDER BY<br>(10)<br>以上每个步骤都会产生一个虚拟表，该虚拟表被用作下一个步骤的输入。<br>这些虚拟表对调用者(客户端应用程序 或者外部查询)不可用。<br>只有最后一步生成的表才会会给调用者。<br>如果没有在查询中指定某一个子句，将跳过相应的 步骤。</p>
 <h1 id="多表查询-表连接查询"><a href="#多表查询-表连接查询" class="headerlink" title="多表查询(表连接查询)"></a>多表查询(表连接查询)</h1><ul>
 <li>实际工作中，每次查询基本都是需要结合多个表去查询数据，所以Mysql的<strong>多表查询</strong>我们必须掌握</li>
 <li>多表查询可以是两张表，也可以是很多张表，取决于需要查询的数据要<strong>关联多少张表</strong></li>
@@ -488,12 +356,13 @@
 </li>
 </ul>
 <h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><h2 id="什么是事务"><a href="#什么是事务" class="headerlink" title="什么是事务"></a>什么是事务</h2><ul>
-<li>一个事务就是一个完整的业务逻辑（业务流程），是一个最小的工作单元，不可再分。<blockquote>
+<li><p>一个事务就是一个完整的业务逻辑（业务流程），是一个最小的工作单元，不可再分。</p>
+<blockquote>
 <p>例子<br>假设转账，从A账户向B账户中转账10000。将A账户的钱减去10000，B账户的钱加上10000<br>这就是一个完整的事务逻辑。</p>
 </blockquote>
 </li>
 </ul>
-<p>以上的操作是一个最小的工作单元，==要么同时成功，要么同时失败，不可再分==。</p>
+<p>以上的操作是一个最小的工作单元，&#x3D;&#x3D;要么同时成功，要么同时失败，不可再分&#x3D;&#x3D;。</p>
 <h2 id="和事务有关的语句"><a href="#和事务有关的语句" class="headerlink" title="和事务有关的语句"></a>和事务有关的语句</h2><p>只有DML语句中的insert、delete、update和事务有关，其他都无关系。<br>因为只有以上的三个语句是数据库表中数据进行增、删、改的。<br>只要你的操作一旦涉及到数据的增、删、改，那么就一定要考虑事务。</p>
 <h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><ul>
 <li>假设所有的业务，只要一条DML语句就能完成，还有必要存在事务机制吗？<br>正是因为做某件事的时候，需要多条DML语句共同联合起来才能完成，所以需要事务的存在，如果任何意见负载的事都能一条DML语句搞定，那么事务则没有存在的价值了。</li>
@@ -508,20 +377,20 @@
 <p>A事务在操作一张表的时候，另一个事务B也操作这张表会怎样？</p>
 <h3 id="持久性"><a href="#持久性" class="headerlink" title="持久性"></a>持久性</h3><p>事务最终结束的一个保障。事务提交，就相当于把没有保存到硬盘上的数据保存到了硬盘上。</p>
 <h2 id="事务的隔离性"><a href="#事务的隔离性" class="headerlink" title="事务的隔离性"></a>事务的隔离性</h2><p>A教室和B教室中间有一道墙，这道墙可以很厚，也可以很薄。这就是事务的隔离级别。这道墙越厚,表示福离级别就越高。</p>
-<h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3><h4 id="读未提交-read-uncommitted（最低级别）"><a href="#读未提交-read-uncommitted（最低级别）" class="headerlink" title="读未提交 read uncommitted（最低级别）"></a>读未提交 read uncommitted（最低级别）</h4><p>事务A可以读取到事务B未提交的数据。这种现象称为==脏读现象==。</p>
+<h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3><h4 id="读未提交-read-uncommitted（最低级别）"><a href="#读未提交-read-uncommitted（最低级别）" class="headerlink" title="读未提交 read uncommitted（最低级别）"></a>读未提交 read uncommitted（最低级别）</h4><p>事务A可以读取到事务B未提交的数据。这种现象称为&#x3D;&#x3D;脏读现象&#x3D;&#x3D;。</p>
 <ul>
-<li><p>==没有提交就读到数据==</p>
+<li><p>=&#x3D;没有提交就读到数据&#x3D;&#x3D;</p>
 </li>
-<li><p>这种隔离级别一般都是理论上的，大多数的数据库隔离级别都是二档起步!（==读已提交==）</p>
+<li><p>这种隔离级别一般都是理论上的，大多数的数据库隔离级别都是二档起步!（&#x3D;&#x3D;读已提交&#x3D;&#x3D;）</p>
 </li>
 </ul>
 <h4 id="读已提交-read-committed"><a href="#读已提交-read-committed" class="headerlink" title="读已提交 read committed"></a>读已提交 read committed</h4><p>事务A只能读取到事务B提交的数据。</p>
 <ul>
-<li><p>==提交之后才能读到数据==</p>
+<li><p>=&#x3D;提交之后才能读到数据&#x3D;&#x3D;</p>
 </li>
-<li><p>==解决了脏读==现象。</p>
+<li><p>=&#x3D;解决了脏读&#x3D;&#x3D;现象。</p>
 </li>
-<li><p>这种级别存在==不可重复读取==数据问题</p>
+<li><p>这种级别存在&#x3D;&#x3D;不可重复读取&#x3D;&#x3D;数据问题</p>
 <p>在同一个事务中，同一个读操作对同一个数据的前后两次读取产生了不同的结果，这就是不可重复读。在事务开启之后,第一次读到的数据是3条，当前事务还没有结束，可能第三次再读取的时候，读到的数据是4条，3不等于4称为不可重复读取。</p>
 </li>
 <li><p>这种隔离级别是比较真实的数据,每一次读到的数据是绝对的真实。</p>
@@ -531,18 +400,18 @@
 </ul>
 <h4 id="可重复读-repeatable-read"><a href="#可重复读-repeatable-read" class="headerlink" title="可重复读 repeatable read"></a>可重复读 repeatable read</h4><p>事务A开启之后,不管是多久，每一次在事务A中读取到的数据都是一致的，即使事务B将数据已经修改，并且提交了，事务A读取到的数据还是没有发生改变,这就是可重复读。</p>
 <ul>
-<li><p>==提交之后也读不到，永远读取的都是开启事务时的数据==</p>
+<li><p>=&#x3D;提交之后也读不到，永远读取的都是开启事务时的数据&#x3D;&#x3D;</p>
 <p>早上9点开启的事务，到了晚上9点读取的数据还是早上9点的数据</p>
 </li>
-<li><p>==解决了不可重复==读取的问题</p>
+<li><p>=&#x3D;解决了不可重复&#x3D;&#x3D;读取的问题</p>
 </li>
-<li><p>这种级别存在的问题是出现==幻象读==</p>
+<li><p>这种级别存在的问题是出现&#x3D;&#x3D;幻象读&#x3D;&#x3D;</p>
 <p>每一次读取的数据都是幻象，不够真实。</p>
 </li>
 <li><p>Mysql默认隔离级别就是可重复读</p>
 </li>
 </ul>
-<h4 id="序列化-串行化-serializable（最高级别）"><a href="#序列化-串行化-serializable（最高级别）" class="headerlink" title="序列化/串行化 serializable（最高级别）"></a>序列化/串行化 serializable（最高级别）</h4><p>这是最高隔离级别,效率最低。解决了所有的问题。</p>
+<h4 id="序列化-串行化-serializable（最高级别）"><a href="#序列化-串行化-serializable（最高级别）" class="headerlink" title="序列化&#x2F;串行化 serializable（最高级别）"></a>序列化&#x2F;串行化 serializable（最高级别）</h4><p>这是最高隔离级别,效率最低。解决了所有的问题。</p>
 <ul>
 <li><p>这种隔离级别表示事务排队。不能并发!</p>
 <p>不能并发：对一个事务不能同时处理</p>
@@ -558,8 +427,9 @@
 <blockquote>
 <p>例子</p>
 </blockquote>
-<p>表名：t_user<br>| id   | name     | email | address |      |<br>| —- | ——– | —– | ——- | —- |<br>| 1    | zhangsan |       |         |      |<br>| 2    | lisi     |       |         |      |<br>| 3    | wangwu   |       |         |      |<br>| 4    | dajun    |       |         |      |<br>| 5    | dilireba |       |         |      |</p>
+<p>表名：t_user<br>| id | name | email | address | |<br>| —- | ——– | —– | ——- | —- |<br>| 1 | zhangsan | | | |<br>| 2 | lisi | | | |<br>| 3 | wangwu | | | |<br>| 4 | dajun | | | |<br>| 5 | dilireba | | | |</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from t_user where name=&#x27;dajun&#x27;;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>以上的这条SQL语句会去name字段上扫描。如果name字段上没有索引或者没有给name字段创建索引，MySQL会进行全扫描，会将name字段上的每一个值都比对一遍。效率较低。</li>
 </ul>
@@ -571,42 +441,11 @@
 <blockquote>
 <p>例子</p>
 </blockquote>
-<table>
-<thead>
-<tr>
-<th>id(PK)</th>
-<th>name</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>100</td>
-<td>a</td>
-<td></td>
-</tr>
-<tr>
-<td>120</td>
-<td>b</td>
-<td></td>
-</tr>
-<tr>
-<td>99</td>
-<td>c</td>
-<td></td>
-</tr>
-<tr>
-<td>55</td>
-<td>d</td>
-<td></td>
-</tr>
-<tr>
-<td>101</td>
-<td>e</td>
-<td></td>
-</tr>
-</tbody></table>
+<table><thead><tr><th>id(PK)</th><th>name</th><th></th></tr></thead><tbody><tr><td>100</td><td>a</td><td></td></tr><tr><td>120</td><td>b</td><td></td></tr><tr><td>99</td><td>c</td><td></td></tr><tr><td>55</td><td>d</td><td></td></tr><tr><td>101</td><td>e</td><td></td></tr></tbody></table>
+
 <p><strong>提醒1</strong>：在任何数据库当中主键上都会自动添加索引对象。另外在mysql中，一个字段上如果有unique约束的话，也会自动创建索引对象。<br><strong>提醒2</strong>：在任何数据库中，任何一张表的任何一条记录在硬盘存储上都有一个硬盘的物理存储编号。<br><strong>提醒3</strong>：在mysql中，索引是一个单独的对象，不同的存储引擎以不同的形式存在。在MyISAM存储引擎中，索引存储在一个.MYI文件中，在InnoDB存储引擎中，索引存储在一个逻辑名称叫做tablespace的当中。在MEMORY存储引擎当中索引被存储在内存当中。不管索引存储在哪里，索引在mysql当中都是一个树的形式存在。（自平衡二叉树：B-Tree）</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from t_user where id=101;</span><br></pre></td></tr></table></figure>
+
 <p>mysql发现id字段上有索引对象，所以会通过索引对象idindex进行查找。</p>
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
 <li>索引也是需要排序的，因为只有排序了才会有区间查找这一说（缩小扫描范围其实就是扫描某个区间）。</li>
@@ -624,7 +463,7 @@
 <li>视图是一种根据查询（也就是 SELECT 表达式）定义的数据库对象，用于获取想要看到和使用的局部数据。</li>
 <li>视图有时也被成为“虚拟表”。</li>
 <li>视图可以被用来从常规表（称为“基表”）或其他视图中查询数据。</li>
-<li> 相对于从基表中直接获取数据，视图有以下好处：</li>
+<li>相对于从基表中直接获取数据，视图有以下好处：</li>
 <li>访问数据变得简单</li>
 <li>可被用来对不同用户显示不同的表的内容</li>
 </ul>
@@ -639,860 +478,147 @@
 <p>一对一放到一张表中不就行了吗?为啥还要拆分表?</p>
 </blockquote>
 <p>在实际的开发中，可能存在一张表字段太多，太庞大。这个时候要拆分表。</p>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th>账号</th>
-<th>密码</th>
-<th>姓名</th>
-<th>邮箱</th>
-<th>地址</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>zhngsan</td>
-<td>123</td>
-<td>张三</td>
-<td><a href="mailto:zhngsan@163.com">zhngsan@163.com</a></td>
-<td>西安</td>
-</tr>
-<tr>
-<td>2</td>
-<td>lisi</td>
-<td>123</td>
-<td>李四</td>
-<td><a href="mailto:lisi@164.com">lisi@164.com</a></td>
-<td>杭州</td>
-</tr>
-</tbody></table>
+<table><thead><tr><th>id</th><th>账号</th><th>密码</th><th>姓名</th><th>邮箱</th><th>地址</th></tr></thead><tbody><tr><td>1</td><td>zhngsan</td><td>123</td><td>张三</td><td><a href="mailto:zhngsan@163.com">zhngsan@163.com</a></td><td>西安</td></tr><tr><td>2</td><td>lisi</td><td>123</td><td>李四</td><td><a href="mailto:lisi@164.com">lisi@164.com</a></td><td>杭州</td></tr></tbody></table>
+
 <h1 id="其他相关知识点"><a href="#其他相关知识点" class="headerlink" title="其他相关知识点"></a>其他相关知识点</h1><p>虽然有用，但是有问题直接搜索即可。<br>比如安装数据库，默认root登录方法，mysql客户端可以在linux后台直接连接，也可以用其他windows客户端如Navicat等连接。<br>连接后可以根据不用用户，创建不同权限的账号、设置密码等操作。</p>
 <p>数据库中可以创建自己想要的表，字段类型以及插入数据等，可以通过python、java等连接数据库直接做sql操作，也可以通过导入导出等方法插入数据。</p>
 <p>理解数据库中各个表的约束关系，做DML操作时注意各种锁的概念以及事务的运用。<br>查询sql中间有较多内置函数可以直接使用，也可以通过子查询来拼接结果。</p>
-<p>其他Pl/Sql在MYSQL中感觉应用不多，主要存储过程、触发器、自定义函数等，没有ORACLE那么多应用场景，不过也需要注意有时候通过<br>Pl的语法块来提高效率。</p>
+<p>其他Pl&#x2F;Sql在MYSQL中感觉应用不多，主要存储过程、触发器、自定义函数等，没有ORACLE那么多应用场景，不过也需要注意有时候通过<br>Pl的语法块来提高效率。</p>
 
-      
     </div>
-    
-    
-    
 
     
-
     
-
-    
-      <div>
-        <ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者：</strong>
-    General usopp
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://shenle2019.github.io/2023/11/13/mysql-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="mysql 基础知识">https://shenle2019.github.io/2023/11/13/mysql-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>
-    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-
-      </div>
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
+
+<div id="comments" class="comments"></div>
+
+
           
-            <a href="/tags/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" rel="tag"># 测试开发</a>
-          
-        </div>
-      
 
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2023/11/13/linux-%E5%91%BD%E4%BB%A4/" rel="next" title="linux 命令">
-                <i class="fa fa-chevron-left"></i> linux 命令
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/11/13/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" rel="prev" title="性能测试">
-                性能测试 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  <!-- 文章结束表示语-->
-   <div>
-     
-       <div>
-    
-        <div style="text-align:center;color: #2E406D;font-size:16px;">--------------------- 本文结束,感谢您的阅读---------------------</div>
-    
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>General usopp
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://shenle2019.github.io/2023/11/13/mysql-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="mysql 基础知识">https://shenle2019.github.io/2023/11/13/mysql-基础知识/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="noopener" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
-     
-   </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
+          <div class="post-tags">
+              <a href="/tags/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" rel="tag"># 测试开发</a>
           </div>
-          
 
-
-          
-
-  
-    <div class="comments" id="comments">
-    </div>
-  
-
-
-
-        </div>
         
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/psb.jpg"
-                alt="" />
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">62</span>
-                  <span class="site-state-item-name">日志</span>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/13/linux-%E5%91%BD%E4%BB%A4/" rel="prev" title="linux 命令">
+                  <i class="fa fa-angle-left"></i> linux 命令
                 </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/shenle2019" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="mailto:emptymiss99@outlook.com" target="_blank" title="E-Mail">
-                      
-                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
-                
             </div>
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DBMS%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">DBMS的种类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.关系数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.非关系型数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL%E8%AF%AD%E8%A8%80%E7%A7%8D%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">SQL语言种类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDL-%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89"><span class="nav-number">2.0.1.</span> <span class="nav-text">DDL 数据定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DML-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="nav-number">2.0.2.</span> <span class="nav-text">DML 数据操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DQL-%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.0.3.</span> <span class="nav-text">DQL 数据查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCL-%E6%95%B0%E6%8D%AE%E6%8E%A7%E5%88%B6"><span class="nav-number">2.0.4.</span> <span class="nav-text">DCL 数据控制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#drop%E3%80%81truncate%E3%80%81delete%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">drop、truncate、delete区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SELECT-%E8%AF%AD%E5%8F%A5%E5%AE%8C%E6%95%B4%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E7%90%86%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">SELECT 语句完整的执行顺序理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2-%E8%A1%A8%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">5.</span> <span class="nav-text">多表查询(表连接查询)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">6.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1"><span class="nav-number">6.1.</span> <span class="nav-text">什么是事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8C%E4%BA%8B%E5%8A%A1%E6%9C%89%E5%85%B3%E7%9A%84%E8%AF%AD%E5%8F%A5"><span class="nav-number">6.2.</span> <span class="nav-text">和事务有关的语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">6.3.</span> <span class="nav-text">思考题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B0%E5%BA%95%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1%E5%91%A2%EF%BC%9F"><span class="nav-number">6.4.</span> <span class="nav-text">到底什么是事务呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%844%E4%B8%AA%E7%89%B9%E6%80%A7"><span class="nav-number">6.5.</span> <span class="nav-text">事务的4个特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="nav-number">6.5.1.</span> <span class="nav-text">原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">6.5.2.</span> <span class="nav-text">一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E6%80%A7"><span class="nav-number">6.5.3.</span> <span class="nav-text">隔离性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E6%80%A7"><span class="nav-number">6.5.4.</span> <span class="nav-text">持久性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E6%80%A7"><span class="nav-number">6.6.</span> <span class="nav-text">事务的隔离性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">6.6.1.</span> <span class="nav-text">隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E6%9C%AA%E6%8F%90%E4%BA%A4-read-uncommitted%EF%BC%88%E6%9C%80%E4%BD%8E%E7%BA%A7%E5%88%AB%EF%BC%89"><span class="nav-number">6.6.1.1.</span> <span class="nav-text">读未提交 read uncommitted（最低级别）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%B7%B2%E6%8F%90%E4%BA%A4-read-committed"><span class="nav-number">6.6.1.2.</span> <span class="nav-text">读已提交 read committed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB-repeatable-read"><span class="nav-number">6.6.1.3.</span> <span class="nav-text">可重复读 repeatable read</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96-%E4%B8%B2%E8%A1%8C%E5%8C%96-serializable%EF%BC%88%E6%9C%80%E9%AB%98%E7%BA%A7%E5%88%AB%EF%BC%89"><span class="nav-number">6.6.1.4.</span> <span class="nav-text">序列化&#x2F;串行化 serializable（最高级别）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">7.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%B4%A2%E5%BC%95"><span class="nav-number">7.1.</span> <span class="nav-text">什么是索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E6%9F%A5%E8%AF%A2%E6%96%B9%E5%BC%8F"><span class="nav-number">7.2.</span> <span class="nav-text">MySQL查询方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">7.3.</span> <span class="nav-text">索引的实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">7.4.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="nav-number">7.5.</span> <span class="nav-text">什么时候添加索引？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE"><span class="nav-number">8.</span> <span class="nav-text">视图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E8%A7%86%E5%9B%BE%EF%BC%9F"><span class="nav-number">8.1.</span> <span class="nav-text">什么视图？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E4%BD%9C%E7%94%A8"><span class="nav-number">8.2.</span> <span class="nav-text">视图作用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E8%A1%A8%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">9.</span> <span class="nav-text">总结表的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%AF%B9%E5%A4%9A"><span class="nav-number">9.0.1.</span> <span class="nav-text">一对多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%AF%B9%E5%A4%9A"><span class="nav-number">9.0.2.</span> <span class="nav-text">多对多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%AF%B9%E4%B8%80"><span class="nav-number">9.0.3.</span> <span class="nav-text">一对一</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">10.</span> <span class="nav-text">其他相关知识点</span></a></li></ol></div>
-            
-
+            <div class="post-nav-item">
+                <a href="/2023/11/13/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" rel="next" title="性能测试">
+                  性能测试 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
           </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-        <div class="back-to-top">
-          <i class="fa fa-arrow-up"></i>
-          
-            <span id="scrollpercent"><span>0</span>%</span>
-          
-        </div>
-      
-	  
-			<!-- require APlayer -->
-			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
-			<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-			<!-- require MetingJS-->
-			<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
-			<!--网易云-->   
-			<meting-js
-			server="netease"
-			id="7091778006"
-			type="playlist"
-			mini="true"
-			fixed="true"
-			list-folded="true"
-			autoplay="true"
-			volume="0.5"
-			theme="#FADFA3"
-			order="random"
-			loop="all"
-			preload="auto"
-			mutex="true">
-			</meting-js>	  
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">General usopp</span>
-
-  
-</div>
-
-
-
-
-
-
-
-
-  <div class="footer-custom">乌索普大将的个人博客</div>
-
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i>本站总访客数
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      人次
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i>本站访问总量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
-
-
-
-
-
-
-
-
-        
-      </div>
     </footer>
+  </article>
+</div>
 
-    
 
-    
 
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">General usopp</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
-  
+    </div>
+  </footer>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  (function () {
+    var mount = document.querySelector('#comments');
+    if (!mount || typeof Valine === 'undefined') return;
+    var allowed = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link'
+      .split(',')
+      .filter(function (item) {
+        return allowed.indexOf(item) > -1;
+      });
+    new Valine({
+      el: '#comments',
+      verify: false,
+      notify: false,
+      appId: 'pDMnuCn44ZQITVEtQAfiiXr5-gzGzoHsz',
+      appKey: 'y43DvreFS6iyfhy7ScRCF8Cy',
+      placeholder: 'Just go go',
+      avatar: 'mm',
+      guest_info: guest,
+      pageSize: 10
+    });
+  })();
 </script>
 
 
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: 'pDMnuCn44ZQITVEtQAfiiXr5-gzGzoHsz',
-        appKey: 'y43DvreFS6iyfhy7ScRCF8Cy',
-        placeholder: 'Just go go',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":240,"hOffset":100,"vOffset":0},"mobile":{"show":false},"react":{"opacity":0.8},"log":false});</script><script>
-            window.imageLazyLoadSetting = {
-                isSPA: false,
-                preloadRatio: 1,
-                processImages: null,
-            };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+<meting-js
+  server="netease"
+  id="7091778006"
+  type="playlist"
+  mini="true"
+  fixed="true"
+  list-folded="true"
+  autoplay="true"
+  volume="0.5"
+  theme="#FADFA3"
+  order="random"
+  loop="all"
+  preload="auto"
+  mutex="true">
+</meting-js>
+
+</body>
 </html>
