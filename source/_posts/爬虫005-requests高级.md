@@ -399,7 +399,7 @@ print(page_text)
     -   验证码图片识别操作
         
         -   识别本地的滑动验证和坐标点击验证
-    -   ```
+    -   ```python
         import tujian
         ret = tujian.getImgCodeText('code_2.png',33)
         print(ret)

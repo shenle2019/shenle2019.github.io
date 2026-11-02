@@ -415,7 +415,7 @@ print('总计得分:',score)
             img_data = fp.read() #读取图片数据
             new_fp = open(targetPath,'wb')
             new_fp.write(img_data)
-            
+
             fp.close()
             new_fp.close()
             ```
@@ -518,7 +518,7 @@ print('总计得分:',score)
     分组：
     
     ```
-        (ab)  
+        (ab)
     ```
     
     贪婪模式： .\*  

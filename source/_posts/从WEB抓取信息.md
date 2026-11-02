@@ -130,75 +130,11 @@ WebDriver对象有很多方法在页面中寻找元素，分为findelement和fin
 findelemen 返回一个WebElement对象，是匹配查询的第一个元素。  
 findelements 返回一个列表，包含所有匹配元素。
 
-方法
-
-return
-
-browser.find\_element\_by\_class\_name(name) browser.find\_elements\_by\_class\_name(name)
-
-使用CSS类name的元素
-
-browser.find\_element\_by\_css\_selector(selector) browser.find\_elements\_by\_css\_selector(selector)
-
-匹配CSSselector的元素
-
-browser.find\_element\_by\_id(id) browser.find\_elements\_by\_id(id)
-
-匹配id属性值的元素
-
-browser.find\_element\_by\_link\_text(text) browser.find\_elements\_by\_link\_text(text)
-
-完全匹配提供的text的元素
-
-browser.find\_element\_by\_partial\_link\_text(text) browser.find\_elements\_by\_partial\_link\_text(text)
-
-包含提供的text的元素
-
-browser.find\_element\_by\_name(name) browser.find\_elements\_by\_name(name)
-
-匹配name属性值的元素
-
-browser.find\_element\_by\_tag\_name(name) browser.find\_elements\_by\_tag\_name(name)
-
-匹配标签name的元素(大小写无关，元素匹配’a’和’A’)
+<table><thead><tr><th>方法</th><th>return</th></tr></thead><tbody><tr><td>browser.find_element_by_class_name(name) browser.find_elements_by_class_name(name)</td><td>使用CSS类name的元素</td></tr><tr><td>browser.find_element_by_css_selector(selector) browser.find_elements_by_css_selector(selector)</td><td>匹配CSSselector的元素</td></tr><tr><td>browser.find_element_by_id(id) browser.find_elements_by_id(id)</td><td>匹配id属性值的元素</td></tr><tr><td>browser.find_element_by_link_text(text) browser.find_elements_by_link_text(text)</td><td>完全匹配提供的text的<a>元素</a></td></tr><tr><td>browser.find_element_by_partial_link_text(text) browser.find_elements_by_partial_link_text(text)</td><td>包含提供的text的<a>元素</a></td></tr><tr><td>browser.find_element_by_name(name) browser.find_elements_by_name(name)</td><td>匹配name属性值的元素</td></tr><tr><td>browser.find_element_by_tag_name(name) browser.find_elements_by_tag_name(name)</td><td>匹配标签name的元素(大小写无关，<a>元素匹配’a’和’A’)</a></td></tr></tbody></table>
 
 -   WebElement的属性和方法：
 
-属性或方法
-
-描述
-
-tag\_name
-
-标签名，例如’a’表示元素
-
-get\_attribute(name)
-
-该元素name属性的值
-
-text
-
-该元素内的文本，例如hello中的’hello’
-
-clear()
-
-对于文本字段或文本区域元素，清除其中输入的文本
-
-is\_displayed()
-
-如果该元素可见，返回True，否则返回False
-
-is\_enabled()
-
-对于输入元素，如果该元素启用，返回True，否则返回False
-
-is\_selected()
-
-对于复选框或单选框元素，如果该元素被选中，选择True，否则返回False
-
-location
-
-一个字典，包含键’x’和’y’，表示该元素在页面上的位置
+<table><thead><tr><th>属性或方法</th><th>描述</th></tr></thead><tbody><tr><td>tag_name</td><td>标签名，例如’a’表示<a>元素</a></td></tr><tr><td>get_attribute(name)</td><td>该元素name属性的值</td></tr><tr><td>text</td><td>该元素内的文本，例如<span>hello</span>中的’hello’</td></tr><tr><td>clear()</td><td>对于文本字段或文本区域元素，清除其中输入的文本</td></tr><tr><td>is_displayed()</td><td>如果该元素可见，返回True，否则返回False</td></tr><tr><td>is_enabled()</td><td>对于输入元素，如果该元素启用，返回True，否则返回False</td></tr><tr><td>is_selected()</td><td>对于复选框或单选框元素，如果该元素被选中，选择True，否则返回False</td></tr><tr><td>location</td><td>一个字典，包含键’x’和’y’，表示该元素在页面上的位置</td></tr></tbody></table>
 
 -   页面点击
 
@@ -233,29 +169,7 @@ passwordElem.submit()
 
 针对不能用字符串值输入的键盘击键，如Shift、F1、Home等，使用send\_keys()方法时，传入selenium.webdriver.common.keys模块的常量：
 
-属性
-
-含义
-
-Keys.DOWN,Keys.UP,Keys.LEFT,Keys.RIGHT
-
-键盘箭头键
-
-Keys.ENTER,Keys.RETURN
-
-回车和换行键
-
-Keys.HOME,Keys.END,Keys.PAGE\_DOWN,Keys.PAGE\_UP
-
-Home键、End键、PageUp键和PageDown键
-
-Keys.ESCAPE,Keys.BACK\_SPACE,Keys.DELETE
-
-Esc、Backspace和字母键
-
-Keys.F1,Keys.F2,…,Keys.F12
-
-键盘顶部的F1到F12键Keys.TABTab键
+<table><thead><tr><th>属性</th><th>含义</th></tr></thead><tbody><tr><td>Keys.DOWN,Keys.UP,Keys.LEFT,Keys.RIGHT</td><td>键盘箭头键</td></tr><tr><td>Keys.ENTER,Keys.RETURN</td><td>回车和换行键</td></tr><tr><td>Keys.HOME,Keys.END,Keys.PAGE_DOWN,Keys.PAGE_UP</td><td>Home键、End键、PageUp键和PageDown键</td></tr><tr><td>Keys.ESCAPE,Keys.BACK_SPACE,Keys.DELETE</td><td>Esc、Backspace和字母键</td></tr><tr><td>Keys.F1,Keys.F2,…,Keys.F12</td><td>键盘顶部的F1到F12键Keys.TABTab键</td></tr></tbody></table>
 
 点击浏览器按钮
 

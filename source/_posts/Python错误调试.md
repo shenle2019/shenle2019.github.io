@@ -96,29 +96,7 @@ logging.basicConfig(level= logging.DEBUG, format= '%(asctime)s - %(levelname)s -
     
 -   日志级别
     
-    日志等级（level）
-    
-    描述
-    
-    DEBUG
-    
-    最详细的日志信息，典型应用场景是 问题诊断
-    
-    INFO
-    
-    信息详细程度仅次于DEBUG，通常只记录关键节点信息，用于确认一切都是按照我们预期的那样进行工作
-    
-    WARNING
-    
-    当某些不期望的事情发生时记录的信息（如，磁盘可用空间较低），但是此时应用程序还是正常运行的
-    
-    ERROR
-    
-    由于一个更严重的问题导致某些功能不能正常运行时记录的信息
-    
-    CRITICAL
-    
-    当发生严重错误，导致应用程序不能继续运行时记录的信息
+    <table><thead><tr><th>日志等级（level）</th><th>描述</th></tr></thead><tbody><tr><td>DEBUG</td><td>最详细的日志信息，典型应用场景是 问题诊断</td></tr><tr><td>INFO</td><td>信息详细程度仅次于DEBUG，通常只记录关键节点信息，用于确认一切都是按照我们预期的那样进行工作</td></tr><tr><td>WARNING</td><td>当某些不期望的事情发生时记录的信息（如，磁盘可用空间较低），但是此时应用程序还是正常运行的</td></tr><tr><td>ERROR</td><td>由于一个更严重的问题导致某些功能不能正常运行时记录的信息</td></tr><tr><td>CRITICAL</td><td>当发生严重错误，导致应用程序不能继续运行时记录的信息</td></tr></tbody></table>
     
 
 -   禁用日志
@@ -140,153 +118,13 @@ logging.basicConfig(**kwargs)
 
 该函数可接收的关键字参数如下：
 
-参数名称
-
-描述
-
-filename
-
-指定日志输出目标文件的文件名，指定该设置项后日志信心就不会被输出到控制台了
-
-filemode
-
-指定日志文件的打开模式，默认为’a’。需要注意的是，该选项要在filename指定时才有效
-
-format
-
-指定日志格式字符串，即指定日志输出时所包含的字段信息以及它们的顺序。logging模块定义的格式字段下面会列出。
-
-datefmt
-
-指定日期/时间格式。需要注意的是，该选项要在format中包含时间字段%(asctime)s时才有效
-
-level
-
-指定日志器的日志级别
-
-stream
-
-指定日志输出目标stream，如sys.stdout、sys.stderr以及网络stream。需要说明的是，stream和filename不能同时提供，否则会引发 `ValueError`异常
-
-style
-
-Python 3.2中新添加的配置项。指定format格式字符串的风格，可取值为’%’、’{‘和’$’，默认为’%’
-
-handlers
-
-Python 3.3中新添加的配置项。该选项如果被指定，它应该是一个创建了多个Handler的可迭代对象，这些handler将会被添加到root logger。需要说明的是：filename、stream和handlers这三个配置项只能有一个存在，不能同时出现2个或3个，否则会引发ValueError异常。
+<table><thead><tr><th>参数名称</th><th>描述</th></tr></thead><tbody><tr><td>filename</td><td>指定日志输出目标文件的文件名，指定该设置项后日志信心就不会被输出到控制台了</td></tr><tr><td>filemode</td><td>指定日志文件的打开模式，默认为’a’。需要注意的是，该选项要在filename指定时才有效</td></tr><tr><td>format</td><td>指定日志格式字符串，即指定日志输出时所包含的字段信息以及它们的顺序。logging模块定义的格式字段下面会列出。</td></tr><tr><td>datefmt</td><td>指定日期/时间格式。需要注意的是，该选项要在format中包含时间字段%(asctime)s时才有效</td></tr><tr><td>level</td><td>指定日志器的日志级别</td></tr><tr><td>stream</td><td>指定日志输出目标stream，如sys.stdout、sys.stderr以及网络stream。需要说明的是，stream和filename不能同时提供，否则会引发 <code>ValueError</code>异常</td></tr><tr><td>style</td><td>Python 3.2中新添加的配置项。指定format格式字符串的风格，可取值为’%’、’{‘和’$’，默认为’%’</td></tr><tr><td>handlers</td><td>Python 3.3中新添加的配置项。该选项如果被指定，它应该是一个创建了多个Handler的可迭代对象，这些handler将会被添加到root logger。需要说明的是：filename、stream和handlers这三个配置项只能有一个存在，不能同时出现2个或3个，否则会引发ValueError异常。</td></tr></tbody></table>
 
 -   logging模块定义的格式字符串字段
 
 我们来列举一下logging模块中定义好的可以用于format格式字符串中字段有哪些：
 
-字段/属性名称
-
-使用格式
-
-描述
-
-asctime
-
-%(asctime)s
-
-日志事件发生的时间–人类可读时间，如：2003-07-08 16:49:45,896
-
-created
-
-%(created)f
-
-日志事件发生的时间–时间戳，就是当时调用time.time()函数返回的值
-
-relativeCreated
-
-%(relativeCreated)d
-
-日志事件发生的时间相对于logging模块加载时间的相对毫秒数（目前还不知道干嘛用的）
-
-msecs
-
-%(msecs)d
-
-日志事件发生事件的毫秒部分
-
-levelname
-
-%(levelname)s
-
-该日志记录的文字形式的日志级别（’DEBUG’, ‘INFO’, ‘WARNING’, ‘ERROR’, ‘CRITICAL’）
-
-levelno
-
-%(levelno)s
-
-该日志记录的数字形式的日志级别（10, 20, 30, 40, 50）
-
-name
-
-%(name)s
-
-所使用的日志器名称，默认是’root’，因为默认使用的是 rootLogger
-
-message
-
-%(message)s
-
-日志记录的文本内容，通过 `msg % args`计算得到的
-
-pathname
-
-%(pathname)s
-
-调用日志记录函数的源码文件的全路径
-
-filename
-
-%(filename)s
-
-pathname的文件名部分，包含文件后缀
-
-module
-
-%(module)s
-
-filename的名称部分，不包含后缀
-
-lineno
-
-%(lineno)d
-
-调用日志记录函数的源代码所在的行号
-
-funcName
-
-%(funcName)s
-
-调用日志记录函数的函数名
-
-process
-
-%(process)d
-
-进程ID
-
-processName
-
-%(processName)s
-
-进程名称，Python 3.1新增
-
-thread
-
-%(thread)d
-
-线程ID
-
-threadName
-
-%(thread)s
-
-线程名称
+<table><thead><tr><th>字段/属性名称</th><th>使用格式</th><th>描述</th></tr></thead><tbody><tr><td>asctime</td><td>%(asctime)s</td><td>日志事件发生的时间–人类可读时间，如：2003-07-08 16:49:45,896</td></tr><tr><td>created</td><td>%(created)f</td><td>日志事件发生的时间–时间戳，就是当时调用time.time()函数返回的值</td></tr><tr><td>relativeCreated</td><td>%(relativeCreated)d</td><td>日志事件发生的时间相对于logging模块加载时间的相对毫秒数（目前还不知道干嘛用的）</td></tr><tr><td>msecs</td><td>%(msecs)d</td><td>日志事件发生事件的毫秒部分</td></tr><tr><td>levelname</td><td>%(levelname)s</td><td>该日志记录的文字形式的日志级别（’DEBUG’, ‘INFO’, ‘WARNING’, ‘ERROR’, ‘CRITICAL’）</td></tr><tr><td>levelno</td><td>%(levelno)s</td><td>该日志记录的数字形式的日志级别（10, 20, 30, 40, 50）</td></tr><tr><td>name</td><td>%(name)s</td><td>所使用的日志器名称，默认是’root’，因为默认使用的是 rootLogger</td></tr><tr><td>message</td><td>%(message)s</td><td>日志记录的文本内容，通过 <code>msg % args</code>计算得到的</td></tr><tr><td>pathname</td><td>%(pathname)s</td><td>调用日志记录函数的源码文件的全路径</td></tr><tr><td>filename</td><td>%(filename)s</td><td>pathname的文件名部分，包含文件后缀</td></tr><tr><td>module</td><td>%(module)s</td><td>filename的名称部分，不包含后缀</td></tr><tr><td>lineno</td><td>%(lineno)d</td><td>调用日志记录函数的源代码所在的行号</td></tr><tr><td>funcName</td><td>%(funcName)s</td><td>调用日志记录函数的函数名</td></tr><tr><td>process</td><td>%(process)d</td><td>进程ID</td></tr><tr><td>processName</td><td>%(processName)s</td><td>进程名称，Python 3.1新增</td></tr><tr><td>thread</td><td>%(thread)d</td><td>线程ID</td></tr><tr><td>threadName</td><td>%(thread)s</td><td>线程名称</td></tr></tbody></table>
 
 简单测试：
 

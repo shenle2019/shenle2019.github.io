@@ -99,9 +99,16 @@ function renderReport(rows) {
   return lines.join('\n');
 }
 
-function main(argv = process.argv.slice(2)) {
-  const root = path.join(__dirname, '..');
-  const rows = scanPosts(path.join(root, 'source', '_posts'), path.join(root, 'public'));
+function main(argv = process.argv.slice(2), root = path.join(__dirname, '..')) {
+  const publicDir = path.join(root, 'public');
+  // public 不存在时所有路径都会被判缺失，会把「13 张缺图」报告覆盖成假数据
+  if (!fs.existsSync(publicDir)) {
+    process.stderr.write(`缺少 ${publicDir}，请先运行 npx hexo generate\n`);
+    process.exitCode = 1;
+    return [];
+  }
+
+  const rows = scanPosts(path.join(root, 'source', '_posts'), publicDir);
   const report = `${renderReport(rows)}\n`;
 
   // Windows 下 `>` 会按 UTF-16LE 转码，中文全坏；用 --out 让 Node 自己写 UTF-8

@@ -1,20 +1,20 @@
 # 迁移报告
 
-- 来源：`E:\一人公司\公众号写作\Obsidian\testobsidian\AI测试开发工程师\shenle2019-pages`
-- 输出：`E:\一人公司\公众号写作\Obsidian\testobsidian\AI测试开发工程师\shenle2019-source\source\_posts`
+- 来源：`../shenle2019-pages`
+- 输出：`source/_posts`
 - 扫描页面：62
-- 新写入：59
-- 跳过（已有同名 md）：3
+- 新写入：61
+- 跳过（已有同名 md）：1
 - 失败：0
 
 ## 跳过清单
 
 - 用-Hexo-和-GitHub-Pages-搭建博客-usopp
-- 《控方证人》影评-usopp
-- 写个人博客的主体思路-usopp
 
 ## 新写入清单
 
+- 《控方证人》影评-usopp
+- 写个人博客的主体思路-usopp
 - markdown语法
 - nexo-Next中添加网易云音乐-切换页面自动播放
 - 问题解决：年龄的焦虑

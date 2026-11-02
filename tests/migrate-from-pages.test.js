@@ -112,6 +112,42 @@ test('headerlink 锚点被移除', () => {
   assert.doesNotMatch(post.bodyMd, /headerlink/);
 });
 
+test('正文表格保留为 HTML，不被压平成连续段落', () => {
+  const post = parsePost(fixture('table.html'), '2021/12/06/table-demo/index.html');
+  // 压平后单元格会变成一段段纯文本，行列关系全丢
+  assert.match(post.bodyMd, /<table>/);
+  assert.match(post.bodyMd, /<th>命令<\/th>/);
+  assert.match(post.bodyMd, /<td><code>shutdown -h now<\/code><\/td>/);
+  assert.match(post.bodyMd, /<\/table>/);
+});
+
+test('裸 pre 代码块同样保留语言（class 无 language- 前缀）', () => {
+  const html = '<div class="post-body"><p>示例：</p><pre><code class="python">print(1)</code></pre></div>';
+  const post = parsePost(html, '2024/03/14/bare-pre-demo/index.html');
+  assert.match(post.bodyMd, /```python\nprint\(1\)/);
+  assert.doesNotMatch(post.bodyMd, /<pre>/);
+});
+
+test('列表项内的裸 pre 回填后，代码行跟随列表缩进不被截断', () => {
+  const html = `<div class="post-body"><ul><li><pre><code class="python">import tujian\nret = tujian.getImgCodeText('code_2.png',33)</code></pre></li></ul></div>`;
+  const post = parsePost(html, '2024/03/14/list-pre-demo/index.html');
+  const lines = post.bodyMd.split('\n');
+  const open = lines.findIndex((line) => /```python/.test(line));
+  assert.ok(open >= 0, '应生成 python 围栏');
+  // 围栏首行带列表标记（如「-   ```python」），其后每行必须缩进到同一内容列，
+  // 否则 CommonMark 会把代码行踢出列表项：正文多出代码文本、代码块凭空多一块
+  const codeRow = lines.findIndex((line, i) => i > open && line.includes('import tujian'));
+  assert.ok(codeRow > open, '代码首行应位于围栏之后');
+  const fencePrefix = lines[open].slice(0, lines[open].indexOf('```'));
+  const expectedIndent = fencePrefix.replace(/[^\s]/g, ' ').length;
+  assert.equal(
+    lines[codeRow].match(/^[ \t]*/)[0].length,
+    expectedIndent,
+    '代码行应与围栏内容列对齐',
+  );
+  assert.ok(lines[codeRow].trim().startsWith('import tujian'), '代码行不应被列表标记改写');
+});
+
 test('writePost 把 date 写成 YAML 时间戳，保留绝对时刻', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'hexo-posts-date-'));
   const post = {

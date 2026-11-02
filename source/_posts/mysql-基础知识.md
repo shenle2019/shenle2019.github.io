@@ -279,29 +279,7 @@ select * from t_user where name='dajun';
 
 > 例子
 
-id(PK)
-
-name
-
-100
-
-a
-
-120
-
-b
-
-99
-
-c
-
-55
-
-d
-
-101
-
-e
+<table><thead><tr><th>id(PK)</th><th>name</th><th></th></tr></thead><tbody><tr><td>100</td><td>a</td><td></td></tr><tr><td>120</td><td>b</td><td></td></tr><tr><td>99</td><td>c</td><td></td></tr><tr><td>55</td><td>d</td><td></td></tr><tr><td>101</td><td>e</td><td></td></tr></tbody></table>
 
 <strong>提醒1</strong>：在任何数据库当中主键上都会自动添加索引对象。另外在mysql中，一个字段上如果有unique约束的话，也会自动创建索引对象。  
 <strong>提醒2</strong>：在任何数据库中，任何一张表的任何一条记录在硬盘存储上都有一个硬盘的物理存储编号。  
@@ -364,41 +342,7 @@ mysql发现id字段上有索引对象，所以会通过索引对象idindex进行
 
 在实际的开发中，可能存在一张表字段太多，太庞大。这个时候要拆分表。
 
-id
-
-账号
-
-密码
-
-姓名
-
-邮箱
-
-地址
-
-1
-
-zhngsan
-
-123
-
-张三
-
-[zhngsan@163.com](mailto:zhngsan@163.com)
-
-西安
-
-2
-
-lisi
-
-123
-
-李四
-
-[lisi@164.com](mailto:lisi@164.com)
-
-杭州
+<table><thead><tr><th>id</th><th>账号</th><th>密码</th><th>姓名</th><th>邮箱</th><th>地址</th></tr></thead><tbody><tr><td>1</td><td>zhngsan</td><td>123</td><td>张三</td><td><a href="mailto:zhngsan@163.com">zhngsan@163.com</a></td><td>西安</td></tr><tr><td>2</td><td>lisi</td><td>123</td><td>李四</td><td><a href="mailto:lisi@164.com">lisi@164.com</a></td><td>杭州</td></tr></tbody></table>
 
 # 其他相关知识点
 

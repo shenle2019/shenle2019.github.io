@@ -21,8 +21,8 @@ const POST_RE = /^(\d{4})\/(\d{2})\/(\d{2})\/([^/]+)\/index\.html$/;
 
 const codeToken = (i) => `@@CODEBLOCK${i}@@`;
 
-// 占位符单独成行，可能被 turndown 加了列表缩进或引用前缀
-const TOKEN_LINE = /^((?:[ \t]*> ?)*[ \t]*)@@CODEBLOCK(\d+)@@[ \t]*$/gm;
+// 占位符单独成行，可能被 turndown 加了引用/列表缩进
+const TOKEN_LINE = /^((?:[ \t]*> ?)*[ \t]*(?:(?:[-*+]|\d+[.)])[ \t]+)?)@@CODEBLOCK(\d+)@@[ \t]*$/gm;
 
 /** 围栏要比代码内容里最长的反引号行更长，否则会被提前闭合 */
 function fenceFor(code, lang) {
@@ -36,10 +36,24 @@ function fenceFor(code, lang) {
 
 function indentBlock(block, indent) {
   if (!indent) return block;
+  // 列表标记只属于首行：后续行换成等宽空格，否则每行都会另起一个列表项，
+  // 代码行会因顶格而被 CommonMark 踢出列表（正文漏出代码、块数凭空变多）
+  const restIndent = /(?:^|[ \t])(?:[-*+]|\d+[.)])[ \t]+$/.test(indent)
+    ? indent.replace(/[^\s]/g, ' ')
+    : indent;
   return block
     .split('\n')
-    .map((line) => (line ? indent + line : ''))
+    .map((line, i) => (line ? (i === 0 ? indent : restIndent) + line : ''))
     .join('\n');
+}
+
+/** 从 class 里取代码语言：优先 language- 前缀，否则取第一个非噪音 token */
+function langFromClass(cls) {
+  const tokens = String(cls || '').split(/\s+/).filter(Boolean);
+  const prefixed = tokens.find((t) => /^language-/.test(t));
+  if (prefixed) return prefixed.replace(/^language-/, '');
+  const bare = tokens.filter((t) => !/^(hljs|line-numbers|prism|code|sourceCode|highlight)$/.test(t));
+  return bare[0] || '';
 }
 
 /** 把预留的代码块回填到占位符位置，沿用该位置原有的缩进 */
@@ -99,13 +113,23 @@ function bodyHtmlToMarkdown(html) {
     $el.replaceWith(`<p>${codeToken(blocks.length - 1)}</p>`);
   });
 
+  // 原站还有裸 pre>code（语言直接写在 class 上），turndown 只认 language- 前缀，
+  // 不先摘出来会生成无语言围栏，丢语法高亮
+  $('pre').each((_, el) => {
+    const $pre = $(el);
+    const cls = $pre.find('code').first().attr('class') || $pre.attr('class') || '';
+    const code = $pre.text().replace(/\s+$/, '');
+    blocks.push(fenceFor(code, langFromClass(cls)));
+    $pre.replaceWith(`<p>${codeToken(blocks.length - 1)}</p>`);
+  });
+
   const turndown = new TurndownService({
     headingStyle: 'atx',
     codeBlockStyle: 'fenced',
     bulletListMarker: '-',
     emDelimiter: '*',
   });
-  turndown.keep(['iframe', 'video', 'audio', 'source']);
+  turndown.keep(['iframe', 'video', 'audio', 'source', 'table']);
   // “**CPU：**汉字”这种闭合符前中文标点、后汉字的写法 CommonMark 不认，
   // 保留 strong 原生标签才能稳定还原原站加粗
   turndown.addRule('strongHtml', {
@@ -264,7 +288,13 @@ function main(argv) {
 
   const summary = { src: args.src, out: args.out, total: rels.length, migrated, skipped, failed };
   fs.mkdirSync(path.dirname(args.report), { recursive: true });
-  fs.writeFileSync(args.report, renderReport(summary), 'utf8');
+  // 报告入库：绝对路径在别人机器上无法复现，统一写相对仓库根的路径
+  const toPosix = (p) => path.relative(root, p).replace(/\\/g, '/');
+  fs.writeFileSync(
+    args.report,
+    renderReport({ ...summary, src: toPosix(args.src), out: toPosix(args.out) }),
+    'utf8',
+  );
 
   console.log(`扫描 ${rels.length} 篇，新写入 ${migrated.length} 篇，跳过 ${skipped.length} 篇，失败 ${failed.length} 篇`);
   console.log(`报告：${args.report}`);

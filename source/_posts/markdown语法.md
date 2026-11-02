@@ -88,17 +88,7 @@ Markdown 的粗体和斜体也非常简单：
 
 当你需要在Markdown文稿中键入表格，代码如下：
 
-header 1
-
-header 2
-
-row 1 col 1
-
-row 1 col 2
-
-row 2 col 1
-
-row 2 col 2
+<table><thead><tr><th>header 1</th><th>header 2</th></tr></thead><tbody><tr><td>row 1 col 1</td><td>row 1 col 2</td></tr><tr><td>row 2 col 1</td><td>row 2 col 2</td></tr></tbody></table>
 
 8.windows程序如何生成目录结构树？  
 电脑中打开cmd  

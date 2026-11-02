@@ -579,6 +579,6 @@ drop table  表名;
         
     -   从第3开始,即先查出第4条,然后包含这条再往后查7条
         
-    -   ```
+    -   ```sql
         select * from emp limit 3,7
         ```

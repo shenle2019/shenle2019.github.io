@@ -14,6 +14,7 @@ const {
   missingImages,
   scanPosts,
   renderReport,
+  main,
 } = require('../scripts/check-images.js');
 
 test('只收相对与站点绝对图片引用，过滤内联图与外链', () => {
@@ -108,4 +109,18 @@ test('没有任何缺失时报告写明无缺失', () => {
   const md = renderReport([{ file: 'b.md', permalink: '2024/03/14/b/', total: 1, missing: [] }]);
 
   assert.ok(md.includes('无缺失'));
+});
+
+test('缺少 public 目录时报错退出，不写出假报告', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'hexo-root-'));
+  fs.mkdirSync(path.join(root, 'source', '_posts'), { recursive: true });
+  const out = path.join(root, 'missing.md');
+  const prevExit = process.exitCode;
+
+  const rows = main(['--out', out], root);
+
+  assert.deepEqual(rows, []);
+  assert.equal(fs.existsSync(out), false, '不得覆盖/生成缺图报告');
+  assert.equal(process.exitCode, 1, '应以非 0 退出');
+  process.exitCode = prevExit;
 });
