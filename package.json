@@ -6,7 +6,7 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "server": "hexo server",
-    "test": "node --test scripts/",
+    "test": "node --test \"scripts/**/*.test.js\"",
     "migrate": "node scripts/migrate-from-pages.js",
     "verify": "node scripts/verify-urls.js"
   },
